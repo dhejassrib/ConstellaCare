@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500;1,700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* Dynamic CSS Variables - Light Theme Defaults (fully light, warm lilac-cream vibe) */
+  --slate-50: #1A0F2E;                /* Dark purple text */
+  --slate-100: #1A0F2E;               /* Dark purple text */
+  --slate-205: #5D4C78;               /* Muted text color */
+  --slate-350: #6E5F80;               /* Helper text */
+  --slate-400: #5D4C78;               /* Accent text */
+  --slate-500: #7E6C9E;               /* Accent text */
+  
+  --slate-800: #E6E2EE;               /* Light purple-gray border */
+  --slate-805: #D7D0E5;               /* Input borders */
+  --slate-815: #D7D0E5;               /* Secondary separators */
+  --slate-850: #F3EEFB;               /* Indicator highlight boxes bg */
+  --slate-900: #FFFFFF;               /* White sidebar & card backgrounds */
+  --slate-950: #FAF8FD;               /* Soft warm lilac-cream page background */
+
+  /* Branding overrides - Purple-Pink transitions */
+  --purple-50: #FAF8FD;
+  --purple-100: #F3EEFB;
+  --purple-500: #7E6C9E;
+  --purple-600: #D4798E;
+  --purple-700: #D4798E;
+  --purple-950: #FFFFFF;
+
+  --pink-400: #D4798E;
+  --pink-500: #D4798E;
+}
+
+.dark {
+  /* Dynamic CSS Variables - Dark Theme Defaults (vampire space & twilight) */
+  --slate-50: #efebf3;                /* Muted light text */
+  --slate-100: #E0D8E4;               /* Primary white text with lavender glow */
+  --slate-205: #9B8AB8;               /* Secondary helper color (muted lavender) */
+  --slate-350: #C2B6CA;               /* Muted lavender white text */
+  --slate-400: #9B8AB8;               /* Accent lavender text */
+  --slate-500: #9B8AB8;               /* Muted lavender elements */
+  
+  --slate-800: #2D2342;               /* Border color */
+  --slate-805: #2D2342;               /* Text area borders */
+  --slate-815: #2D2342;               /* Separators */
+  --slate-850: #1C1530;               /* Indicator highlight boxes bg */
+  --slate-900: #120D21;               /* Dark vampire purple sidebar & cards */
+  --slate-950: #0A0714;               /* Deep space background */
+
+  /* Branding overrides for dark mode */
+  --purple-50: #1C1530;
+  --purple-100: #2C1A4D;
+  --purple-500: #9B8AB8;
+  --purple-600: #D4919E;
+  --purple-700: #D4919E;
+  --purple-950: #120D21;
+
+  --pink-400: #D4919E;
+  --pink-500: #D4919E;
+}
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Dynamically map to the dynamic properties */
+  --color-slate-50: var(--slate-50);
+  --color-slate-100: var(--slate-100);
+  --color-slate-205: var(--slate-205);
+  --color-slate-350: var(--slate-350);
+  --color-slate-400: var(--slate-400);
+  --color-slate-500: var(--slate-500);
+  
+  --color-slate-800: var(--slate-800);
+  --color-slate-805: var(--slate-805);
+  --color-slate-815: var(--slate-815);
+  --color-slate-850: var(--slate-850);
+  --color-slate-900: var(--slate-900);
+  --color-slate-950: var(--slate-950);
+
+  --color-purple-50: var(--purple-50);
+  --color-purple-100: var(--purple-100);
+  --color-purple-500: var(--purple-500);
+  --color-purple-600: var(--purple-600);
+  --color-purple-700: var(--purple-700);
+  --color-purple-950: var(--purple-950);
+
+  --color-pink-400: var(--pink-400);
+  --color-pink-500: var(--pink-500);
+  
+  --animate-custom-scan: custom-scan 2s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.4s ease-out forwards;
+  
+  @keyframes custom-scan {
+    0%, 100% { top: 5%; }
+    50% { top: 92%; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* Custom global smoothings and fine tuning */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--slate-950);
+  color: var(--slate-100);
+}
+
+/* Scrollbar support fitting the constellation theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 145, 158, 0.15);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 145, 158, 0.35);
+}
