@@ -2,13 +2,13 @@
 @import "tailwindcss";
 
 :root {
-  /* Dynamic CSS Variables - Light Theme Defaults (fully light, warm lilac-cream vibe) */
-  --slate-50: #1A0F2E;                /* Dark purple text */
-  --slate-100: #1A0F2E;               /* Dark purple text */
-  --slate-205: #5D4C78;               /* Muted text color */
-  --slate-350: #6E5F80;               /* Helper text */
+  /* FIXED: Light Theme - 50 is now Light, 950 is now Dark */
+  --slate-50: #FAF8FD;                /* Light page background */
+  --slate-100: #F3EEFB;               /* Very light purple box background */
+  --slate-205: #D7D0E5;               /* Muted borders */
+  --slate-350: #7E6C9E;               /* Helper text */
   --slate-400: #5D4C78;               /* Accent text */
-  --slate-500: #7E6C9E;               /* Accent text */
+  --slate-500: #1A0F2E;               /* Dark text */
   
   --slate-800: #E6E2EE;               /* Light purple-gray border */
   --slate-805: #D7D0E5;               /* Input borders */
@@ -30,10 +30,10 @@
 }
 
 .dark {
-  /* Dynamic CSS Variables - Dark Theme Defaults (vampire space & twilight) */
-  --slate-50: #efebf3;                /* Muted light text */
-  --slate-100: #E0D8E4;               /* Primary white text with lavender glow */
-  --slate-205: #9B8AB8;               /* Secondary helper color (muted lavender) */
+  /* Dark Theme - 50 is Light (Text), 950 is Dark (Background) */
+  --slate-50: #efebf3;                /* Light text */
+  --slate-100: #E0D8E4;               /* Primary white text */
+  --slate-205: #9B8AB8;               /* Secondary helper color */
   --slate-350: #C2B6CA;               /* Muted lavender white text */
   --slate-400: #9B8AB8;               /* Accent lavender text */
   --slate-500: #9B8AB8;               /* Muted lavender elements */
@@ -42,7 +42,7 @@
   --slate-805: #2D2342;               /* Text area borders */
   --slate-815: #2D2342;               /* Separators */
   --slate-850: #1C1530;               /* Indicator highlight boxes bg */
-  --slate-900: #120D21;               /* Dark vampire purple sidebar & cards */
+  --slate-900: #120D21;               /* Dark sidebar & cards */
   --slate-950: #0A0714;               /* Deep space background */
 
   /* Branding overrides for dark mode */
@@ -61,7 +61,6 @@
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  /* Dynamically map to the dynamic properties */
   --color-slate-50: var(--slate-50);
   --color-slate-100: var(--slate-100);
   --color-slate-205: var(--slate-205);
@@ -99,15 +98,13 @@
   }
 }
 
-/* Custom global smoothings and fine tuning */
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--slate-950);
-  color: var(--slate-100);
+  color: var(--slate-500); /* Changed to 500 for better light mode visibility */
 }
 
-/* Scrollbar support fitting the constellation theme */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
