@@ -68,12 +68,12 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
         </div>
 
         <h1 className={styles.brand}>ConstellaCare</h1>
-        <p className={styles.tagline}>A gentle space for Breast Cancer patients and caregivers</p>
+        <p className={styles.tagline}>A gentle space for every health journey</p>
         
         <p className={styles.description}>
-          ConstellaCare helps you name hard feelings, prepare for appointments &amp; build
-          resilience together — through mood check-ins, calm tools and a shared constellation
-          journey under the same night sky.
+          ConstellaCare is an emotionally intelligent health companion designed for patients, caregivers, and families. 
+          Track your wellbeing, prepare for appointments, reflect through guided journaling, access supportive resources, 
+          and stay connected with the people who matter most — all through a shared constellation journey that grows with your progress.
         </p>
 
         <div className={styles.actions}>
@@ -82,18 +82,18 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
             className={`${styles.btn} ${styles.btnPatient}`}
             onClick={() => navigate('/patient')}
           >
-            I am a patient
+            Patient Portal
           </button>
           <button
             type="button"
             className={`${styles.btn} ${styles.btnCaregiver}`}
             onClick={() => navigate('/caregiver')}
           >
-            I am a caregiver
+            Caregiver Portal
           </button>
         </div>
 
-        <p className={styles.sub}>Two stars orbiting the same night sky, closer together.</p>
+        <p className={styles.sub}>Turning health journeys into constellations of support.</p>
       </div>
 
       {/* ── About Modal ── */}
@@ -103,18 +103,18 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
             <button className={styles.closeBtn} onClick={closeModal} aria-label="Close">✕</button>
             <h2 className={styles.modalTitle}>About ConstellaCare</h2>
             <p className={styles.modalText}>
-              ConstellaCare was born from a simple belief: no one should have to navigate breast cancer alone — not patients, not the people who love them.
+              ConstellaCare was born from a simple belief: no one should have to navigate health journeys alone — not patients, not the people who love them.
             </p>
             <p className={styles.modalText}>
-              We are a digital companion designed to sit quietly beside you through diagnosis, treatment, and recovery. Whether you're tracking how you feel today, preparing questions for your next oncologist visit, or simply needing a calm corner of the internet at 3 am — ConstellaCare is here.
+              Whether you're managing a chronic condition, recovering from surgery, supporting a loved one, navigating a diagnosis, preparing questions for your next medical appointment, or simply needing a calm corner of the internet at 3am, you don't have to carry the emotional weight of healthcare alone. Through diagnosis, treatment, recovery, and everything in between, ConstellaCare is here.
             </p>
             <p className={styles.modalText}>
-              Our tools are grounded in evidence-based emotional wellness practices and shaped by real stories from patients and caregivers. We believe in the power of shared experience — symbolised by the constellation you build together with your caregiver, two stars travelling the same sky.
+              Through mood check-ins, guided reflections, appointment preparation tools, caregiver support features, and shared constellation journeys, we help people feel more prepared, connected, and understood throughout their healthcare experience.
             </p>
             <p className={styles.modalText}>
-              ConstellaCare does not replace medical advice. We complement your care team by helping you arrive at appointments more prepared, more heard, and more whole.
+              ConstellaCare complements — but never replaces — professional medical advice. Our goal is to strengthen communication, encourage self-reflection, and help users become more confident participants in their own care.
             </p>
-            <div className={styles.modalPill}>🌸 Built with compassion, for the breast cancer community</div>
+            <div className={styles.modalPill}>🌸 Built with compassion for every health journey</div>
           </div>
         </div>
       )}
@@ -127,60 +127,76 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
             <h2 className={styles.modalTitle}>Resources &amp; Emergency Support</h2>
 
             <div className={styles.resourceSection}>
-              <h3 className={styles.resourceHeading}>🎗️ Breast Cancer Foundation (BCF)</h3>
-              <p className={styles.resourceDesc}>Singapore's leading charity dedicated to breast cancer awareness, early detection support.</p>
-              <a href="https://www.bcf.org.sg" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>bcf.org.sg →</a>
-              <a href="tel:+6564767522" className={styles.resourceLink}>📞 +65 6476 7522</a>
-            </div>
-
-            <div className={styles.resourceSection}>
-              <h3 className={styles.resourceHeading}>🚨 Emergency &amp; Crisis Lines</h3>
+              <h3 className={styles.resourceHeading}>🏥 Healthcare Resources</h3>
               <div className={styles.resourceRow}>
-                <span className={styles.resourceName}>Singapore Emergency</span>
-                <a href="tel:995" className={styles.resourceLink}>📞 995</a>
+                <span className={styles.resourceName}>HealthHub Singapore</span>
+                <a href="https://www.healthhub.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>healthhub.sg →</a>
               </div>
               <div className={styles.resourceRow}>
-                <span className={styles.resourceName}>Samaritans of Singapore (SOS) — 24 hr</span>
-                <a href="tel:1767" className={styles.resourceLink}>📞 1767</a>
-              </div>
-              <div className={styles.resourceRow}>
-                <span className={styles.resourceName}>IMH Mental Health Helpline — 24 hr</span>
-                <a href="tel:63892222" className={styles.resourceLink}>📞 6389 2222</a>
-              </div>
-              <div className={styles.resourceRow}>
-                <span className={styles.resourceName}>AWARE Women's Helpline</span>
-                <a href="tel:1800777555" className={styles.resourceLink}>📞 1800 777 5555</a>
-              </div>
-            </div>
-
-            <div className={styles.resourceSection}>
-              <h3 className={styles.resourceHeading}>🌐 Helpful Websites</h3>
-              <div className={styles.resourceRow}>
-                <span className={styles.resourceName}>Breast Cancer Welfare Association</span>
-                <a href="https://www.bcwa.org.sg" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>bcwa.org.sg →</a>
-              </div>
-              <div className={styles.resourceRow}>
-                <span className={styles.resourceName}>Cancer.org — Breast Cancer Guide</span>
-                <a href="https://www.cancer.org/cancer/breast-cancer.html" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>cancer.org →</a>
-              </div>
-              <div className={styles.resourceRow}>
-                <span className={styles.resourceName}>Breastcancer.org — Community &amp; Info</span>
-                <a href="https://www.breastcancer.org" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>breastcancer.org →</a>
+                <span className={styles.resourceName}>Agency for Integrated Care (AIC)</span>
+                <a href="https://www.aic.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>aic.sg →</a>
               </div>
               <div className={styles.resourceRow}>
                 <span className={styles.resourceName}>Singapore Cancer Society</span>
-                <a href="https://www.singaporecancersociety.org.sg" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>singaporecancersociety.org.sg →</a>
-              </div>
-              <div className={styles.resourceRow}>
-                <span className={styles.resourceName}>Caregiver Alliance — Support &amp; Resources</span>
-                <a href="https://www.caregiversalliance.org.sg" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>caregiversalliance.org.sg →</a>
+                <a href="https://www.singaporecancersociety.org.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>singaporecancersociety.org.sg →</a>
               </div>
             </div>
 
-            <div className={styles.modalPill}>💜 You are not alone — help is always within reach</div>
+            <div className={styles.resourceSection}>
+              <h3 className={styles.resourceHeading}>🧠 Mental Health Support</h3>
+              <div className={styles.resourceRow}>
+                <span className={styles.resourceName}>Samaritans of Singapore (SOS) — 1767</span>
+                <a href="https://www.sos.org.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>sos.org.sg →</a>
+              </div>
+              <div className={styles.resourceRow}>
+                <span className={styles.resourceName}>IMH Mental Health Helpline — 6389 2222</span>
+                <a href="https://www.imh.com.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>imh.com.sg →</a>
+              </div>
+              <div className={styles.resourceRow}>
+                <span className={styles.resourceName}>National CARE Hotline — 1800 202 6868</span>
+                <a href="https://www.careinmind.gov.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>careinmind.gov.sg →</a>
+              </div>
+            </div>
+
+            <div className={styles.resourceSection}>
+              <h3 className={styles.resourceHeading}>👨‍👩‍👧 Caregiver Support</h3>
+              <div className={styles.resourceRow}>
+                <span className={styles.resourceName}>Caregivers Alliance Limited</span>
+                <a href="https://www.cal.org.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>cal.org.sg →</a>
+              </div>
+              <div className={styles.resourceRow}>
+                <span className={styles.resourceName}>AIC Caregiver Resources</span>
+                <a href="https://www.aic.sg/Caregiving-Support/General-Caregiving-Resources" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>aic.sg →</a>
+              </div>
+            </div>
+
+            <div className={styles.resourceSection}>
+              <h3 className={styles.resourceHeading}>🌸 Women's Health Resources</h3>
+              <div className={styles.resourceRow}>
+                <span className={styles.resourceName}>Breast Cancer Foundation</span>
+                <a href="https://www.bcf.org.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>bcf.org.sg →</a>
+              </div>
+              <div className={styles.resourceRow}>
+                <span className={styles.resourceName}>Breast Cancer Welfare Association</span>
+                <a href="https://www.bcwa.org.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>bcwa.org.sg →</a>
+              </div>
+            </div>
+
+            <div className={styles.resourceSection}>
+              <h3 className={styles.resourceHeading}>🚨 Emergency Services</h3>
+              <div className={styles.resourceRow}>
+                <span className={styles.resourceName}>Emergency Ambulance — 995</span>
+              </div>
+              <div className={styles.resourceRow}>
+                <span className={styles.resourceName}>Non-Emergency Ambulance — 1777</span>
+              </div>
+            </div>
+
+            <div className={styles.modalPill}>💜 Support, guidance, and care — whenever you need it.</div>
           </div>
         </div>
       )}
     </div>
   );
 }
+// 💜 You are not alone — help is always within reach
