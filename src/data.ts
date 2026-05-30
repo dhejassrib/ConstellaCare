@@ -15,8 +15,9 @@ export const NAV_GROUPS = [
   {
     group: 'Care Journey',
     items: [
-      { id: 'appointment' as Section, label: 'Appointment Copilot', icon: '🩺' },
-      { id: 'symptoms' as Section, label: 'Symptom Tracker', icon: '📋' },
+      { id: 'appointment' as Section, label: 'Appointment Prep Copilot', icon: '🩺' },
+      { id: 'symptoms' as Section, label: 'Health Check-In Tracker', icon: '📋' },
+      { id: 'medications' as Section, label: 'Medication Constellation', icon: '💊' },
       { id: 'timeline' as Section, label: 'Timeline', icon: '📅' },
       { id: 'reports' as Section, label: 'Reports', icon: '📊' },
     ],
@@ -33,6 +34,7 @@ export const NAV_GROUPS = [
     group: 'My Constellation',
     items: [
       { id: 'progress' as Section, label: 'Progress', icon: '✨' },
+      { id: 'milestones' as Section, label: 'Health Milestones', icon: '🌟' },
       { id: 'reflection' as Section, label: 'Reflection Archive', icon: '🌙' },
     ],
   },

@@ -6,6 +6,8 @@ export type Section =
   | 'voice'
   | 'appointment'
   | 'symptoms'
+  | 'medications'
+  | 'milestones'
   | 'timeline'
   | 'reports'
   | 'circle'

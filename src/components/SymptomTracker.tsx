@@ -42,7 +42,7 @@ export default function SymptomTracker({ onLogSymptoms, initialLog = {} }: Sympt
         <div>
           <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
             <Heart className="w-5 h-5 text-rose-500 animate-pulse" />
-            Daily Symptom Logger
+            Health Check-In Tracker
           </h3>
           <p className="text-xs text-slate-400 mt-1">
             Tracking severity (0 = None, 5 = Severe) generates analytical medical reports.
