@@ -133,6 +133,14 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
                 <a href="https://www.healthhub.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>healthhub.sg →</a>
               </div>
               <div className={styles.resourceRow}>
+                <span className={styles.resourceName}>Ministry of Health Singapore</span>
+                <a href="https://www.moh.gov.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>moh.gov.sg →</a>
+              </div>
+              <div className={styles.resourceRow}>
+                <span className={styles.resourceName}>Health Promotion Board</span>
+                <a href="https://www.hpb.gov.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>hpb.gov.sg →</a>
+              </div>
+              <div className={styles.resourceRow}>
                 <span className={styles.resourceName}>Agency for Integrated Care (AIC)</span>
                 <a href="https://www.aic.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>aic.sg →</a>
               </div>
@@ -153,16 +161,16 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
                 <a href="https://www.imh.com.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>imh.com.sg →</a>
               </div>
               <div className={styles.resourceRow}>
-                <span className={styles.resourceName}>National CARE Hotline — 1800 202 6868</span>
-                <a href="https://www.careinmind.gov.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>careinmind.gov.sg →</a>
+                <span className={styles.resourceName}>Singapore Association for Mental Health Helpline — 1800 283 7019</span>
+                <a href="https://www.samhealth.org.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>samhealth.org.sg →</a>
               </div>
             </div>
 
             <div className={styles.resourceSection}>
               <h3 className={styles.resourceHeading}>👨‍👩‍👧 Caregiver Support</h3>
               <div className={styles.resourceRow}>
-                <span className={styles.resourceName}>Caregivers Alliance Limited</span>
-                <a href="https://www.cal.org.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>cal.org.sg →</a>
+                <span className={styles.resourceName}>Caring SG</span>
+                <a href="https://caring.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>caring.sg →</a>
               </div>
               <div className={styles.resourceRow}>
                 <span className={styles.resourceName}>AIC Caregiver Resources</span>
@@ -177,13 +185,20 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
                 <a href="https://www.bcf.org.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>bcf.org.sg →</a>
               </div>
               <div className={styles.resourceRow}>
-                <span className={styles.resourceName}>Breast Cancer Welfare Association</span>
-                <a href="https://www.bcwa.org.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>bcwa.org.sg →</a>
+                <span className={styles.resourceName}>AWARE Helpline — 1800 777 5555</span>
+                <a href="https://www.aware.org.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>aware.org.sg →</a>
+              </div>
+              <div className={styles.resourceRow}>
+                <span className={styles.resourceName}>BABES (Babes Pregnancy Crisis Support Ltd) — 8111 3535</span>
+                <a href="https://www.babes.org.sg/" target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>babes.org.sg →</a>
               </div>
             </div>
 
             <div className={styles.resourceSection}>
               <h3 className={styles.resourceHeading}>🚨 Emergency Services</h3>
+              <div className={styles.resourceRow}>
+                <span className={styles.resourceName}>Singapore Police Force — 999</span>
+              </div>
               <div className={styles.resourceRow}>
                 <span className={styles.resourceName}>Emergency Ambulance — 995</span>
               </div>
@@ -191,7 +206,7 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
                 <span className={styles.resourceName}>Non-Emergency Ambulance — 1777</span>
               </div>
             </div>
-
+            
             <div className={styles.modalPill}>💜 Support, guidance, and care — whenever you need it.</div>
           </div>
         </div>
