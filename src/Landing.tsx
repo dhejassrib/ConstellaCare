@@ -18,9 +18,9 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
   return (
     <div className={styles.page}>
       {/* Absolute 3D Interactive Celestial Constellation Overlay */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-auto">
+      {/* <div className="absolute inset-0 z-0 overflow-hidden pointer-events-auto">
         <ConstellationSphere theme={theme} />
-      </div>
+      </div> */}
 
       {/* Subtle backing starry particles spacer */}
       <div className={styles.stars} aria-hidden />

@@ -1,3 +1,4 @@
+// app.tsx:
 import { useState, useEffect, useRef } from 'react';
 import Landing from './Landing';
 import { 
@@ -312,7 +313,7 @@ export default function App() {
           sidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
         }`}
       >
-        <div>
+        <div className="flex flex-col min-h-0 flex-1">
           {/* Brand header */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-[#6366f1]/10">
             <div 
@@ -334,7 +335,7 @@ export default function App() {
           </div>
 
           {/* Navigation group sets */}
-          <nav className="p-4 space-y-6">
+          <nav className="p-4 space-y-6 overflow-y-auto flex-1">
             {NAV_GROUPS.map((group) => (
               <div key={group.group} className="space-y-1">
                 <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#a855f7] block pl-2 mb-2">
@@ -363,7 +364,7 @@ export default function App() {
         </div>
 
         {/* Global Stars Counter indicator at bottom of sidebar */}
-        <div className="p-6 border-t border-[#6366f1]/10">
+        <div className="p-6 border-t border-[#6366f1]/10 flex-shrink-0">
           <div className="bg-gradient-to-tr from-slate-950 to-slate-850 text-slate-100 rounded-2xl p-4 border border-purple-500/15 text-center relative overflow-hidden shadow-md">
             <div className="absolute top-0 right-0 w-16 h-16 bg-purple-500/10 blur-xl rounded-full" />
             <Award className="w-7 h-7 text-amber-500 dark:text-amber-400 mx-auto animate-pulse" />

@@ -1,3 +1,4 @@
+// ProgressiveAuthModal.tsx:
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Star, Sparkles, CheckCircle2, ShieldCheck, Heart } from 'lucide-react';
