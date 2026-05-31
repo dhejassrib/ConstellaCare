@@ -352,9 +352,9 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
   // Light mode text helpers — matches patient dashboard dark-text-on-light style
   const txt = theme === 'dark' ? 'text-[#f5f0eb]' : 'text-[#1e133a]';
   const txtMuted = theme === 'dark' ? 'text-[#9b8ab8]' : 'text-[#4d3c69]';
-  const txtSubtle = theme === 'dark' ? 'text-[#decfe6]' : 'text-[#3d3650]';
+  const txtSubtle = theme === 'dark' ? 'text-slate-700 dark:text-slate-300' : 'text-[#3d3650]';
   const cardBg = theme === 'dark' ? 'bg-[#120d21]' : 'bg-white';
-  const cardBorder = theme === 'dark' ? 'border-[#c9a0dc]/15' : 'border-purple-200';
+  const cardBorder = theme === 'dark' ? 'border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'border-purple-200';
   const inputBorder = theme === 'dark' ? 'border-purple-500/30' : 'border-purple-300';
   const surfaceBg = theme === 'dark' ? 'bg-[#07040f]/60' : 'bg-slate-50';
   const surfaceBorder = theme === 'dark' ? 'border-[#c9a0dc]/10' : 'border-purple-100';
@@ -372,11 +372,11 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
       <aside
         className={`fixed top-0 bottom-0 left-0 border-r backdrop-blur-md w-64 z-40 flex flex-col justify-between transition-all duration-300 transform md:translate-x-0 ${
           sidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
-        } ${theme === 'dark' ? 'bg-[#0f0a21]/90 border-[#c9a0dc]/15' : 'bg-[#FAF8FD]/95 border-[#7e6c9e]/20'}`}
+        } ${theme === 'dark' ? 'bg-[#0f0a21]/90 border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'bg-[#FAF8FD]/95 border-[#7e6c9e]/20'}`}
       >
         <div className="flex flex-col min-h-0 flex-1">
           {/* Brand header */}
-          <div className={`flex items-center justify-between px-6 py-5 border-b flex-shrink-0 ${theme === 'dark' ? 'border-[#c9a0dc]/15' : 'border-[#7e6c9e]/20'}`}>
+          <div className={`flex items-center justify-between px-6 py-5 border-b flex-shrink-0 ${theme === 'dark' ? 'border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'border-[#7e6c9e]/20'}`}>
             <div
               onClick={() => onNavigate('/')}
               className="flex items-center gap-2.5 cursor-pointer group"
@@ -439,7 +439,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
         </div>
 
         {/* Global Stars Counter at bottom */}
-        <div className={`p-5 border-t flex-shrink-0 ${theme === 'dark' ? 'border-[#c9a0dc]/15' : 'border-[#7e6c9e]/20'}`}>
+        <div className={`p-5 border-t flex-shrink-0 ${theme === 'dark' ? 'border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'border-[#7e6c9e]/20'}`}>
           <div className="bg-gradient-to-tr from-[#120d21] to-[#251a3d] text-[#f4d4a8] rounded-2xl p-4 border border-[#c9a0dc]/25 text-center relative overflow-hidden shadow-lg">
             <div className="absolute top-0 right-0 w-16 h-16 bg-[#d4798e]/10 blur-xl rounded-full" />
             <Award className="w-6.5 h-6.5 text-[#f4d4a8] mx-auto animate-pulse" />
@@ -464,7 +464,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
       <main className="flex-1 md:pl-64 min-h-screen flex flex-col z-10 relative">
         
         {/* Interactive Header */}
-        <header className={`sticky top-0 backdrop-blur-md py-4 px-6 md:px-10 flex items-center justify-between border-b z-20 ${theme === 'dark' ? 'bg-[#07040f]/80 border-[#c9a0dc]/15' : 'bg-[#FAF8FD]/80 border-[#7e6c9e]/20'}`}>
+        <header className={`sticky top-0 backdrop-blur-md py-4 px-6 md:px-10 flex items-center justify-between border-b z-20 ${theme === 'dark' ? 'bg-[#07040f]/80 border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'bg-[#FAF8FD]/80 border-[#7e6c9e]/20'}`}>
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -519,7 +519,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
               className="p-2 rounded-xl border border-transparent hover:border-[#c9a0dc]/20 hover:bg-purple-100/10 cursor-pointer"
               aria-label="Toggle Theme"
             >
-              {theme === 'dark' ? <Sun className="w-4 h-4 text-[#decfe6]" /> : <Moon className="w-4 h-4 text-[#3d3650]" />}
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-slate-700 dark:text-slate-300" /> : <Moon className="w-4 h-4 text-[#3d3650]" />}
             </button>
           </div>
         </header>
@@ -587,7 +587,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                       </div>
                     </div>
 
-                    <div className={`space-y-2.5 mt-2 p-3.5 rounded-2xl border font-mono text-[10px] ${theme === 'dark' ? 'bg-[#07040f]/60 border-[#c9a0dc]/5 text-[#decfe6]' : 'bg-purple-50/80 border-purple-200 text-[#2e214c]'}`}>
+                    <div className={`space-y-2.5 mt-2 p-3.5 rounded-2xl border font-mono text-[10px] ${theme === 'dark' ? 'bg-[#07040f]/60 border-[#c9a0dc]/5 text-slate-700 dark:text-slate-300' : 'bg-purple-50/80 border-purple-200 text-[#2e214c]'}`}>
                       <div className="flex justify-between items-center">
                         <span className={`flex items-center gap-1 ${txtMuted}`}>✨ Patient Stability:</span>
                         <span className="text-yellow-600 dark:text-yellow-400 font-extrabold">Moderate</span>
@@ -691,7 +691,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                       name="taskText"
                       type="text"
                       placeholder="Add coordination task..."
-                      className={`flex-1 text-[11px] px-3 py-2 border rounded-xl bg-transparent focus:outline-none focus:border-[#d4798e] ${theme === 'dark' ? 'text-white border-[#c9a0dc]/15' : 'text-[#2e214c] border-purple-300'}`}
+                      className={`flex-1 text-[11px] px-3 py-2 border rounded-xl bg-transparent focus:outline-none focus:border-[#d4798e] ${theme === 'dark' ? 'text-white border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'text-[#2e214c] border-purple-300'}`}
                     />
                     <button
                       type="submit"
@@ -908,7 +908,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
           {activeSection === 'communication' && (
             <div className="space-y-8 animate-fade-in text-left">
               <div className={`border rounded-3xl overflow-hidden shadow-xl flex flex-col h-[520px] relative ${cardBg} ${cardBorder}`}>
-                <div className="bg-[#120d21] p-4 border-b border-[#c9a0dc]/15 flex items-center justify-between">
+                <div className="bg-[#120d21] p-4 border-b border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15 flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#d4798e] via-[#9c82ba] to-[#decfe6] flex items-center justify-center text-white ring-2 ring-[#d4798e]">
                       <MessageSquare className="w-4 h-4 text-white" />
@@ -962,7 +962,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                     value={commQuery}
                     onChange={(e) => setCommQuery(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleSendCommQuery()}
-                    className={`flex-1 text-xs px-4 py-3 border rounded-xl bg-transparent focus:outline-none focus:border-[#d4798e] ${theme === 'dark' ? 'text-[#decfe6] border-[#c9a0dc]/15' : 'text-[#2e214c] border-purple-300'}`}
+                    className={`flex-1 text-xs px-4 py-3 border rounded-xl bg-transparent focus:outline-none focus:border-[#d4798e] ${theme === 'dark' ? 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'text-[#2e214c] border-purple-300'}`}
                   />
                   <button onClick={() => handleSendCommQuery()} className="w-11 h-11 rounded-xl bg-[#d4798e] hover:bg-[#ea96a6] text-white flex items-center justify-center cursor-pointer shadow-lg hover:scale-103 transition">
                     <Send className="w-4 h-4 fill-white" />
@@ -981,7 +981,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                 </h3>
                 <p className={`text-xs mt-1 ${txtMuted}`}>Spotting fatigue accumulation to map safe bounds</p>
 
-                <div className={`mt-5 p-4 rounded-2xl border grid grid-cols-1 md:grid-cols-2 gap-4 ${theme === 'dark' ? 'bg-[#07040f] border-[#c9a0dc]/15' : 'bg-purple-50/55 border-purple-200/60'}`}>
+                <div className={`mt-5 p-4 rounded-2xl border grid grid-cols-1 md:grid-cols-2 gap-4 ${theme === 'dark' ? 'bg-[#07040f] border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'bg-purple-50/55 border-purple-200/60'}`}>
                   <div>
                     <span className="text-[9px] font-black uppercase tracking-widest text-[#d4798e] block">Log Decompression Node</span>
                     <p className={`text-[11px] leading-relaxed mt-1 ${txtMuted}`}>Log fatigue instances to unlock rest offsets dynamically.</p>
@@ -994,7 +994,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                       </button>
                     </div>
                   </div>
-                  <div className={`relative rounded-xl overflow-hidden h-24 flex flex-col justify-center items-center p-3 text-center border border-dashed ${theme === 'dark' ? 'bg-gradient-to-tr from-[#251a3d] to-[#07040f] border-[#c9a0dc]/15' : 'bg-gradient-to-tr from-purple-100/40 to-slate-50 border-purple-300/60'}`}>
+                  <div className={`relative rounded-xl overflow-hidden h-24 flex flex-col justify-center items-center p-3 text-center border border-dashed ${theme === 'dark' ? 'bg-gradient-to-tr from-[#251a3d] to-[#07040f] border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'bg-gradient-to-tr from-purple-100/40 to-slate-50 border-purple-300/60'}`}>
                     <span className="text-xl animate-spin" style={{ animationDuration: '24s' }}>🌀</span>
                     <span className={`text-[10px] font-bold mt-1 uppercase tracking-wider ${theme === 'dark' ? 'text-[#ea96a6]' : 'text-purple-700'}`}>Atmosphere: Starry &amp; Hazy</span>
                     <span className={`text-[8px] mt-0.5 font-mono ${txtMuted}`}>Micro-recoveries settling slowly</span>
@@ -1048,7 +1048,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                   <div className={`lg:col-span-7 relative rounded-3xl p-6 border text-center h-[340px] flex items-center justify-center overflow-hidden ${theme === 'dark' ? 'bg-[#07040f] border-[#c9a0dc]/10' : 'bg-purple-50/20 border-purple-200/50'}`}>
-                    <div className="absolute inset-6 border border-dashed border-purple-200/50 dark:border-[#c9a0dc]/15 rounded-full animate-spin duration-[40s]" />
+                    <div className="absolute inset-6 border border-dashed border-purple-200/50 dark:border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15 rounded-full animate-spin duration-[40s]" />
                     <div className="absolute inset-16 border border-dashed border-teal-400/20 rounded-full animate-spin duration-[28s]" />
                     <svg className="absolute inset-0 w-full h-full pointer-events-none">
                       <line x1="50%" y1="50%" x2="20%" y2="25%" stroke="rgba(212,121,142,0.3)" strokeDasharray="4" strokeWidth="1" />
@@ -1126,7 +1126,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                       onClick={triggerVoiceNote}
                       className={`w-14 h-14 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg mt-4 ring-4 ${voiceActive ? 'bg-[#d4798e] ring-pink-500/20 shadow-[#d4798e]/40 hover:scale-95 animate-pulse' : 'bg-[#1c1530] border border-[#c9a0dc]/40 ring-[#c9a0dc]/10 hover:scale-105'}`}
                     >
-                      <Mic className={`w-5 h-5 ${voiceActive ? 'text-white' : 'text-[#decfe6]'}`} />
+                      <Mic className={`w-5 h-5 ${voiceActive ? 'text-white' : 'text-slate-700 dark:text-slate-300'}`} />
                     </button>
                     <span className={`text-[9px] mt-2 font-bold uppercase tracking-wider ${txtMuted}`}>{voiceActive ? 'Tap to stop transcription' : 'Tap to unpack voice'}</span>
                   </div>
@@ -1135,7 +1135,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                     <div>
                       <span className="text-[9px] font-black uppercase tracking-widest text-[#d4798e] block">Write or transcribed entry notes:</span>
                       <textarea
-                        className={`w-full text-xs p-4 rounded-2xl border mt-2 focus:outline-none focus:border-[#d4798e] leading-relaxed bg-transparent ${theme === 'dark' ? 'text-[#decfe6] border-[#c9a0dc]/15' : 'text-[#2e214c] border-purple-300 bg-slate-50'}`}
+                        className={`w-full text-xs p-4 rounded-2xl border mt-2 focus:outline-none focus:border-[#d4798e] leading-relaxed bg-transparent ${theme === 'dark' ? 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'text-[#2e214c] border-purple-300 bg-slate-50'}`}
                         rows={6}
                         placeholder="Pour whatever fits inside your heart tonight. Sarah cannot read this; your boundaries are locked."
                         value={journalText}
@@ -1166,7 +1166,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                             <span className={`text-[10px] font-mono font-bold ${txtMuted}`}>{log.date}</span>
                           </div>
                           <p className={`text-xs leading-relaxed italic pr-2 ${txtSubtle}`}>"{log.text}"</p>
-                          <div className="p-3 bg-[#decfe6]/10 rounded-xl border border-[#c9a0dc]/15 flex gap-2.5 items-start text-[11px]">
+                          <div className="p-3 bg-[#decfe6]/10 rounded-xl border border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15 flex gap-2.5 items-start text-[11px]">
                             <Sparkles className="w-4 h-4 text-[#d4798e] flex-shrink-0 animate-pulse" />
                             <div>
                               <b className="uppercase font-bold tracking-wider text-[8px] text-[#ea96a6] block mb-0.5">Astra Compass Interpretation:</b>
@@ -1193,23 +1193,19 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
         <div className="fixed bottom-6 right-6 z-50">
           <div className="relative">
             {quickSupportOpen && (
-              <div className="absolute bottom-16 right-0 w-52 bg-[#120d21] border border-[#c9a0dc]/30 rounded-2xl p-3 shadow-2xl backdrop-blur-md animate-fade-in flex flex-col gap-1.5 text-left text-xs text-white">
-                <span className="text-[9px] font-black uppercase text-[#ea96a6] border-b border-[#c9a0dc]/10 pb-1.5 mb-1.5 pl-1 tracking-widest block font-mono">QUICK COMPASS</span>
-                <button onClick={() => { setActiveSection('communication'); setQuickSupportOpen(false); handleSendCommQuery("How do I talk without sounding afraid?"); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-[#decfe6] hover:bg-white/10 cursor-pointer text-left transition">
+              <div className="absolute bottom-16 right-0 w-52 bg-white dark:bg-slate-900 border border-purple-200/50 dark:border-slate-800 rounded-2xl p-3 shadow-2xl backdrop-blur-md animate-fade-in flex flex-col gap-1.5 text-left">
+                <span className="text-[9px] font-extrabold uppercase font-mono tracking-widest text-slate-700 dark:text-pink-500 border-b border-slate-200 dark:border-slate-800 pb-1.5 mb-1.5 pl-1 block">QUICK COMPASS</span>
+                <button onClick={() => { setActiveSection('communication'); setQuickSupportOpen(false); handleSendCommQuery("How do I talk without sounding afraid?"); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left transition">
                   <MessageSquare className="w-3.5 h-3.5 text-[#d4798e]" /><span>Phrasing Guidance</span>
                 </button>
-                <button onClick={() => { setActiveSection('journal'); setQuickSupportOpen(false); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-[#decfe6] hover:bg-white/10 cursor-pointer text-left transition">
+                <button onClick={() => { setActiveSection('journal'); setQuickSupportOpen(false); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left transition">
                   <Mic className="w-3.5 h-3.5 text-purple-400" /><span>Vocal Grounding</span>
                 </button>
-                <button onClick={() => { setActiveSection('emotion'); setQuickSupportOpen(false); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-[#decfe6] hover:bg-white/10 cursor-pointer text-left transition">
+                <button onClick={() => { setActiveSection('emotion'); setQuickSupportOpen(false); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left transition">
                   <Activity className="w-3.5 h-3.5 text-emerald-400" /><span>Quick Rest Check</span>
                 </button>
-                {/* <div className="border-t border-[#c9a0dc]/15 pt-1.5 mt-1">
-                  <a href="https://www.bcf.org.sg" target="_blank" rel="noopener noreferrer" className="w-full flex items-center gap-2 px-2 py-1.5 rounded-xl text-[11px] font-black text-red-400 hover:bg-red-500/10 cursor-pointer text-left transition">
-                    <ShieldAlert className="w-3.5 h-3.5 text-red-500 animate-bounce" /><span>Get Help Now 🚨</span>
-                  </a>
-                </div> */}
-                <div className="border-t border-[#c9a0dc]/15 pt-1.5 mt-1">
+                
+                <div className="border-t border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15 pt-1.5 mt-1">
                   <div className="px-2 py-1">
                     <div className="flex items-center gap-2 text-[11px] font-black text-red-400 mb-2">
                       <ShieldAlert className="w-3.5 h-3.5 text-red-500 animate-bounce" />
@@ -1218,7 +1214,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
 
                     <a
                       href="tel:995"
-                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:bg-red-500/10 transition"
+                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-350 hover:bg-red-500/10 transition"
                     >
                       <span>Singapore Emergency</span>
                       <span className="text-red-500 font-bold">995</span>
@@ -1226,18 +1222,18 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
 
                     <a
                       href="tel:1767"
-                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:bg-purple-500/10 transition"
+                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-350 dark:text-slate-350 hover:bg-purple-500/10 transition"
                     >
                       <span>SOS Crisis Hotline</span>
-                      <span className="text-purple-500 font-bold">1767</span>
+                      <span className="text-purple-700 dark:text-purple-600 font-bold">1767</span>
                     </a>
 
                     <a
                       href="tel:63892222"
-                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:bg-indigo-500/10 transition"
+                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-350 hover:bg-indigo-500/10 transition"
                     >
                       <span>IMH Mental Health</span>
-                      <span className="text-indigo-500 font-bold">6389 2222</span>
+                      <span className="text-[10px] leading-none text-indigo-700 dark:text-indigo-400 font-bold">6389 2222</span>
                     </a>
 
                     <button
@@ -1254,13 +1250,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                 </div>
               </div>
             )}
-            {/* <button
-              onClick={() => setQuickSupportOpen(!quickSupportOpen)}
-              className="px-5 py-3 rounded-full bg-gradient-to-r from-[#d4798e] via-[#9c82ba] to-[#e8b4bc] text-white text-xs font-black flex items-center gap-2 cursor-pointer shadow-2xl hover:scale-103 hover:shadow-[#d4798e]/20 transition-all ring-4 ring-[#d4798e]/20 select-none"
-            >
-              <Heart className="w-4 h-4 fill-white text-none animate-pulse" />
-              <span>Need Support?</span>
-            </button> */}
+            
             {/* Glowing Trigger Orb Button */}
             <button
               onClick={() => setQuickSupportOpen(!quickSupportOpen)}

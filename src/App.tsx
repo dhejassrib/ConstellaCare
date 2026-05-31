@@ -1147,18 +1147,18 @@ export default function App() {
             {/* Quick action menu selector overlay panel */}
             {quickSupportOpen && (
               <div className="absolute bottom-16 right-0 w-52 bg-white dark:bg-slate-900 border border-purple-200/50 dark:border-slate-800 rounded-2xl p-3 shadow-2xl backdrop-blur-md animate-fade-in flex flex-col gap-1.5 text-left">
-                <span className="text-[9px] font-extrabold uppercase font-mono tracking-widest text-pink-500 border-b border-slate-100 dark:border-slate-850 pb-1.5 mb-1 pl-1">
+                <span className="text-[9px] font-extrabold uppercase font-mono tracking-widest text-slate-700 dark:text-pink-500 border-b border-slate-200 dark:border-slate-850 pb-1.5 mb-1 pl-1">
                   QUICK COMPASS
                 </span>
-                
+
                 <button
                   onClick={() => {
                     setActiveSection('astra');
                     setQuickSupportOpen(false);
                   }}
-                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
+                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-350 dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
                 >
-                  <Sparkles className="w-4 h-4 text-purple-600" />
+                  <Sparkles className="w-4 h-4 text-purple-700 dark:text-purple-600" />
                   <span>Talk with Astra</span>
                 </button>
 
@@ -1167,9 +1167,9 @@ export default function App() {
                     setActiveSection('calm');
                     setQuickSupportOpen(false);
                   }}
-                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
+                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-350 dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
                 >
-                  <Heart className="w-4 h-4 text-cyan-500 animate-pulse" />
+                  <Heart className="w-4 h-4 text-cyan-600 dark:text-cyan-500 animate-pulse" />
                   <span>Breathing exercises</span>
                 </button>
 
@@ -1178,46 +1178,41 @@ export default function App() {
                     setActiveSection('voice');
                     setQuickSupportOpen(false);
                   }}
-                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
+                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-350 dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
                 >
-                  <Compass className="w-4 h-4 text-purple-500" />
+                  <Compass className="w-4 h-4 text-purple-700 dark:text-purple-500" />
                   <span>Voice Journal</span>
                 </button>
 
-                {/* <div className="border-t border-[#c9a0dc]/15 pt-1.5 mt-1">
-                  <a href="https://www.bcf.org.sg" target="_blank" rel="noopener noreferrer" className="w-full flex items-center gap-2 px-2 py-1.5 rounded-xl text-[11px] font-black text-red-400 hover:bg-red-500/10 cursor-pointer text-left transition">
-                    <ShieldAlert className="w-3.5 h-3.5 text-red-500 animate-bounce" /><span>Get Help Now 🚨</span>
-                  </a>
-                </div> */}
-                <div className="border-t border-[#c9a0dc]/15 pt-1.5 mt-1">
+                <div className="border-t border-slate-200 dark:border-[#c9a0dc]/15 pt-1.5 mt-1">
                   <div className="px-2 py-1">
-                    <div className="flex items-center gap-2 text-[11px] font-black text-red-400 mb-2">
-                      <ShieldAlert className="w-3.5 h-3.5 text-red-500 animate-bounce" />
+                    <div className="flex items-center gap-2 text-[11px] font-black text-red-600 dark:text-red-400 mb-2">
+                      <ShieldAlert className="w-3.5 h-3.5 text-red-600 dark:text-red-500 animate-bounce" />
                       <span>Get Help Now 🚨</span>
                     </div>
 
                     <a
                       href="tel:995"
-                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:bg-red-500/10 transition"
+                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-350 dark:text-slate-350 hover:bg-red-500/10 transition"
                     >
                       <span>Singapore Emergency</span>
-                      <span className="text-red-500 font-bold">995</span>
+                      <span className="text-red-600 dark:text-red-500 font-bold">995</span>
                     </a>
 
                     <a
                       href="tel:1767"
-                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:bg-purple-500/10 transition"
+                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-350 dark:text-slate-350 hover:bg-purple-500/10 transition"
                     >
                       <span>SOS Crisis Hotline</span>
-                      <span className="text-purple-500 font-bold">1767</span>
+                      <span className="text-purple-700 dark:text-purple-600 font-bold">1767</span>
                     </a>
 
                     <a
                       href="tel:63892222"
-                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:bg-indigo-500/10 transition"
+                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-350 dark:text-slate-350 hover:bg-indigo-500/10 transition"
                     >
                       <span>IMH Mental Health</span>
-                      <span className="text-indigo-500 font-bold">6389 2222</span>
+                      <span className="text-[10px] leading-none text-indigo-700 dark:text-indigo-400 font-bold">6389 2222</span>
                     </a>
 
                     <button
@@ -1225,14 +1220,13 @@ export default function App() {
                         setActiveSection('calm');
                         setQuickSupportOpen(false);
                       }}
-                      className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/10 transition"
+                      className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-cyan-700 dark:text-cyan-400 hover:bg-cyan-500/10 transition"
                     >
                       <Heart className="w-3.5 h-3.5" />
                       <span>Ground Me First</span>
                     </button>
                   </div>
                 </div>
-
               </div>
             )}
 
