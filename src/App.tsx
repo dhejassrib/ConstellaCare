@@ -29,6 +29,7 @@ import SharedConstellation from './components/SharedConstellation';
 import ProgressiveAuthModal from './components/ProgressiveAuthModal';
 import MedicationReminderConstellation from './components/MedicationReminderConstellation';
 import HealthMilestones from './components/HealthMilestones';
+import ConstellaLogo from './components/ConstellaLogo';
 
 // Lucide Icons
 import { 
@@ -361,7 +362,9 @@ export default function App() {
               className="flex items-center gap-2.5 cursor-pointer group"
               title="Return to Landing Page"
             >
-              <span className="w-8 h-8 rounded-xl bg-gradient-to-r from-pink-400 to-purple-400 flex items-center justify-center text-white text-lg font-black shadow-lg animate-pulse">C</span>
+              <span className="w-8 h-8 rounded-xl bg-[#120D21]/80 dark:bg-[#120D21] flex items-center justify-center shadow-lg ring-1 ring-pink-400/20">
+                <ConstellaLogo size={28} />
+              </span>
               <span className="font-bold text-xl bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent italic tracking-tight group-hover:opacity-85">
                 ConstellaCare
               </span>

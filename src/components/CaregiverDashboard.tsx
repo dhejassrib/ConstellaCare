@@ -1,6 +1,7 @@
 // CaregiverDashboard.tsx:
 import React, { useState, useEffect, useRef } from 'react';
 import SharedConstellation from './SharedConstellation';
+import ConstellaLogo from './ConstellaLogo';
 import {
   Sun, Moon, Star, MessageSquare, Heart, Sparkles, Navigation, CheckCircle,
   ChevronRight, Compass, ShieldAlert, Award, FileText, Send, HelpCircle, X,
@@ -382,7 +383,9 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
               className="flex items-center gap-2.5 cursor-pointer group"
               title="Return to Landing Page"
             >
-              <span className="w-8 h-8 rounded-xl bg-gradient-to-r from-[#d4798e] to-[#9c82ba] flex items-center justify-center text-white text-lg font-black shadow-md animate-pulse">C</span>
+              <span className={`w-8 h-8 rounded-xl flex items-center justify-center shadow-md ring-1 ${theme === 'dark' ? 'bg-[#120D21] ring-[#c9a0dc]/20' : 'bg-[#1e133a]/90 ring-[#7e6c9e]/20'}`}>
+                <ConstellaLogo size={28} />
+              </span>
               <div>
                 <span className="font-bold text-lg bg-gradient-to-r from-[#d4798e] to-[#c9a0dc] bg-clip-text text-transparent italic tracking-tight">
                   ConstellaCare

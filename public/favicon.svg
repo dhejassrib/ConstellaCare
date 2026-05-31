@@ -1,0 +1,29 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="48" height="48" rx="12" fill="#120D21"/>
+  <path
+    d="M10 38 L16 24 L24 10 L32 22 L38 36 M16 24 L32 22 M32 22 L28 38"
+    stroke="url(#line)"
+    stroke-width="1.25"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    opacity="0.8"
+  />
+  <defs>
+    <linearGradient id="line" x1="8" y1="38" x2="40" y2="10" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D4798E"/>
+      <stop offset="50%" stop-color="#9c82ba"/>
+      <stop offset="100%" stop-color="#c9a0dc"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f4d4a8"/>
+      <stop offset="100%" stop-color="#D4798E"/>
+    </radialGradient>
+  </defs>
+  <circle cx="10" cy="38" r="2" fill="#D4798E"/>
+  <circle cx="16" cy="24" r="2.25" fill="#9c82ba"/>
+  <circle cx="32" cy="22" r="2.25" fill="#D4798E"/>
+  <circle cx="38" cy="36" r="1.75" fill="#c9a0dc"/>
+  <circle cx="28" cy="38" r="1.75" fill="#7E6C9E"/>
+  <circle cx="24" cy="10" r="3.5" fill="url(#glow)"/>
+  <circle cx="24" cy="10" r="1.25" fill="#fff" opacity="0.85"/>
+</svg>
