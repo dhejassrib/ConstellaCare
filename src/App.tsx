@@ -714,8 +714,9 @@ export default function App() {
           {activeSection === 'mood' && (
             <div className="space-y-8 animate-fade-in">
               <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl leading-relaxed">
-                <p className="text-sm text-[#4d3c69] dark:text-slate-400 leading-relaxed">
-                  Checking in with how you are feeling helps map your long-term diagnostic trends. Both biometric scans (the visual sensors) and daily emotion card selections are welcome.
+                <p className="text-sm text-[#4d3c69] dark:text-slate-400 leading-relaxed center">
+                  Checking in with how you are feeling helps map your long-term diagnostic trends.
+                  <br></br>Both biometric scans (the visual sensors) and daily emotion card selections are welcome.
                 </p>
               </div>
 
