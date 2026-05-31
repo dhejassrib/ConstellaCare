@@ -1196,27 +1196,78 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
               <div className="absolute bottom-16 right-0 w-52 bg-[#120d21] border border-[#c9a0dc]/30 rounded-2xl p-3 shadow-2xl backdrop-blur-md animate-fade-in flex flex-col gap-1.5 text-left text-xs text-white">
                 <span className="text-[9px] font-black uppercase text-[#ea96a6] border-b border-[#c9a0dc]/10 pb-1.5 mb-1.5 pl-1 tracking-widest block font-mono">QUICK COMPASS</span>
                 <button onClick={() => { setActiveSection('communication'); setQuickSupportOpen(false); handleSendCommQuery("How do I talk without sounding afraid?"); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-[#decfe6] hover:bg-white/10 cursor-pointer text-left transition">
-                  <MessageSquare className="w-3.5 h-3.5 text-[#d4798e]" /><span>Phrasing Guidance ✨</span>
+                  <MessageSquare className="w-3.5 h-3.5 text-[#d4798e]" /><span>Phrasing Guidance</span>
                 </button>
                 <button onClick={() => { setActiveSection('journal'); setQuickSupportOpen(false); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-[#decfe6] hover:bg-white/10 cursor-pointer text-left transition">
-                  <Mic className="w-3.5 h-3.5 text-purple-400" /><span>Vocal Grounding 🎙️</span>
+                  <Mic className="w-3.5 h-3.5 text-purple-400" /><span>Vocal Grounding</span>
                 </button>
                 <button onClick={() => { setActiveSection('emotion'); setQuickSupportOpen(false); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-[#decfe6] hover:bg-white/10 cursor-pointer text-left transition">
-                  <Activity className="w-3.5 h-3.5 text-emerald-400" /><span>Quick Rest Check 🌸</span>
+                  <Activity className="w-3.5 h-3.5 text-emerald-400" /><span>Quick Rest Check</span>
                 </button>
-                <div className="border-t border-[#c9a0dc]/15 pt-1.5 mt-1">
+                {/* <div className="border-t border-[#c9a0dc]/15 pt-1.5 mt-1">
                   <a href="https://www.bcf.org.sg" target="_blank" rel="noopener noreferrer" className="w-full flex items-center gap-2 px-2 py-1.5 rounded-xl text-[11px] font-black text-red-400 hover:bg-red-500/10 cursor-pointer text-left transition">
-                    <ShieldAlert className="w-3.5 h-3.5 text-red-500 animate-bounce" /><span>Emergency Lines 🚨</span>
+                    <ShieldAlert className="w-3.5 h-3.5 text-red-500 animate-bounce" /><span>Get Help Now 🚨</span>
                   </a>
+                </div> */}
+                <div className="border-t border-[#c9a0dc]/15 pt-1.5 mt-1">
+                  <div className="px-2 py-1">
+                    <div className="flex items-center gap-2 text-[11px] font-black text-red-400 mb-2">
+                      <ShieldAlert className="w-3.5 h-3.5 text-red-500 animate-bounce" />
+                      <span>Get Help Now 🚨</span>
+                    </div>
+
+                    <a
+                      href="tel:995"
+                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:bg-red-500/10 transition"
+                    >
+                      <span>Singapore Emergency</span>
+                      <span className="text-red-500 font-bold">995</span>
+                    </a>
+
+                    <a
+                      href="tel:1767"
+                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:bg-purple-500/10 transition"
+                    >
+                      <span>SOS Crisis Hotline</span>
+                      <span className="text-purple-500 font-bold">1767</span>
+                    </a>
+
+                    <a
+                      href="tel:63892222"
+                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:bg-indigo-500/10 transition"
+                    >
+                      <span>IMH Mental Health</span>
+                      <span className="text-indigo-500 font-bold">6389 2222</span>
+                    </a>
+
+                    <button
+                      onClick={() => {
+                        setActiveSection('calm');
+                        setQuickSupportOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/10 transition"
+                    >
+                      <Heart className="w-3.5 h-3.5" />
+                      <span>Ground Me First</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
-            <button
+            {/* <button
               onClick={() => setQuickSupportOpen(!quickSupportOpen)}
               className="px-5 py-3 rounded-full bg-gradient-to-r from-[#d4798e] via-[#9c82ba] to-[#e8b4bc] text-white text-xs font-black flex items-center gap-2 cursor-pointer shadow-2xl hover:scale-103 hover:shadow-[#d4798e]/20 transition-all ring-4 ring-[#d4798e]/20 select-none"
             >
               <Heart className="w-4 h-4 fill-white text-none animate-pulse" />
-              <span>Astra Care Orb</span>
+              <span>Need Support?</span>
+            </button> */}
+            {/* Glowing Trigger Orb Button */}
+            <button
+              onClick={() => setQuickSupportOpen(!quickSupportOpen)}
+              className="px-5 py-3 rounded-full bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] text-white text-xs font-black flex items-center gap-2 cursor-pointer shadow-2xl hover:scale-103 transition-all ring-4 ring-purple-400/20 select-none"
+            >
+              <Heart className="w-4 h-4 fill-white animate-pulse" />
+              <span>Need support?</span>
             </button>
           </div>
         </div>
