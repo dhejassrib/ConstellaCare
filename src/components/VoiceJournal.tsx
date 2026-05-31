@@ -69,26 +69,45 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
     };
   }, [isRecording]);
 
-  const startRecord = () => {
-    setIsRecording(true);
-    setRecordProgress(0);
-    setTranscript('');
-    setAnalysisResult(null);
+  // Add this near your other refs at the top of the component
+  const audioStreamRef = useRef<MediaStream | null>(null);
 
-    progressIntervalRef.current = setInterval(() => {
-      setRecordProgress(prev => {
-        if (prev >= 100) {
-          stopRecord();
-          return 100;
-        }
-        return prev + 1.2;
-      });
-    }, 100);
+  const startRecord = async () => {
+    try {
+      // THIS is the magic line that asks for real mic permissions for the demo
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      audioStreamRef.current = stream;
+      
+      setIsRecording(true);
+      setRecordProgress(0);
+      setTranscript('');
+      setAnalysisResult(null);
+
+      progressIntervalRef.current = setInterval(() => {
+        setRecordProgress(prev => {
+          if (prev >= 100) {
+            stopRecord();
+            return 100;
+          }
+          return prev + 1.2;
+        });
+      }, 100);
+      
+    } catch (err) {
+      console.error("Microphone access denied or unavailable:", err);
+      alert("Please allow microphone access to use the Voice Journal.");
+    }
   };
 
   const stopRecord = () => {
     setIsRecording(false);
     if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
+    
+    // Stop the actual microphone tracks so the browser recording red dot goes away
+    if (audioStreamRef.current) {
+      audioStreamRef.current.getTracks().forEach(track => track.stop());
+      audioStreamRef.current = null;
+    }
     
     // Choose a random template or insert general transcription
     setIsTranscribing(true);
@@ -99,6 +118,7 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
     }, 2000);
   };
 
+  
   const analyzeAudio = async () => {
     if (!transcript) return;
     setIsAnalyzing(true);
