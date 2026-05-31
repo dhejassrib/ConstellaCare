@@ -6,7 +6,7 @@ import {
   Sun, Moon, Star, MessageSquare, Heart, Sparkles, Navigation, CheckCircle,
   ChevronRight, Compass, ShieldAlert, Award, FileText, Send, HelpCircle, X,
   Activity, Battery, Plus, Trash, Lock, Calendar, Users, Mic, Volume2, Clock,
-  ArrowRight, ShieldCheck, RefreshCw, Zap
+  ArrowRight, ShieldCheck, RefreshCw, Wind, Pill, FileBarChart, Mail, Trophy, BookOpen, Zap
 } from 'lucide-react';
 
 interface CaregiverDashboardProps {

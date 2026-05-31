@@ -1,44 +1,105 @@
 import { Section, CareCircleNode, Milestone, SymptomLog } from './types';
 
+// export const NAV_GROUPS = [
+//   {
+//     group: 'Emotional Support',
+//     items: [
+//       { id: 'home' as Section, label: 'Home', icon: '⭐' },
+//       { id: 'shared' as Section, label: 'Shared Constellation', icon: '💫' },
+//       { id: 'astra' as Section, label: 'Talk to Astra', icon: '✨' },
+//       { id: 'mood' as Section, label: 'Mood Check-In', icon: '🌸' },
+//       { id: 'calm' as Section, label: 'Calm Corner', icon: '🫧' },
+//       { id: 'voice' as Section, label: 'Voice Journal', icon: '🎙️' },
+//     ],
+//   },
+//   {
+//     group: 'Care Journey',
+//     items: [
+//       { id: 'appointment' as Section, label: 'Appointment Prep', icon: '🩺' },
+//       { id: 'symptoms' as Section, label: 'Health Tracker', icon: '📋' },
+//       { id: 'medications' as Section, label: 'Medications', icon: '💊' },
+//       { id: 'timeline' as Section, label: 'Timeline', icon: '📅' },
+//       { id: 'reports' as Section, label: 'Reports', icon: '📊' },
+//     ],
+//   },
+//   {
+//     group: 'Community',
+//     items: [
+//       { id: 'circle' as Section, label: 'Care Circle', icon: '🌌' },
+//       { id: 'bottles' as Section, label: 'Message Bottles', icon: '💌' },
+//       { id: 'resources' as Section, label: 'Resources', icon: '📚' },
+//     ],
+//   },
+//   {
+//     group: 'My Constellation',
+//     items: [
+//       { id: 'progress' as Section, label: 'Progress', icon: '✨' },
+//       { id: 'milestones' as Section, label: 'Health Milestones', icon: '🌟' },
+//       { id: 'reflection' as Section, label: 'Reflection Archive', icon: '🌙' },
+//     ],
+//   },
+// ];
+
+import {
+  Compass,
+  Sparkles,
+  MessageSquare,
+  Heart,
+  Wind,
+  Mic,
+  Calendar,
+  Activity,
+  Pill,
+  Clock,
+  BarChart3,
+  Users,
+  Mail,
+  BookOpen,
+  Trophy,
+  Star,
+  Moon,
+} from 'lucide-react';
 export const NAV_GROUPS = [
   {
     group: 'Emotional Support',
     items: [
-      { id: 'home' as Section, label: 'Home', icon: '⭐' },
-      { id: 'shared' as Section, label: 'Shared Constellation', icon: '💫' },
-      { id: 'astra' as Section, label: 'Talk to Astra', icon: '✨' },
-      { id: 'mood' as Section, label: 'Mood Check-In', icon: '🌸' },
-      { id: 'calm' as Section, label: 'Calm Corner', icon: '🫧' },
-      { id: 'voice' as Section, label: 'Voice Journal', icon: '🎙️' },
+      { id: 'home', label: 'Home', icon: <Compass className="w-3.5 h-3.5" /> },
+      { id: 'shared', label: 'Shared Constellation', icon: <Sparkles className="w-3.5 h-3.5 text-pink-400" /> },
+      { id: 'astra', label: 'Talk to Astra', icon: <MessageSquare className="w-3.5 h-3.5" /> },
+      { id: 'mood', label: 'Mood Check-In', icon: <Heart className="w-3.5 h-3.5" /> },
+      { id: 'calm', label: 'Calm Corner', icon: <Wind className="w-3.5 h-3.5" /> },
+      { id: 'voice', label: 'Voice Journal', icon: <Mic className="w-3.5 h-3.5" /> },
     ],
   },
   {
     group: 'Care Journey',
     items: [
-      { id: 'appointment' as Section, label: 'Appointment Prep Copilot', icon: '🩺' },
-      { id: 'symptoms' as Section, label: 'Health Check-In Tracker', icon: '📋' },
-      { id: 'medications' as Section, label: 'Medication Constellation', icon: '💊' },
-      { id: 'timeline' as Section, label: 'Timeline', icon: '📅' },
-      { id: 'reports' as Section, label: 'Reports', icon: '📊' },
+      { id: 'appointment', label: 'Appointment Prep', icon: <Calendar className="w-3.5 h-3.5" /> },
+      { id: 'symptoms', label: 'Health Tracker', icon: <Activity className="w-3.5 h-3.5" /> },
+      { id: 'medications', label: 'Medications', icon: <Pill className="w-3.5 h-3.5" /> },
+      { id: 'timeline', label: 'Timeline', icon: <Clock className="w-3.5 h-3.5" /> },
+      { id: 'reports', label: 'Reports', icon: <BarChart3 className="w-3.5 h-3.5" /> },
     ],
   },
   {
     group: 'Community',
     items: [
-      { id: 'circle' as Section, label: 'Care Circle', icon: '🌌' },
-      { id: 'bottles' as Section, label: 'Message Bottles', icon: '💌' },
-      { id: 'resources' as Section, label: 'Resources', icon: '📚' },
+      { id: 'circle', label: 'Care Circle', icon: <Users className="w-3.5 h-3.5" /> },
+      { id: 'bottles', label: 'Message Bottles', icon: <Mail className="w-3.5 h-3.5" /> },
+      { id: 'resources', label: 'Resources', icon: <BookOpen className="w-3.5 h-3.5" /> },
     ],
   },
   {
     group: 'My Constellation',
     items: [
-      { id: 'progress' as Section, label: 'Progress', icon: '✨' },
-      { id: 'milestones' as Section, label: 'Health Milestones', icon: '🌟' },
-      { id: 'reflection' as Section, label: 'Reflection Archive', icon: '🌙' },
+      { id: 'progress', label: 'Progress', icon: <Trophy className="w-3.5 h-3.5" /> },
+      { id: 'milestones', label: 'Health Milestones', icon: <Star className="w-3.5 h-3.5" /> },
+      { id: 'reflection', label: 'Reflection Archive', icon: <Moon className="w-3.5 h-3.5" /> },
     ],
   },
 ];
+
+
 
 export const REFLECTIONS = [
   'What is one small thing that felt manageable today?',
@@ -74,7 +135,7 @@ export const PATIENT_EMOTION_CARDS: EmotionCard[] = [
   { id: 'exhausted', label: 'Exhausted', emoji: '🌙', color: 'from-indigo-200 to-blue-300 dark:from-indigo-950 dark:to-blue-900', reflectionPrompt: "Your cells are doing brave work. There is absolute permission to rest." },
   { id: 'stable', label: 'Stable/Ground', emoji: '🌱', color: 'from-teal-200 to-emerald-300 dark:from-teal-950 dark:to-emerald-900', reflectionPrompt: "Feeling grounded is a beautiful harbor. What helped you anchor today?" },
   { id: 'grateful', label: 'Grateful', emoji: '✨', color: 'from-purple-200 to-violet-300 dark:from-purple-950 dark:to-violet-900', reflectionPrompt: "A star is lit in your sky. Who or what warmed your heart today?" },
-  { id: 'numb', label: 'Numb/Overwhelmed', emoji: '🌫️', color: 'from-slate-200 to-zinc-300 dark:from-slate-800 dark:to-zinc-900', reflectionPrompt: "Sometimes numbing is a protective shield. No pressure to active-feel. We are just here." }
+  { id: 'numb', label: 'Overwhelmed', emoji: '🌫️', color: 'from-slate-200 to-zinc-300 dark:from-slate-800 dark:to-zinc-900', reflectionPrompt: "Sometimes numbing is a protective shield. No pressure to active-feel. We are just here." }
 ];
 
 export const PATIENT_AI_RESPONSES: Record<string, string> = {

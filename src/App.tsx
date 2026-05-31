@@ -29,9 +29,11 @@ import SharedConstellation from './components/SharedConstellation';
 import ProgressiveAuthModal from './components/ProgressiveAuthModal';
 
 // Lucide Icons
-import { 
-  Sun, Moon, Star, MessageSquare, Heart, Sparkles, Navigation, CheckCircle, 
-  ChevronRight, Compass, ShieldAlert, Award, FileText, Send, HelpCircle, X
+import {
+  Sun, Moon, Star, MessageSquare, Heart, Sparkles, Navigation, CheckCircle,
+  ChevronRight, Compass, ShieldAlert, Award, FileText, Send, HelpCircle, X,
+  Activity, Battery, Plus, Trash, Lock, Calendar, Users, Mic, Volume2, Clock,
+  ArrowRight, ShieldCheck, RefreshCw, Wind, Pill, FileBarChart, Mail, Trophy, BookOpen, Zap
 } from 'lucide-react';
 
 export default function App() {
@@ -352,10 +354,10 @@ export default function App() {
                     className={`w-full flex items-center gap-3.5 px-3 py-2 rounded-xl text-xs font-bold leading-none capitalize transition-all duration-200 cursor-pointer ${
                       activeSection === item.id
                         ? theme === 'dark'
-                          ? 'bg-purple-950/45 text-purple-300 border border-purple-500/20'
+                          ? 'bg-gradient-to-r from-[#211738] to-[#120d21] text-[#f4d4a8] border border-[#c9a0dc]/20'
                           : 'bg-gradient-to-r from-[#decfe6] to-[#e8e2f4] text-[#1a1530] border border-[#c9a0dc]/20'
                         : theme === 'dark'
-                          ? 'bg-transparent text-slate-400 hover:bg-slate-850'
+                          ? 'bg-transparent text-[#9b8ab8] hover:bg-[#1c1530]/50 font-semibold'
                           : 'bg-transparent text-[#4d3c69] hover:bg-purple-100/60'
                     }`}
                   >
