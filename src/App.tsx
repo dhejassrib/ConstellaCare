@@ -442,9 +442,13 @@ export default function App() {
             )}
 
             {/* Stars counter on header right */}
-            <div className="flex items-center gap-1.5 bg-purple-100/50 dark:bg-[#1a0e30]/40 border border-purple-500/20 px-3 py-1 rounded-full text-xs font-bold text-purple-650 dark:text-purple-400">
+            {/* <div className="flex items-center gap-1.5 bg-purple-100/50 dark:bg-[#1a0e30]/40 border border-purple-500/20 px-3 py-1 rounded-full text-xs font-bold text-purple-650 dark:text-purple-400">
               <Star className="w-3.5 h-3.5 fill-purple-600 dark:fill-purple-500 animate-pulse" />
               <span>{totalStars} Stars</span>
+            </div> */}
+            <div className={`flex items-center gap-1.5 bg-gradient-to-r from-[#d4798e]/10 to-[#9c82ba]/10 border border-[#d4798e]/35 px-3 py-1 rounded-full text-xs font-bold ${theme === 'dark' ? 'text-[#f4d4a8]' : 'text-[#d4798e]'}`}>
+              <Star className="w-3.5 h-3.5 fill-[#d4798e] text-[#d4798e] animate-pulse" />
+              <span>{totalStars} stars aligned</span>
             </div>
 
             {/* Light / Dark selector utility */}
