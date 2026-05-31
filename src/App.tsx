@@ -1,4 +1,4 @@
-//app.tsx:
+// app.tsx:
 import { useState, useEffect, useRef } from 'react';
 import Landing from './Landing';
 import { 
@@ -27,14 +27,13 @@ import Resources from './components/Resources';
 import CaregiverDashboard from './components/CaregiverDashboard';
 import SharedConstellation from './components/SharedConstellation';
 import ProgressiveAuthModal from './components/ProgressiveAuthModal';
-import MedicationReminderConstellation from './components/MedicationReminderConstellation';
-import HealthMilestones from './components/HealthMilestones';
-import ConstellaLogo from './components/ConstellaLogo';
 
 // Lucide Icons
-import { 
-  Sun, Moon, Star, MessageSquare, Heart, Sparkles, Navigation, CheckCircle, 
-  ChevronRight, Compass, ShieldAlert, Award, FileText, Send, HelpCircle, X
+import {
+  Sun, Moon, Star, MessageSquare, Heart, Sparkles, Navigation, CheckCircle,
+  ChevronRight, Compass, ShieldAlert, Award, FileText, Send, HelpCircle, X,
+  Activity, Battery, Plus, Trash, Lock, Calendar, Users, Mic, Volume2, Clock,
+  ArrowRight, ShieldCheck, RefreshCw, Wind, Pill, FileBarChart, Mail, Trophy, BookOpen, Zap
 } from 'lucide-react';
 
 export default function App() {
@@ -171,44 +170,6 @@ export default function App() {
     });
   };
 
-  const calculateWellnessScore = () => {
-    let moodFactor = lastAction && lastAction.includes('Logged mood') ? 95 : 70;
-    
-    let symptomFactor = 85; 
-    if (symptomLog && Object.keys(symptomLog).length > 0) {
-      const keys = Object.keys(symptomLog);
-      const avg = keys.reduce((acc, k) => acc + (symptomLog[k] ?? 0), 0) / keys.length;
-      symptomFactor = Math.round(105 - (avg * 15));
-    }
-    
-    let medicationFactor = 80;
-    try {
-      const medicationCache = localStorage.getItem('constella-medications');
-      if (medicationCache) {
-        const medsList = JSON.parse(medicationCache);
-        if (medsList.length > 0) {
-          let total = medsList.length * 7;
-          let taken = 0;
-          medsList.forEach((m: any) => {
-            Object.keys(m.takenDays || {}).forEach(k => {
-              if (m.takenDays[k]) taken++;
-            });
-          });
-          if (total > 0) {
-            medicationFactor = Math.round((taken / total) * 100);
-          }
-        }
-      }
-    } catch (e) {
-      console.error(e);
-    }
-
-    let wellnessActivityFactor = stars.length > 0 ? Math.min(100, 60 + stars.length * 4) : 65;
-
-    const score = Math.round((moodFactor + symptomFactor + medicationFactor + wellnessActivityFactor) / 4);
-    return Math.min(100, Math.max(30, score));
-  };
-
   // Chat request dispatch
   const handleSendChat = async (promptOverride?: string) => {
     const activeText = promptOverride || chatPrompt;
@@ -340,7 +301,7 @@ export default function App() {
   }
 
   return (
-    <div className={`flex min-h-screen transition-all duration-500 font-sans ${theme === 'dark' ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-950 text-slate-100'}`}>
+    <div className={`flex min-h-screen transition-all duration-500 font-sans ${theme === 'dark' ? 'dark bg-slate-950 text-slate-100' : 'bg-[#FAF8FD] text-[#1e133a]'}`}>
       
       {/* 🔮 Background floating space specs */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -350,34 +311,33 @@ export default function App() {
 
       {/* ── Sidebar Navigation ── */}
       <aside 
-        className={`fixed top-0 bottom-0 left-0 bg-slate-900 border-r border-[#6366f1]/10 backdrop-blur-md w-64 z-40 flex flex-col justify-between transition-all duration-300 transform md:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 border-r backdrop-blur-md w-64 z-40 flex flex-col justify-between transition-all duration-300 transform md:translate-x-0 ${
           sidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
-        }`}
+        } ${theme === 'dark' ? 'bg-slate-900 border-[#6366f1]/10' : 'bg-[#FAF8FD]/95 border-[#7e6c9e]/20'}`}
       >
-        <div className="flex flex-col min-h-0 flex-1"> 
+        {/* ── CHANGED: wrapped in flex-col with min-h-0 so nav can scroll ── */}
+        <div className="flex flex-col min-h-0 flex-1">
           {/* Brand header */}
-          <div className="flex items-center justify-between px-6 py-5 border-b border-[#6366f1]/10">
+          <div className={`flex items-center justify-between px-6 py-5 border-b flex-shrink-0 ${theme === 'dark' ? 'border-[#6366f1]/10' : 'border-[#7e6c9e]/20'}`}>
             <div 
               onClick={() => setView('landing')} 
               className="flex items-center gap-2.5 cursor-pointer group"
               title="Return to Landing Page"
             >
-              <span className="w-8 h-8 rounded-xl bg-[#120D21]/80 dark:bg-[#120D21] flex items-center justify-center shadow-lg ring-1 ring-pink-400/20">
-                <ConstellaLogo size={28} />
-              </span>
+              <span className="w-8 h-8 rounded-xl bg-gradient-to-r from-pink-400 to-purple-400 flex items-center justify-center text-white text-lg font-black shadow-lg animate-pulse">C</span>
               <span className="font-bold text-xl bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent italic tracking-tight group-hover:opacity-85">
                 ConstellaCare
               </span>
             </div>
             <button 
               onClick={() => setSidebarOpen(false)}
-              className="md:hidden p-1 rounded-full hover:bg-slate-850 text-slate-400"
+              className={`md:hidden p-1 rounded-full ${theme === 'dark' ? 'hover:bg-slate-850 text-slate-400' : 'hover:bg-purple-100/60 text-[#7e6c9e]'}`}
             >
               <X className="w-4.5 h-4.5" />
             </button>
           </div>
 
-          {/* Navigation group sets */}
+          {/* ── CHANGED: added overflow-y-auto flex-1 so this scrolls ── */}
           <nav className="p-4 space-y-6 overflow-y-auto flex-1">
             {NAV_GROUPS.map((group) => (
               <div key={group.group} className="space-y-1">
@@ -393,8 +353,12 @@ export default function App() {
                     }}
                     className={`w-full flex items-center gap-3.5 px-3 py-2 rounded-xl text-xs font-bold leading-none capitalize transition-all duration-200 cursor-pointer ${
                       activeSection === item.id
-                        ? 'bg-purple-100 text-purple-700 dark:bg-purple-950/45 dark:text-purple-300 border border-purple-500/20'
-                        : 'bg-transparent text-slate-500 dark:text-slate-205 hover:bg-slate-850'
+                        ? theme === 'dark'
+                          ? 'bg-gradient-to-r from-[#211738] to-[#120d21] text-[#f4d4a8] border border-[#c9a0dc]/20'
+                          : 'bg-gradient-to-r from-[#decfe6] to-[#e8e2f4] text-[#1a1530] border border-[#c9a0dc]/20'
+                        : theme === 'dark'
+                          ? 'bg-transparent text-[#9b8ab8] hover:bg-[#1c1530]/50 font-semibold'
+                          : 'bg-transparent text-[#4d3c69] hover:bg-purple-100/60'
                     }`}
                   >
                     <span className="text-sm">{item.icon}</span>
@@ -406,13 +370,13 @@ export default function App() {
           </nav>
         </div>
 
-        {/* Global Stars Counter indicator at bottom of sidebar */}
-        <div className="p-6 border-t border-[#6366f1]/10 flex-shrink-0">
+        {/* ── CHANGED: added flex-shrink-0 so stars counter stays pinned at bottom ── */}
+        <div className={`p-6 border-t flex-shrink-0 ${theme === 'dark' ? 'border-[#6366f1]/10' : 'border-[#7e6c9e]/20'}`}>
           <div className="bg-gradient-to-tr from-slate-950 to-slate-850 text-slate-100 rounded-2xl p-4 border border-purple-500/15 text-center relative overflow-hidden shadow-md">
             <div className="absolute top-0 right-0 w-16 h-16 bg-purple-500/10 blur-xl rounded-full" />
             <Award className="w-7 h-7 text-amber-500 dark:text-amber-400 mx-auto animate-pulse" />
-            <span className="text-[10px] text-purple-600 dark:text-purple-400 block font-mono font-bold tracking-widest mt-1">STAR ENERGY INDEX</span>
-            <span className="text-2xl font-black mt-1 block">{totalStars} ✨</span>
+            <span className="text-[10px] text-purple-400 block font-mono font-bold tracking-widest mt-1">STAR ENERGY INDEX</span>
+            <span className="text-2xl font-black mt-1 block text-[#5b4a7a] dark:text-[#d4af37]">{totalStars} ✨</span>
             <p className="text-[10px] text-slate-350 mt-1.5 leading-relaxed">
               Every mindful check-in lights a new star. Watch your sky align.
             </p>
@@ -424,7 +388,7 @@ export default function App() {
       {sidebarOpen && (
         <div 
           onClick={() => setSidebarOpen(false)}
-          className="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-30 md:hidden transition-all"
+          className="fixed inset-0 bg-[#1e133a]/30 dark:bg-slate-950/40 backdrop-blur-xs z-30 md:hidden transition-all"
         />
       )}
 
@@ -440,7 +404,7 @@ export default function App() {
             >
               <Compass className="w-5 h-5 text-purple-650 dark:text-purple-400" />
             </button>
-            <h1 className="text-lg font-black bg-gradient-to-r from-purple-950 to-slate-700 dark:from-slate-100 dark:to-slate-350 bg-clip-text text-transparent">
+            <h1 className="text-lg font-black bg-gradient-to-r from-[#1e133a] to-[#4d3c69] dark:from-slate-100 dark:to-slate-350 bg-clip-text text-transparent">
               {getSectionTitle()}
             </h1>
           </div>
@@ -480,9 +444,13 @@ export default function App() {
             )}
 
             {/* Stars counter on header right */}
-            <div className="flex items-center gap-1.5 bg-purple-100/50 dark:bg-[#1a0e30]/40 border border-purple-500/20 px-3 py-1 rounded-full text-xs font-bold text-purple-650 dark:text-purple-400">
+            {/* <div className="flex items-center gap-1.5 bg-purple-100/50 dark:bg-[#1a0e30]/40 border border-purple-500/20 px-3 py-1 rounded-full text-xs font-bold text-purple-650 dark:text-purple-400">
               <Star className="w-3.5 h-3.5 fill-purple-600 dark:fill-purple-500 animate-pulse" />
               <span>{totalStars} Stars</span>
+            </div> */}
+            <div className={`flex items-center gap-1.5 bg-gradient-to-r from-[#d4798e]/10 to-[#9c82ba]/10 border border-[#d4798e]/35 px-3 py-1 rounded-full text-xs font-bold ${theme === 'dark' ? 'text-[#f4d4a8]' : 'text-[#d4798e]'}`}>
+              <Star className="w-3.5 h-3.5 fill-[#d4798e] text-[#d4798e] animate-pulse" />
+              <span>{totalStars} stars aligned</span>
             </div>
 
             {/* Light / Dark selector utility */}
@@ -504,7 +472,7 @@ export default function App() {
             <div className="space-y-8 animate-fade-in">
               
               {/* TOP AREA: ✨ Dynamic Greeting Hero */}
-              <div className="relative overflow-hidden rounded-3xl bg-gradient-to-tr from-purple-100/50 via-pink-100/10 to-slate-950 text-slate-100 p-7 md:p-9 shadow-xl border border-purple-500/10 dark:border-purple-500/20">
+              <div className={`relative overflow-hidden rounded-3xl p-7 md:p-9 shadow-xl border ${theme === 'dark' ? 'bg-gradient-to-tr from-purple-100/50 via-pink-100/10 to-slate-950 text-slate-100 border-purple-500/20' : 'bg-gradient-to-tr from-[#decfe6]/40 via-[#e8e2f4]/20 to-white text-[#1e133a] border-purple-200'}`}>
                 {/* Immersive space dust flow */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
                   <div className="absolute top-10 right-10 w-48 h-48 rounded-full bg-pink-500/20 blur-3xl animate-pulse duration-[10s]" />
@@ -514,28 +482,26 @@ export default function App() {
                 <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6 z-10">
                   <div>
                     <h2 className="text-xl md:text-2xl font-extrabold flex items-center gap-2">
-                      {view === 'caregiver'
-                        ? user ? `Good evening, ${user.displayName.split(' ')[0]} 🌟` : 'Good evening, Caregiver 🌟'
-                        : user ? `Good evening, ${user.displayName.split(' ')[0]} ✨` : 'Good evening, Sarah ✨'
-                      }
+                      {user
+                        ? `Good evening, ${user.displayName.split(' ')[0]} ✨`
+                        : 'Good evening, Sarah ✨'}
                     </h2>
+
                     <p className="text-xs text-slate-350 max-w-md mt-1 leading-relaxed">
-                      {view === 'caregiver' 
-                        ? `${user ? user.displayName.split(' ')[0] : "Sarah"}'s Constellation index has flared brighter this week. Let's make sure her care journey is fully supported.`
-                        : "Your Constellation index has flared brighter this week. Let's make sure you take a slow, gentle orbit of comfort tonight."}
+                      Your Constellation index has flared brighter this week. Let's make sure you take a slow, gentle orbit of comfort tonight.
                     </p>
                     {/* Status grid summary */}
                     <div className="mt-5 flex items-center gap-4.5 flex-wrap">
-                      <div className="bg-slate-850/60 border border-purple-500/10 rounded-xl py-1 px-3">
-                        <span className="text-[9px] uppercase font-mono tracking-wider text-slate-350 block font-bold">Resilience</span>
+                      <div className={`border border-purple-500/10 rounded-xl py-1 px-3 ${theme === 'dark' ? 'bg-slate-850/60' : 'bg-white/70'}`}>
+                        <span className={`text-[9px] uppercase font-mono tracking-wider block font-bold ${theme === 'dark' ? 'text-slate-350' : 'text-[#7e6c9e]'}`}>Resilience</span>
                         <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">Calmer than last week</span>
                       </div>
-                      <div className="bg-slate-850/60 border border-purple-500/10 rounded-xl py-1 px-3">
-                        <span className="text-[9px] uppercase font-mono tracking-wider text-slate-350 block font-bold">Next Oncology Check</span>
+                      <div className={`border border-purple-500/10 rounded-xl py-1 px-3 ${theme === 'dark' ? 'bg-slate-850/60' : 'bg-white/70'}`}>
+                        <span className={`text-[9px] uppercase font-mono tracking-wider block font-bold ${theme === 'dark' ? 'text-slate-350' : 'text-[#7e6c9e]'}`}>Next Oncology Check</span>
                         <span className="text-xs font-bold text-purple-600 dark:text-purple-400">Tomorrow, 2:30 PM</span>
                       </div>
-                      <div className="bg-slate-850/60 border border-purple-500/10 rounded-xl py-1 px-3">
-                        <span className="text-[9px] uppercase font-mono tracking-wider text-slate-350 block font-bold">Constellation circle</span>
+                      <div className={`border border-purple-500/10 rounded-xl py-1 px-3 ${theme === 'dark' ? 'bg-slate-850/60' : 'bg-white/70'}`}>
+                        <span className={`text-[9px] uppercase font-mono tracking-wider block font-bold ${theme === 'dark' ? 'text-slate-350' : 'text-[#7e6c9e]'}`}>Constellation circle</span>
                         <span className="text-xs font-bold text-pink-600 dark:text-pink-400">2 active check-ins</span>
                       </div>
                     </div>
@@ -547,71 +513,13 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Dynamic Daily Wellness Score Card */}
-              <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-5 shadow-lg flex flex-col md:flex-row items-center gap-5 relative overflow-hidden text-left">
-                <div className="relative w-24 h-24 flex-shrink-0 flex items-center justify-center">
-                  <svg viewBox="0 0 100 100" className="w-20 sm:w-24 h-20 sm:h-24 transform -rotate-90">
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="42"
-                      className="stroke-slate-100 dark:stroke-slate-800"
-                      strokeWidth="6"
-                      fill="transparent"
-                    />
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="42"
-                      className="stroke-purple-600 dark:stroke-purple-400"
-                      strokeWidth="6"
-                      fill="transparent"
-                      strokeDasharray={263.89}
-                      strokeDashoffset={263.89 - (263.89 * calculateWellnessScore()) / 100}
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex flex-col items-center justify-center font-sans">
-                    <span className="text-sm font-black text-slate-850 dark:text-white leading-none">{calculateWellnessScore()}%</span>
-                    <span className="text-[8px] font-mono tracking-widest text-[#a855f7] uppercase font-bold mt-1.5">WELLNESS</span>
-                  </div>
-                </div>
-                
-                <div className="flex-1">
-                  <span className="text-[9px] font-black uppercase tracking-widest text-[#a855f7] block font-mono">ASTRA REAL-TIME METRIC</span>
-                  <h4 className="text-xs font-extrabold text-slate-800 dark:text-slate-100 mt-1">Dynamic Daily Wellness Index</h4>
-                  <p className="text-[11px] text-slate-450 dark:text-slate-400 max-w-xl mt-1 leading-relaxed font-semibold">
-                    Calculated by combining your emotional check-in mood, active health tracker logs, prescription reminder compliance rate, and completed mindfulness/breathing sessions.
-                  </p>
-                  
-                  <div className="grid grid-cols-4 gap-2 mt-4 text-center border-t border-slate-50 dark:border-slate-850/50 pt-2.5 font-mono text-[9px] font-bold">
-                    <div>
-                      <span className="text-slate-400 block uppercase font-bold">MOOD</span>
-                      <span className="font-extrabold text-purple-650 dark:text-purple-300 mt-0.5 block">{lastAction && lastAction.includes('Logged mood') ? 'LOGGED ✓' : 'EMPTY'}</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-400 block uppercase font-bold font-mono">TRACKER</span>
-                      <span className="font-extrabold text-pink-655 dark:text-pink-300 mt-0.5 block">{symptomLog && Object.keys(symptomLog).length > 0 ? `${Object.keys(symptomLog).length} LOGGED` : 'PENDING'}</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-400 block uppercase font-bold">RETIRED</span>
-                      <span className="font-extrabold text-teal-600 dark:text-teal-400 mt-0.5 block">ACTIVE ✓</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-400 block uppercase font-bold">ACTIONS</span>
-                      <span className="font-extrabold text-amber-600 dark:text-amber-400 mt-0.5 block">{stars.length > 0 ? `${stars.length} ALIGNED` : 'EMPTY'}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               {/* SECTION 1: LATEST LIVING CONSTELLATION OVERVIEW */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h4 className="text-sm font-bold uppercase tracking-wider text-[#a855f7] flex items-center gap-1.5 pl-1.5">
                     <Compass className="w-4 h-4" /> Living Constellation Orbits
                   </h4>
-                  <span className="text-xs text-slate-400">Click coordinates to fetch logs</span>
+                  <span className="text-xs text-[#7e6c9e] dark:text-slate-400">Click coordinates to fetch logs</span>
                 </div>
                 <LivingConstellation stars={stars} totalStars={totalStars} />
               </div>
@@ -638,38 +546,38 @@ export default function App() {
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
                       <button 
                         onClick={() => setActiveSection('mood')} 
-                        className="bg-white dark:bg-slate-900 hover:border-purple-300 dark:hover:border-purple-900 border border-slate-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
+                        className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
                       >
                         <span className="text-2xl animate-pulse">🌸</span>
-                        <span className="text-xs font-bold text-slate-800 dark:text-slate-150">Mood Check-In</span>
-                        <span className="text-[10px] text-slate-400">Biometric scanner</span>
+                        <span className="text-xs font-bold text-[#1e133a] dark:text-slate-150">Mood Check-In</span>
+                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400">Biometric scanner</span>
                       </button>
 
                       <button 
                         onClick={() => setActiveSection('calm')} 
-                        className="bg-white dark:bg-slate-900 hover:border-purple-300 dark:hover:border-purple-900 border border-slate-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
+                        className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
                       >
                         <span className="text-2xl animate-pulse">🫧</span>
-                        <span className="text-xs font-bold text-slate-800 dark:text-slate-150">Calm exercise</span>
+                        <span className="text-xs font-bold text-[#1e133a] dark:text-slate-150">Calm exercise</span>
                         <span className="text-[10px] text-[#22d3ee]">Bubble expansion</span>
                       </button>
 
                       <button 
                         onClick={() => setActiveSection('appointment')} 
-                        className="bg-white dark:bg-slate-900 hover:border-purple-300 dark:hover:border-purple-900 border border-slate-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
+                        className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
                       >
                         <span className="text-2xl animate-pulse">🩺</span>
-                        <span className="text-xs font-bold text-slate-800 dark:text-slate-150">Copilot 2.0</span>
-                        <span className="text-[10px] text-slate-400">Speak to oncologist</span>
+                        <span className="text-xs font-bold text-[#1e133a] dark:text-slate-150">Copilot 2.0</span>
+                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400">Speak to oncologist</span>
                       </button>
 
                       <button 
                         onClick={() => setActiveSection('bottles')} 
-                        className="bg-white dark:bg-slate-900 hover:border-purple-300 dark:hover:border-purple-900 border border-slate-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
+                        className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
                       >
                         <span className="text-2xl animate-pulse">💌</span>
-                        <span className="text-xs font-bold text-slate-800 dark:text-slate-150">Message Bottle</span>
-                        <span className="text-[10px] text-slate-400">Therapeutic check-ins</span>
+                        <span className="text-xs font-bold text-[#1e133a] dark:text-slate-150">Message Bottle</span>
+                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400">Therapeutic check-ins</span>
                       </button>
                     </div>
                   </div>
@@ -680,7 +588,7 @@ export default function App() {
                   <span className="text-xs font-bold uppercase tracking-widest text-[#a855f7] block pl-1.5">Concentric Care Circle</span>
                   <div 
                     onClick={() => setActiveSection('circle')}
-                    className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-5 shadow-lg relative overflow-hidden flex flex-col items-center justify-center text-center cursor-pointer hover:border-purple-400/50 transition-all aspect-square lg:aspect-auto"
+                    className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-5 shadow-lg relative overflow-hidden flex flex-col items-center justify-center text-center cursor-pointer hover:border-purple-400/50 transition-all aspect-square lg:aspect-auto"
                   >
                     <div className="absolute inset-0 bg-radial from-violet-500/5 to-transparent blur-xl" />
                     {/* Compact version of rotating orbits preview */}
@@ -693,8 +601,8 @@ export default function App() {
                       <div className="w-11 h-11 rounded-full bg-gradient-to-r from-pink-400 to-indigo-500 text-white font-bold text-xs flex items-center justify-center ring-4 ring-purple-500/20">Me</div>
                     </div>
                     
-                    <h5 className="text-xs font-bold text-slate-800 dark:text-slate-205 mt-4">Family Connections Active</h5>
-                    <p className="text-[10px] text-slate-400 max-w-[150px] mt-1.5 mx-auto leading-relaxed">
+                    <h5 className="text-xs font-bold text-[#1e133a] dark:text-slate-205 mt-4">Family Connections Active</h5>
+                    <p className="text-[10px] text-[#7e6c9e] dark:text-slate-400 max-w-[150px] mt-1.5 mx-auto leading-relaxed">
                       Mom checked in today. Your sister added encouraging tea lines.
                     </p>
                   </div>
@@ -712,7 +620,7 @@ export default function App() {
 
           {/*  TALK TO ASTRA ✨ */}
           {activeSection === 'astra' && (
-            <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl overflow-hidden shadow-xl flex flex-col h-[520px] relative font-sans animate-fade-in">
+            <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl overflow-hidden shadow-xl flex flex-col h-[520px] relative font-sans animate-fade-in">
               {/* Astra Header */}
               <div className="bg-gradient-to-tr from-slate-950 to-indigo-950 p-4.5 text-white flex items-center justify-between border-b border-slate-800 relative">
                 <div className="absolute inset-0 bg-radial from-violet-600/20 to-transparent blur-md" />
@@ -732,14 +640,14 @@ export default function App() {
               </div>
 
               {/* Chat history display */}
-              <div className="flex-1 overflow-y-auto p-5 space-y-4.5 bg-slate-50/50 dark:bg-slate-950/20">
+              <div className="flex-1 overflow-y-auto p-5 space-y-4.5 bg-[#FAF8FD]/60 dark:bg-slate-950/20">
                 {chatHistory.map((msg) => (
                   <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                     <div 
                       className={`max-w-[76%] rounded-2xl p-4 text-xs leading-relaxed shadow-sm relative ${
                         msg.sender === 'user'
-                          ? 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 rounded-tr-none'
-                          : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 rounded-tl-none border border-slate-100 dark:border-slate-850'
+                          ? 'bg-[#1e133a] text-white dark:bg-slate-100 dark:text-slate-900 rounded-tr-none'
+                          : 'bg-white dark:bg-slate-900 text-[#3d3650] dark:text-slate-300 rounded-tl-none border border-purple-100 dark:border-slate-850'
                       }`}
                     >
                       <p className="whitespace-pre-line leading-relaxed">{msg.text}</p>
@@ -761,36 +669,36 @@ export default function App() {
               </div>
 
               {/* Suggestion prompts */}
-              <div className="p-3 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-850 flex gap-2 overflow-x-auto">
+              <div className="p-3 bg-white dark:bg-slate-900 border-t border-purple-100 dark:border-slate-850 flex gap-2 overflow-x-auto">
                 <button
                   onClick={() => handleSendChat("I am feeling physically exhausted after today's sessions... Guidelines?")}
-                  className="px-3 py-1.5 border border-slate-200 dark:border-slate-800 text-[10px] font-bold text-slate-500 rounded-full whitespace-nowrap hover:border-purple-400 cursor-pointer text-xs"
+                  className="px-3 py-1.5 border border-purple-200 dark:border-slate-800 text-[10px] font-bold text-[#4d3c69] dark:text-slate-400 rounded-full whitespace-nowrap hover:border-purple-400 cursor-pointer text-xs"
                 >
                   "Exhausted after session"
                 </button>
                 <button
                   onClick={() => handleSendChat("I have minor nausea spikes during the deep night, what has worked?")}
-                  className="px-3 py-1.5 border border-slate-200 dark:border-slate-800 text-[10px] font-bold text-slate-500 rounded-full whitespace-nowrap hover:border-purple-400 cursor-pointer text-xs"
+                  className="px-3 py-1.5 border border-purple-200 dark:border-slate-800 text-[10px] font-bold text-[#4d3c69] dark:text-slate-400 rounded-full whitespace-nowrap hover:border-purple-400 cursor-pointer text-xs"
                 >
                   "Night nausea adjustments"
                 </button>
                 <button
                   onClick={() => handleSendChat("Guide me through a quick grounding breath to help clear my racing heart.")}
-                  className="px-3 py-1.5 border border-slate-200 dark:border-slate-800 text-[10px] font-bold text-slate-500 rounded-full whitespace-nowrap hover:border-purple-400 cursor-pointer text-xs"
+                  className="px-3 py-1.5 border border-purple-200 dark:border-slate-800 text-[10px] font-bold text-[#4d3c69] dark:text-slate-400 rounded-full whitespace-nowrap hover:border-purple-400 cursor-pointer text-xs"
                 >
                   " racing thoughts "
                 </button>
               </div>
 
               {/* Chat Input panel bar */}
-              <div className="p-4 bg-slate-50 dark:bg-slate-950/40 border-t border-slate-100 dark:border-slate-850 flex gap-2">
+              <div className="p-4 bg-slate-50/80 dark:bg-slate-950/40 border-t border-purple-100 dark:border-slate-850 flex gap-2">
                 <input
                   type="text"
                   placeholder="Share whatever feels right — no expectations here..."
                   value={chatPrompt}
                   onChange={e => setChatPrompt(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && handleSendChat()}
-                  className="flex-1 text-xs px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent text-slate-700 dark:text-slate-200 focus:outline-none focus:border-purple-500"
+                  className="flex-1 text-xs px-4 py-3 rounded-xl border border-purple-200 dark:border-slate-800 bg-transparent text-[#2e214c] dark:text-slate-200 focus:outline-none focus:border-purple-500"
                 />
                 <button
                   onClick={() => handleSendChat()}
@@ -805,14 +713,15 @@ export default function App() {
           {/*  MOOD CHECK-IN ── */}
           {activeSection === 'mood' && (
             <div className="space-y-8 animate-fade-in">
-              <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2.5xl p-6 shadow-xl leading-relaxed">
-                <p className="text-sm text-slate-500 leading-relaxed0">
-                  Checking in with how you are feeling helps map your long-term diagnostic trends. Both biometric scans (the visual sensors) and daily emotion card selections are welcome.
+              <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl leading-relaxed">
+                <p className="text-sm text-[#4d3c69] dark:text-slate-400 leading-relaxed center">
+                  Checking in with how you are feeling helps map your long-term diagnostic trends.
+                  <br></br>Both biometric scans (the visual sensors) and daily emotion card selections are welcome.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2.5xl p-5 shadow-xl">
+                <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-5 shadow-xl">
                   <span className="text-xs font-bold font-mono tracking-widest text-[#a855f7] uppercase block mb-4">Biometric Mood Sensor Scanner</span>
                   <FacialEmotionDetection onDetected={(rawEm) => {
                     addStar("Mapped Facial Line Alignment", "mood");
@@ -820,7 +729,7 @@ export default function App() {
                   }} />
                 </div>
 
-                <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2.5xl p-5 shadow-xl flex flex-col justify-between">
+                <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-5 shadow-xl flex flex-col justify-between">
                   <div>
                     <span className="text-xs font-bold font-mono tracking-widest text-[#a855f7] uppercase block mb-4">Daily Emotion Selector Card Set</span>
                     <EmotionCards 
@@ -840,8 +749,8 @@ export default function App() {
           {/*  CALM CORNER ── */}
           {activeSection === 'calm' && (
             <div className="space-y-8 animate-fade-in">
-              <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2.5xl p-6 shadow-xl leading-relaxed">
-                <p className="text-sm text-slate-500">
+              <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl leading-relaxed">
+                <p className="text-sm text-[#4d3c69] dark:text-slate-400">
                   Mindfulness isn't a distraction; it lowers cortisol baselines allowing chemotherapy compounds to settle comfortably inside cells.
                 </p>
               </div>
@@ -853,18 +762,18 @@ export default function App() {
                 }} />
 
                 {/* Soundtrack Corner */}
-                <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2.5xl p-6 shadow-xl">
+                <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
                   <span className="text-xs font-bold font-mono tracking-widest text-[#a855f7] uppercase block mb-4">Clinical Calming Soundtrack Orbits</span>
                   
                   <div className="space-y-4">
-                    <p className="text-xs text-slate-500 leading-relaxed">
+                    <p className="text-xs text-[#4d3c69] dark:text-slate-400 leading-relaxed">
                       Settle your thoughts under gentle acoustic white noises and space soundtracks curated by care leads.
                     </p>
 
-                    <div className="bg-purple-50/50 dark:bg-purple-950/20 border border-purple-100/60 p-4.5 rounded-2xl flex items-center justify-between text-left">
+                    <div className="bg-purple-50/60 dark:bg-purple-950/20 border border-purple-200/60 dark:border-purple-100/60 p-4.5 rounded-2xl flex items-center justify-between text-left">
                       <div>
-                        <b className="text-xs text-slate-800 dark:text-white block font-bold">\"Deep Cosmic Rest Loop\"</b>
-                        <span className="text-[10px] text-slate-400 block mt-0.5">Gentle 24-000Hz frequency tracks</span>
+                        <b className="text-xs text-slate-800 dark:text-white block font-bold">"Deep Cosmic Rest Loop"</b>
+                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400 block mt-0.5">Gentle 24-000Hz frequency tracks</span>
                       </div>
                       <a 
                         href="https://open.spotify.com/playlist/37i9dQZF1DWXe9gFZP0gtP" 
@@ -914,10 +823,10 @@ export default function App() {
 
           {/*  TIMELINE ── */}
           {activeSection === 'timeline' && (
-            <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl font-sans animate-fade-in">
+            <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl font-sans animate-fade-in">
               <div className="pb-4 border-b border-slate-100 dark:border-slate-800 mb-6">
-                <h3 className="text-md font-extrabold text-slate-850 dark:text-slate-100">Care Chronology Pipeline</h3>
-                <p className="text-xs text-slate-400 mt-1">Track milestones. Every mapped node aligns you to release.</p>
+                <h3 className="text-md font-extrabold text-[#1e133a] dark:text-slate-100">Care Chronology Pipeline</h3>
+                <p className="text-xs text-[#7e6c9e] dark:text-slate-400 mt-1">Track milestones. Every mapped node aligns you to release.</p>
               </div>
 
               <div className="relative pl-6 border-l-2 border-purple-500/15 space-y-8 text-left py-2">
@@ -927,12 +836,12 @@ export default function App() {
                     <span className={`absolute -left-[30px] top-0 w-4 h-4 rounded-full border-2 ${
                       mil.done 
                         ? 'bg-gradient-to-tr from-pink-400 to-purple-500 border-white ring-4 ring-pink-400/20 shadow-md' 
-                        : 'bg-slate-300 border-slate-100 text-slate-500'
+                        : 'bg-[#decfe6] border-purple-200 text-[#4d3c69] dark:bg-slate-700 dark:border-slate-600 dark:text-slate-400'
                     }`} />
                     
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono tracking-wider font-extrabold text-slate-400">{mil.date}</span>
+                        <span className="text-[10px] font-mono tracking-wider font-extrabold text-[#7e6c9e] dark:text-slate-400">{mil.date}</span>
                         <span className={`text-[8px] px-2 py-0.5 rounded-full font-extrabold uppercase ${
                           mil.type === 'medical' ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/20 dark:text-blue-400' :
                           mil.type === 'emotional' ? 'bg-pink-50 text-pink-600 dark:bg-pink-950/20 dark:text-pink-400' :
@@ -942,8 +851,8 @@ export default function App() {
                         </span>
                       </div>
 
-                      <h4 className="text-xs font-bold text-slate-805 dark:text-slate-200 mt-1 leading-snug">{mil.label}</h4>
-                      {mil.notes && <p className="text-[11px] leading-relaxed mt-1 text-slate-500">{mil.notes}</p>}
+                      <h4 className="text-xs font-bold text-[#2e214c] dark:text-slate-200 mt-1 leading-snug">{mil.label}</h4>
+                      {mil.notes && <p className="text-[11px] leading-relaxed mt-1 text-[#4d3c69] dark:text-slate-400">{mil.notes}</p>}
                     </div>
                   </div>
                 ))}
@@ -968,15 +877,15 @@ export default function App() {
           {/*  MESSAGE BOTTLES ── */}
           {activeSection === 'bottles' && (
             <div className="space-y-8 animate-fade-in">
-              <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col items-center justify-center text-center">
+              <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col items-center justify-center text-center">
                 <div className="absolute top-0 right-0 w-44 h-44 bg-purple-500/5 blur-3xl rounded-full" />
                 <span className="text-4xl block mb-3 animate-bounce">💌</span>
-                <h3 className="text-md font-extrabold text-slate-800 dark:text-slate-100">Hope Therapeutic Message Bottles</h3>
-                <p className="text-xs text-slate-400 max-w-sm mt-1.5 leading-relaxed">
+                <h3 className="text-md font-extrabold text-[#1e133a] dark:text-slate-100">Hope Therapeutic Message Bottles</h3>
+                <p className="text-xs text-[#7e6c9e] dark:text-slate-400 max-w-sm mt-1.5 leading-relaxed">
                   Supportive messages locked in orbits by cancer survivors. Unscrew a bottle whenever dark clouds block your stargaze.
                 </p>
 
-                <div className="my-6 max-w-md w-full bg-slate-50 dark:bg-slate-950/30 border border-dashed border-purple-300/40 rounded-2xl p-5 leading-relaxed shadow-inner min-h-[90px] flex items-center justify-center italic text-xs text-slate-700 dark:text-slate-300">
+                <div className="my-6 max-w-md w-full bg-purple-50/50 dark:bg-slate-950/30 border border-dashed border-purple-300/40 rounded-2xl p-5 leading-relaxed shadow-inner min-h-[90px] flex items-center justify-center italic text-xs text-[#3d3650] dark:text-slate-300">
                   {bottleIndex !== null 
                     ? MESSAGE_BOTTLES[bottleIndex] 
                     : "No active alignment message opened yet. Pull a secure cork below."}
@@ -991,7 +900,7 @@ export default function App() {
                     {unlockedBottles >= MESSAGE_BOTTLES.length ? 'All Bottles Dispatched 🌸' : 'Acquire Orbits Bottle 🌟'}
                   </button>
 
-                  <span className="text-[10px] font-mono text-slate-400 font-bold uppercase mt-1">
+                  <span className="text-[10px] font-mono text-[#7e6c9e] dark:text-slate-400 font-bold uppercase mt-1">
                     {unlockedBottles} / {MESSAGE_BOTTLES.length} BOTTLES UNLOCKED
                   </span>
                 </div>
@@ -1009,39 +918,39 @@ export default function App() {
           {/*  PROGRESS ── */}
           {activeSection === 'progress' && (
             <div className="space-y-8 animate-fade-in">
-              <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
-                <div className="pb-3 border-b border-slate-100 dark:border-slate-815/50 mb-5">
-                  <h3 className="text-md font-extrabold text-slate-800 dark:text-white">Active Constellation Index</h3>
-                  <p className="text-xs text-slate-400 mt-1">A historical view of all illuminated alignment points mapping safety guidelines.</p>
+              <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div className="pb-3 border-b border-purple-100 dark:border-slate-815/50 mb-5">
+                  <h3 className="text-md font-extrabold text-[#1e133a] dark:text-white">Active Constellation Index</h3>
+                  <p className="text-xs text-[#7e6c9e] dark:text-slate-400 mt-1">A historical view of all illuminated alignment points mapping safety guidelines.</p>
                 </div>
 
                 <div className="grid grid-cols-3 gap-4 text-center">
-                  <div className="p-4 bg-slate-55/40 dark:bg-slate-950/30 rounded-2xl border border-slate-100 dark:border-slate-800">
+                  <div className="p-4 bg-slate-55/40 dark:bg-slate-950/30 rounded-2xl border border-purple-100 dark:border-slate-800">
                     <span className="text-2xl font-black text-purple-600 block">{stars.length}</span>
-                    <span className="text-[10px] font-semibold text-slate-400 block mt-1">Illuminated Stars</span>
+                    <span className="text-[10px] font-semibold text-[#7e6c9e] dark:text-slate-400 block mt-1">Illuminated Stars</span>
                   </div>
-                  <div className="p-4 bg-slate-55/40 dark:bg-slate-950/30 rounded-2xl border border-slate-100 dark:border-slate-800">
+                  <div className="p-4 bg-slate-55/40 dark:bg-slate-950/30 rounded-2xl border border-purple-100 dark:border-slate-800">
                     <span className="text-2xl font-black text-pink-600 block">{Math.max(1, Math.floor(stars.length / 5))}</span>
-                    <span className="text-[10px] font-semibold text-slate-400 block mt-1">Formed Constellations</span>
+                    <span className="text-[10px] font-semibold text-[#7e6c9e] dark:text-slate-400 block mt-1">Formed Constellations</span>
                   </div>
-                  <div className="p-4 bg-slate-55/40 dark:bg-slate-950/30 rounded-2xl border border-slate-100 dark:border-slate-800">
+                  <div className="p-4 bg-slate-55/40 dark:bg-slate-950/30 rounded-2xl border border-purple-100 dark:border-slate-800">
                     <span className="text-2xl font-black text-cyan-600 block">{unlockedBottles}</span>
-                    <span className="text-[10px] font-semibold text-slate-400 block mt-1">Hope Messages Discovered</span>
+                    <span className="text-[10px] font-semibold text-[#7e6c9e] dark:text-slate-400 block mt-1">Hope Messages Discovered</span>
                   </div>
                 </div>
               </div>
 
               {/* Connected Star summary items */}
-              <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-5 shadow-xl">
+              <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-5 shadow-xl">
                 <span className="text-xs font-bold font-mono tracking-widest text-[#a855f7] block mb-4 uppercase">Stellar Log Pathway Archive</span>
                 <div className="space-y-3">
                   {stars.slice().reverse().map(star => (
-                    <div key={star.id} className="flex items-center justify-between p-3 bg-slate-50/50 dark:bg-slate-950/20 border border-slate-100 dark:border-slate-850 rounded-xl text-left">
+                    <div key={star.id} className="flex items-center justify-between p-3 bg-slate-50/50 dark:bg-slate-950/20 border border-purple-100 dark:border-slate-850 rounded-xl text-left">
                       <div>
-                        <b className="text-xs font-bold text-slate-800 dark:text-slate-100">{star.label}</b>
+                        <b className="text-xs font-bold text-[#1e133a] dark:text-slate-100">{star.label}</b>
                         <span className="text-[9px] text-[#a855f7] font-mono uppercase block mt-0.5">✦ Sector aligned // {star.category}</span>
                       </div>
-                      <span className="text-[9px] font-mono text-slate-400 whitespace-nowrap">{star.timestamp}</span>
+                      <span className="text-[9px] font-mono text-[#7e6c9e] dark:text-slate-400 whitespace-nowrap">{star.timestamp}</span>
                     </div>
                   ))}
                 </div>
@@ -1049,39 +958,10 @@ export default function App() {
             </div>
           )}
 
-          {/*  MEDICATION REMINDER CONSTELLATION ── */}
-          {activeSection === 'medications' && (
-            <div className="space-y-8 animate-fade-in">
-              <MedicationReminderConstellation 
-                theme={theme} 
-                onStarEarned={(label) => {
-                  addStar(label, 'calm');
-                  setLastAction(`Active medication compliance star: ${label}`);
-                }}
-                onAdherenceUpdate={(rate) => {
-                  setLastAction(`Updated daily medication compliance rate to ${rate}%`);
-                }}
-              />
-            </div>
-          )}
-
-          {/*  HEALTH MILESTONES ── */}
-          {activeSection === 'milestones' && (
-            <div className="space-y-8 animate-fade-in">
-              <HealthMilestones 
-                theme={theme} 
-                onStarEarned={(label) => {
-                  addStar(label, 'symptom');
-                  setLastAction(`Achieved recovery milestone: ${label}`);
-                }}
-              />
-            </div>
-          )}
-
           {/*  REFLECTION ARCHIVE ── */}
           {activeSection === 'reflection' && (
             <div className="space-y-8 animate-fade-in font-sans">
-              <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+              <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
                 <div className="flex items-center gap-3.5 bg-purple-50/50 dark:bg-purple-950/25 border border-purple-100/60 p-4.5 rounded-2xl mb-6">
                   <span className="text-3xl animate-pulse">🌙</span>
                   <div>
@@ -1092,9 +972,9 @@ export default function App() {
                   </div>
                 </div>
 
-                <label className="text-[10px] font-bold font-mono tracking-widest text-slate-400 block mb-2">WRITE YOUR SECURE THOUGHTS</label>
+                <label className="text-[10px] font-bold font-mono tracking-widest text-[#7e6c9e] dark:text-slate-400 block mb-2">WRITE YOUR SECURE THOUGHTS</label>
                 <textarea
-                  className="w-full text-xs p-4 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-150 dark:border-slate-805 focus:outline-none focus:border-purple-500 text-slate-705 dark:text-slate-250 leading-relaxed resize-none"
+                  className="w-full text-xs p-4 bg-[#FAF8FD] dark:bg-slate-950 rounded-2xl border border-purple-200 dark:border-slate-805 focus:outline-none focus:border-purple-500 text-[#2e214c] dark:text-slate-250 leading-relaxed resize-none"
                   rows={4}
                   placeholder="The page is empty. There is absolute permission to express frustration, beauty, stable relief, or fog. This is just for you..."
                   value={reflectionAnswer}
@@ -1118,12 +998,12 @@ export default function App() {
                   <span className="text-xs font-bold uppercase tracking-widest text-[#a855f7] block pl-1">Historical Reflections Archive</span>
                   <div className="space-y-4">
                     {reflectionHistory.map(item => (
-                      <div key={item.id} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-805 p-5 rounded-2xl shadow-sm text-left">
-                        <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-805 mb-2.5">
-                          <span className="text-[10px] font-bold text-slate-400">Prompt: \"{item.prompt}\"</span>
-                          <span className="text-[9px] font-mono text-slate-400">{item.date}</span>
+                      <div key={item.id} className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-805 p-5 rounded-2xl shadow-sm text-left">
+                        <div className="flex items-center justify-between pb-2 border-b border-purple-100 dark:border-slate-805 mb-2.5">
+                          <span className="text-[10px] font-bold text-[#7e6c9e] dark:text-slate-400">Prompt: "{item.prompt}"</span>
+                          <span className="text-[9px] font-mono text-[#7e6c9e] dark:text-slate-400">{item.date}</span>
                         </div>
-                        <p className="text-xs leading-relaxed text-slate-650 dark:text-slate-350">{item.text}</p>
+                        <p className="text-xs leading-relaxed text-[#3d3650] dark:text-slate-350">{item.text}</p>
                       </div>
                     ))}
                   </div>
