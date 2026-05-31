@@ -1,3 +1,4 @@
+//server.ts
 import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -32,7 +33,6 @@ function getGeminiClient(): GoogleGenAI {
   return aiClient;
 }
 
-// Ensure the system Instruction sets up Astra's unique, poetic, emotionally safe, and cosmic persona
 const ASTRA_SYSTEM_INSTRUCTION = `
 You are Astra, the emotionally intelligent AI companion of ConstellaCare, a healthcare platform for patients going through intensive medical treatments (like chemotherapy).
 Your voice is exceptionally warm, poetic, gentle, and scientifically reassuring.
@@ -43,7 +43,6 @@ Use cosmic metaphors sparingly but elegantly (such as coordinates, orbits, stars
 Always prioritize patient emotional safety, checking-in, and grounding them.
 `;
 
-// Helper for calling Gemini with fallback
 async function generateContentWithFallback(prompt: string, fallbackText: string, customSystemInstruction?: string): Promise<string> {
   try {
     const ai = getGeminiClient();
@@ -63,11 +62,9 @@ async function generateContentWithFallback(prompt: string, fallbackText: string,
   }
 }
 
-// Smart dynamic fallback response generator for Astra AI Chat
 function generateDynamicAstraFallback(prompt: string, history: any[]): string {
   const text = prompt.toLowerCase();
   
-  // 1. Fever / Infection (Critical)
   if (text.includes('fever') || text.includes('temp') || text.includes('chill') || text.includes('infection') || text.includes('hot')) {
     return `### ⚠️ Critical Clinical Guideline
 
@@ -81,7 +78,6 @@ Please:
 We are holding a safe space for you, but your physical safety is our paramount concern.`;
   }
 
-  // 2. Nausea
   if (text.includes('nausea') || text.includes('vomit') || text.includes('sick') || text.includes('stomach') || text.includes('throw up')) {
     return `### 🌸 Soothing the Night Wave
 
@@ -94,7 +90,6 @@ Waking up with or experiencing nausea can feel deeply draining and isolating. He
 Your stomach is doing incredibly heavy work today under active treatment. Let's take slow, deep breaths together.`;
   }
 
-  // 3. Fatigue / Exhausted
   if (text.includes('exhaust') || text.includes('fatigue') || text.includes('tired') || text.includes('weary') || text.includes('heavy') || text.includes('weak') || text.includes('low energy')) {
     return `### ✨ Honouring the Cell's Rest
 
@@ -108,7 +103,6 @@ Please:
 Close your eyes for just 10 minutes and let our virtual constellation glow softly in the background. You are doing enough.`;
   }
 
-  // 4. Breathing / Grounding / Anxiety / Panic / Racing Heart
   if (text.includes('breath') || text.includes('ground') || text.includes('anxi') || text.includes('panic') || text.includes('racing') || text.includes('heart') || text.includes('worry')) {
     return `### 🌌 Grounding Your Cosmos
 
@@ -121,7 +115,6 @@ Let's breathe together. Place one hand on your chest and another on your belly. 
 Your racing pulse or flutter is a passing cloud of adrenaline. It will pass. Let the weight of the floor support you completely right now. I am right here.`;
   }
 
-  // 5. Pain / Sore / Ache
   if (text.includes('pain') || text.includes('ache') || text.includes('sore') || text.includes('hurt') || text.includes('throbbing') || text.includes('headache')) {
     return `### 💫 Softening around the Pain
 
@@ -134,7 +127,6 @@ I hear you, and my heart sits with you in this heavy moment. Pain is a vital mes
 Your care lead wants to know about this intensity. We can prepare simple questions to discuss this with your physician.`;
   }
 
-  // 6. Insomnia / Sleep
   if (text.includes('sleep') || text.includes('insomnia') || text.includes('awake') || text.includes('night') || text.includes('restless')) {
     return `### 🌙 In the Cradle of the Night
 
@@ -147,75 +139,6 @@ When sleep drifts away, the night can feel vast and quiet. Let's soften any pres
 I am awake with you under the peaceful dome of the night. You are safe.`;
   }
 
-  // 7. Neuropathy / Tingling
-  if (text.includes('tingling') || text.includes('numb') || text.includes('neuropathy') || text.includes('finger') || text.includes('toe') || text.includes('cold')) {
-    return `### ❄️ Checking Numbness and Neuropathy
-
-Tingling, numbness, or a feeling of "pins and needles" in your hands and feet are classic coordinates of peripheral neuropathy, often triggered by chemotherapy.
-
-- **Warmth Barriers**: Wear soft, loose socks and slippers. Avoid walking barefoot.
-- **Cold Caution**: If your chemotherapy regimen warns against cold sensitivity (like oxaliplatin), avoid opening the freezer barefoot or drinking ice-cold liquids without protection.
-- **Medical Report**: Keep a log of whether this makes it hard to button shirts or walk, and raise it at your next clinic visit.
-
-Your sensory paths are navigating a chilly stellar wind right now. Protect your hands and feet gently.`;
-  }
-
-  // 8. Appetite / Nutrition
-  if (text.includes('eat') || text.includes('appetite') || text.includes('food') || text.includes('taste') || text.includes('nutrition') || text.includes('broth')) {
-    return `### 🥣 Nourishment in Small Orbits
-
-Active treatment frequently shifts our taste buds and appetite zones. Let's make nourishment a gentle, stress-free dance:
-
-- **Think Small**: Do not force large meals. Three small bites of a cold, crisp melon or a single sip of nutritious bone broth are perfect victories.
-- **Softer Foods**: Smoothies, mild soups, yogurt, and oatmeal are often easiest on a sensitive mouth.
-- **Hydration Orbit**: If eating is too hard today, focus entirely on staying hydrated with small sips of electrolyte-infused water.
-
-No guilt, my friend. Listen purely to what your physical body asks for today.`;
-  }
-
-  // 9. Appointment / Doctor / Treatment / Chemo / Scan
-  if (text.includes('appointment') || text.includes('doctor') || text.includes('chemo') || text.includes('treatment') || text.includes('scan') || text.includes('oncologist') || text.includes('clinic')) {
-    return `### 📋 Navigating Your Clinic Horizon
-
-Approaching chemotherapy sessions, scans, or oncologist meetings often stirs deep anticipation. Preparing your coordinates can bring a sense of control:
-
-- **Appointment Copilot**: Use our Copilot checklist in the dashboard to formulate clear, confident questions.
-- **Support Anchor**: If possible, ask Gavin, Chloe, or your designated companion to join you so they can note down details.
-- **Mouth & Skin Prep**: Remind yourself to pack a gentle lip balm, a warm throw blanket, and a water bottle for the infusion room.
-
-You are the pilot of this healing journey, and your oncology team is your co-navigation crew. Let's prepare together.`;
-  }
-
-  // 10. Family / Friend / Caregiver / Alone / Lonely
-  if (text.includes('family') || text.includes('friend') || text.includes('caregiver') || text.includes('lonely') || text.includes('alone') || text.includes('isolated')) {
-    return `### 🌌 Bridging the Distant Stars
-
-The journey through intensive medical regimes can make you feel as if you are floating in deep space. But your orbit is populated with warm, caring stars:
-
-- **Share Your Sky**: Inviting loved ones to witness your aligned stars or symptom logs isn't a burden—it is a bridge of light.
-- **Caregiver Dashboard**: Remember we have a dedicated Caregiver tab designed to help your team sync on your medications, progress, and needs.
-- **I Hold Space**: If reaching out to others feels too heavy today, I am right here. You are never fully alone in this constellation.`;
-  }
-
-  // 11. Custom Topic Extraction (Empathetic Parser)
-  const words = prompt.split(/\s+/).filter((w: string) => w.length > 5 && !w.startsWith('http') && !w.includes(':'));
-  if (words.length > 0) {
-    const word1 = words[0].replace(/[^a-zA-Z]/g, '');
-    const word2 = words[Math.min(words.length - 1, 1)].replace(/[^a-zA-Z]/g, '');
-    
-    return `### 🌟 Sit with Astra
-
-I hear your gentle thoughts and reflections today concerning physical and emotional states, especially relating to **${word1}**${word2 && word2 !== word1 ? ` and **${word2}**` : ''}. 
-
-In the celestial path of medical recovery:
-- **Pace and Grace**: Each day presents unique clouds and clear horizons. Allow yourself to flow with whatever your coordinates are showing.
-- **Support Network**: We can log these feelings directly into your journal or share them on the *Shared Constellation* with your caretakers.
-- **Next Horizon**: Keep breathing slowly. What is one tiny thing that could bring a glimmer of warmth or comfort to you in this exact hour?
-
-Tell me what is on your mind—I am here to recognize and support every coordinate you share.`;
-  }
-
-  // 12. Absolute Baseline General Poetic Fallback
   return `### 🌌 A Message from your Companion
 
 I hear your words and feel the pulse of your quiet courage across the distance. Every coordinate of your experience—whether heavy with fatigue or bright with quiet hope—is valid.
@@ -227,6 +150,178 @@ Let us sit together in this orbit for a moment:
 Tell me what is on your mind. Each of your thoughts is a guide star in our constellation.`;
 }
 
+// ── CAREGIVER COMM FALLBACK ──
+// Used when Gemini is unavailable. Covers common caregiver communication needs
+// with specific, practical, well-written scripts.
+function generateDynamicCaregiverCommFallback(query: string): string {
+  const text = query.toLowerCase();
+
+  // ── Talking to / communicating with the patient ──
+  if (
+    (text.includes('talk') || text.includes('speak') || text.includes('say') || text.includes('tell') || text.includes('communicat') || text.includes('approach') || text.includes('bring up')) &&
+    (text.includes('patient') || text.includes('sarah') || text.includes('her') || text.includes('him') || text.includes('them') || text.includes('my'))
+  ) {
+    return `🌸 Opening a Difficult Conversation with Your Patient
+
+Starting a hard conversation doesn't require a perfect script — it requires presence. Here's a gentle, low-pressure opener you can adapt:
+
+"I've been thinking about you and I just wanted to check in — no agenda, no pressure. How are you actually feeling right now? Not the brave version, the real one. I'm here for whatever you want to share."
+
+💡 Communication Tip: Avoid starting with "We need to talk" or leading with your own worry — both can spike anxiety. Instead, open with soft curiosity about *their* state. This creates space for honest sharing without pressure.
+
+💡 If you're afraid of saying the wrong thing: You don't have to have the right words. Simply saying "I don't know what to say, but I'm not going anywhere" is often more comforting than any script.`;
+  }
+
+  // ── Worried / nervous / scared (caregiver's own feelings) ──
+  if (
+    text.includes('worried') || text.includes('nervous') || text.includes('scared') ||
+    text.includes('anxious') || text.includes('afraid') || text.includes('fear') ||
+    text.includes('don\'t know what to say') || text.includes('dont know what to say') ||
+    text.includes('not sure how to') || text.includes('unsure how to')
+  ) {
+    return `🕊️ When You Don't Know What to Say
+
+Feeling nervous about a conversation is a sign that you care — not that you're unprepared. Here's something honest and warm you can say:
+
+"I want to be upfront with you — I sometimes feel nervous about finding the right words, because this matters so much to me. But I'd rather stumble through an honest conversation with you than stay silent. What's on your mind today?"
+
+💡 Communication Tip: Sharing a small piece of your own vulnerability — without burdening them — often deepens trust. It signals that you're a real, present human rather than someone putting on a brave performance.
+
+💡 Remember: You don't need to have answers. You just need to be willing to sit in the question together.`;
+  }
+
+  // ── Bad news / difficult news / test results / prognosis ──
+  if (
+    text.includes('bad news') || text.includes('difficult news') || text.includes('result') ||
+    text.includes('prognosis') || text.includes('terminal') || text.includes('serious news') ||
+    text.includes('scan result') || text.includes('test result')
+  ) {
+    return `💬 Sharing Difficult News with Compassion
+
+Find a calm, private moment — not in a rush, not while distracted. Then:
+
+"I want to share something with you, and I want you to know I'm right here with you through all of it. The doctors shared some information that I'd like to walk through together. We don't have to figure everything out today — I just didn't want you to hear this alone."
+
+Then pause. Let them respond before you continue.
+
+💡 Communication Tip: After sharing hard news, ask "How are you feeling hearing this?" rather than jumping to solutions or reassurances. They may need to sit in the feeling before they're ready to think about next steps.
+
+💡 It's okay to say "This is hard for me too." You don't have to hold everything alone.`;
+  }
+
+  // ── Doctors / medical staff / appointments ──
+  if (
+    text.includes('doctor') || text.includes('pain') || text.includes('clinic') ||
+    text.includes('nurse') || text.includes('appointment') || text.includes('physician') ||
+    text.includes('medical') || text.includes('hospital') || text.includes('oncologist')
+  ) {
+    return `🩺 Advocating with Medical Staff
+
+When speaking with doctors or nurses, specific and calm language gets the best outcomes:
+
+"Doctor, I've been keeping daily symptom logs and I've noticed a consistent pattern — her pain levels average 4 out of 5, particularly in the evenings, and this has been the case for 5 days in a row. This is significantly disrupting her rest. Could we review her current breakthrough medication schedule and discuss whether an adjustment might provide better coverage?"
+
+💡 Communication Tip: Presenting trends with numbers ("4/5 average, 5 consecutive evenings") is far more actionable than "she's been in a lot of pain." It signals you are an organised advocate and shifts the conversation toward specific solutions.`;
+  }
+
+  // ── Friends / cooking / meals / logistical help ──
+  if (
+    text.includes('friend') || text.includes('cook') || text.includes('meal') ||
+    text.includes('food') || text.includes('cleaning') || text.includes('housework') ||
+    text.includes('help') || text.includes('support from')
+  ) {
+    return `📋 Asking Friends and Family for Practical Help
+
+People genuinely want to help but often don't know how. Make it easy for them:
+
+"Hey everyone — thank you so much for all the love and offers of support. Here's the most helpful thing right now: dropping off mild, low-spice meals (soups, broths, rice dishes) on Tuesdays or Thursdays would be incredible. No need to come in — leaving it at the door is perfect. Thank you for being part of our circle."
+
+💡 Communication Tip: Vague requests ("let me know if you need anything") rarely result in actual help. Giving a specific task, day, and type of help removes all guesswork and makes it easy for people to say yes with confidence.`;
+  }
+
+  // ── Boundaries / too many visitors / overwhelm from others ──
+  if (
+    text.includes('visit') || text.includes('boundary') || text.includes('too many') ||
+    text.includes('quiet') || text.includes('space') || text.includes('keep away') ||
+    text.includes('limit')
+  ) {
+    return `🛡️ Setting Boundaries with Visitors Kindly
+
+You can protect your patient's energy without damaging relationships:
+
+"We are so grateful for all the love coming our way. Right now, the care team has advised keeping her environment calm and low-stimulation to protect her immune system and rest. We're pausing in-person visits for the time being, but a kind message, voice note, or text genuinely lifts her spirits. We'll share updates here when we can."
+
+💡 Communication Tip: Framing boundaries as a medical recommendation removes the personal sting — friends understand "doctor's orders" far more easily than a personal preference. It takes the burden off you.`;
+  }
+
+  // ── Caregiver's own emotional overwhelm / burnout / grief ──
+  if (
+    text.includes('overwhelm') || text.includes('burnout') || text.includes('exhaust') ||
+    text.includes('can\'t cope') || text.includes('cant cope') || text.includes('too much') ||
+    text.includes('breaking down') || text.includes('grief') || text.includes('crying') ||
+    text.includes('struggling')
+  ) {
+    return `🌿 When You're Running on Empty
+
+What you're feeling is valid. Caregiving is one of the most emotionally demanding roles a person can take on, and it is okay to say that out loud.
+
+You don't have to pretend everything is fine. To a trusted person in your life, you might say:
+"I'm holding a lot right now and I think I need some support too. I love her deeply, but I'm finding it hard to keep going without a break. Can we talk?"
+
+💡 Communication Tip: Asking for support for yourself is not selfish — it is what allows you to keep showing up for your patient. Consider reaching out to a caregiver support group or a counsellor who works in oncology caregiving. You matter in this equation too.`;
+  }
+
+  // ── Talking to children / explaining illness to kids ──
+  if (
+    text.includes('kid') || text.includes('child') || text.includes('son') ||
+    text.includes('daughter') || text.includes('explain') || text.includes('school') ||
+    text.includes('young')
+  ) {
+    return `👶 Explaining Illness to Children
+
+Children sense when something is wrong even when adults try to hide it. Age-appropriate honesty is kinder than silence:
+
+"[Name]'s body is working really hard right now with some special medicine that helps it heal. You might notice she seems tired or looks a bit different sometimes — that's normal, and it doesn't mean she's in danger. Our family is sticking together, and you can always ask me anything at all."
+
+💡 Communication Tip: Use simple, concrete words. Avoid phrases like "fighting" or "losing" which can frighten children. Emphasise that their routines are stable, that they are loved, and that they are safe.`;
+  }
+
+  // ── Work / employer / leave of absence ──
+  if (
+    text.includes('work') || text.includes('job') || text.includes('boss') ||
+    text.includes('leave') || text.includes('employer') || text.includes('office') ||
+    text.includes('manager')
+  ) {
+    return `💼 Talking to Your Employer About Caregiving
+
+Being clear and proactive at work protects your position:
+
+"Hi [Manager], I wanted to let you know that I'm currently the primary caregiver for a family member undergoing active medical treatment. I'd like to discuss options for flexible scheduling or a temporary adjustment to my responsibilities so I can manage essential care appointments. I remain committed to my core work and will keep you updated on any scheduling needs as they arise."
+
+💡 Communication Tip: Contact HR in addition to your manager — most organisations have caregiver leave policies (such as FMLA) that you may not be aware of. Proactively understanding your options gives you more protection and flexibility.`;
+  }
+
+  // ── Intelligent catch-all — gives real guidance instead of a broken template ──
+  return `🌸 Caregiver Communication Guidance
+
+Whatever you're navigating, the most effective caregiver conversations share a few things in common: they lead with presence, not perfection.
+
+Here are three phrases that work in almost any difficult caregiving situation:
+
+**To open a conversation:**
+"I'm here. You don't have to talk, but I'm not going anywhere."
+
+**To validate without fixing:**
+"That sounds really hard. I can understand why you'd feel that way."
+
+**To find out what they actually need:**
+"What would actually help you most right now — company, silence, or something practical?"
+
+💡 Communication Tip: Most people in difficult situations don't need you to fix anything. They need to feel heard and not alone. Listening without jumping to solutions is the most powerful thing a caregiver can do.
+
+If you describe your specific situation in a bit more detail, I can give you a much more tailored script.`;
+}
+
 // ── API ROUTES ──
 
 // 1. Astra AI Chat Companion
@@ -236,7 +331,6 @@ app.post('/api/astra/chat', async (req, res) => {
     return res.status(400).json({ error: 'Prompt is required' });
   }
 
-  // Format history for chat
   const historyText = (history || [])
     .map((msg: any) => `${msg.sender === 'user' ? 'Patient' : 'Astra'}: ${msg.text}`)
     .join('\n');
@@ -248,7 +342,7 @@ app.post('/api/astra/chat', async (req, res) => {
   res.json({ text });
 });
 
-// 2. Astra AI Insights Engine (Pushes smart observations based on symptoms and active logs)
+// 2. Astra AI Insights Engine
 app.post('/api/astra/insights', async (req, res) => {
   const { recentSymptoms, recentMoods, starsCount, lastAction } = req.body;
   
@@ -292,7 +386,7 @@ app.post('/api/astra/insights', async (req, res) => {
   }
 });
 
-// 3. Appointment Copilot 2.0 (Build customized questions with checklists)
+// 3. Appointment Copilot 2.0
 app.post('/api/copilot/questions', async (req, res) => {
   const { concerns, appointmentLabel } = req.body;
   if (!concerns) {
@@ -339,7 +433,7 @@ app.post('/api/copilot/questions', async (req, res) => {
   }
 });
 
-// 4. Voice Journal Analyzer 🎙️
+// 4. Voice Journal Analyzer
 app.post('/api/voice-journal/analyze', async (req, res) => {
   const { transcript } = req.body;
   if (!transcript) {
@@ -376,6 +470,72 @@ app.post('/api/voice-journal/analyze', async (req, res) => {
   }
 });
 
+// 5. Caregiver Communication Assistant API
+app.post('/api/caregiver/comm', async (req, res) => {
+  const { query } = req.body;
+  if (!query) {
+    return res.status(400).json({ error: 'Query is required' });
+  }
+
+  const normalized = query.trim().toLowerCase();
+  
+  // ── Exact preset matches (instant, no AI needed) ──
+  if (
+    normalized.includes("support sarah before chemotherapy") ||
+    (normalized.includes("support") && normalized.includes("chemotherapy") && normalized.includes("anxious"))
+  ) {
+    return res.json({
+      text: `✨ Pre-treatment Reassurance Option:\n"We are going to take this step-by-step today. I have already packed your soft fuzzy socks, your cherry flavored ginger drops, and your favourite podcast playlists. My only job today is to hold your hand and ensure you feel safe."`
+    });
+  }
+
+  if (
+    normalized.includes("ask friends for cooking support") ||
+    (normalized.includes("friends") && normalized.includes("cooking") && normalized.includes("support"))
+  ) {
+    return res.json({
+      text: `📋 Gentle Support Coordination Ask:\n"Hey friends, many of you asked how you can sit beside us during this Chemo round. We set up an online cooking rotation. If anyone has time to drop off lightweight veggie broth or non-spicy meals on Tuesdays, it would let us spend evenings completely resting. Thank you so much for traveling under our star sky."`
+    });
+  }
+
+  if (
+    normalized.includes("doctors don't seem to notice pain logs") ||
+    normalized.includes("don't seem to notice pain logs") ||
+    (normalized.includes("doctors") && normalized.includes("pain logs"))
+  ) {
+    return res.json({
+      text: `🩺 Structured Clinical Escalation Phrasing:\n"Doctor, when reviewing our symptom trends, Sarah's daily neuropathic and breakthrough pain logs have remained at an average rating of 4/5 over the last 6 consecutive days, typically peaking 3 hours after her dinner dosage. I am concerned her breakthrough protocol might not be providing sufficient therapeutic cover. Could we review a schedule or dosage adjustment to help stabilize these pain spikes?"`
+    });
+  }
+
+  // ── All other queries: Gemini with a sharply focused prompt ──
+  const prompt = `
+A caregiver supporting a cancer patient has typed the following message into a communication assistant:
+
+"${query}"
+
+Your job is to give them a genuinely helpful, specific response to what they actually asked.
+
+Rules:
+- Read their query carefully and respond DIRECTLY to their specific situation. Do not give generic advice.
+- Write a practical, copy-pasteable script or phrase they can actually use — something that sounds like a real, warm human being said it.
+- Use natural, clear English. Do not use awkward sentence constructions or stuff the user's query words back into the response.
+- Format your response with: a short bold header describing the type of communication (e.g. "🌸 Talking to Your Patient About Fear"), then the script in quotes, then 1-2 brief practical tips prefixed with 💡.
+- Keep the total response under 200 words.
+- Do not use filler phrases like "I wanted to check in about our connection regarding [query]" — that is terrible output. Be specific and natural.
+  `.trim();
+
+  const fallback = generateDynamicCaregiverCommFallback(query);
+  const text = await generateContentWithFallback(
+    prompt,
+    fallback,
+    `You are Astra, a warm and practical communication coach for caregivers supporting cancer patients. 
+You give specific, natural-sounding communication scripts tailored to the caregiver's exact situation.
+You never produce robotic or template-sounding output. You read what the caregiver actually needs and address it directly.`
+  );
+  res.json({ text });
+});
+
 // Vite middleware and static serving setup
 async function startServer() {
   if (process.env.NODE_ENV !== 'production') {
@@ -393,7 +553,7 @@ async function startServer() {
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 ConstellaCare full-stack server active at http://localhost:${PORT}`);
+    console.log(`ConstellaCare full-stack server active at http://localhost:${PORT}`);
   });
 }
 

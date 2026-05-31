@@ -227,7 +227,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
     setTasks(prev => prev.filter(t => t.id !== id));
   };
 
-  const handleSendCommQuery = (custom?: string) => {
+  const handleSendCommQuery = async (custom?: string) => {
     const textToSend = custom || commQuery;
     if (!textToSend.trim()) return;
 
@@ -235,19 +235,74 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
     setCommQuery('');
     setTyping(true);
 
-    setTimeout(() => {
-      let aiResponseText = '';
-      if (textToSend.toLowerCase().includes('chemotherapy') || textToSend.toLowerCase().includes('nervous') || textToSend.toLowerCase().includes('anxious')) {
-        aiResponseText = "✨ Pre-treatment Reassurance Option:\n\"We are going to take this step-by-step today. I have already packed your soft fuzzy socks, your cherry flavored ginger drops, and your favourite podcast playlists. My only job today is to hold your hand and ensure you feel safe.\"";
-      } else if (textToSend.toLowerCase().includes('cooking') || textToSend.toLowerCase().includes('friends') || textToSend.toLowerCase().includes('help')) {
-        aiResponseText = "📋 Gentle Support Coordination Ask:\n\"Hey friends, many of you asked how you can sit beside us during this Chemo round. We set up an online cooking rotation. If anyone has time to drop off lightweight veggie broth or non-spicy meals on Tuesdays, it would let us spend evenings completely resting. Thank you so much for traveling under our star sky.\"";
-      } else {
-        aiResponseText = "🌱 Supportive Translation Option:\n\"I love you, and it's okay to feel completely tired and raw today. We don't have to put on a brave face. I am cozy sitting right here next to you in silence. We are doing enough by simply being.\"";
-      }
-      setCommChat(prev => [...prev, { sender: 'ai', text: aiResponseText }]);
+    // ── Quick-prompt exact presets (matched locally for instant response) ──
+    const normalized = textToSend.trim().toLowerCase();
+
+    const isChemoPre =
+      normalized.includes("support sarah before chemotherapy") ||
+      (normalized.includes("support") && normalized.includes("chemotherapy") && normalized.includes("anxious"));
+
+    const isCookingAsk =
+      normalized.includes("ask friends for cooking support") ||
+      (normalized.includes("friends") && normalized.includes("cooking") && normalized.includes("support"));
+
+    const isPainLogs =
+      normalized.includes("doctors don't seem to notice pain logs") ||
+      normalized.includes("don't seem to notice pain logs") ||
+      (normalized.includes("doctors") && normalized.includes("pain logs"));
+
+    if (isChemoPre) {
+      setCommChat(prev => [...prev, {
+        sender: 'ai',
+        text: `✨ Pre-treatment Reassurance Option:\n"We are going to take this step-by-step today. I have already packed your soft fuzzy socks, your cherry flavored ginger drops, and your favourite podcast playlists. My only job today is to hold your hand and ensure you feel safe."`
+      }]);
       setTyping(false);
       setTotalStars(prev => prev + 1);
-    }, 1500);
+      return;
+    }
+
+    if (isCookingAsk) {
+      setCommChat(prev => [...prev, {
+        sender: 'ai',
+        text: `📋 Gentle Support Coordination Ask:\n"Hey friends, many of you asked how you can sit beside us during this Chemo round. We set up an online cooking rotation. If anyone has time to drop off lightweight veggie broth or non-spicy meals on Tuesdays, it would let us spend evenings completely resting. Thank you so much for traveling under our star sky."`
+      }]);
+      setTyping(false);
+      setTotalStars(prev => prev + 1);
+      return;
+    }
+
+    if (isPainLogs) {
+      setCommChat(prev => [...prev, {
+        sender: 'ai',
+        text: `🩺 Structured Clinical Escalation Phrasing:\n"Doctor, when reviewing our symptom trends, Sarah's daily neuropathic and breakthrough pain logs have remained at an average rating of 4/5 over the last 6 consecutive days, typically peaking 3 hours after her dinner dosage. I am concerned her breakthrough protocol might not be providing sufficient therapeutic cover. Could we review a schedule or dosage adjustment to help stabilize these pain spikes?"`
+      }]);
+      setTyping(false);
+      setTotalStars(prev => prev + 1);
+      return;
+    }
+
+    // ── All other typed inputs → call the server API ──
+    try {
+      const response = await fetch('/api/caregiver/comm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: textToSend }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setCommChat(prev => [...prev, { sender: 'ai', text: data.text }]);
+      } else {
+        // Server error — use the rich local fallback
+        setCommChat(prev => [...prev, { sender: 'ai', text: generateLocalCaregiverCommFallback(textToSend) }]);
+      }
+    } catch (err) {
+      // Network error (e.g. dev without server) — use rich local fallback
+      setCommChat(prev => [...prev, { sender: 'ai', text: generateLocalCaregiverCommFallback(textToSend) }]);
+    } finally {
+      setTyping(false);
+      setTotalStars(prev => prev + 1);
+    }
   };
 
   const saveJournalEntry = () => {
@@ -350,8 +405,8 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                 Support Center
               </span>
               {[
-                { id: 'home', label: 'Dashboard Home 🪐', icon: <Compass className="w-3.5 h-3.5" /> },
-                { id: 'shared', label: '✨ Shared Constellation', icon: <Sparkles className="w-3.5 h-3.5 text-pink-400 animate-pulse" /> },
+                { id: 'home', label: 'Dashboard Home', icon: <Compass className="w-3.5 h-3.5" /> },
+                { id: 'shared', label: 'Shared Constellation', icon: <Sparkles className="w-3.5 h-3.5 text-pink-400 animate-pulse" /> },
                 { id: 'emotion', label: 'Astra Check-In', icon: <Activity className="w-3.5 h-3.5" /> },
                 { id: 'appointments', label: 'Treatment Timeline', icon: <Calendar className="w-3.5 h-3.5" /> },
                 { id: 'communication', label: 'Comm. Assistant', icon: <MessageSquare className="w-3.5 h-3.5" /> },
@@ -1169,3 +1224,6 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
     </div>
   );
 }
+
+
+// cute emoji: 🪐

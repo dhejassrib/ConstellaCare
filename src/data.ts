@@ -4,8 +4,8 @@ export const NAV_GROUPS = [
   {
     group: 'Emotional Support',
     items: [
-      { id: 'home' as Section, label: 'Home ✨', icon: '⭐' },
-      { id: 'shared' as Section, label: '✨ Shared Constellation', icon: '💫' },
+      { id: 'home' as Section, label: 'Home', icon: '⭐' },
+      { id: 'shared' as Section, label: 'Shared Constellation', icon: '💫' },
       { id: 'astra' as Section, label: 'Talk to Astra', icon: '✨' },
       { id: 'mood' as Section, label: 'Mood Check-In', icon: '🌸' },
       { id: 'calm' as Section, label: 'Calm Corner', icon: '🫧' },
