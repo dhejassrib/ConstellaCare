@@ -16,6 +16,7 @@ interface CaregiverDashboardProps {
   user?: { email: string; displayName: string } | null;
   onAuthTrigger?: () => void;
   onLogout?: () => void;
+  // view: 'patient' | 'caregiver';
 }
 
 type CaregiverSection =
@@ -58,6 +59,41 @@ interface AppointmentEvent {
 interface SuggestionCard {
   prompt: string;
   category: string;
+}
+
+function generateLocalCaregiverCommFallback(query: string): string {
+  const text = query.toLowerCase();
+
+  if (text.includes('chemo') || text.includes('chemotherapy')) {
+    return `🌟 Before treatment, focus on comfort and predictability. Consider saying:
+
+"We don't have to be brave all day. Let's just focus on getting through this next hour together."
+
+Small routines, hydration, familiar music, and calm presence often help reduce anxiety.`;
+  }
+
+  if (text.includes('doctor') || text.includes('pain')) {
+    return `🩺 When speaking with clinicians, it can help to use specific observations:
+
+"We have recorded symptoms over several days and would appreciate reviewing the pattern together."
+
+Clear timelines and symptom logs often make concerns easier to discuss.`;
+  }
+
+  if (text.includes('tired') || text.includes('burnout')) {
+    return `💜 Caregiver fatigue is common during long periods of support.
+
+Try identifying one task today that can be delegated or postponed. Small recovery moments can help preserve energy for the long term.`;
+  }
+
+  return `✨ I couldn't reach the communication assistant right now, but I'm still here.
+
+Try describing:
+• The situation
+• Who you're speaking to
+• The feeling you're trying to express
+
+and I can help draft supportive wording.`;
 }
 
 export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, user, onAuthTrigger, onLogout }: CaregiverDashboardProps) {
@@ -377,25 +413,22 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
       >
         <div className="flex flex-col min-h-0 flex-1">
           {/* Brand header */}
-          <div className={`flex items-center justify-between px-6 py-5 border-b flex-shrink-0 ${theme === 'dark' ? 'border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'border-[#7e6c9e]/20'}`}>
-            <div
+          <div className="flex items-center justify-between px-6 py-5 border-b border-[#6366f1]/10">
+            <div 
               onClick={() => onNavigate('/')}
               className="flex items-center gap-2.5 cursor-pointer group"
               title="Return to Landing Page"
             >
-              <span className={`w-8 h-8 rounded-xl flex items-center justify-center shadow-md ring-1 ${theme === 'dark' ? 'bg-[#120D21] ring-[#c9a0dc]/20' : 'bg-[#1e133a]/90 ring-[#7e6c9e]/20'}`}>
+              <span className="w-8 h-8 rounded-xl bg-[#120D21]/80 dark:bg-[#120D21] flex items-center justify-center shadow-lg ring-1 ring-pink-400/20">
                 <ConstellaLogo size={28} />
               </span>
-              <div>
-                <span className="font-bold text-lg bg-gradient-to-r from-[#d4798e] to-[#c9a0dc] bg-clip-text text-transparent italic tracking-tight">
-                  ConstellaCare
-                </span>
-                <span className={`block text-[8px] tracking-widest font-bold uppercase mt-0.5 ${theme === 'dark' ? 'text-[#9b8ab8]' : 'text-[#7e6c9e]'}`}>Caregiver Command</span>
-              </div>
+              <span className="font-bold text-xl bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent italic tracking-tight group-hover:opacity-85">
+                ConstellaCare
+              </span>
             </div>
-            <button
+            <button 
               onClick={() => setSidebarOpen(false)}
-              className="md:hidden p-1 rounded-full hover:bg-purple-100/10 text-[#9b8ab8]"
+              className="md:hidden p-1 rounded-full hover:bg-slate-850 text-slate-400"
             >
               <X className="w-4.5 h-4.5" />
             </button>
@@ -442,7 +475,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
         </div>
 
         {/* Global Stars Counter at bottom */}
-        <div className={`p-5 border-t flex-shrink-0 ${theme === 'dark' ? 'border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'border-[#7e6c9e]/20'}`}>
+        {/* <div className={`p-5 border-t flex-shrink-0 ${theme === 'dark' ? 'border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'border-[#7e6c9e]/20'}`}>
           <div className="bg-gradient-to-tr from-[#120d21] to-[#251a3d] text-[#f4d4a8] rounded-2xl p-4 border border-[#c9a0dc]/25 text-center relative overflow-hidden shadow-lg">
             <div className="absolute top-0 right-0 w-16 h-16 bg-[#d4798e]/10 blur-xl rounded-full" />
             <Award className="w-6.5 h-6.5 text-[#f4d4a8] mx-auto animate-pulse" />
@@ -452,7 +485,21 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
               Every coordination aid lights a star under the same night sky.
             </p>
           </div>
+        </div> */}
+
+        <div className={`p-6 border-t flex-shrink-0 ${theme === 'dark' ? 'border-[#6366f1]/10' : 'border-[#7e6c9e]/20'}`}>
+          <div className="bg-gradient-to-tr from-slate-950 to-slate-850 text-slate-100 rounded-2xl p-4 border border-purple-500/15 text-center relative overflow-hidden shadow-md">
+            <div className="absolute top-0 right-0 w-16 h-16 bg-purple-500/10 blur-xl rounded-full" />
+            <Award className="w-7 h-7 text-amber-500 dark:text-amber-400 mx-auto animate-pulse" />
+            <span className="text-[10px] text-purple-400 block font-mono font-bold tracking-widest mt-1">CAREGIVER CARESCORE</span>
+            <span className="text-2xl font-black mt-1 block text-[#5b4a7a] dark:text-[#d4af37]">{totalStars} ✨</span>
+            <p className="text-[10px] text-slate-350 mt-1.5 leading-relaxed">
+              Every coordination aid lights a star under the same night sky.
+            </p>
+          </div>
         </div>
+
+        
       </aside>
 
       {/* Mobile Overlay */}
@@ -1241,7 +1288,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
 
                     <button
                       onClick={() => {
-                        setActiveSection('calm');
+                        setActiveSection('journal');
                         setQuickSupportOpen(false);
                       }}
                       className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/10 transition"

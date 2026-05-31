@@ -70,12 +70,11 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
 
         <ConstellaLogo size={72} className={styles.logo} />
         <h1 className={styles.brand}>ConstellaCare</h1>
-        <p className={styles.tagline}>A gentle space for every health journey</p>
+        <p className={styles.tagline}>A gentle space for every health journey.</p>
         
         <p className={styles.description}>
-          ConstellaCare is an emotionally intelligent health companion designed for patients, caregivers, and families. 
-          Track your wellbeing, prepare for appointments, reflect through guided journaling, access supportive resources, 
-          and stay connected with the people who matter most — all through a shared constellation journey that grows with your progress.
+          An emotionally intelligent health companion for patients and caregivers to track wellbeing, 
+          stay organized, and grow together through every stage of care.
         </p>
 
         <div className={styles.actions}>
@@ -95,7 +94,7 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
           </button>
         </div>
 
-        <p className={styles.sub}>Turning health journeys into constellations of support.</p>
+        {/* <p className={styles.sub}>Turning health journeys into constellations of support.</p> */}
       </div>
 
       {/* ── About Modal ── */}
