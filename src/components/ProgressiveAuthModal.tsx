@@ -237,54 +237,82 @@ export default function ProgressiveAuthModal({
                 )}
 
                 {simState === 'google' && (
-                  <div className="text-left space-y-3 w-full">
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      if (!emailInput.trim()) return;
+                      if (authMode === 'signup' && !nameInput.trim()) return;
+                      setLoading(true);
+                      setTimeout(() => {
+                        setLoading(false);
+                        const parts = emailInput.split('@');
+                        const fallbackName = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
+                        const finalDisplayName = authMode === 'signup' && nameInput.trim() ? nameInput : fallbackName;
+                        if (onAuthSuccess) {
+                          onAuthSuccess(emailInput.trim(), finalDisplayName);
+                        }
+                        setSimState('success');
+                      }, 1200);
+                    }}
+                    className="text-left space-y-3 w-full"
+                  >
                     <span className="text-[10px] font-black text-pink-500 block uppercase tracking-wider">
-                      {authMode === 'signup' ? 'Google Account Creator' : 'Google Account Picker'}
+                      {authMode === 'signup' ? 'Create Account with Google' : 'Sign In with Google'}
                     </span>
                     <p className={`text-[11px] leading-relaxed ${theme === 'dark' ? 'text-purple-300' : 'text-slate-600'}`}>
                       {authMode === 'signup'
-                        ? 'Select an account to register your new healing constellation:'
-                        : 'Select an account to authorize secure credentials link:'}
+                        ? 'Enter your name and email to register your healing constellation:'
+                        : 'Enter your email to authorize your secure credentials link:'}
                     </p>
-                    <div className="space-y-2 mt-2">
-                      {[
-                        { name: "Sarah Moss", email: "sarah.moss.healing@gmail.com", avatar: "🌸" },
-                        { name: "Dhejassri", email: "dhejassri11@gmail.com", avatar: "✨" }
-                      ].map((acc) => (
-                        <button
-                          key={acc.email}
-                          onClick={() => {
-                            setLoading(true);
-                            setTimeout(() => {
-                              setLoading(false);
-                              if (onAuthSuccess) {
-                                onAuthSuccess(acc.email, acc.name);
-                              }
-                              setSimState('success');
-                            }, 1200);
-                          }}
-                          className={`w-full p-2.5 rounded-2xl border flex items-center gap-3 text-left transition hover:scale-[1.01] cursor-pointer ${theme === 'dark' ? 'bg-[#1b1536]/80 border-purple-500/25 text-slate-100 hover:bg-purple-950/20' : 'bg-slate-50 border-purple-100 text-slate-800 hover:bg-purple-50/50'}`}
-                        >
-                          <span className="text-lg">{acc.avatar}</span>
-                          <div className="leading-tight">
-                            <span className="text-xs font-bold block">{acc.name}</span>
-                            <span className="text-[9.5px] text-slate-400 font-mono">{acc.email}</span>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                    {loading && (
-                      <div className="flex items-center justify-center gap-2 mt-3 text-xs text-pink-500 font-bold animate-pulse">
-                        <span className="animate-spin text-sm font-mono">🌀</span> Linking cloud orbits...
+
+                    {authMode === 'signup' && (
+                      <div className="space-y-1">
+                        <label className="text-[9px] font-bold text-slate-400 dark:text-purple-300 uppercase tracking-wider block">Full Name</label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="Your name"
+                          value={nameInput}
+                          onChange={(e) => setNameInput(e.target.value)}
+                          className={`w-full text-xs p-3 rounded-2xl border bg-transparent text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-pink-500 ${theme === 'dark' ? 'border-purple-500/30' : 'border-purple-200'}`}
+                        />
                       </div>
                     )}
+
+                    <div className="space-y-1">
+                      <label className="text-[9px] font-bold text-slate-400 dark:text-purple-300 uppercase tracking-wider block">Email Address</label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="you@example.com"
+                        value={emailInput}
+                        onChange={(e) => setEmailInput(e.target.value)}
+                        className={`w-full text-xs p-3 rounded-2xl border bg-transparent text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-pink-500 ${theme === 'dark' ? 'border-purple-500/30' : 'border-purple-200'}`}
+                      />
+                    </div>
+
                     <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full py-3 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-black font-sans font-extrabold text-xs shadow hover:scale-[1.01] transition-transform active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                    >
+                      <svg className="w-4 h-4" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                        <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z" />
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                      </svg>
+                      {loading ? 'Linking cloud orbits...' : authMode === 'signup' ? 'Create Account' : 'Continue'}
+                    </button>
+
+                    <button
+                      type="button"
                       onClick={() => setSimState('none')}
-                      className="text-[10px] px-3 py-1 bg-slate-100 dark:bg-purple-950/40 text-slate-600 dark:text-purple-300 rounded-lg font-bold mt-2 hover:bg-slate-200 dark:hover:bg-purple-900/40 cursor-pointer"
+                      className="text-[10px] px-3 py-1 bg-slate-100 dark:bg-purple-950/40 text-slate-600 dark:text-purple-300 rounded-lg font-bold hover:bg-slate-200 dark:hover:bg-purple-900/40 cursor-pointer"
                     >
                       ← Back
                     </button>
-                  </div>
+                  </form>
                 )}
 
                 {simState === 'email' && (
@@ -316,7 +344,7 @@ export default function ProgressiveAuthModal({
                         <input
                           type="text"
                           required
-                          placeholder="Sarah Moss"
+                          placeholder="Your name"
                           value={nameInput}
                           onChange={(e) => setNameInput(e.target.value)}
                           className={`w-full text-xs p-3 rounded-2xl border bg-transparent text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-pink-500 ${theme === 'dark' ? 'border-purple-500/30' : 'border-purple-200'}`}
@@ -329,10 +357,10 @@ export default function ProgressiveAuthModal({
                       <input
                         type="email"
                         required
-                        placeholder="e.g. sarah@constella.com"
+                        placeholder="you@example.com"
                         value={emailInput}
                         onChange={(e) => setEmailInput(e.target.value)}
-                        className={`w-full text-xs p-3 rounded-2xl border bg-transparent text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-pink-500 ${theme === 'dark' ? 'border-purple-550/30' : 'border-purple-200'}`}
+                        className={`w-full text-xs p-3 rounded-2xl border bg-transparent text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-pink-500 ${theme === 'dark' ? 'border-purple-500/30' : 'border-purple-200'}`}
                       />
                     </div>
 
@@ -383,7 +411,7 @@ export default function ProgressiveAuthModal({
                       placeholder="• • • •"
                       value={otpInput}
                       onChange={(e) => setOtpInput(e.target.value.replace(/\D/g, ''))}
-                      className={`w-full text-center tracking-[1em] text-sm font-mono font-black p-3 rounded-2xl border bg-transparent text-slate-800 dark:text-slate-200 focus:outline-none ${theme === 'dark' ? 'border-purple-550/30' : 'border-purple-200'}`}
+                      className={`w-full text-center tracking-[1em] text-sm font-mono font-black p-3 rounded-2xl border bg-transparent text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-pink-500 ${theme === 'dark' ? 'border-purple-500/30' : 'border-purple-200'}`}
                     />
 
                     <button
