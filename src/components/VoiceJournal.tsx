@@ -73,8 +73,7 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
   const startRecord = async () => {
     setErrorMessage(null);
     try {
-      const SpeechRecognition = window.SpeechRecognition || (window as any).webkitSpeechRecognition;
-      
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
       if (!SpeechRecognition) {
         setErrorMessage("Your browser doesn't support live transcription. Try using Chrome or Edge!");
         return;
@@ -142,7 +141,7 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
     setErrorMessage(null);
     
     try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY?.trim();
       
       if (!apiKey) {
         setErrorMessage("Missing API Key! Make sure VITE_GEMINI_API_KEY is defined in your local .env file.");
@@ -159,7 +158,7 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
         - "weather": A creative, 1-sentence metaphor for their emotional state (e.g., "Stormy seas looking for a lighthouse").
       `;
 
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -168,13 +167,14 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
       });
 
       if (!response.ok) {
-        throw new Error("Gemini API network response failed");
+        const errorBody = await response.text();
+        console.error("Google Server API Raw Error:", errorBody);
+        throw new Error(`Gemini API responded with status ${response.status}`);
       }
 
       const rawData = await response.json();
       const aiText = rawData.candidates[0].content.parts[0].text;
       
-      // Clear out potential markdown blocks from AI responses securely
       const cleanJson = aiText.replace(/```json/g, '').replace(/```/g, '').trim();
       const data = JSON.parse(cleanJson);
 
@@ -196,7 +196,6 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
       console.error("Gemini API Execution Error:", e);
       setErrorMessage("Astra couldn't finalize the content generation stream. Swapping to baseline mode.");
       
-      // Reliable backup fallback state values
       setAnalysisResult({
         emotions: ["Quiet Fatigue", "Tender Sincerity"],
         validation: "I hear the soft timber of courage in your voice. It is completely safe to acknowledge that the path feels heavy while maintaining your focus. We will wrap your coordinate in soft rest.",
@@ -215,7 +214,6 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
           Chemotherapy is exhausting. Skip the typing — simply share your voice, and let Astra transcribe and analyze your emotional weather.
         </p>
 
-        {/* Error Messaging Interface Hook */}
         {errorMessage && (
           <div className="mt-4 p-3 bg-red-500/10 border border-red-500/50 rounded-xl text-red-500 text-xs font-bold flex items-center justify-center gap-2">
             <AlertCircle className="w-4 h-4" />
@@ -223,7 +221,6 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
           </div>
         )}
 
-        {/* 🎙️ Glowing Recording Button Module */}
         <div className="my-8 flex flex-col items-center justify-center">
           <div className="relative">
             <button
@@ -258,12 +255,10 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
           </span>
         </div>
 
-        {/* 〰️ Waveform Visualizer */}
         <div className="w-full h-12 bg-slate-50 dark:bg-slate-950 rounded-xl p-2.5 flex items-center justify-center border border-slate-100 dark:border-slate-800 mb-6">
           <canvas ref={canvasRef} width="350" height="40" className="w-full h-full" />
         </div>
 
-        {/* MOCK TEMPLATE PICKER */}
         {!isRecording && !isTranscribing && (
           <>
             <div className="relative mb-6">
@@ -292,7 +287,6 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
           </>
         )}
 
-        {/* Transcription Loader */}
         {isTranscribing && (
           <div className="flex flex-col items-center justify-center py-4 bg-purple-50/20 dark:bg-purple-950/10 border border-dashed border-purple-200 rounded-2xl mb-6">
             <Headphones className="w-6 h-6 text-purple-500 animate-bounce" />
@@ -300,7 +294,6 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
           </div>
         )}
 
-        {/* Editable Transcript Text Area */}
         {transcript && !isTranscribing && (
           <div className="text-left bg-gradient-to-tr from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 border border-slate-150 dark:border-slate-800 p-4.5 rounded-2xl mb-5 shadow-inner">
             <span className="text-[10px] font-extrabold uppercase font-mono tracking-widest text-slate-400 block mb-1.5">Voice Transcription Transcript</span>
@@ -333,7 +326,6 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
           </div>
         )}
 
-        {/* 🌌 Astra Analysis Display */}
         {analysisResult && (
           <div className="text-left bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200/40 dark:border-purple-900/30 rounded-2.5xl p-5 shadow-lg relative overflow-hidden">
             <div className="absolute top-0 right-0 w-36 h-36 bg-pink-500/5 blur-2xl rounded-full" />
