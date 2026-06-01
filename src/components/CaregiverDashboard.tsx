@@ -852,6 +852,12 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                     { id: 'worried', emoji: '🌪️', title: 'Anxious & Worried', color: 'from-[#faecee] to-[#ea96a6] dark:to-pink-900 border-[#ea96a6]' },
                     { id: 'peaceful', emoji: '🌱', title: 'Calm & Grounded', color: 'from-emerald-100 to-emerald-200 dark:to-emerald-950 border-emerald-500' },
                     { id: 'overwhelmed', emoji: '🌫️', title: 'Numb / Overwhelmed', color: 'from-slate-100 to-[#decfe6] dark:to-slate-800 border-slate-500' },
+                    // {
+                    //   id: 'overwhelmed',
+                    //   emoji: '🌫️',
+                    //   title: 'Numb / Overwhelmed',
+                    //   color: 'from-[#d8c6ee] to-[#cbb3e8] dark:from-slate-900 dark:to-slate-800 border-slate-500'
+                    // }
                   ].map((card) => (
                     <button
                       key={card.id}

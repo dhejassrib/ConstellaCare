@@ -212,7 +212,7 @@ export default function AppointmentCopilot({ onQuestionsBuilt }: AppointmentCopi
             2. WHAT ARE YOUR KEY CONCERNS OR PHYSICAL CHANGES?
           </label>
           <textarea
-            className="w-full text-xs bg-transparent border-none focus:outline-none resize-none leading-relaxed text-slate-700 dark:text-slate-200"
+            className="w-full text-xs bg-transparent border-none focus:outline-none resize-none leading-relaxed text-slate-700 dark:text-slate-400"
             rows={3}
             placeholder={`e.g. My pain is managed, but I get very exhausted and experience minor nausea in the evening hours...`}
             value={concernInput}
