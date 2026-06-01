@@ -11,6 +11,7 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
   const [recordProgress, setRecordProgress] = useState(0);
   const [isTranscribing, setIsTranscribing] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   
   const [transcript, setTranscript] = useState('');
   const [analysisResult, setAnalysisResult] = useState<{
@@ -23,6 +24,7 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationRef = useRef<number | null>(null);
   const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const audioStreamRef = useRef<MediaStream | null>(null);
 
   // Mock template transcripts for quick simulation
   const mockTemplates = [
@@ -43,12 +45,11 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#c084fc'; // purple-400
+      ctx.fillStyle = '#c084fc'; 
 
       for (let i = 0; i < barsCount; i++) {
-        // If recording, produce randomized motion; otherwise smooth baseline
         const factor = isRecording ? Math.random() * 28 + 2 : 3;
-        data[i] = data[i] * 0.7 + factor * 0.3; // smoothing interpolation
+        data[i] = data[i] * 0.7 + factor * 0.3; 
 
         const h = Math.max(3, data[i]);
         const w = (canvas.width / barsCount) - 3;
@@ -69,12 +70,10 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
     };
   }, [isRecording]);
 
-  // Add this near your other refs at the top of the component
-  const audioStreamRef = useRef<MediaStream | null>(null);
-
   const startRecord = async () => {
+    setErrorMessage(null);
     try {
-      // THIS is the magic line that asks for real mic permissions for the demo
+      // Trigger the browser's native microphone request
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       audioStreamRef.current = stream;
       
@@ -93,9 +92,9 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
         });
       }, 100);
       
-    } catch (err) {
-      console.error("Microphone access denied or unavailable:", err);
-      alert("Please allow microphone access to use the Voice Journal.");
+    } catch (err: any) {
+      console.error("Mic access failed:", err);
+      setErrorMessage("Microphone access blocked! Allow permissions in your browser URL bar.");
     }
   };
 
@@ -103,13 +102,12 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
     setIsRecording(false);
     if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
     
-    // Stop the actual microphone tracks so the browser recording red dot goes away
+    // Kill the mic hardware stream
     if (audioStreamRef.current) {
       audioStreamRef.current.getTracks().forEach(track => track.stop());
       audioStreamRef.current = null;
     }
     
-    // Choose a random template or insert general transcription
     setIsTranscribing(true);
     setTimeout(() => {
       const randomText = mockTemplates[Math.floor(Math.random() * mockTemplates.length)].text;
@@ -118,7 +116,6 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
     }, 2000);
   };
 
-  
   const analyzeAudio = async () => {
     if (!transcript) return;
     setIsAnalyzing(true);
@@ -131,8 +128,6 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
       if (response.ok) {
         const data = await response.json();
         setAnalysisResult(data);
-        
-        // Callback parent to append star progress
         onJournalSaved({
           id: Math.random().toString(),
           date: 'Just now',
@@ -142,8 +137,6 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
         });
       }
     } catch (e) {
-      console.error(e);
-      // Fallback
       setAnalysisResult({
         emotions: ["Quiet Fatigue", "Tender Sincerity"],
         validation: "I hear the soft timber of courage in your voice. It is completely safe to acknowledge that the path feels heavy while maintaining your focus. We will wrap your coordinate in soft rest.",
@@ -157,10 +150,18 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2.5xl p-6 shadow-xl transition-all duration-300">
       <div className="text-center max-w-md mx-auto">
-        <h3 className="theme-heading text-lg font-bold mb-1">Empathetic Voice Journaling</h3>
+        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">Empathetic Voice Journaling</h3>
         <p className="text-xs text-slate-400">
           Chemotherapy is exhausting. Skip the typing — simply share your voice, and let Astra transcribe and analyze your emotional weather.
         </p>
+
+        {/* Error Display */}
+        {errorMessage && (
+          <div className="mt-4 p-3 bg-red-500/10 border border-red-500/50 rounded-xl text-red-500 text-xs font-bold flex items-center justify-center gap-2">
+            <AlertCircle className="w-4 h-4" />
+            {errorMessage}
+          </div>
+        )}
 
         {/* 🎙️ Glowing Recording Button Module */}
         <div className="my-8 flex flex-col items-center justify-center">
@@ -202,33 +203,33 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
           <canvas ref={canvasRef} width="350" height="40" className="w-full h-full" />
         </div>
 
-        {/* MOCK TEMPLATE PICKER (for ease of UI review) */}
+        {/* MOCK TEMPLATE PICKER */}
         {!isRecording && !isTranscribing && (
-          <div className="relative mb-6">
-            <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-100 dark:border-slate-800" /></div>
-            <div className="relative flex justify-center text-xs"><span className="bg-white dark:bg-slate-900 px-3 text-slate-400 font-medium">Capture Simulators</span></div>
-          </div>
-        )}
+          <>
+            <div className="relative mb-6">
+              <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-100 dark:border-slate-800" /></div>
+              <div className="relative flex justify-center text-xs"><span className="bg-white dark:bg-slate-900 px-3 text-slate-400 font-medium">Capture Simulators</span></div>
+            </div>
 
-        {!isRecording && !isTranscribing && (
-          <div className="flex justify-center gap-2.5 flex-wrap mb-6">
-            {mockTemplates.map((tmp, ix) => (
-              <button
-                key={ix}
-                onClick={() => {
-                  setTranscript(tmp.text);
-                  setAnalysisResult(null);
-                }}
-                className={`text-[11px] font-semibold py-1.5 px-3 rounded-full border transition cursor-pointer ${
-                  transcript === tmp.text
-                    ? 'bg-purple-50 dark:bg-purple-950/30 border-purple-400 text-purple-700 dark:text-purple-300'
-                    : 'bg-transparent border-slate-200 dark:border-slate-800 hover:bg-slate-50 text-slate-500 hover:text-slate-700'
-                }`}
-              >
-                {tmp.label}
-              </button>
-            ))}
-          </div>
+            <div className="flex justify-center gap-2.5 flex-wrap mb-6">
+              {mockTemplates.map((tmp, ix) => (
+                <button
+                  key={ix}
+                  onClick={() => {
+                    setTranscript(tmp.text);
+                    setAnalysisResult(null);
+                  }}
+                  className={`text-[11px] font-semibold py-1.5 px-3 rounded-full border transition cursor-pointer ${
+                    transcript === tmp.text
+                      ? 'bg-purple-50 dark:bg-purple-950/30 border-purple-400 text-purple-700 dark:text-purple-300'
+                      : 'bg-transparent border-slate-200 dark:border-slate-800 hover:bg-slate-50 text-slate-500 hover:text-slate-700'
+                  }`}
+                >
+                  {tmp.label}
+                </button>
+              ))}
+            </div>
+          </>
         )}
 
         {/* Transcription Loader */}
@@ -272,7 +273,7 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
           </div>
         )}
 
-        {/* 🌌 Astra Emotions & Weather Analysis Result display */}
+        {/* 🌌 Astra Analysis Display */}
         {analysisResult && (
           <div className="text-left bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200/40 dark:border-purple-900/30 rounded-2.5xl p-5 shadow-lg relative overflow-hidden">
             <div className="absolute top-0 right-0 w-36 h-36 bg-pink-500/5 blur-2xl rounded-full" />
@@ -282,7 +283,6 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
               <span className="text-sm font-bold text-slate-800 dark:text-slate-100">Astra Cosmic Empathy Log</span>
             </div>
 
-            {/* Weather metaphor */}
             <div className="mb-4 bg-slate-950 border border-slate-800 rounded-xl p-3.5 flex items-center gap-3 shadow-inner">
               <div className="w-9 h-9 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-amber-400">
                 <CloudLightning className="w-5 h-5" />
@@ -309,7 +309,6 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
             </p>
           </div>
         )}
-
       </div>
     </div>
   );
