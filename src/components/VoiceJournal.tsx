@@ -20,20 +20,20 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
     weather: string;
   } | null>(null);
 
-  // Canvas waveform reference
+  // References
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationRef = useRef<number | null>(null);
   const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const audioStreamRef = useRef<MediaStream | null>(null);
+  const recognitionRef = useRef<any>(null);
 
-  // Mock template transcripts for quick simulation
+  // Mock templates for quick bypass testing if needed
   const mockTemplates = [
     { label: "🥀 Vulnerable Fatigue", text: "I finished my second chemo round today. My body feels entirely heavy, like lead. Even holding a fork is tough... but Chloe made me some ginger water, and that felt like a quiet drop of safety in my throat." },
     { label: "🌱 A Moment of Hope", text: "Woke up feeling stable today. The nauseous fog took the morning off. Gavin and I sat on the porch for ten minutes. I felt the dry sun on my face. Feeling grateful that today feels accessible." },
     { label: "🌪️ Pre-Appointment Flurry", text: "The next check-up is tomorrow. My chest feels tight, my breathing is high in my rib cage. I am terrified of what the blood marker counts will say, but I am trying to focus on my bubble breathing orbits." }
   ];
 
-  // Animated Waveform drawer
+  // Waveform Visualization Effect
   useEffect(() => {
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
@@ -73,9 +73,38 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
   const startRecord = async () => {
     setErrorMessage(null);
     try {
-      // Trigger the browser's native microphone request
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      audioStreamRef.current = stream;
+      const SpeechRecognition = window.SpeechRecognition || (window as any).webkitSpeechRecognition;
+      
+      if (!SpeechRecognition) {
+        setErrorMessage("Your browser doesn't support live transcription. Try using Chrome or Edge!");
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      
+      recognition.onresult = (event: any) => {
+        let currentTranscript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          if (event.results[i].isFinal) {
+            currentTranscript += event.results[i][0].transcript;
+          }
+        }
+        if (currentTranscript) {
+          setTranscript(prev => prev + currentTranscript + ' ');
+        }
+      };
+
+      recognition.onerror = (event: any) => {
+        console.error("Speech Recognition Error:", event.error);
+        if (event.error === 'not-allowed') {
+          setErrorMessage("Microphone access blocked! Allow permissions in your browser URL bar.");
+        }
+      };
+
+      recognitionRef.current = recognition;
+      recognition.start();
       
       setIsRecording(true);
       setRecordProgress(0);
@@ -93,8 +122,8 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
       }, 100);
       
     } catch (err: any) {
-      console.error("Mic access failed:", err);
-      setErrorMessage("Microphone access blocked! Allow permissions in your browser URL bar.");
+      console.error("Mic setup failed:", err);
+      setErrorMessage("Could not start microphone. Check your browser permissions.");
     }
   };
 
@@ -102,41 +131,72 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
     setIsRecording(false);
     if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
     
-    // Kill the mic hardware stream
-    if (audioStreamRef.current) {
-      audioStreamRef.current.getTracks().forEach(track => track.stop());
-      audioStreamRef.current = null;
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
     }
-    
-    setIsTranscribing(true);
-    setTimeout(() => {
-      const randomText = mockTemplates[Math.floor(Math.random() * mockTemplates.length)].text;
-      setTranscript(randomText);
-      setIsTranscribing(false);
-    }, 2000);
   };
 
   const analyzeAudio = async () => {
     if (!transcript) return;
     setIsAnalyzing(true);
+    setErrorMessage(null);
+    
     try {
-      const response = await fetch('/api/voice-journal/analyze', {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      
+      if (!apiKey) {
+        setErrorMessage("Missing API Key! Make sure VITE_GEMINI_API_KEY is defined in your local .env file.");
+        setIsAnalyzing(false);
+        return;
+      }
+
+      const prompt = `
+        You are Astra, an empathetic AI for a healthcare app. Analyze this patient journal entry: "${transcript}"
+        
+        Return ONLY a valid JSON object (no markdown, no backticks, no other text) with exactly these keys:
+        - "emotions": An array of 2 short emotion tags representing how the user feels (e.g., ["Anxious", "Seeking Calm"]).
+        - "validation": A short, highly empathetic, supportive sentence validating their feelings.
+        - "weather": A creative, 1-sentence metaphor for their emotional state (e.g., "Stormy seas looking for a lighthouse").
+      `;
+
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ transcript })
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }]
+        })
       });
-      if (response.ok) {
-        const data = await response.json();
-        setAnalysisResult(data);
-        onJournalSaved({
-          id: Math.random().toString(),
-          date: 'Just now',
-          prompt: 'Voice Journal Record',
-          text: transcript,
-          emotionsDetected: data.emotions
-        });
+
+      if (!response.ok) {
+        throw new Error("Gemini API network response failed");
       }
+
+      const rawData = await response.json();
+      const aiText = rawData.candidates[0].content.parts[0].text;
+      
+      // Clear out potential markdown blocks from AI responses securely
+      const cleanJson = aiText.replace(/```json/g, '').replace(/```/g, '').trim();
+      const data = JSON.parse(cleanJson);
+
+      setAnalysisResult({
+        emotions: data.emotions || ["Processing"],
+        validation: data.validation || "I hear your voice and I am here for you.",
+        weather: data.weather || "Starlight shifting"
+      });
+
+      onJournalSaved({
+        id: Math.random().toString(),
+        date: 'Just now',
+        prompt: 'Voice Journal Record',
+        text: transcript,
+        emotionsDetected: data.emotions || ["Processing"]
+      });
+
     } catch (e) {
+      console.error("Gemini API Execution Error:", e);
+      setErrorMessage("Astra couldn't finalize the content generation stream. Swapping to baseline mode.");
+      
+      // Reliable backup fallback state values
       setAnalysisResult({
         emotions: ["Quiet Fatigue", "Tender Sincerity"],
         validation: "I hear the soft timber of courage in your voice. It is completely safe to acknowledge that the path feels heavy while maintaining your focus. We will wrap your coordinate in soft rest.",
@@ -155,7 +215,7 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
           Chemotherapy is exhausting. Skip the typing — simply share your voice, and let Astra transcribe and analyze your emotional weather.
         </p>
 
-        {/* Error Display */}
+        {/* Error Messaging Interface Hook */}
         {errorMessage && (
           <div className="mt-4 p-3 bg-red-500/10 border border-red-500/50 rounded-xl text-red-500 text-xs font-bold flex items-center justify-center gap-2">
             <AlertCircle className="w-4 h-4" />
