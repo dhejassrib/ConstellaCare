@@ -17,21 +17,46 @@ export default function FacialEmotionDetection({ onDetected, accentClass }: Faci
   const streamRef = useRef<MediaStream | null>(null);
   const scanIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  // const handleStartCamera = async () => {
+  //   setCameraError(false);
+  //   setDetectedEmotion(null);
+  //   try {
+  //     const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 320, height: 240 } });
+  //     streamRef.current = stream;
+  //     if (videoRef.current) {
+  //       videoRef.current.srcObject = stream;
+  //       // The browser handles autoplay automatically now
+  //     }
+  //     setStreamActive(true);
+  //   } catch (err) {
+  //     console.warn("Camera hardware not available or permission denied. Loading simulated biometric sensor instead.", err);
+  //     setCameraError(true);
+  //     setStreamActive(true); 
+  //   }
+  // };
   const handleStartCamera = async () => {
     setCameraError(false);
     setDetectedEmotion(null);
+
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 320, height: 240 } });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'user', width: 320, height: 240 }
+      });
+
       streamRef.current = stream;
+
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
-        // The browser handles autoplay automatically now
+        videoRef.current.muted = true;
+        videoRef.current.playsInline = true;
+        await videoRef.current.play();
       }
+
       setStreamActive(true);
     } catch (err) {
-      console.warn("Camera hardware not available or permission denied. Loading simulated biometric sensor instead.", err);
+      console.warn("Camera not available or permission denied.", err);
       setCameraError(true);
-      setStreamActive(true); 
+      setStreamActive(true);
     }
   };
 
