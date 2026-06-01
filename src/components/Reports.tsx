@@ -62,7 +62,7 @@ Care Connections: Concentric alignment approves Mom (Sarah) and Chloe check-ins.
     <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2.5xl p-6 shadow-xl transition-all duration-300">
       <div className="flex flex-col md:flex-row items-start justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800 mb-6 font-sans">
         <div>
-          <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+          <h3 className="theme-heading text-lg font-bold mb-1 flex items-center gap-2">
             <FileText className="w-5 h-5 text-purple-600" />
             Clinical Reports Dispatcher
           </h3>
@@ -72,9 +72,16 @@ Care Connections: Concentric alignment approves Mom (Sarah) and Chloe check-ins.
         </div>
         
         <div className="flex gap-2">
-          <button
+          {/* <button
             onClick={copyToClipboard}
             className="px-4 py-2 border border-slate-205 dark:border-slate-800 rounded-xl text-xs font-bold font-sans hover:bg-slate-50 dark:hover:bg-slate-850 hover:border-purple-300 transition text-slate-750 dark:text-slate-300 flex items-center gap-1.5 cursor-pointer"
+          >
+            <Share2 className="w-3.5 h-3.5" />
+            {copied ? 'Copied' : 'Copy Report'}
+          </button> */}
+          <button
+            onClick={copyToClipboard}
+            className="px-4 py-2 border border-slate-205 dark:border-slate-800 rounded-xl text-xs font-bold font-sans hover:bg-slate-50 dark:hover:bg-slate-850 hover:border-purple-300 transition theme-heading flex items-center gap-1.5 cursor-pointer"
           >
             <Share2 className="w-3.5 h-3.5" />
             {copied ? 'Copied' : 'Copy Report'}

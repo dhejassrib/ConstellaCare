@@ -171,7 +171,7 @@ export default function AppointmentCopilot({ onQuestionsBuilt }: AppointmentCopi
       
       {/* 🧾 SECTION 1: Top Input Builder */}
       <div className="mb-8">
-        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+        <h3 className="theme-heading text-lg font-bold flex items-center gap-2">
           <Calendar className="w-5 h-5 text-purple-600 dark:text-purple-400" />
           Appointment Preparation Copilot
         </h3>

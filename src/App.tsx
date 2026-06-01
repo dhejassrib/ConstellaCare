@@ -772,8 +772,8 @@ export default function App() {
 
                     <div className="bg-purple-50/60 dark:bg-purple-950/20 border border-purple-200/60 dark:border-purple-100/60 p-4.5 rounded-2xl flex items-center justify-between text-left">
                       <div>
-                        <b className="text-xs text-slate-800 dark:text-white block font-bold">"Deep Cosmic Rest Loop"</b>
-                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400 block mt-0.5">Gentle 24-000Hz frequency tracks</span>
+                        <b className="text-xs text-slate-800 dark:text-slate-400 block font-bold">Deep Cosmic Rest Playlist</b>
+                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400 block mt-0.5">Opens in Spotify when you need background calm.</span>
                       </div>
                       <a 
                         href="https://open.spotify.com/playlist/37i9dQZF1DWXe9gFZP0gtP" 

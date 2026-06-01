@@ -40,10 +40,42 @@ export default function SymptomTracker({ onLogSymptoms, initialLog = {} }: Sympt
     <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2.5xl p-6 shadow-xl transition-all duration-300">
       <div className="flex items-start justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
         <div>
-          <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+          <h3 className="theme-heading text-lg font-bold flex items-center gap-2">
             <Heart className="w-5 h-5 text-rose-500 animate-pulse" />
             Health Check-In Tracker
           </h3>
+          
+          {/* <h3
+            className={`text-lg font-bold flex items-center gap-2 ${
+              theme === 'dark'
+                ? 'text-white'
+                : 'text-[#5D4C78]'
+            }`}
+          >
+            <Heart className="w-5 h-5 text-rose-500 animate-pulse" />
+            Health Check-In Tracker
+          </h3> */}
+          {/* <h3
+            style={{ color: '#5D4C78' }}
+            className="text-lg font-bold flex items-center gap-2"
+          >
+            <Heart className="w-5 h-5 text-rose-500 animate-pulse" />
+            Health Check-In Tracker
+          </h3> */}
+          {/* <h3 style={{ color: '#5D4C78' }} className="text-lg font-bold flex items-center gap-2 dark:text-white">
+            <Heart className="w-5 h-5 text-rose-500 animate-pulse" />
+            Health Check-In Tracker
+          </h3> */}
+          {/* <h3
+            style={{
+              color: document.documentElement.classList.contains('dark')
+                ? '#ffffff'
+                : '#5D4C78',
+            }}
+            className="text-lg font-bold flex items-center gap-2"
+          >
+            Health Check-In Tracker
+          </h3> */}
           <p className="text-xs text-slate-400 mt-1">
             Tracking severity (0 = None, 5 = Severe) generates analytical medical reports.
           </p>

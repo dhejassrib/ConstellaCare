@@ -152,7 +152,7 @@ export default function CareCircle({ nodes: propNodes, onAddMessage }: CareCircl
           <div>
             <div className="flex items-center gap-2 mb-3">
               <Users className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-              <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-100">Care Connection Node</h4>
+              <h4 className="text-sm theme-heading text-lg font-bold flex items-center gap-2">Care Connection Node</h4>
             </div>
 
             {selectedNode ? (
@@ -170,6 +170,10 @@ export default function CareCircle({ nodes: propNodes, onAddMessage }: CareCircl
                 <p className="mt-3 text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed">
                   {selectedNode.message || "Awaiting supportive alignment messages."}
                 </p>
+
+                {/* <p className="mt-3 text-sm theme-heading text-lg font-bold flex items-center gap-2">
+                  {selectedNode.message || "Awaiting supportive alignment messages."}
+                </p> */}
 
                 <div className="mt-4 flex items-center gap-1.5 text-xs text-rose-500 font-medium">
                   <Heart className="w-4 h-4 fill-rose-500" />
