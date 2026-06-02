@@ -61,40 +61,41 @@ import {
 } from 'lucide-react';
 export const NAV_GROUPS = [
   {
-    group: 'Emotional Support',
+    group: 'Emotional Wellbeing',
     items: [
       { id: 'home', label: 'Home', icon: <Compass className="w-3.5 h-3.5" /> },
-      { id: 'shared', label: 'Shared Constellation', icon: <Sparkles className="w-3.5 h-3.5 text-pink-400" /> },
       { id: 'astra', label: 'Talk to Astra', icon: <MessageSquare className="w-3.5 h-3.5" /> },
       { id: 'mood', label: 'Mood Check-In', icon: <Heart className="w-3.5 h-3.5" /> },
       { id: 'calm', label: 'Calm Corner', icon: <Wind className="w-3.5 h-3.5" /> },
-      { id: 'voice', label: 'Voice Journal', icon: <Mic className="w-3.5 h-3.5" /> },
+      // { id: 'voice', label: 'Voice Journal', icon: <Mic className="w-3.5 h-3.5" /> },
     ],
   },
   {
     group: 'Care Journey',
     items: [
-      { id: 'appointment', label: 'Appointment Prep', icon: <Calendar className="w-3.5 h-3.5" /> },
+      { id: 'appointment', label: 'Appointment Copilot', icon: <Calendar className="w-3.5 h-3.5" /> },
       { id: 'symptoms', label: 'Health Tracker', icon: <Activity className="w-3.5 h-3.5" /> },
       { id: 'medications', label: 'Medications', icon: <Pill className="w-3.5 h-3.5" /> },
-      { id: 'timeline', label: 'Timeline', icon: <Clock className="w-3.5 h-3.5" /> },
-      { id: 'reports', label: 'Reports', icon: <BarChart3 className="w-3.5 h-3.5" /> },
+      // { id: 'timeline', label: 'Timeline', icon: <Clock className="w-3.5 h-3.5" /> },
+      // { id: 'reports', label: 'Reports', icon: <BarChart3 className="w-3.5 h-3.5" /> },
+      { id: 'timeline', label: 'Health Journey Timeline', icon: <Clock className="w-3.5 h-3.5" /> },
     ],
   },
   {
-    group: 'Community',
+    group: 'Support Network',
     items: [
+      { id: 'shared', label: 'Shared Constellation', icon: <Sparkles className="w-3.5 h-3.5 text-pink-400" /> },
       { id: 'circle', label: 'Care Circle', icon: <Users className="w-3.5 h-3.5" /> },
       { id: 'bottles', label: 'Message Bottles', icon: <Mail className="w-3.5 h-3.5" /> },
-      { id: 'resources', label: 'Resources', icon: <BookOpen className="w-3.5 h-3.5" /> },
     ],
   },
   {
-    group: 'My Constellation',
+    group: 'Personal',
     items: [
-      { id: 'progress', label: 'Progress', icon: <Trophy className="w-3.5 h-3.5" /> },
-      { id: 'milestones', label: 'Health Milestones', icon: <Star className="w-3.5 h-3.5" /> },
+      // { id: 'progress', label: 'Progress', icon: <Trophy className="w-3.5 h-3.5" /> },
+      // { id: 'milestones', label: 'Health Milestones', icon: <Star className="w-3.5 h-3.5" /> },
       { id: 'reflection', label: 'Reflection Archive', icon: <Moon className="w-3.5 h-3.5" /> },
+      { id: 'resources', label: 'Resources', icon: <BookOpen className="w-3.5 h-3.5" /> },
     ],
   },
 ];
@@ -154,12 +155,35 @@ export const INITIAL_CARE_CIRCLE: CareCircleNode[] = [
   { id: '4', name: 'Gavin', relationship: 'Best Friend', lastActive: '5h ago', message: 'Shared a funny music video: \"Keep shine in your sky!\"', angle: 310, distance: 140, color: '#3dd5f3' },
 ];
 
+// export const INITIAL_MILESTONES: Milestone[] = [
+//   { id: 'm1', date: '2026-05-15', label: 'Oncology Consultation', done: true, type: 'medical', notes: 'Agreed on chemotherapy parameters and schedule.' },
+//   { id: 'm2', date: '2026-05-20', label: 'Chemo Infusion #1', done: true, type: 'medical', notes: 'Completed. Experienced moderate nausea, but stable.' },
+//   { id: 'm3', date: '2026-05-26', label: 'Care Circle Grounding', done: true, type: 'emotional', notes: 'Mom joined the Constellation. Star lit.' },
+//   { id: 'm4', date: 'Yesterday', label: '3-Min Deep Breathing Star', done: true, type: 'selfcare', notes: 'Practiced bubble expansion twice.' },
+//   { id: 'm5', date: 'Tomorrow, 2:30 PM', label: 'Appointment with Dr. Evelyn Moss', done: false, type: 'medical', notes: 'Chemotherapy review and next schedule.' },
+//   { id: 'm6', date: 'Next Week', label: 'Chemo Infusion #2', done: false, type: 'medical', notes: 'Prepare hydration levels 48h before.' },
+// ];
+
 export const INITIAL_MILESTONES: Milestone[] = [
   { id: 'm1', date: '2026-05-15', label: 'Oncology Consultation', done: true, type: 'medical', notes: 'Agreed on chemotherapy parameters and schedule.' },
+
   { id: 'm2', date: '2026-05-20', label: 'Chemo Infusion #1', done: true, type: 'medical', notes: 'Completed. Experienced moderate nausea, but stable.' },
+
+  {
+    id: 'milestone1',
+    date: '2026-05-22',
+    label: '⭐ First Treatment Cycle Completed',
+    done: true,
+    type: 'milestone',
+    notes: 'Reached an important treatment milestone.'
+  },
+
   { id: 'm3', date: '2026-05-26', label: 'Care Circle Grounding', done: true, type: 'emotional', notes: 'Mom joined the Constellation. Star lit.' },
+
   { id: 'm4', date: 'Yesterday', label: '3-Min Deep Breathing Star', done: true, type: 'selfcare', notes: 'Practiced bubble expansion twice.' },
+
   { id: 'm5', date: 'Tomorrow, 2:30 PM', label: 'Appointment with Dr. Evelyn Moss', done: false, type: 'medical', notes: 'Chemotherapy review and next schedule.' },
+
   { id: 'm6', date: 'Next Week', label: 'Chemo Infusion #2', done: false, type: 'medical', notes: 'Prepare hydration levels 48h before.' },
 ];
 
@@ -178,18 +202,18 @@ export const HELPFUL_RESOURCES = [
     title: '🌿 Coping with Chemo Nausea & Appetite',
     description: 'Practical self-care tips including small snack timing, ginger infusions, and doctor communication guide.',
     category: 'Symptom Relief',
-    link: 'https://www.cancer.org/cancer/managing-cancer/side-effects/eating-problems.html'
+    link: 'https://www.nccs.com.sg/your-care/patient-support/coping-with-cancer-and-treatments/nausea-and-vomitingl'
   },
   {
     title: '🧠 Centering in Hard Moments: Anchoring Techniques',
     description: 'Learn the 5-4-3-2-1 grounding method, somatic neck releases, and cosmic boundary tracking.',
     category: 'Mindfulness',
-    link: 'https://www.cancerresearchuk.org/about-cancer/coping/emotionally/anxiety-panic'
+    link: 'https://www.verywellmind.com/5-4-3-2-1-grounding-technique-8639390'
   },
   {
     title: '💬 Guidance for Explaining Your Diagnosis to Children',
     description: 'Compassionate conversation starters, age-appropriate descriptions, and maintaining a sense of safety.',
     category: 'Care Circle',
-    link: 'https://www.cancer.net/coping-with-cancer/talking-with-family-and-friends/talking-with-your-children'
+    link: 'https://explainingbrains.com/explaining-a-diagnosis/'
   }
 ];

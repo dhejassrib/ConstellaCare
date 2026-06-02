@@ -115,7 +115,7 @@ export default function BubbleBreathing({ onComplete }: BubbleBreathingProps) {
           {phase === 'idle' ? 'BUBBLE GROUNDING' : `PHASE: ${phase.toUpperCase()}`}
         </h4>
         <p className="text-xs text-slate-500 mt-1">
-          {phase === 'idle' && 'Breathe in as the bubble inflates, hold in serene suspension, exhale to release.'}
+          {phase === 'idle' && 'Follow the bubble. Breathe in, hold, then breathe out slowly.'}
           {phase === 'inhale' && 'Expand your chest slowly. Fill with clinical oxygen.'}
           {phase === 'hold' && 'Dwell in suspended comfort. Unclench your mouth.'}
           {phase === 'exhale' && 'Release all accumulated stress. Drop your shoulders.'}
@@ -144,7 +144,7 @@ export default function BubbleBreathing({ onComplete }: BubbleBreathingProps) {
         {/* Star accumulation count */}
         <div className="flex items-center gap-1.5 text-[10px] font-bold font-mono text-slate-400 bg-slate-50 dark:bg-slate-950 py-1 px-3.5 rounded-full border border-slate-100 dark:border-slate-800/80 mt-1">
           <Award className="w-3.5 h-3.5 text-pink-500" />
-          <span>CYCLES: {cyclesCompleted} / 3 TO UNLOCK ALPHA STAR STAR</span>
+          <span>CYCLES: {cyclesCompleted} / 3 TO UNLOCK ALPHA STAR</span>
         </div>
 
         {starEarned && (

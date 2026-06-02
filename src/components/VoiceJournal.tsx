@@ -211,7 +211,7 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
       <div className="text-center max-w-md mx-auto">
         <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">Empathetic Voice Journaling</h3>
         <p className="text-xs text-slate-400">
-          Chemotherapy is exhausting. Skip the typing — simply share your voice, and let Astra transcribe and analyze your emotional weather.
+          Some days it's easier to talk than type. Share your thoughts aloud, and let Astra transcribe and reflect on your emotional weather.
         </p>
 
         {errorMessage && (

@@ -307,7 +307,7 @@ export default function SharedConstellation({ theme, role, onNavigateHome }: Sha
       </div>
 
       {/* SUPPORT BEACON BANNER */}
-      {supportRequested && (
+      {/* {supportRequested && (
         <div className="px-4 md:px-8 py-1 relative z-10 max-w-6xl mx-auto">
           <div className="bg-gradient-to-r from-rose-500/10 via-amber-500/10 to-[#110c24] border border-rose-500/40 p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg animate-pulse">
             <div className="flex items-start gap-3">
@@ -340,7 +340,7 @@ export default function SharedConstellation({ theme, role, onNavigateHome }: Sha
             )}
           </div>
         </div>
-      )}
+      )} */}
 
       {/* HUB WORKSPACE LAYOUT */}
       <div className="relative z-10 px-4 md:px-8 pb-20 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mt-4">
@@ -353,181 +353,72 @@ export default function SharedConstellation({ theme, role, onNavigateHome }: Sha
           <div className={`border rounded-3xl p-5 shadow-lg ${
             theme === 'dark' ? 'bg-[#110c24]/90 border-purple-500/25 text-white' : 'bg-white border-purple-150 text-slate-800'
           }`}>
-            <div className="border-b border-slate-100 dark:border-purple-500/10 pb-2 mb-3.5 flex justify-between items-center">
-              <div className="text-left">
-                <h3 className="text-xs font-black uppercase tracking-widest text-purple-700 dark:text-purple-400">
-                  Shared Health Timeline
-                </h3>
-                <span className="text-[9px] text-slate-400 block mt-0.5">360° clinical view of care parameters</span>
-              </div>
-
-              {/* Tab Selector Buttons */}
-              <div className="flex bg-slate-100 dark:bg-slate-950 p-1 rounded-xl">
-                <button
-                  onClick={() => setActiveLeftTab('timeline')}
-                  className={`text-[9px] uppercase tracking-wider font-extrabold px-2 py-1 rounded-lg select-none transition ${
-                    activeLeftTab === 'timeline'
-                      ? 'bg-purple-600 text-white'
-                      : 'text-slate-400 hover:text-slate-650'
-                  }`}
-                >
-                  Timeline
-                </button>
-                <button
-                  onClick={() => setActiveLeftTab('memories')}
-                  className={`text-[9px] uppercase tracking-wider font-extrabold px-2 py-1 rounded-lg select-none transition ${
-                    activeLeftTab === 'memories'
-                      ? 'bg-purple-600 text-white'
-                      : 'text-slate-400 hover:text-slate-650'
-                  }`}
-                >
-                  Memories
-                </button>
-              </div>
+            <div className="border-b border-slate-100 dark:border-purple-500/10 pb-3 mb-4 text-left">
+              <h3 className="text-xs font-black uppercase tracking-widest text-purple-700 dark:text-purple-400">
+                Shared Health Snapshot
+              </h3>
+              <span className="text-[10px] text-slate-400">
+                Key updates visible to both patient and caregiver
+              </span>
             </div>
 
             {/* Render Tab Contents */}
-            {activeLeftTab === 'timeline' ? (
-              <div className="space-y-4 max-h-[460px] overflow-y-auto pr-1 text-left">
-                
-                {/* 1. UPCOMING APPOINTMENT CHECKLIST */}
-                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-purple-950/15 border border-slate-100 dark:border-purple-500/5">
-                  <span className="text-[8px] font-mono tracking-widest text-purple-600 dark:text-purple-400 uppercase font-bold flex items-center gap-1">
-                    <Calendar className="w-3 h-3" /> Scheduled Consults
-                  </span>
-                  <div className="mt-2 space-y-2">
-                    <div className="flex items-center justify-between text-xs font-semibold text-slate-800 dark:text-slate-250">
-                      <span>General Check-In & Medication Review</span>
-                      <span className="text-[9px] px-2 py-0.5 roundedbg-purple-100 dark:bg-purple-900 border border-purple-500/10 font-mono">TOMORROW</span>
-                    </div>
-                    <span className="text-[9px] text-slate-400 block font-medium">Prepared prompts verified using Appointment Prep Copilot 🩺</span>
-                  </div>
-                </div>
+            <div className="space-y-4 text-left">
 
-                {/* 2. REAL-TIME LOGGED SYMPTOM SEVERITIES */}
-                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-purple-950/15 border border-slate-100 dark:border-purple-500/5">
-                  <span className="text-[8px] font-mono tracking-widest text-pink-600 dark:text-pink-400 uppercase font-bold flex items-center gap-1">
-                    <Activity className="w-3 h-3" /> Health Tracker Check-Ins
-                  </span>
-                  
-                  {Object.keys(symptoms).length > 0 ? (
-                    <div className="mt-2 grid grid-cols-2 gap-2">
-                      {Object.entries(symptoms).map(([k, val]) => {
-                        const scoreNum = Number(val) || 0;
-                        return (
-                          <div key={k} className="flex justify-between items-center p-1.5 bg-white dark:bg-[#070512] rounded-lg text-[10px] font-semibold border dark:border-purple-500/5">
-                            <span className="text-slate-600 dark:text-slate-350">{k}</span>
-                            <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold ${
-                              scoreNum >= 4 ? 'bg-rose-500/10 text-rose-500' :
-                              scoreNum >= 2 ? 'bg-amber-500/10 text-amber-500' :
-                              'bg-emerald-500/10 text-emerald-500'
-                            }`}>
-                              {scoreNum}/5
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <p className="text-[10px] text-slate-400 italic mt-2">No check-in logs submitted today yet.</p>
-                  )}
-                </div>
+              {/* Health Snapshot */}
+              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-purple-950/15 border border-slate-100 dark:border-purple-500/5">
+                <h4 className="text-[10px] font-bold uppercase tracking-wide text-purple-600 mb-2">
+                  Shared Health Snapshot
+                </h4>
 
-                {/* 3. RECENT THERAPEUTIC JOURNAL HIGHLIGHTS */}
-                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-purple-950/15 border border-slate-100 dark:border-purple-500/5">
-                  <span className="text-[8px] font-mono tracking-widest text-purple-600 dark:text-purple-400 uppercase font-bold flex items-center gap-1">
-                    <FileText className="w-3 h-3" /> Journal Expression Highlights
-                  </span>
-                  
-                  {journals.length > 0 ? (
-                    <div className="mt-2 space-y-2">
-                      {journals.slice(0, 2).map((journ, i) => (
-                        <div key={i} className="p-2.5 bg-white dark:bg-[#070512] rounded-xl text-[10px] border dark:border-purple-500/5 text-slate-600 dark:text-slate-300 italic leading-relaxed">
-                          "{journ.text.slice(0, 85)}..."
-                          <span className="block text-[8px] font-mono text-slate-400 text-right mt-1">— {journ.date}</span>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-[10px] text-slate-400 italic mt-2">No written reflections recorded yet this week.</p>
-                  )}
+                <div className="space-y-1 text-xs">
+                  <p>💜 Mood: Calm</p>
+                  <p>⚡ Fatigue: Moderate</p>
+                  <p>💊 Medication adherence: 85%</p>
                 </div>
-
-                {/* 4. MEDICATION COMPLIANCE ARCHIVE */}
-                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-purple-950/15 border border-slate-100 dark:border-purple-500/5">
-                  <span className="text-[8px] font-mono tracking-widest text-teal-600 dark:text-teal-400 uppercase font-bold flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3" /> Medication Adherence Metrics
-                  </span>
-                  
-                  {meds.length > 0 ? (
-                    <div className="mt-2 text-xs font-semibold">
-                      <div className="flex justify-between items-center">
-                        <span className="text-slate-500">Active Prescriptions:</span>
-                        <span className="text-slate-800 dark:text-slate-200 font-bold">{meds.length} drugs</span>
-                      </div>
-                      <div className="flex justify-between items-center mt-1">
-                        <span className="text-slate-500">Weekly Target status:</span>
-                        <span className="text-purple-600 dark:text-purple-400 font-bold">Stable</span>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="mt-2 flex justify-between items-center text-[10px]">
-                      <span className="text-slate-400">Compliance alignment:</span>
-                      <span className="text-slate-400 font-mono italic">No meds enrolled</span>
-                    </div>
-                  )}
-                </div>
-
               </div>
-            ) : (
-              <div className="space-y-4 max-h-[460px] overflow-y-auto pr-1 text-left">
-                {milestones.length === 0 ? (
-                  <p className="text-xs text-slate-400 italic text-center py-8">No shared memories aligned yet.</p>
-                ) : (
-                  milestones.map((ms) => (
-                    <div 
-                      key={ms.id} 
-                      className="p-3 bg-slate-50 dark:bg-[#070512] rounded-2xl border border-slate-100 dark:border-purple-500/10 hover:border-purple-500/30 transition-all relative group font-sans"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className={`text-[8px] font-extrabold uppercase px-2 py-0.5 rounded ${
-                          ms.category === 'support' ? 'bg-rose-500/10 text-rose-450 border border-rose-500/20' :
-                          ms.category === 'activity' ? 'bg-emerald-500/10 text-emerald-455 border border-emerald-500/20' :
-                          'bg-purple-500/10 text-purple-300 border border-purple-500/20'
-                        }`}>
-                          {ms.category}
-                        </span>
-                        <span className="text-[8px] font-mono text-slate-400">{ms.date}</span>
-                      </div>
 
-                      <h4 className="text-xs font-bold text-slate-805 dark:text-[#f4d4a8] mt-1 leading-tight">{ms.title}</h4>
-                      <p className="text-[11px] text-slate-550 dark:text-slate-350 italic mt-0.5">"{ms.notes}"</p>
-                      
-                      <div className="flex items-center justify-between mt-2 pt-1 border-t border-dashed border-slate-100 dark:border-purple-500/5 text-[9px] text-slate-400">
-                        <span>Synced by: <b>{ms.createdBy}</b></span>
-                        <button
-                          onClick={() => removeMilestone(ms.id)}
-                          className="opacity-0 group-hover:opacity-100 text-rose-400 hover:text-rose-600 transition"
-                          title="Remove milestone"
-                        >
-                          <Trash className="w-3 h-3" />
-                        </button>
-                      </div>
-                    </div>
-                  ))
-                )}
+              {/* Appointment */}
+              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-purple-950/15 border border-slate-100 dark:border-purple-500/5">
+                <h4 className="text-[10px] font-bold uppercase tracking-wide text-purple-600 mb-2">
+                  Upcoming Appointment
+                </h4>
+
+                <p className="text-xs">
+                  Tomorrow · General Check-In & Medication Review
+                </p>
               </div>
-            )}
-            
-            {/* Force backup button trigger */}
-            <div className="mt-4 pt-3 border-t border-purple-500/10 text-center">
-              <button
-                onClick={() => triggerProgressiveAuth("Synched Multi-User Backup Core")}
-                className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-purple-500/10 hover:bg-purple-500/25 border border-purple-500/20 text-purple-400 dark:text-purple-300 text-xs font-bold cursor-pointer transition"
-              >
-                <ShieldCheck className="w-3.5 h-3.5" /> Force Constellation Backup
-              </button>
+
+              {/* Shared Tasks */}
+              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-purple-950/15 border border-slate-100 dark:border-purple-500/5">
+                <h4 className="text-[10px] font-bold uppercase tracking-wide text-purple-600 mb-2">
+                  Shared Care Tasks
+                </h4>
+
+                <ul className="text-xs space-y-1">
+                  <li>✓ Prepare consultation questions</li>
+                  <li>✓ Track fatigue this evening</li>
+                  <li>✓ Confirm medication refill</li>
+                </ul>
+              </div>
+
+              {/* Support Message */}
+              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-purple-950/15 border border-slate-100 dark:border-purple-500/5">
+                <h4 className="text-[10px] font-bold uppercase tracking-wide text-purple-600 mb-2">
+                  Recent Support
+                </h4>
+
+                <p className="text-xs italic">
+                  "Thinking of you today."
+                </p>
+
+                <p className="text-[10px] mt-1 text-slate-400">
+                  — Sarah
+                </p>
+              </div>
+
             </div>
+            
           </div>
 
         </div>
@@ -686,7 +577,7 @@ export default function SharedConstellation({ theme, role, onNavigateHome }: Sha
           </div>
 
           {/* BRING TRUSTED RELATION CIRCLES IN */}
-          <div className={`border rounded-3xl p-5 shadow-lg ${
+          {/* <div className={`border rounded-3xl p-5 shadow-lg ${
             theme === 'dark' ? 'bg-[#110c24]/90 border-purple-500/25 text-white' : 'bg-white border-purple-150 text-slate-855'
           }`}>
             <h3 className="text-xs font-black uppercase tracking-widest text-[#a855f7] flex items-center gap-1.5 border-b border-purple-500/10 pb-2 mb-3 text-left">
@@ -730,10 +621,10 @@ export default function SharedConstellation({ theme, role, onNavigateHome }: Sha
                 + Invite to Support Orbit
               </button>
             </form>
-          </div>
+          </div> */}
 
           {/* MILSTONE MEMORIES CHRONOLOGY */}
-          <div className={`border rounded-3xl p-5 shadow-lg ${
+          {/* <div className={`border rounded-3xl p-5 shadow-lg ${
             theme === 'dark' ? 'bg-[#110c24]/90 border-purple-500/25 text-white' : 'bg-white border-purple-150 text-slate-855'
           }`}>
             <h3 className="text-xs font-black uppercase tracking-widest text-[#a855f7] flex items-center gap-1.5 border-b border-purple-500/10 pb-2 mb-3 text-left">
@@ -764,7 +655,7 @@ export default function SharedConstellation({ theme, role, onNavigateHome }: Sha
                 + Commit to Sky Timeline
               </button>
             </form>
-          </div>
+          </div> */}
 
         </div>
 

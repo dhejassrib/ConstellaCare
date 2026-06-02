@@ -40,7 +40,7 @@ export interface Milestone {
   date: string;
   label: string;
   done: boolean;
-  type: 'medical' | 'emotional' | 'selfcare';
+  type: 'medical' | 'emotional' | 'selfcare' | 'milestone';
   notes?: string;
 }
 
