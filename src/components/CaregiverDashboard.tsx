@@ -1240,7 +1240,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
 
           {activeSection === 'shared' && (
             <div className="animate-fade-in">
-              <SharedConstellation theme={theme} role="caregiver" onNavigateHome={() => setActiveSection('home')} />
+              <SharedConstellation theme={theme} role="caregiver" isLoggedIn={!!user} onNavigateHome={() => setActiveSection('home')} />
             </div>
           )}
         </div>

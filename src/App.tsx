@@ -80,6 +80,22 @@ export default function App() {
     const newUser = { email, displayName };
     setUser(newUser);
     localStorage.setItem('constella_user', JSON.stringify(newUser));
+    setProgressiveAuthOpen(false);
+  };
+
+  const isLoggedIn = () => {
+    if (user) return true;
+    try {
+      return !!localStorage.getItem('constella_user');
+    } catch {
+      return false;
+    }
+  };
+
+  const openProgressiveAuth = (reason: string) => {
+    if (isLoggedIn()) return;
+    setProgressiveAuthReason(reason);
+    setProgressiveAuthOpen(true);
   };
 
   const handleLogout = () => {
@@ -97,12 +113,12 @@ export default function App() {
   });
 
   const triggerMilestoneAuth = (reason: string, triggerKey: string) => {
+    if (isLoggedIn()) return;
     if (milestonesTriggered[triggerKey]) return;
     const next = { ...milestonesTriggered, [triggerKey]: true };
     setMilestonesTriggered(next);
     localStorage.setItem('patient-milestones-auth-triggers', JSON.stringify(next));
-    setProgressiveAuthReason(reason);
-    setProgressiveAuthOpen(true);
+    openProgressiveAuth(reason);
   };
 
   // Message Bottles Unlocks
@@ -278,10 +294,7 @@ export default function App() {
           theme={theme}
           onThemeToggle={() => setTheme(theme === 'light' ? 'dark' : 'light')}
           user={user}
-          onAuthTrigger={() => {
-            setProgressiveAuthReason("Encrypting & backing up Caregiver logs");
-            setProgressiveAuthOpen(true);
-          }}
+          onAuthTrigger={() => openProgressiveAuth("Encrypting & backing up Caregiver logs")}
           onLogout={handleLogout}
           onNavigate={(path) => {
             if (path === '/') {
@@ -433,10 +446,7 @@ export default function App() {
               </div>
             ) : (
               <button
-                onClick={() => {
-                  setProgressiveAuthReason("Enrolling encrypted cloud sync coordinates");
-                  setProgressiveAuthOpen(true);
-                }}
+                onClick={() => openProgressiveAuth("Enrolling encrypted cloud sync coordinates")}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-gradient-to-r from-[#d4798e] via-[#9c82ba] to-[#decfe6] text-white hover:scale-101 active:scale-99 transition-all shadow-md cursor-pointer border border-[#c9a0dc]/20"
               >
                 <span>Backup Progress ☁️</span>
@@ -1026,6 +1036,7 @@ export default function App() {
               <SharedConstellation
                 theme={theme}
                 role="patient"
+                isLoggedIn={!!user}
                 onNavigateHome={() => setActiveSection('home')}
               />
             </div>

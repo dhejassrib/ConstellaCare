@@ -9,6 +9,7 @@ import {
 interface SharedConstellationProps {
   theme: 'light' | 'dark';
   role: 'patient' | 'caregiver';
+  isLoggedIn?: boolean;
   onNavigateHome: () => void;
 }
 
@@ -31,7 +32,7 @@ interface SharedMilestone {
   createdBy: string;
 }
 
-export default function SharedConstellation({ theme, role, onNavigateHome }: SharedConstellationProps) {
+export default function SharedConstellation({ theme, role, isLoggedIn = false, onNavigateHome }: SharedConstellationProps) {
   // Shared Live Constellation States (with localStorage syncing)
   const [messageStars, setMessageStars] = useState<MessageStar[]>(() => {
     const cached = localStorage.getItem('shared-message-stars');
@@ -146,6 +147,12 @@ export default function SharedConstellation({ theme, role, onNavigateHome }: Sha
   };
 
   const triggerProgressiveAuth = (reason: string) => {
+    if (isLoggedIn) return;
+    try {
+      if (localStorage.getItem('constella_user')) return;
+    } catch {
+      /* ignore */
+    }
     setAuthTriggerReason(reason);
     setShowProgressiveAuth(true);
   };
