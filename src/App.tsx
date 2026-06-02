@@ -484,7 +484,8 @@ export default function App() {
                     <h2 className="text-xl md:text-2xl font-extrabold flex items-center gap-2">
                       {user
                         ? `Good evening, ${user.displayName.split(' ')[0]} ✨`
-                        : 'Good evening, Sarah ✨'}
+                        // : 'Good evening, Sarah ✨'}
+                        : 'Good evening ✨'}
                     </h2>
 
                     <p className="text-xs text-slate-350 max-w-md mt-1 leading-relaxed">
@@ -519,7 +520,7 @@ export default function App() {
                   <h4 className="text-sm font-bold uppercase tracking-wider text-[#a855f7] flex items-center gap-1.5 pl-1.5">
                     <Compass className="w-4 h-4" /> Living Constellation Orbits
                   </h4>
-                  <span className="text-xs text-[#7e6c9e] dark:text-slate-400">Click coordinates to fetch logs</span>
+                  <span className="text-xs text-[#7e6c9e] dark:text-slate-400">Mouse over coordinates to view logs</span>
                 </div>
                 <LivingConstellation stars={stars} totalStars={totalStars} />
               </div>
@@ -549,8 +550,8 @@ export default function App() {
                         className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
                       >
                         <span className="text-2xl animate-pulse">🌸</span>
-                        <span className="text-xs font-bold text-[#1e133a] dark:text-slate-150">Mood Check-In</span>
-                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400">Biometric scanner</span>
+                        <span className="text-xs font-bold text-[#0284c7]">Mood Check-In</span>
+                        <span className="text-[10px] text-[#1e133a] dark:text-slate-400">Facial emotion scanner</span>
                       </button>
 
                       <button 
@@ -558,8 +559,16 @@ export default function App() {
                         className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
                       >
                         <span className="text-2xl animate-pulse">🫧</span>
-                        <span className="text-xs font-bold text-[#1e133a] dark:text-slate-150">Calm exercise</span>
-                        <span className="text-[10px] text-[#22d3ee]">Bubble expansion</span>
+                        {/* <span className= "text-xs font-bold text-[#1e133a] dark:text-slate-400">Calm exercises</span>
+                        <span className="text-[10px] text-[#22d3ee]">Bubble expansion and calming sounds</span> */}
+                        {/* colors swapped */}
+                        <span className="text-xs font-bold text-[#0284c7]">
+                          Calm exercises
+                        </span>
+
+                        <span className="text-[10px] text-[#1e133a] dark:text-slate-400">
+                          Bubble expansion and calming sounds
+                        </span>
                       </button>
 
                       <button 
@@ -567,8 +576,8 @@ export default function App() {
                         className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
                       >
                         <span className="text-2xl animate-pulse">🩺</span>
-                        <span className="text-xs font-bold text-[#1e133a] dark:text-slate-150">Copilot 2.0</span>
-                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400">Speak to oncologist</span>
+                        <span className="text-xs font-bold text-[#0284c7]">Copilot 2.0</span>
+                        <span className="text-[10px] text-[#1e133a] dark:text-slate-400">Articulate your concerns</span>
                       </button>
 
                       <button 
@@ -576,8 +585,8 @@ export default function App() {
                         className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
                       >
                         <span className="text-2xl animate-pulse">💌</span>
-                        <span className="text-xs font-bold text-[#1e133a] dark:text-slate-150">Message Bottle</span>
-                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400">Therapeutic check-ins</span>
+                        <span className="text-xs font-bold text-[#1e133a] dark:text-slate-400">Message Bottle</span>
+                        <span className="text-[10px] text-[#1e133a] dark:text-slate-400">Therapeutic messages</span>
                       </button>
                     </div>
                   </div>
@@ -610,10 +619,10 @@ export default function App() {
               </div>
 
               {/* MAP EMOTIONAL SKY CHART */}
-              <div className="space-y-4">
+              {/* <div className="space-y-4">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#a855f7] block pl-1.5">Emotional Weather Sky Chart</span>
                 <EmotionalTrendTracking />
-              </div>
+              </div> */}
 
             </div>
           )}
@@ -880,9 +889,9 @@ export default function App() {
               <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col items-center justify-center text-center">
                 <div className="absolute top-0 right-0 w-44 h-44 bg-purple-500/5 blur-3xl rounded-full" />
                 <span className="text-4xl block mb-3 animate-bounce">💌</span>
-                <h3 className="text-md font-extrabold text-[#1e133a] dark:text-slate-100">Hope Therapeutic Message Bottles</h3>
-                <p className="text-xs text-[#7e6c9e] dark:text-slate-400 max-w-sm mt-1.5 leading-relaxed">
-                  Supportive messages locked in orbits by cancer survivors. Unscrew a bottle whenever dark clouds block your stargaze.
+                <h3 className="text-md font-extrabold text-[#1e133a] dark:text-slate-100">Hopeful Message Bottles</h3>
+                <p className="text-xs text-[#7e6c9e] dark:text-slate-400 mt-1.5 leading-relaxed">
+                  Supportive messages gathered from shared health journeys. <br></br>Unscrew a bottle whenever dark clouds make the stars harder to see.
                 </p>
 
                 <div className="my-6 max-w-md w-full bg-purple-50/50 dark:bg-slate-950/30 border border-dashed border-purple-300/40 rounded-2xl p-5 leading-relaxed shadow-inner min-h-[90px] flex items-center justify-center italic text-xs text-[#3d3650] dark:text-slate-300">
