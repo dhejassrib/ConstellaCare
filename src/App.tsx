@@ -27,6 +27,7 @@ import Resources from './components/Resources';
 import CaregiverDashboard from './components/CaregiverDashboard';
 import SharedConstellation from './components/SharedConstellation';
 import ProgressiveAuthModal from './components/ProgressiveAuthModal';
+import MedicationReminderConstellation from './components/MedicationReminderConstellation';
 
 // Lucide Icons
 import {
@@ -474,6 +475,7 @@ export default function App() {
           </div>
         </header>
 
+        
         {/* ── Main Content Compartment ── */}
         <div className="flex-1 p-6 md:p-10 max-w-5xl w-full mx-auto space-y-8 pb-32">
           
@@ -493,28 +495,29 @@ export default function App() {
                   <div>
                     <h2 className="text-xl md:text-2xl font-extrabold flex items-center gap-2">
                       {user
-                        ? `Good evening, ${user.displayName.split(' ')[0]} ✨`
+                        ? `Good Evening ✨`
                         // : 'Good evening, Sarah ✨'}
-                        : 'Good evening ✨'}
+                        : 'Good Evening ✨'}
                     </h2>
 
-                    <p className="text-xs text-slate-350 max-w-md mt-1 leading-relaxed">
-                      Your Constellation index has flared brighter this week. Let's make sure you take a slow, gentle orbit of comfort tonight.
+                    <p className="text-xs text-slate-350 mt-1 leading-relaxed">
+                      You've shown up for yourself this week. Consider taking a few quiet moments tonight to unwind and reset.
                     </p>
                     {/* Status grid summary */}
                     <div className="mt-5 flex items-center gap-4.5 flex-wrap">
                       <div className={`border border-purple-500/10 rounded-xl py-1 px-3 ${theme === 'dark' ? 'bg-slate-850/60' : 'bg-white/70'}`}>
                         <span className={`text-[9px] uppercase font-mono tracking-wider block font-bold ${theme === 'dark' ? 'text-slate-350' : 'text-[#7e6c9e]'}`}>Resilience</span>
-                        <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">Calmer than last week</span>
+                        <span className="text-xs font-bold text-pink-600 dark:text-pink-400">Calmer than last week</span>
+                        {/* <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">Calmer than last week</span> */}
                       </div>
                       <div className={`border border-purple-500/10 rounded-xl py-1 px-3 ${theme === 'dark' ? 'bg-slate-850/60' : 'bg-white/70'}`}>
                         <span className={`text-[9px] uppercase font-mono tracking-wider block font-bold ${theme === 'dark' ? 'text-slate-350' : 'text-[#7e6c9e]'}`}>Next Oncology Check</span>
                         <span className="text-xs font-bold text-purple-600 dark:text-purple-400">Tomorrow, 2:30 PM</span>
                       </div>
-                      <div className={`border border-purple-500/10 rounded-xl py-1 px-3 ${theme === 'dark' ? 'bg-slate-850/60' : 'bg-white/70'}`}>
+                      {/* <div className={`border border-purple-500/10 rounded-xl py-1 px-3 ${theme === 'dark' ? 'bg-slate-850/60' : 'bg-white/70'}`}>
                         <span className={`text-[9px] uppercase font-mono tracking-wider block font-bold ${theme === 'dark' ? 'text-slate-350' : 'text-[#7e6c9e]'}`}>Constellation circle</span>
                         <span className="text-xs font-bold text-pink-600 dark:text-pink-400">2 active check-ins</span>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
 
@@ -561,7 +564,7 @@ export default function App() {
                       >
                         <span className="text-2xl animate-pulse">🌸</span>
                         <span className="text-xs font-bold text-[#0284c7]">Mood Check-In</span>
-                        <span className="text-[10px] text-[#1e133a] dark:text-slate-400">Facial emotion scanner</span>
+                        <span className="text-[10px] text-[#1e133a] dark:text-slate-400">Facial emotion scanner and voice journal</span>
                       </button>
 
                       <button 
@@ -595,7 +598,7 @@ export default function App() {
                         className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
                       >
                         <span className="text-2xl animate-pulse">💌</span>
-                        <span className="text-xs font-bold text-[#1e133a] dark:text-slate-400">Message Bottle</span>
+                        <span className="text-xs font-bold text-[#0284c7]">Message Bottle</span>
                         <span className="text-[10px] text-[#1e133a] dark:text-slate-400">Therapeutic messages</span>
                       </button>
                     </div>
@@ -648,8 +651,8 @@ export default function App() {
                     <Sparkles className="w-4 h-4 fill-white" />
                   </div>
                   <div>
-                    <h3 className="text-xs font-black tracking-widest uppercase text-purple-300">ASTRA COPRESENCE</h3>
-                    <p className="text-[9px] text-slate-400 font-mono">STABLE SECURE TUNNEL // ACTIVE</p>
+                    <h3 className="text-xs font-black tracking-widest uppercase text-purple-300">ASTRA COMPANION</h3>
+                    <p className="text-[9px] text-slate-400 font-mono">ACTIVE</p>
                   </div>
                 </div>
                 
@@ -734,14 +737,14 @@ export default function App() {
             <div className="space-y-8 animate-fade-in">
               <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl leading-relaxed">
                 <p className="text-sm text-[#4d3c69] dark:text-slate-400 leading-relaxed center">
-                  Checking in with how you are feeling helps map your long-term diagnostic trends.
-                  <br></br>Both biometric scans (the visual sensors) and daily emotion card selections are welcome.
+                  Checking in with how you are feeling helps track your emotional wellbeing over time. <br>
+                  </br>Use a biometric mood scan, emotion card, or voice journal - whatever feels easiest for you today.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                 <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-5 shadow-xl">
-                  <span className="text-xs font-bold font-mono tracking-widest text-[#a855f7] uppercase block mb-4">Biometric Mood Sensor Scanner</span>
+                  <span className="text-xs font-bold font-mono tracking-widest text-[#a855f7] uppercase block mb-4 text-center">Biometric Mood Sensor Scanner</span>
                   <FacialEmotionDetection onDetected={(rawEm) => {
                     addStar("Mapped Facial Line Alignment", "mood");
                     setLastAction(`Biometric mapped ${rawEm}`);
@@ -750,7 +753,7 @@ export default function App() {
 
                 <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-5 shadow-xl flex flex-col justify-between">
                   <div>
-                    <span className="text-xs font-bold font-mono tracking-widest text-[#a855f7] uppercase block mb-4">Daily Emotion Selector Card Set</span>
+                    <span className="text-xs font-bold font-mono tracking-widest text-[#a855f7] uppercase block mb-4 text-center">Daily Emotion Selector Card Set</span>
                     <EmotionCards 
                       emotions={PATIENT_EMOTION_CARDS}
                       responses={PATIENT_AI_RESPONSES}
@@ -762,6 +765,23 @@ export default function App() {
                   </div>
                 </div>
               </div>
+
+              {/*  VOICE JOURNAL ── */}
+              {/* changed activesection===voice to activesection===mood */}
+              {activeSection === 'mood' && (
+                <div className="space-y-8 animate-fade-in">
+                  <VoiceJournal onJournalSaved={(entry) => {
+                    setReflectionHistory(prev => [entry, ...prev]);
+                    setLastAction("Transcribed Voice Journal");
+                  }} />
+                </div>
+              )}
+              
+              {/* MAP EMOTIONAL SKY CHART */}
+              {/* <div className="space-y-4">
+                <span className="text-xs font-bold uppercase tracking-widest text-[#a855f7] block pl-1.5">Emotional Weather Sky Chart</span>
+                <EmotionalTrendTracking />
+              </div> */}
             </div>
           )}
 
@@ -770,7 +790,7 @@ export default function App() {
             <div className="space-y-8 animate-fade-in">
               <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl leading-relaxed">
                 <p className="text-sm text-[#4d3c69] dark:text-slate-400">
-                  Mindfulness isn't a distraction; it lowers cortisol baselines allowing chemotherapy compounds to settle comfortably inside cells.
+                  Taking a few moments to pause, breathe, and reset can help support emotional wellbeing throughout any health journey.
                 </p>
               </div>
 
@@ -791,7 +811,7 @@ export default function App() {
 
                     <div className="bg-purple-50/60 dark:bg-purple-950/20 border border-purple-200/60 dark:border-purple-100/60 p-4.5 rounded-2xl flex items-center justify-between text-left">
                       <div>
-                        <b className="text-xs text-slate-800 dark:text-slate-400 block font-bold">Deep Cosmic Rest Playlist</b>
+                        <b className="text-xs text-slate-500 dark:text-slate-100 block font-bold">Deep Cosmic Rest Playlist</b>
                         <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400 block mt-0.5">Opens in Spotify when you need background calm.</span>
                       </div>
                       <a 
@@ -810,14 +830,14 @@ export default function App() {
           )}
 
           {/*  VOICE JOURNAL ── */}
-          {activeSection === 'voice' && (
+          {/* {activeSection === 'voice' && (
             <div className="space-y-8 animate-fade-in">
               <VoiceJournal onJournalSaved={(entry) => {
                 setReflectionHistory(prev => [entry, ...prev]);
                 setLastAction("Transcribed Voice Journal");
               }} />
             </div>
-          )}
+          )} */}
 
           {/*  APPOINTMENT COPILOT ── */}
           {activeSection === 'appointment' && (
@@ -829,7 +849,7 @@ export default function App() {
             </div>
           )}
 
-          {/*  SYMPTOM TRACKER ── */}
+          {/*  HEALTH TRACKER ── */}
           {activeSection === 'symptoms' && (
             <div className="space-y-8 animate-fade-in">
               <SymptomTracker onLogSymptoms={(log) => {
@@ -840,37 +860,70 @@ export default function App() {
             </div>
           )}
 
-          {/*  TIMELINE ── */}
+          {/*  MEDICATIONS ── */}
+          {activeSection === 'medications' && (
+            <MedicationReminderConstellation
+              theme={theme}
+              onStarEarned={(label) => addStar(label, 'medications')}
+            />
+          )}
+
+          {/*  HEALTH JOURNEY TIMELINE ── */}
           {activeSection === 'timeline' && (
             <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl font-sans animate-fade-in">
               <div className="pb-4 border-b border-slate-100 dark:border-slate-800 mb-6">
-                <h3 className="text-md font-extrabold text-[#1e133a] dark:text-slate-100">Care Chronology Pipeline</h3>
-                <p className="text-xs text-[#7e6c9e] dark:text-slate-400 mt-1">Track milestones. Every mapped node aligns you to release.</p>
+                <h3 className="text-md font-extrabold text-[#1e133a] dark:text-slate-100">Health Journey Timeline</h3>
+                <p className="text-xs text-[#7e6c9e] dark:text-slate-400 mt-1">View appointments, treatments, check-ins, and important milestones in one place.</p>
               </div>
 
               <div className="relative pl-6 border-l-2 border-purple-500/15 space-y-8 text-left py-2">
                 {timelineItems.map((mil, idx) => (
                   <div key={mil.id} className="relative">
                     {/* Glowing orb anchor */}
-                    <span className={`absolute -left-[30px] top-0 w-4 h-4 rounded-full border-2 ${
+                    {/* <span className={`absolute -left-[30px] top-0 w-4 h-4 rounded-full border-2 ${
                       mil.done 
                         ? 'bg-gradient-to-tr from-pink-400 to-purple-500 border-white ring-4 ring-pink-400/20 shadow-md' 
                         : 'bg-[#decfe6] border-purple-200 text-[#4d3c69] dark:bg-slate-700 dark:border-slate-600 dark:text-slate-400'
-                    }`} />
+                    }`} /> */}
+                    {mil.type === 'milestone' ? (
+                      <span className="absolute -left-[33px] top-0 text-yellow-500 text-lg">
+                        ⭐
+                      </span>
+                    ) : (
+                      <span
+                        className={`absolute -left-[30px] top-0 w-4 h-4 rounded-full border-2 ${
+                          mil.done
+                            ? 'bg-gradient-to-tr from-pink-400 to-purple-500 border-white ring-4 ring-pink-400/20 shadow-md'
+                            : 'bg-[#decfe6] border-purple-200 text-[#4d3c69] dark:bg-slate-700 dark:border-slate-600 dark:text-slate-400'
+                        }`}
+                      />
+                    )}
                     
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-[10px] font-mono tracking-wider font-extrabold text-[#7e6c9e] dark:text-slate-400">{mil.date}</span>
                         <span className={`text-[8px] px-2 py-0.5 rounded-full font-extrabold uppercase ${
-                          mil.type === 'medical' ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/20 dark:text-blue-400' :
-                          mil.type === 'emotional' ? 'bg-pink-50 text-pink-600 dark:bg-pink-950/20 dark:text-pink-400' :
-                          'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-400'
+                          mil.type === 'medical'
+                            ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/20 dark:text-blue-400'
+                            : mil.type === 'emotional'
+                            ? 'bg-pink-50 text-pink-600 dark:bg-pink-950/20 dark:text-pink-400'
+                            : mil.type === 'selfcare'
+                            ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-400'
+                            : 'bg-amber-50 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400'
                         }`}>
                           {mil.type}
                         </span>
                       </div>
 
-                      <h4 className="text-xs font-bold text-[#2e214c] dark:text-slate-200 mt-1 leading-snug">{mil.label}</h4>
+                      <h4
+                        className={`text-xs font-bold mt-1 leading-snug ${
+                          mil.type === 'milestone'
+                            ? 'text-amber-600 dark:text-amber-400'
+                            : 'text-[#2e214c] dark:text-slate-200'
+                        }`}
+                      >
+                        {mil.label}
+                      </h4>
                       {mil.notes && <p className="text-[11px] leading-relaxed mt-1 text-[#4d3c69] dark:text-slate-400">{mil.notes}</p>}
                     </div>
                   </div>
@@ -1076,7 +1129,7 @@ export default function App() {
                   <span>Breathing exercises</span>
                 </button>
 
-                <button
+                {/* <button
                   onClick={() => {
                     setActiveSection('voice');
                     setQuickSupportOpen(false);
@@ -1085,7 +1138,7 @@ export default function App() {
                 >
                   <Compass className="w-4 h-4 text-purple-700 dark:text-purple-500" />
                   <span>Voice Journal</span>
-                </button>
+                </button> */}
 
                 <div className="border-t border-slate-200 dark:border-[#c9a0dc]/15 pt-1.5 mt-1">
                   <div className="px-2 py-1">

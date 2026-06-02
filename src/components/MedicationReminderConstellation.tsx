@@ -141,19 +141,19 @@ export default function MedicationReminderConstellation({
           <span className="text-[10px] font-black uppercase tracking-widest text-[#a855f7] block font-mono">CARE JOURNEY MODULE</span>
           <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2 mt-0.5">
             <Pill className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-            Medication Reminder Constellation
+            Medication Reminder
           </h3>
           <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-            Record therapeutic schedules. Each completed week aligns a glittering star pattern in your mutual sky.
+            Record medication schedules, track adherence, and build a consistent care routine.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        {/* <div className="flex items-center gap-3">
           <div className="bg-purple-50 dark:bg-purple-950/40 p-3 rounded-2xl border border-purple-500/10 text-center">
             <span className="text-[9px] uppercase tracking-wider text-purple-600 dark:text-purple-400 block font-bold font-mono">CONSTELLATIONS LIT</span>
             <span className="text-lg font-black text-slate-850 dark:text-purple-300 block mt-0.5">{completedWeeks} 🌌</span>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -209,12 +209,12 @@ export default function MedicationReminderConstellation({
             </form>
           </div>
 
-          <div className="bg-purple-50/40 dark:bg-purple-950/10 border border-purple-100 dark:border-purple-900/30 p-4 rounded-2.5xl text-left">
+          {/* <div className="bg-purple-50/40 dark:bg-purple-950/10 border border-purple-100 dark:border-purple-900/30 p-4 rounded-2.5xl text-left">
             <span className="text-[9px] font-mono tracking-wider text-purple-600 dark:text-purple-450 block uppercase font-bold">Stellar Compliance Benefit</span>
             <p className="text-[11px] leading-relaxed text-slate-600 dark:text-slate-400 mt-1.5">
               Taking your medication daily stabilizes physiological recovery metrics. When all cells are protected, matching lines of light connect your care team, forming a protective barrier of wellness.
             </p>
-          </div>
+          </div> */}
         </div>
 
         {/* Right 2 Columns: Adherence Grid View */}
@@ -223,13 +223,13 @@ export default function MedicationReminderConstellation({
             <h4 className="text-xs font-black uppercase tracking-wider text-[#a855f7] flex items-center gap-1.5">
               <Calendar className="w-4 h-4" /> Weekly Tracking Calendar
             </h4>
-            <button
+            {/* <button
               onClick={checkWeekCompletion}
               disabled={meds.length === 0}
               className="text-[10px] font-extrabold uppercase tracking-widest px-3 py-1.5 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-700 dark:bg-purple-950/50 dark:text-purple-300 border border-purple-500/20 disabled:opacity-40 select-none cursor-pointer"
             >
               🌌 Light Up Constellation Week
-            </button>
+            </button> */}
           </div>
 
           <div className="space-y-4">

@@ -386,6 +386,41 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
     }
   };
 
+//   const NAVGROUPS = [
+//   {
+//     title: '',
+//     items: [
+//       { id: 'home', label: '⭐ Home', icon: Compass },
+//     ],
+//   },
+//   {
+//     title: 'PATIENT CARE',
+//     items: [
+//       { id: 'shared', label: '💫 Shared Constellation', icon: Sparkles },
+//       { id: 'appointments', label: '📅 Treatment Timeline', icon: Calendar },
+//     ],
+//   },
+//   {
+//     title: 'CAREGIVER WELLBEING',
+//     items: [
+//       { id: 'emotion', label: '🌤 Emotional Wellbeing', icon: Activity },
+//     ],
+//   },
+//   {
+//     title: 'COMMUNICATION',
+//     items: [
+//       { id: 'communication', label: '💬 Communication Assistant', icon: MessageSquare },
+//       { id: 'circle', label: '🌌 Care Orbit Circle', icon: Users },
+//     ],
+//   },
+//   {
+//     title: 'PERSONAL',
+//     items: [
+//       { id: 'journal', label: '🎙 Private Journal', icon: Mic },
+//     ],
+//   },
+// ];
+
   // Light mode text helpers — matches patient dashboard dark-text-on-light style
   const txt = theme === 'dark' ? 'text-[#f5f0eb]' : 'text-[#1e133a]';
   const txtMuted = theme === 'dark' ? 'text-[#9b8ab8]' : 'text-[#4d3c69]';
@@ -443,10 +478,9 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
               {[
                 { id: 'home', label: 'Dashboard Home', icon: <Compass className="w-3.5 h-3.5" /> },
                 { id: 'shared', label: 'Shared Constellation', icon: <Sparkles className="w-3.5 h-3.5 text-pink-400 animate-pulse" /> },
-                { id: 'emotion', label: 'Astra Check-In', icon: <Activity className="w-3.5 h-3.5" /> },
+                { id: 'emotion', label: 'Caregiver Wellbeing', icon: <Activity className="w-3.5 h-3.5" /> },
                 { id: 'appointments', label: 'Treatment Timeline', icon: <Calendar className="w-3.5 h-3.5" /> },
                 { id: 'communication', label: 'Comm. Assistant', icon: <MessageSquare className="w-3.5 h-3.5" /> },
-                { id: 'burnout', label: 'Emotional Weather', icon: <Zap className="w-3.5 h-3.5" /> },
                 { id: 'circle', label: 'Care Orbit Circle', icon: <Users className="w-3.5 h-3.5" /> },
                 { id: 'journal', label: 'Private Journal', icon: <Mic className="w-3.5 h-3.5" /> },
               ].map((item) => (
@@ -523,7 +557,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
               <Compass className="w-5 h-5 text-[#d4798e]" />
             </button>
             <div>
-              <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#d4798e] block">COMMAND OVERVIEW</span>
+              {/* <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#d4798e] block">COMMAND OVERVIEW</span> */}
               <h1 className={`text-base font-extrabold flex items-center gap-1.5 capitalize ${theme === 'dark' ? 'text-[#FAF8FD]' : 'text-[#2e214c]'}`}>
                 {activeSection === 'home' ? 'Operations Dashboard' : `${activeSection} Interface`}
               </h1>
@@ -604,7 +638,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                     <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-[#d4798e]/10 border border-[#d4798e]/20 text-[#ea96a6] mb-3`}>
                       <ShieldCheck className="w-2.5 h-2.5" /> Care coordination stable
                     </span>
-                    <h2 className={`text-xl md:text-2xl font-black tracking-tight ${txt}`}>Sarah's support is part of her healing journey.</h2>
+                    <h2 className={`text-xl md:text-2xl font-black tracking-tight ${txt}`}>Your patient's support is part of their healing journey.</h2>
                     <p className={`text-xs mt-1 max-w-lg leading-relaxed ${txtMuted}`}>
                       Two stars orbiting the same night sky, closer together. You have saved <b className={theme === 'dark' ? 'text-[#f4d4a8]' : 'text-purple-700'}>4 treatment parameters</b> this week. Sarah's current fatigue index is moderate.
                     </p>
@@ -619,7 +653,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 
                 {/* Emotional Orbit Card */}
-                <div className={`border rounded-3xl p-6 shadow-md text-left flex flex-col justify-between ${cardBg} ${cardBorder}`}>
+                {/* <div className={`border rounded-3xl p-6 shadow-md text-left flex flex-col justify-between ${cardBg} ${cardBorder}`}>
                   <div>
                     <h4 className="text-xs font-black uppercase tracking-widest text-[#d4798e] flex items-center gap-1.5">
                       <Activity className="w-4 h-4" /> Emotional Orbit
@@ -652,7 +686,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Astra Care Insights */}
                 <div className={`border rounded-3xl p-6 shadow-md flex flex-col justify-between ${cardBg} ${cardBorder}`}>
@@ -661,7 +695,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                       <h4 className="text-xs font-black uppercase tracking-widest text-[#d4798e] flex items-center gap-1.5 leading-none">
                         <Sparkles className="w-4 h-4 fill-[#d4798e]" /> Astra Care Insights
                       </h4>
-                      <span className="text-[8px] font-mono border border-[#d4798e]/30 px-1.5 py-0.5 rounded text-[#d4798e]">AI DETECTED</span>
+                      <span className="text-[8px] font-mono border border-[#d4798e]/30 px-1.5 py-0.5 rounded text-[#d4798e]">AI</span>
                     </div>
 
                     <div className={`space-y-4 text-xs leading-relaxed ${txtSubtle}`}>
@@ -751,13 +785,45 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                     </button>
                   </form>
                 </div>
+
+                {/* Pattern Recognition */}
+                <div className={`border rounded-3xl p-6 shadow-md text-left flex flex-col justify-between ${cardBg} ${cardBorder}`}>
+                  <div>
+                    <h4 className="text-xs font-black uppercase tracking-widest text-[#d4798e] flex items-center gap-1.5">
+                      <ShieldCheck className="w-4 h-4 text-emerald-500" /> Astra Pattern Recognition
+                      {/* <span className="text-[8px] font-mono border border-[#d4798e]/30 px-1.5 py-0.5 rounded text-[#d4798e]">AI</span> */}
+                    </h4>
+                    <span className={`text-[10px] mt-0.5 block font-semibold ${txtMuted}`}>Advanced correlation logs</span>
+
+                    <div className="space-y-3 mt-4">
+                      <div className={`flex items-start gap-2.5 p-3 rounded-xl border text-xs ${surfaceBg} ${surfaceBorder}`}>
+                        <Activity className="w-4 h-4 text-[#d4798e] flex-shrink-0 mt-0.5" />
+                        <div>
+                          <p className="font-bold text-[#ea96a6]">Exhaustion Patterns Detected</p>
+                          <p className={`text-[11px] mt-0.5 leading-relaxed ${txtMuted}`}>
+                            Astra has identified higher stress levels logged around late evenings. We recommend complete mental off-grid times after 9:30 PM.
+                          </p>
+                        </div>
+                      </div>
+                      <div className={`flex items-start gap-2.5 p-3 rounded-xl border text-xs ${surfaceBg} ${surfaceBorder}`}>
+                        <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <p className="font-bold text-emerald-600 dark:text-emerald-500">Co-Regulation Alignment positive</p>
+                          <p className={`text-[11px] mt-0.5 leading-relaxed ${txtMuted}`}>
+                            Sarah logged calmer anxiety levels (+25% relief) on mornings immediately following pre-appointment question prep sessions.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* ENERGY BATTERY + PATTERN RECOGNITION */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
                 
                 {/* Energy Battery */}
-                <div className={`border rounded-3xl p-6 shadow-md text-left ${cardBg} ${cardBorder}`}>
+                {/* <div className={`border rounded-3xl p-6 shadow-md text-left ${cardBg} ${cardBorder}`}>
                   <h4 className="text-xs font-black uppercase tracking-widest text-[#d4798e] flex items-center gap-1.5">
                     <Battery className="w-4 h-4 text-emerald-500" /> Support Battery Cell
                   </h4>
@@ -798,10 +864,10 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Pattern Recognition */}
-                <div className={`border rounded-3xl p-6 shadow-md text-left flex flex-col justify-between ${cardBg} ${cardBorder}`}>
+                {/* <div className={`border rounded-3xl p-6 shadow-md text-left flex flex-col justify-between ${cardBg} ${cardBorder}`}>
                   <div>
                     <h4 className="text-xs font-black uppercase tracking-widest text-[#d4798e] flex items-center gap-1.5">
                       <ShieldCheck className="w-4 h-4 text-emerald-500" /> Astra Pattern Recognition
@@ -829,12 +895,12 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           )}
 
-          {/* SECTION 2: ASTRA CHECK-IN */}
+          {/* SECTION 2: CAREGIVER WELLBEING */}
           {activeSection === 'emotion' && (
             <div className="space-y-8 animate-fade-in text-left">
               <div className={`border rounded-3xl p-6 shadow-xl relative overflow-hidden ${cardBg} ${cardBorder}`}>
@@ -882,8 +948,73 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                   </div>
                 )}
               </div>
+              
+              {/* BURNOUT WEATHER - EMOTIONAL WEATHER TIMELINE */}
+              {activeSection === 'emotion' && (
+                <div className="space-y-8 animate-fade-in text-left">
+                  <div className={`border rounded-3xl p-6 shadow-xl leading-relaxed text-left ${cardBg} ${cardBorder}`}>
+                    <h3 className={`text-md font-extrabold flex items-center gap-1.5 ${txt}`}>
+                      <Zap className="w-5 h-5 text-[#d4798e] animate-pulse" /> Emotional Weather Timeline
+                    </h3>
+                    <p className={`text-xs mt-1 ${txtMuted}`}>Spotting fatigue accumulation to map safe bounds</p>
+
+                    <div className={`mt-5 p-4 rounded-2xl border grid grid-cols-1 md:grid-cols-2 gap-4 ${theme === 'dark' ? 'bg-[#07040f] border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'bg-purple-50/55 border-purple-200/60'}`}>
+                      <div>
+                        <span className="text-[9px] font-black uppercase tracking-widest text-[#d4798e] block">Log Decompression Node</span>
+                        <p className={`text-[11px] leading-relaxed mt-1 ${txtMuted}`}>Log fatigue instances to unlock rest offsets dynamically.</p>
+                        <div className="flex gap-2 flex-wrap mt-3">
+                          <button onClick={() => addBurnoutEvent('fatigue', 'Felt deep mental tiredness after arranging schedules.', 40)} className={`px-3 py-1.5 rounded-xl border text-[10px] font-bold cursor-pointer ${theme === 'dark' ? 'border-[#c9a0dc]/20 bg-[#d4798e]/10 text-[#d4798e]' : 'border-purple-300 bg-[#d4798e]/10 text-purple-700'}`}>
+                            ☁️ Log Fatigue Spike
+                          </button>
+                          <button onClick={() => addBurnoutEvent('overwhelm', 'Worry index high before radiotherapy planning.', 25)} className={`px-3 py-1.5 rounded-xl border text-[10px] font-bold cursor-pointer ${theme === 'dark' ? 'border-pink-500/20 bg-pink-500/10 text-[#ea96a6]' : 'border-pink-300 bg-pink-50 text-pink-700'}`}>
+                            🌧️ Log Overwhelm
+                          </button>
+                        </div>
+                      </div>
+                      <div className={`relative rounded-xl overflow-hidden h-24 flex flex-col justify-center items-center p-3 text-center border border-dashed ${theme === 'dark' ? 'bg-gradient-to-tr from-[#251a3d] to-[#07040f] border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'bg-gradient-to-tr from-purple-100/40 to-slate-50 border-purple-300/60'}`}>
+                        <span className="text-xl animate-spin" style={{ animationDuration: '24s' }}>🌀</span>
+                        <span className={`text-[10px] font-bold mt-1 uppercase tracking-wider ${theme === 'dark' ? 'text-[#ea96a6]' : 'text-purple-700'}`}>Atmosphere: Starry &amp; Hazy</span>
+                        <span className={`text-[8px] mt-0.5 font-mono ${txtMuted}`}>Micro-recoveries settling slowly</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4 mt-8">
+                      <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#d4798e] block pl-1">Historical Weather Chart</span>
+                      <div className="space-y-4">
+                        {burnoutEvents.map((evt) => (
+                          <div key={evt.id} className={`p-4 rounded-2xl border flex flex-col sm:flex-row justify-between sm:items-center gap-4 text-left hover:border-purple-300 transition shadow-sm ${surfaceBg} ${surfaceBorder}`}>
+                            <div className="space-y-1">
+                              <div className="flex items-center gap-2">
+                                <span className={`text-[10px] font-mono uppercase tracking-wider font-bold ${txtMuted}`}>{evt.time}</span>
+                                <span className={`text-[8px] px-2 py-0.5 rounded-full font-extrabold uppercase ${
+                                  evt.moodType === 'fatigue' ? 'bg-[#c9a0dc]/20 text-purple-700 dark:text-[#c9a0dc]' :
+                                  evt.moodType === 'overwhelm' ? 'bg-rose-500/10 text-pink-600 dark:text-[#ea96a6]' :
+                                  evt.moodType === 'stable' ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400' :
+                                  'bg-amber-400/10 text-amber-700 dark:text-amber-300'
+                                }`}>
+                                  {evt.moodType}
+                                </span>
+                              </div>
+                              <p className={`text-xs font-semibold leading-tight pr-3 ${theme === 'dark' ? 'text-[#f4d4a8]' : 'text-[#2e214c]'}`}>"{evt.notes}"</p>
+                            </div>
+                            <div className="flex items-center gap-2 flex-shrink-0">
+                              <span className={`text-[9px] font-mono uppercase font-bold ${txtMuted}`}>Energy:</span>
+                              <span className={`text-xs font-black ${txt}`}>{evt.energy}%</span>
+                              <div className={`w-12 h-1.5 rounded-full overflow-hidden ${theme === 'dark' ? 'bg-[#07040f]' : 'bg-purple-100'}`}>
+                                <div className="bg-[#d4798e] h-full rounded-full" style={{ width: `${evt.energy}%` }} />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
+
+          
 
           {/* SECTION 3: TREATMENT TIMELINE */}
           {activeSection === 'appointments' && (
@@ -970,8 +1101,8 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                       <MessageSquare className="w-4 h-4 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xs font-black tracking-widest text-[#d4798e] uppercase">WHAT SHOULD I SAY?</h3>
-                      <p className="text-[9px] text-[#9b8ab8] font-mono">EMPATHETIC PHRASING SYNTHESISE // ACTIVE</p>
+                      <h3 className="text-xs font-black tracking-widest text-[#d4798e] uppercase">ASTRA COMPANION - "WHAT SHOULD I SAY?"</h3>
+                      <p className="text-[9px] text-[#9b8ab8] font-mono">ACTIVE</p>
                     </div>
                   </div>
                   <span className="text-[9px] border border-emerald-500/30 text-emerald-400 px-2.5 py-0.5 rounded font-mono animate-pulse">● ASTRA SECURE FEED</span>
@@ -1028,7 +1159,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
             </div>
           )}
 
-          {/* SECTION 5: BURNOUT WEATHER */}
+          {/* SECTION 5: BURNOUT WEATHER
           {activeSection === 'burnout' && (
             <div className="space-y-8 animate-fade-in text-left">
               <div className={`border rounded-3xl p-6 shadow-xl leading-relaxed text-left ${cardBg} ${cardBorder}`}>
@@ -1089,7 +1220,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
           {/* SECTION 6: CARE ORBIT */}
           {activeSection === 'circle' && (
@@ -1097,7 +1228,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
               <div className={`border rounded-3xl p-6 shadow-xl leading-relaxed text-left ${cardBg} ${cardBorder}`}>
                 <div className="border-b pb-4 mb-6 border-purple-100/10">
                   <h3 className={`text-md font-extrabold flex items-center gap-1.5 ${txt}`}>
-                    <Users className="w-5 h-5 text-[#d4798e]" /> Concentric Care Support Circle
+                    <Users className="w-5 h-5 text-[#d4798e]" /> Care Orbit Circle
                   </h3>
                   <p className={`text-xs mt-1 ${txtMuted}`}>Mapping communication resonance, support strain, and orbital connectivity</p>
                 </div>
@@ -1254,9 +1385,9 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                 <button onClick={() => { setActiveSection('communication'); setQuickSupportOpen(false); handleSendCommQuery("How do I talk without sounding afraid?"); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left transition">
                   <MessageSquare className="w-3.5 h-3.5 text-[#d4798e]" /><span>Phrasing Guidance</span>
                 </button>
-                <button onClick={() => { setActiveSection('journal'); setQuickSupportOpen(false); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left transition">
+                {/* <button onClick={() => { setActiveSection('journal'); setQuickSupportOpen(false); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left transition">
                   <Mic className="w-3.5 h-3.5 text-purple-400" /><span>Vocal Grounding</span>
-                </button>
+                </button> */}
                 <button onClick={() => { setActiveSection('emotion'); setQuickSupportOpen(false); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-700 dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left transition">
                   <Activity className="w-3.5 h-3.5 text-emerald-400" /><span>Quick Rest Check</span>
                 </button>

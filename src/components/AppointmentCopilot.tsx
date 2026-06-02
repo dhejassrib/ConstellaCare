@@ -275,7 +275,7 @@ export default function AppointmentCopilot({ onQuestionsBuilt }: AppointmentCopi
         </div>
 
         {/* Accordion Block B: Medication Companion Reminders */}
-        <div className="border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+        {/* <div className="border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
           <button
             onClick={() => setActiveAccordion(activeAccordion === 'reminders' ? null : 'reminders')}
             className="w-full flex items-center justify-between p-4 bg-slate-50/50 dark:bg-slate-950/20 font-semibold text-xs text-slate-705 dark:text-slate-200 cursor-pointer"
@@ -315,7 +315,7 @@ export default function AppointmentCopilot({ onQuestionsBuilt }: AppointmentCopi
               ))}
             </div>
           )}
-        </div>
+        </div> */}
 
         {/* Accordion Block C: Generated Doctor Question Guide */}
         {questions.length > 0 && (
