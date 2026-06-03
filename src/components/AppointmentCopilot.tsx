@@ -195,7 +195,7 @@ export default function AppointmentCopilot({ onQuestionsBuilt }: AppointmentCopi
                   className={`flex flex-col items-center justify-center p-3 rounded-2xl border text-center transition cursor-pointer select-none ${
                     matches
                       ? 'bg-purple-500/10 border-purple-500 text-purple-700 dark:text-purple-300 font-extrabold ring-2 ring-purple-500/10'
-                      : 'bg-transparent border-slate-200 dark:border-slate-800 text-slate-550 dark:text-slate-450 hover:bg-slate-50 dark:hover:bg-slate-850'
+                      : 'bg-transparent border-slate-200 dark:border-slate-800 text-[#4f426d] dark:text-slate-450 hover:bg-slate-50 dark:hover:bg-slate-850'
                   }`}
                 >
                   <span className="text-xl mb-1">{type.icon}</span>
@@ -247,7 +247,7 @@ export default function AppointmentCopilot({ onQuestionsBuilt }: AppointmentCopi
         <div className="border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
           <button
             onClick={() => setActiveAccordion(activeAccordion === 'prep' ? null : 'prep')}
-            className="w-full flex items-center justify-between p-4 bg-slate-50/50 dark:bg-slate-950/20 font-semibold text-xs text-slate-705 dark:text-slate-200 cursor-pointer"
+            className="w-full flex items-center justify-between p-4 bg-slate-50/50 dark:bg-slate-950/20 font-semibold text-xs text-[#2e214c] dark:text-slate-200 cursor-pointer"
           >
             <div className="flex items-center gap-2">
               <CheckSquare className="w-4.5 h-4.5 text-purple-500" />
@@ -265,7 +265,7 @@ export default function AppointmentCopilot({ onQuestionsBuilt }: AppointmentCopi
                     onChange={() => toggleChecklist(item.id)}
                     className="mt-1 accent-purple-600"
                   />
-                  <span className={`text-xs leading-relaxed ${item.checked ? 'line-through text-slate-450 dark:text-slate-550' : 'text-slate-700 dark:text-slate-300'}`}>
+                  <span className={`text-xs leading-relaxed ${item.checked ? 'line-through text-[#7e6c9e] dark:text-slate-550' : 'text-[#2e214c] dark:text-slate-300'}`}>
                     {item.item}
                   </span>
                 </div>
@@ -278,7 +278,7 @@ export default function AppointmentCopilot({ onQuestionsBuilt }: AppointmentCopi
         {/* <div className="border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
           <button
             onClick={() => setActiveAccordion(activeAccordion === 'reminders' ? null : 'reminders')}
-            className="w-full flex items-center justify-between p-4 bg-slate-50/50 dark:bg-slate-950/20 font-semibold text-xs text-slate-705 dark:text-slate-200 cursor-pointer"
+            className="w-full flex items-center justify-between p-4 bg-slate-50/50 dark:bg-slate-950/20 font-semibold text-xs text-[#2e214c] dark:text-slate-200 cursor-pointer"
           >
             <div className="flex items-center gap-2">
               <Clock className="w-4.5 h-4.5 text-purple-500 animate-pulse" />

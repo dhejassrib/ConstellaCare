@@ -35,6 +35,19 @@
 
   --pink-400: #D4798E;
   --pink-500: #D4798E;
+
+  /* Extended readable text shades (used by components) */
+  --slate-450: #5a487c;
+  --slate-550: #4f426d;
+  --slate-650: #4f426d;
+  --slate-705: #3d3650;
+  --slate-750: #2e214c;
+  --slate-755: #2e214c;
+  --slate-855: #1e133a;
+  --slate-150: #2e214c;
+  --slate-105: #2e214c;
+  --purple-150: #d7d0e5;
+  --purple-650: #5D4C78;
 }
 
 .dark {
@@ -92,6 +105,18 @@
 
   --color-pink-400: var(--pink-400);
   --color-pink-500: var(--pink-500);
+
+  --color-slate-450: var(--slate-450);
+  --color-slate-550: var(--slate-550);
+  --color-slate-650: var(--slate-650);
+  --color-slate-705: var(--slate-705);
+  --color-slate-750: var(--slate-750);
+  --color-slate-755: var(--slate-755);
+  --color-slate-855: var(--slate-855);
+  --color-slate-150: var(--slate-150);
+  --color-slate-105: var(--slate-105);
+  --color-purple-150: var(--purple-150);
+  --color-purple-650: var(--purple-650);
   
   --animate-custom-scan: custom-scan 2s ease-in-out infinite;
   --animate-fade-in: fade-in 0.4s ease-out forwards;
@@ -110,7 +135,70 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--slate-950);
-  color: var(--slate-500); /* Changed to 500 for better light mode visibility */
+  color: var(--slate-500);
+}
+
+/* Light mode: custom slate scale is inverted (800/900 = light bg colors).
+   Remap text-* utilities to readable dark colors on light backgrounds. */
+html:not(.dark) .text-slate-50,
+html:not(.dark) .text-slate-100,
+html:not(.dark) .text-slate-800,
+html:not(.dark) .text-slate-805,
+html:not(.dark) .text-slate-815,
+html:not(.dark) .text-slate-850,
+html:not(.dark) .text-slate-855,
+html:not(.dark) .text-slate-900,
+html:not(.dark) .text-purple-950,
+html:not(.dark) .text-purple-100,
+html:not(.dark) .text-purple-50 {
+  color: #1e133a;
+}
+
+html:not(.dark) .text-slate-205,
+html:not(.dark) .text-slate-350,
+html:not(.dark) .text-slate-450,
+html:not(.dark) .text-slate-550,
+html:not(.dark) .text-slate-650 {
+  color: #4f426d;
+}
+
+html:not(.dark) .text-slate-705,
+html:not(.dark) .text-slate-750,
+html:not(.dark) .text-slate-755,
+html:not(.dark) .text-slate-150,
+html:not(.dark) .text-slate-105 {
+  color: #2e214c;
+}
+
+html:not(.dark) .text-slate-400 {
+  color: #5a487c;
+}
+
+html:not(.dark) .text-slate-500 {
+  color: #1e133a;
+}
+
+html:not(.dark) .text-slate-600 {
+  color: #4f426d;
+}
+
+html:not(.dark) .text-slate-700 {
+  color: #2e214c;
+}
+
+/* Preserve light text on intentionally dark surfaces in light mode */
+html:not(.dark) .on-dark-surface .text-slate-100,
+html:not(.dark) .on-dark-surface .text-slate-50 {
+  color: #efebf3;
+}
+
+html:not(.dark) .on-dark-surface .text-slate-400,
+html:not(.dark) .on-dark-surface .text-slate-500 {
+  color: #c2b6ca;
+}
+
+html:not(.dark) .on-dark-surface .text-purple-300 {
+  color: #d8b4fe;
 }
 
 ::-webkit-scrollbar {

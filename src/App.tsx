@@ -386,12 +386,16 @@ export default function App() {
 
         {/* ── CHANGED: added flex-shrink-0 so stars counter stays pinned at bottom ── */}
         <div className={`p-6 border-t flex-shrink-0 ${theme === 'dark' ? 'border-[#6366f1]/10' : 'border-[#7e6c9e]/20'}`}>
-          <div className="bg-gradient-to-tr from-slate-950 to-slate-850 text-slate-100 rounded-2xl p-4 border border-purple-500/15 text-center relative overflow-hidden shadow-md">
+          <div className={`rounded-2xl p-4 border text-center relative overflow-hidden shadow-md ${
+            theme === 'dark'
+              ? 'bg-gradient-to-tr from-slate-950 to-slate-850 text-slate-100 border-purple-500/15'
+              : 'bg-gradient-to-tr from-[#ede6f8] to-[#decfe6] text-[#1e133a] border-[#c9a0dc]/25'
+          }`}>
             <div className="absolute top-0 right-0 w-16 h-16 bg-purple-500/10 blur-xl rounded-full" />
             <Award className="w-7 h-7 text-amber-500 dark:text-amber-400 mx-auto animate-pulse" />
-            <span className="text-[10px] text-purple-400 block font-mono font-bold tracking-widest mt-1">STAR ENERGY INDEX</span>
-            <span className="text-2xl font-black mt-1 block text-[#5b4a7a] dark:text-[#d4af37]">{totalStars} ✨</span>
-            <p className="text-[10px] text-slate-350 mt-1.5 leading-relaxed">
+            <span className={`text-[10px] block font-mono font-bold tracking-widest mt-1 ${theme === 'dark' ? 'text-purple-400' : 'text-[#7e6c9e]'}`}>STAR ENERGY INDEX</span>
+            <span className={`text-2xl font-black mt-1 block ${theme === 'dark' ? 'text-[#d4af37]' : 'text-[#5b4a7a]'}`}>{totalStars} ✨</span>
+            <p className={`text-[10px] mt-1.5 leading-relaxed ${theme === 'dark' ? 'text-slate-350' : 'text-[#4f426d]'}`}>
               Every mindful check-in lights a new star. Watch your sky align.
             </p>
           </div>
@@ -500,7 +504,7 @@ export default function App() {
                         : 'Good Evening ✨'}
                     </h2>
 
-                    <p className="text-xs text-slate-350 mt-1 leading-relaxed">
+                    <p className={`text-xs mt-1 leading-relaxed ${theme === 'dark' ? 'text-slate-350' : 'text-[#4f426d]'}`}>
                       You've shown up for yourself this week. Consider taking a few quiet moments tonight to unwind and reset.
                     </p>
                     {/* Status grid summary */}
@@ -644,7 +648,7 @@ export default function App() {
           {activeSection === 'astra' && (
             <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl overflow-hidden shadow-xl flex flex-col h-[520px] relative font-sans animate-fade-in">
               {/* Astra Header */}
-              <div className="bg-gradient-to-tr from-slate-950 to-indigo-950 p-4.5 text-white flex items-center justify-between border-b border-slate-800 relative">
+              <div className="on-dark-surface bg-gradient-to-tr from-[#1a1530] to-[#2d1f54] p-4.5 text-white flex items-center justify-between border-b border-[#2d2342] relative">
                 <div className="absolute inset-0 bg-radial from-violet-600/20 to-transparent blur-md" />
                 <div className="flex items-center gap-3 relative z-10">
                   <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-pink-400 via-purple-500 to-indigo-500 flex items-center justify-center text-white scale-102 ring-2 ring-purple-400 animate-pulse">
@@ -669,17 +673,17 @@ export default function App() {
                       className={`max-w-[76%] rounded-2xl p-4 text-xs leading-relaxed shadow-sm relative ${
                         msg.sender === 'user'
                           ? 'bg-[#1e133a] text-white dark:bg-slate-100 dark:text-slate-900 rounded-tr-none'
-                          : 'bg-white dark:bg-slate-900 text-[#3d3650] dark:text-slate-300 rounded-tl-none border border-purple-100 dark:border-slate-850'
+                          : 'bg-white dark:bg-slate-900 text-[#1e133a] dark:text-slate-300 rounded-tl-none border border-purple-200 dark:border-slate-850'
                       }`}
                     >
                       <p className="whitespace-pre-line leading-relaxed">{msg.text}</p>
-                      <span className="block text-[8px] text-slate-400 text-right mt-1.5 font-mono">{msg.timestamp}</span>
+                      <span className={`block text-[8px] text-right mt-1.5 font-mono ${msg.sender === 'user' ? 'text-white/60' : theme === 'dark' ? 'text-slate-400' : 'text-[#7e6c9e]'}`}>{msg.timestamp}</span>
                     </div>
                   </div>
                 ))}
                 {chatLoading && (
                   <div className="flex justify-start">
-                    <div className="bg-white dark:bg-slate-900 rounded-2xl rounded-tl-none p-4 text-slate-400 flex items-center gap-2 border border-slate-100 dark:border-slate-850 font-semibold text-xs">
+                    <div className={`rounded-2xl rounded-tl-none p-4 flex items-center gap-2 border font-semibold text-xs ${theme === 'dark' ? 'bg-slate-900 text-slate-400 border-slate-850' : 'bg-white text-[#7e6c9e] border-purple-100'}`}>
                       <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-bounce" />
                       <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
                       <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
@@ -811,7 +815,7 @@ export default function App() {
 
                     <div className="bg-purple-50/60 dark:bg-purple-950/20 border border-purple-200/60 dark:border-purple-100/60 p-4.5 rounded-2xl flex items-center justify-between text-left">
                       <div>
-                        <b className="text-xs text-slate-500 dark:text-slate-100 block font-bold">Deep Cosmic Rest Playlist</b>
+                        <b className="text-xs text-[#1e133a] dark:text-slate-100 block font-bold">Deep Cosmic Rest Playlist</b>
                         <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400 block mt-0.5">Opens in Spotify when you need background calm.</span>
                       </div>
                       <a 
@@ -1038,7 +1042,7 @@ export default function App() {
                   <span className="text-3xl animate-pulse">🌙</span>
                   <div>
                     <span className="text-[9px] font-bold font-mono tracking-wider text-purple-600 uppercase">ACTIVE COGNITIVE ALIGNMENT PROMPT</span>
-                    <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 italic mt-0.5">
+                    <p className="text-sm font-semibold text-[#1e133a] dark:text-slate-200 italic mt-0.5">
                       "{REFLECTIONS[reflectionIndex]}"
                     </p>
                   </div>
@@ -1112,7 +1116,7 @@ export default function App() {
                     setActiveSection('astra');
                     setQuickSupportOpen(false);
                   }}
-                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-350 dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
+                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
                 >
                   <Sparkles className="w-4 h-4 text-purple-700 dark:text-purple-600" />
                   <span>Talk with Astra</span>
@@ -1123,7 +1127,7 @@ export default function App() {
                     setActiveSection('calm');
                     setQuickSupportOpen(false);
                   }}
-                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-350 dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
+                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
                 >
                   <Heart className="w-4 h-4 text-cyan-600 dark:text-cyan-500 animate-pulse" />
                   <span>Breathing exercises</span>
@@ -1134,7 +1138,7 @@ export default function App() {
                     setActiveSection('voice');
                     setQuickSupportOpen(false);
                   }}
-                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-slate-350 dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
+                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
                 >
                   <Compass className="w-4 h-4 text-purple-700 dark:text-purple-500" />
                   <span>Voice Journal</span>
@@ -1149,7 +1153,7 @@ export default function App() {
 
                     <a
                       href="tel:995"
-                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-350 dark:text-slate-350 hover:bg-red-500/10 transition"
+                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-red-500/10 transition"
                     >
                       <span>Singapore Emergency</span>
                       <span className="text-red-600 dark:text-red-500 font-bold">995</span>
@@ -1157,7 +1161,7 @@ export default function App() {
 
                     <a
                       href="tel:1767"
-                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-350 dark:text-slate-350 hover:bg-purple-500/10 transition"
+                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-purple-500/10 transition"
                     >
                       <span>SOS Crisis Hotline</span>
                       <span className="text-purple-700 dark:text-purple-600 font-bold">1767</span>
@@ -1165,7 +1169,7 @@ export default function App() {
 
                     <a
                       href="tel:63892222"
-                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-350 dark:text-slate-350 hover:bg-indigo-500/10 transition"
+                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-indigo-500/10 transition"
                     >
                       <span>IMH Mental Health</span>
                       <span className="text-[10px] leading-none text-indigo-700 dark:text-indigo-400 font-bold">6389 2222</span>

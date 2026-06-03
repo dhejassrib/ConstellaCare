@@ -167,7 +167,7 @@ export default function HealthMilestones({ theme, onStarEarned }: HealthMileston
 
       <div className="mt-6 p-4 rounded-2xl bg-purple-50/50 dark:bg-purple-950/25 border border-purple-150/40 flex items-start gap-3 text-left">
         <Info className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5" />
-        <p className="text-[11px] leading-relaxed text-purple-950 dark:text-[#decfe6]">
+        <p className="text-[11px] leading-relaxed text-[#2f2349] dark:text-[#decfe6]">
           These individual checkpoints are shared live between client dashboards and caregiver portals. Each accomplishment illuminates mutual coordinates so you can verify and celebrate recovery milestones simultaneously.
         </p>
       </div>

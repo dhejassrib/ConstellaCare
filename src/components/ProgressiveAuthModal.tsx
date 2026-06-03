@@ -138,7 +138,7 @@ export default function ProgressiveAuthModal({
               className={`relative z-10 w-full max-w-md overflow-hidden rounded-3xl p-7 text-center shadow-2xl ${
                 theme === 'dark' 
                   ? 'bg-[#120d2a] border border-purple-500/35 text-slate-100' 
-                  : 'bg-white border border-purple-100 text-slate-900'
+                  : 'bg-white border border-purple-100 text-[#1e133a]'
               }`}
             >
               {/* Close corner utility for non-invasive guest path */}
@@ -189,7 +189,7 @@ export default function ProgressiveAuthModal({
                         className={`flex-1 py-1.5 rounded-xl text-xs font-extrabold uppercase tracking-widest transition-all cursor-pointer ${
                           authMode === 'signin'
                             ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-md'
-                            : theme === 'dark' ? 'text-purple-300 hover:text-white' : 'text-purple-950/70 hover:text-purple-950'
+                            : theme === 'dark' ? 'text-purple-300 hover:text-white' : 'text-[#4f426d] hover:text-[#1e133a]'
                         }`}
                       >
                         🚀 Sign In
@@ -200,7 +200,7 @@ export default function ProgressiveAuthModal({
                         className={`flex-1 py-1.5 rounded-xl text-xs font-extrabold uppercase tracking-widest transition-all cursor-pointer ${
                           authMode === 'signup'
                             ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-md'
-                            : theme === 'dark' ? 'text-purple-300 hover:text-white' : 'text-purple-950/70 hover:text-purple-950'
+                            : theme === 'dark' ? 'text-purple-300 hover:text-white' : 'text-[#4f426d] hover:text-[#1e133a]'
                         }`}
                       >
                         ✨ Sign Up

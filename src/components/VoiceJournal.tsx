@@ -209,8 +209,8 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2.5xl p-6 shadow-xl transition-all duration-300">
       <div className="text-center max-w-md mx-auto">
-        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">Empathetic Voice Journaling</h3>
-        <p className="text-xs text-slate-400">
+        <h3 className="text-lg font-bold text-[#1e133a] dark:text-slate-100 mb-1">Empathetic Voice Journaling</h3>
+        <p className="text-xs text-[#5a487c] dark:text-slate-400">
           Some days it's easier to talk than type. Share your thoughts aloud, and let Astra transcribe and reflect on your emotional weather.
         </p>
 
@@ -335,12 +335,12 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
               <span className="text-sm font-bold text-slate-800 dark:text-slate-100">Astra Cosmic Empathy Log</span>
             </div>
 
-            <div className="mb-4 bg-slate-950 border border-slate-800 rounded-xl p-3.5 flex items-center gap-3 shadow-inner">
+            <div className="mb-4 on-dark-surface bg-[#1a1530] dark:bg-slate-950 border border-slate-800 rounded-xl p-3.5 flex items-center gap-3 shadow-inner">
               <div className="w-9 h-9 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-amber-400">
                 <CloudLightning className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[9px] uppercase tracking-wider font-mono text-slate-500 block">Identified Weather Horizon</span>
+                <span className="text-[9px] uppercase tracking-wider font-mono text-slate-400 block">Identified Weather Horizon</span>
                 <span className="text-xs font-bold text-slate-100">{analysisResult.weather}</span>
               </div>
             </div>

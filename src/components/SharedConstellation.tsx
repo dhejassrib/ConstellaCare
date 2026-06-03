@@ -296,14 +296,14 @@ export default function SharedConstellation({ theme, role, isLoggedIn = false, o
           </div>
 
           <div className={`relative overflow-hidden rounded-3xl p-5 md:p-6 border text-center shadow-lg ${
-            theme === 'dark' ? 'bg-[#110c24]/95 border-purple-500/20 text-white' : 'bg-white border-purple-100 text-slate-800'
+            theme === 'dark' ? 'bg-[#110c24]/95 border-purple-500/20 text-white' : 'bg-white border-purple-100 text-[#1e133a]'
           }`}>
             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 blur-2xl rounded-full" />
             <div className="relative z-10 max-w-2xl mx-auto space-y-1">
               <h2 className="text-base md:text-lg font-black italic text-purple-650 dark:text-purple-300">
                 “Two stars navigating the same night sky.”
               </h2>
-              <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>
+              <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-slate-400' : 'text-[#4f426d]'}`}>
                 Welcome to active co-presence. Most health tools compile charts as cold rows of spreadsheets. 
                 ConstellaCare connects patient timelines and caregiver tools into a single glowing web of shared micro-comfort.
               </p>
@@ -358,7 +358,7 @@ export default function SharedConstellation({ theme, role, isLoggedIn = false, o
         <div className="lg:col-span-4 space-y-6">
           
           <div className={`border rounded-3xl p-5 shadow-lg ${
-            theme === 'dark' ? 'bg-[#110c24]/90 border-purple-500/25 text-white' : 'bg-white border-purple-150 text-slate-800'
+            theme === 'dark' ? 'bg-[#110c24]/90 border-purple-500/25 text-white' : 'bg-white border-purple-150 text-[#1e133a]'
           }`}>
             <div className="border-b border-slate-100 dark:border-purple-500/10 pb-3 mb-4 text-left">
               <h3 className="text-xs font-black uppercase tracking-widest text-purple-700 dark:text-purple-400">
@@ -554,12 +554,12 @@ export default function SharedConstellation({ theme, role, isLoggedIn = false, o
           
           {/* CAST COMMUNICATION COINCIDENCE STAR */}
           <div className={`border rounded-3xl p-5 shadow-lg ${
-            theme === 'dark' ? 'bg-[#110c24]/90 border-purple-500/25 text-white' : 'bg-white border-purple-150 text-slate-855'
+            theme === 'dark' ? 'bg-[#110c24]/90 border-purple-500/25 text-white' : 'bg-white border-purple-150 text-[#1e133a]'
           }`}>
             <h3 className="text-xs font-black uppercase tracking-widest text-purple-700 dark:text-[#a855f7] flex items-center gap-1.5 text-left border-b border-purple-500/10 pb-2 mb-3">
               <Star className="w-4 h-4 text-amber-400 fill-amber-400" /> Cast Message Star
             </h3>
-            <p className="text-[10px] text-slate-400 text-left leading-relaxed mb-4">
+            <p className={`text-[10px] text-left leading-relaxed mb-4 ${theme === 'dark' ? 'text-slate-400' : 'text-[#4f426d]'}`}>
               Write a gentle message or comfort check-in. It will lock in space as a permanent star on Sarah's timeline instantly.
             </p>
 
@@ -585,12 +585,12 @@ export default function SharedConstellation({ theme, role, isLoggedIn = false, o
 
           {/* BRING TRUSTED RELATION CIRCLES IN */}
           {/* <div className={`border rounded-3xl p-5 shadow-lg ${
-            theme === 'dark' ? 'bg-[#110c24]/90 border-purple-500/25 text-white' : 'bg-white border-purple-150 text-slate-855'
+            theme === 'dark' ? 'bg-[#110c24]/90 border-purple-500/25 text-white' : 'bg-white border-purple-150 text-[#1e133a]'
           }`}>
             <h3 className="text-xs font-black uppercase tracking-widest text-[#a855f7] flex items-center gap-1.5 border-b border-purple-500/10 pb-2 mb-3 text-left">
               <Plus className="w-4 h-4 text-purple-500" /> Trusted Circle Invite
             </h3>
-            <p className="text-[10px] text-slate-450 text-left leading-normal mb-3">
+            <p className={`text-[10px] text-left leading-normal mb-3 ${theme === 'dark' ? 'text-slate-400' : 'text-[#4f426d]'}`}>
               Invite additional members (spouse, sibling, friend, parent, caregiver) to join this mutual constellation workspace.
             </p>
 
@@ -632,7 +632,7 @@ export default function SharedConstellation({ theme, role, isLoggedIn = false, o
 
           {/* MILSTONE MEMORIES CHRONOLOGY */}
           {/* <div className={`border rounded-3xl p-5 shadow-lg ${
-            theme === 'dark' ? 'bg-[#110c24]/90 border-purple-500/25 text-white' : 'bg-white border-purple-150 text-slate-855'
+            theme === 'dark' ? 'bg-[#110c24]/90 border-purple-500/25 text-white' : 'bg-white border-purple-150 text-[#1e133a]'
           }`}>
             <h3 className="text-xs font-black uppercase tracking-widest text-[#a855f7] flex items-center gap-1.5 border-b border-purple-500/10 pb-2 mb-3 text-left">
               <Calendar className="w-4 h-4" /> Add Memory Event

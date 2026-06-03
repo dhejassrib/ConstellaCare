@@ -522,12 +522,16 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
         </div> */}
 
         <div className={`p-6 border-t flex-shrink-0 ${theme === 'dark' ? 'border-[#6366f1]/10' : 'border-[#7e6c9e]/20'}`}>
-          <div className="bg-gradient-to-tr from-slate-950 to-slate-850 text-slate-100 rounded-2xl p-4 border border-purple-500/15 text-center relative overflow-hidden shadow-md">
+          <div className={`rounded-2xl p-4 border text-center relative overflow-hidden shadow-md ${
+            theme === 'dark'
+              ? 'bg-gradient-to-tr from-slate-950 to-slate-850 text-slate-100 border-purple-500/15'
+              : 'bg-gradient-to-tr from-[#ede6f8] to-[#decfe6] text-[#1e133a] border-[#c9a0dc]/25'
+          }`}>
             <div className="absolute top-0 right-0 w-16 h-16 bg-purple-500/10 blur-xl rounded-full" />
             <Award className="w-7 h-7 text-amber-500 dark:text-amber-400 mx-auto animate-pulse" />
-            <span className="text-[10px] text-purple-400 block font-mono font-bold tracking-widest mt-1">CAREGIVER CARESCORE</span>
-            <span className="text-2xl font-black mt-1 block text-[#5b4a7a] dark:text-[#d4af37]">{totalStars} ✨</span>
-            <p className="text-[10px] text-slate-350 mt-1.5 leading-relaxed">
+            <span className={`text-[10px] block font-mono font-bold tracking-widest mt-1 ${theme === 'dark' ? 'text-purple-400' : 'text-[#7e6c9e]'}`}>CAREGIVER CARESCORE</span>
+            <span className={`text-2xl font-black mt-1 block ${theme === 'dark' ? 'text-[#d4af37]' : 'text-[#5b4a7a]'}`}>{totalStars} ✨</span>
+            <p className={`text-[10px] mt-1.5 leading-relaxed ${theme === 'dark' ? 'text-slate-350' : 'text-[#4f426d]'}`}>
               Every coordination aid lights a star under the same night sky.
             </p>
           </div>
@@ -1409,7 +1413,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
 
                     <a
                       href="tel:1767"
-                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-slate-350 dark:text-slate-350 hover:bg-purple-500/10 transition"
+                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-purple-500/10 transition"
                     >
                       <span>SOS Crisis Hotline</span>
                       <span className="text-purple-700 dark:text-purple-600 font-bold">1767</span>

@@ -5,11 +5,11 @@ export default function Resources() {
   return (
     <div className="space-y-6">
       <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2.5xl p-6 shadow-xl transition-all duration-300">
-        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+        <h3 className="text-lg font-bold text-[#1e133a] dark:text-slate-100 flex items-center gap-2">
           <BookOpen className="w-5 h-5 text-purple-600 dark:text-purple-400" />
           Clinical & Emotional Resource Library
         </h3>
-        <p className="text-xs text-slate-400 mt-1">
+        <p className="text-xs text-[#5a487c] dark:text-slate-400 mt-1">
           A collection of guides and materials curated by clinical oncologists and patient advocates to help support you and your family.
         </p>
       </div>
@@ -25,11 +25,11 @@ export default function Resources() {
                 <Bookmark className="w-4 h-4 text-slate-300 group-hover:text-purple-400 transition" />
               </div>
               
-              <h4 className="text-sm font-bold text-slate-800 dark:text-slate-150 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition leading-snug">
+              <h4 className="text-sm font-bold text-[#1e133a] dark:text-slate-150 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition leading-snug">
                 {res.title}
               </h4>
               
-              <p className="text-xs leading-relaxed text-slate-500 dark:text-slate-400 mt-2">
+              <p className="text-xs leading-relaxed text-[#4f426d] dark:text-slate-400 mt-2">
                 {res.description}
               </p>
             </div>

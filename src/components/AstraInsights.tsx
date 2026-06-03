@@ -92,16 +92,16 @@ export default function AstraInsights({ starsCount, recentSymptoms, lastAction, 
             </div>
           ) : insightData ? (
             <div className="mt-2.5">
-              <h4 className="text-base font-semibold text-slate-800 dark:text-slate-100 leading-snug">
+              <h4 className="text-base font-semibold text-[#1e133a] dark:text-slate-100 leading-snug">
                 {insightData.insight}
               </h4>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-500 dark:text-slate-400 italic">
+              <p className="mt-1.5 text-sm leading-relaxed text-[#4f426d] dark:text-slate-400 italic">
                 "{insightData.empathy}"
               </p>
 
               {insightData.actionType !== 'none' && (
                 <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-purple-50/50 dark:bg-purple-950/20 border border-purple-100/60 dark:border-purple-900/30 rounded-xl p-3.5 transition-all">
-                  <span className="text-xs font-medium text-slate-600 dark:text-slate-300">
+                  <span className="text-xs font-medium text-[#4f426d] dark:text-slate-300">
                     {insightData.actionText}
                   </span>
                   <button

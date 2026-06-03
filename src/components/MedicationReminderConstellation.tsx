@@ -139,11 +139,11 @@ export default function MedicationReminderConstellation({
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-6 gap-4">
         <div>
           <span className="text-[10px] font-black uppercase tracking-widest text-[#a855f7] block font-mono">CARE JOURNEY MODULE</span>
-          <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2 mt-0.5">
+          <h3 className="text-lg font-bold text-[#1e133a] dark:text-slate-100 flex items-center gap-2 mt-0.5">
             <Pill className="w-5 h-5 text-purple-600 dark:text-purple-400" />
             Medication Reminder
           </h3>
-          <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
+          <p className="text-xs text-[#5a487c] dark:text-slate-400 mt-0.5 leading-relaxed">
             Record medication schedules, track adherence, and build a consistent care routine.
           </p>
         </div>
@@ -151,7 +151,7 @@ export default function MedicationReminderConstellation({
         {/* <div className="flex items-center gap-3">
           <div className="bg-purple-50 dark:bg-purple-950/40 p-3 rounded-2xl border border-purple-500/10 text-center">
             <span className="text-[9px] uppercase tracking-wider text-purple-600 dark:text-purple-400 block font-bold font-mono">CONSTELLATIONS LIT</span>
-            <span className="text-lg font-black text-slate-850 dark:text-purple-300 block mt-0.5">{completedWeeks} 🌌</span>
+            <span className="text-lg font-black text-[#2e214c] dark:text-purple-300 block mt-0.5">{completedWeeks} 🌌</span>
           </div>
         </div> */}
       </div>
@@ -161,7 +161,7 @@ export default function MedicationReminderConstellation({
         {/* Left Column: Form & Add Medications */}
         <div className="space-y-6">
           <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2.5xl border border-slate-100 dark:border-slate-850">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-650 dark:text-slate-350 flex items-center gap-1.5 mb-3">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#4f426d] dark:text-slate-350 flex items-center gap-1.5 mb-3">
               <Plus className="w-4 h-4 text-purple-500" /> Add New Medication
             </h4>
 
@@ -245,7 +245,7 @@ export default function MedicationReminderConstellation({
                 >
                   <div className="flex items-start justify-between gap-4 mb-3 border-b border-dashed border-slate-150 dark:border-purple-500/5 pb-2">
                     <div>
-                      <h5 className="text-xs font-bold text-slate-805 dark:text-slate-150 flex items-center gap-1.5 leading-none">
+                      <h5 className="text-xs font-bold text-[#1e133a] dark:text-slate-150 flex items-center gap-1.5 leading-none">
                         <Pill className="w-3.5 h-3.5 text-pink-500 animate-pulse" />
                         {med.name}
                       </h5>
@@ -293,7 +293,7 @@ export default function MedicationReminderConstellation({
           
           {/* Constellation visualizer mockup inside component */}
           {meds.length > 0 && (
-            <div className="p-4 rounded-2.5xl bg-slate-950 text-[#decfe6] border border-purple-500/20 text-center relative overflow-hidden">
+            <div className="on-dark-surface p-4 rounded-2.5xl bg-[#1a1530] text-[#decfe6] border border-purple-500/20 text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-20 h-20 bg-pink-500/10 blur-xl rounded-full" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-[0.5px] border-b border-dashed border-purple-500/15" />
               <h5 className="text-[10px] font-black uppercase tracking-widest text-pink-400 block font-mono">ADHERENCE CONSTELLATION MAP</h5>

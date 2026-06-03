@@ -58,7 +58,7 @@ export default function CareCircle({ nodes: propNodes, onAddMessage }: CareCircl
         
         {/* 🪐 Interactive Galaxy Orbital SVG (Left Column) */}
         <div className="flex-1 flex flex-col items-center">
-          <div className="relative w-full aspect-square max-w-[280px] bg-slate-950 dark:bg-black rounded-full overflow-hidden border border-slate-800 flex items-center justify-center p-4">
+          <div className="relative w-full aspect-square max-w-[280px] bg-[#1a1530] dark:bg-black rounded-full overflow-hidden border border-[#2d2342] flex items-center justify-center p-4">
             
             {/* Spinning space nebulae */}
             <div className="absolute inset-0 opacity-20 bg-radial from-violet-600/30 to-slate-950/0 animate-pulse duration-[5s]" />
@@ -159,7 +159,7 @@ export default function CareCircle({ nodes: propNodes, onAddMessage }: CareCircl
               <div className="bg-purple-50/50 dark:bg-purple-950/20 border border-purple-100/50 dark:border-purple-900/20 rounded-2xl p-4 transition-all">
                 <div className="flex items-center justify-between pb-3 border-b border-purple-100/40 dark:border-purple-900/30">
                   <div>
-                    <span className="text-sm font-bold text-slate-800 dark:text-slate-100">{selectedNode.name}</span>
+                    <span className="text-sm font-bold text-[#1e133a] dark:text-slate-100">{selectedNode.name}</span>
                     <span className="ml-2.5 text-[10px] bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300 font-extrabold px-1.5 py-0.5 rounded-full uppercase">
                       {selectedNode.relationship}
                     </span>
@@ -167,7 +167,7 @@ export default function CareCircle({ nodes: propNodes, onAddMessage }: CareCircl
                   <span className="text-[10px] font-mono text-slate-400">{selectedNode.lastActive}</span>
                 </div>
                 
-                <p className="mt-3 text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed">
+                <p className="mt-3 text-sm text-[#4f426d] dark:text-slate-300 italic leading-relaxed">
                   {selectedNode.message || "Awaiting supportive alignment messages."}
                 </p>
 
