@@ -82,6 +82,8 @@ export default function AppointmentCopilot({ onQuestionsBuilt }: AppointmentCopi
   // Pre-loaded checklists dynamic loader
   const [preTreatChecklist, setPreTreatChecklist] = useState<Checklist[]>([]);
 
+  const [newChecklistItem, setNewChecklistItem] = useState('');
+
   useEffect(() => {
     const presets = CHECKLIST_PRESETS[appointmentType] || CHECKLIST_PRESETS.cancer;
     setPreTreatChecklist(
@@ -100,6 +102,27 @@ export default function AppointmentCopilot({ onQuestionsBuilt }: AppointmentCopi
   const toggleChecklist = (id: string) => {
     setPreTreatChecklist(prev => prev.map(c => c.id === id ? { ...c, checked: !c.checked } : c));
   };
+
+  const addChecklistItem = () => {
+    if (!newChecklistItem.trim()) return;
+
+    setPreTreatChecklist(prev => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        item: newChecklistItem,
+        checked: false,
+      },
+    ]);
+
+    setNewChecklistItem('');
+  };
+
+  const deleteChecklistItem = (id: string) => {
+  setPreTreatChecklist(prev =>
+    prev.filter(item => item.id !== id)
+  );
+};
 
   const buildQuestions = async () => {
     if (!concernInput.trim()) return;
@@ -247,9 +270,9 @@ export default function AppointmentCopilot({ onQuestionsBuilt }: AppointmentCopi
         <div className="border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
           <button
             onClick={() => setActiveAccordion(activeAccordion === 'prep' ? null : 'prep')}
-            className="w-full flex items-center justify-between p-4 bg-slate-50/50 dark:bg-slate-950/20 font-semibold text-xs text-[#2e214c] dark:text-slate-200 cursor-pointer"
+            className="w-full flex items-center justify-between p-4 bg-slate-50/50 dark:bg-slate-950/20 font-semibold text-xs text-[#2e214c] dark:text-slate-200 cursor-pointer font-black theme-heading"
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 font-black theme-heading">
               <CheckSquare className="w-4.5 h-4.5 text-purple-500" />
               <span>Personalized Preparation Checklist ({APPOINTMENT_TYPES.find(t => t.id === appointmentType)?.label})</span>
             </div>
@@ -257,21 +280,54 @@ export default function AppointmentCopilot({ onQuestionsBuilt }: AppointmentCopi
           </button>
           {activeAccordion === 'prep' && (
             <div className="p-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 space-y-3">
-              {preTreatChecklist.map(item => (
-                <div key={item.id} className="flex items-start gap-3">
-                  <input
-                    type="checkbox"
-                    checked={item.checked}
-                    onChange={() => toggleChecklist(item.id)}
-                    className="mt-1 accent-purple-600"
-                  />
-                  <span className={`text-xs leading-relaxed ${item.checked ? 'line-through text-[#7e6c9e] dark:text-slate-550' : 'text-[#2e214c] dark:text-slate-300'}`}>
-                    {item.item}
-                  </span>
-                </div>
-              ))}
+
+            <div className="flex gap-2 mb-3">
+              <input
+                type="text"
+                value={newChecklistItem}
+                onChange={(e) => setNewChecklistItem(e.target.value)}
+                placeholder="Add checklist item..."
+                className="flex-1 px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent"
+              />
+
+              <button
+                onClick={addChecklistItem}
+                className="w-9 h-9 rounded-xl bg-purple-600 text-white font-bold"
+              >
+                +
+              </button>
             </div>
+
+            {preTreatChecklist.map(item => (
+              <div key={item.id} className="flex items-start gap-3 group">
+                <input
+                  type="checkbox"
+                  checked={item.checked}
+                  onChange={() => toggleChecklist(item.id)}
+                  className="mt-1 accent-purple-600"
+                />
+
+                <span
+                  className={`flex-1 text-xs leading-relaxed ${
+                    item.checked
+                      ? 'line-through text-[#7e6c9e] dark:text-slate-550'
+                      : 'text-[#2e214c] dark:text-slate-300'
+                  }`}
+                >
+                  {item.item}
+                </span>
+
+                <button
+                  onClick={() => deleteChecklistItem(item.id)}
+                  className="text-red-500 text-xs px-2"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+          </div>
           )}
+          
         </div>
 
         {/* Accordion Block B: Medication Companion Reminders */}

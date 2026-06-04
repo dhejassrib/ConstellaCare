@@ -518,7 +518,7 @@ export default function App() {
             <span className="absolute top-0 right-0 w-8 h-8 bg-[#c9a0dc]/5 rounded-full blur-sm" />
             <Sparkles className="w-4 h-4 text-[#d4798e] flex-shrink-0 mt-0.5 animate-bounce" />
             <div>
-              <span className="text-[9px] font-black uppercase tracking-widest text-[#d4798e] block">RECOVERY TIPS</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-[#d4798e] block">QUICK RESET TIPS</span>
               <p className={`text-xs italic mt-0.5 leading-relaxed font-semibold ${theme === 'dark' ? 'text-[#FAF8FD]/90' : 'text-[#3d3650]'}`}>{currentRecoveryRem}</p>
             </div>
           </div>
