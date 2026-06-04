@@ -579,8 +579,9 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
       <main className="flex-1 md:pl-64 min-h-screen flex flex-col z-10 relative">
         
         {/* Interactive Header */}
+        {/* <header className="sticky top-0 bg-[#FAF8FD]/85 dark:bg-slate-900/80 backdrop-blur-md py-4 px-6 md:px-10 flex items-center justify-between border-b border-purple-200/50 dark:border-[#6366f1]/10 z-20"> */}
         <header className="sticky top-0 bg-[#FAF8FD]/85 dark:bg-slate-900/80 backdrop-blur-md py-4 px-6 md:px-10 flex items-center justify-between border-b border-purple-200/50 dark:border-[#6366f1]/10 z-20">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3.5">
             <button
               onClick={() => setSidebarOpen(true)}
               className="md:hidden p-2 bg-purple-100/30 dark:bg-slate-850 rounded-xl cursor-pointer"
@@ -605,7 +606,8 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
             {/* Backup Recovery Button — matches patient dashboard */}
             {user ? (
               <div className="flex items-center gap-2">
-                <span className={`hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[9px] font-mono font-bold uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/20 ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-700'}`}>
+                {/* <span className={`hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[9px] font-mono font-bold uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/20 ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-700'}`}> */}
+                <span className="hidden leading-none sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[9px] font-mono font-bold uppercase tracking-widest bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Sync Active
                 </span>
                 <div className="relative group">
