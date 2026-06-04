@@ -459,6 +459,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
 
   return (
     <div className={`flex min-h-screen transition-all duration-500 font-sans ${theme === 'dark' ? 'dark bg-[#07040f] text-[#f5f0eb]' : 'bg-[#FAF8FD] text-[#1e133a]'}`}>
+    {/* <div className="flex min-h-screen transition-all duration-500 font-sans bg-FAF8FD text-1e133a"> */}
       
       {/* Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">

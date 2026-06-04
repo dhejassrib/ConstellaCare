@@ -1,4 +1,4 @@
-// app.tsx:
+// app.tsx: patient dashbaord:
 import { useState, useEffect, useRef } from 'react';
 import Landing from './Landing';
 import { 
