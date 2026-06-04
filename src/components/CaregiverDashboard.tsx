@@ -163,8 +163,9 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
   const [waveSeconds, setWaveSeconds] = useState(0);
 
   // Recovery Alert States
-  const [currentRecoveryRem, setCurrentRecoveryRem] = useState('🍵 Cozy Lavender Alert: Take 2 minutes to stretch your arms and have three long deep sips of warm water.');
-
+  // const [currentRecoveryRem, setCurrentRecoveryRem] = useState('🍵 Cozy Lavender Alert: Take 2 minutes to stretch your arms and have three long deep sips of warm water.');
+  const [currentRecoveryRem, setCurrentRecoveryRem] = useState('Take a moment to stretch your shoulders and neck. Have a few slow sips of water before continuing.');
+  
   // Constellation logs - Caregiver check-in reactions
   const [selectedEmotion, setSelectedEmotion] = useState<string | null>(null);
   const [emotionFeedback, setEmotionFeedback] = useState<string>('');
@@ -205,10 +206,25 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
 
   useEffect(() => {
     const reminders = [
-      '🍵 Cozy Lavender Alert: Take 2 minutes to stretch your arms and have three long deep sips of warm water.',
-      '✨ Grounding Note: Look out of the window and spot two tiny specs of light. Realize you do not carry this sky alone.',
-      '🧬 Micro Breathing Reset: Inhale cool air through your nose for 4 seconds, expand your abdomen, hold for 2, release slowly.',
-      '🕊️ Soft Boundary Card: You are allowed to say \"I need a 10-minute break in the other room to breathe.\"'
+      "Take a moment to stretch your shoulders and neck. Have a few slow sips of water before continuing.",
+      
+      "Look away from your screen for 20 seconds. Notice two things around you that you haven't paid attention to today.",
+      
+      "Try a quick breathing reset: inhale for 4 seconds, hold for 2, then exhale slowly for 6 seconds.",
+      
+      "If you're feeling overwhelmed, it's okay to step away briefly. A short break can help you return with more focus.",
+      
+      "Check in with yourself: what's one thing that went well today, even if it was small?",
+      
+      "Relax your jaw, unclench your shoulders, and take one slow breath before moving to the next task.",
+      
+      "You don't need to solve everything at once. Focus on the next small step in front of you.",
+      
+      "Take 30 seconds to sit comfortably and notice how your body feels right now.",
+      
+      "Consider reaching out to someone if you've been carrying a challenge on your own.",
+      
+      "Progress doesn't have to be dramatic. Small actions count too."
     ];
     const timer = setInterval(() => {
       const randomRem = reminders[Math.floor(Math.random() * reminders.length)];
@@ -421,12 +437,22 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
 //   },
 // ];
 
+  const navItems = [
+    { id: 'home', label: 'Dashboard Home' },
+    { id: 'shared', label: 'Shared Constellation' },
+    { id: 'emotion', label: 'Caregiver Wellbeing' },
+    { id: 'appointments', label: 'Treatment Timeline' },
+    { id: 'communication', label: 'Communication Assistant' },
+    { id: 'circle', label: 'Care Orbit Circle' },
+    { id: 'journal', label: 'Private Journal' },
+  ];
+
   // Light mode text helpers — matches patient dashboard dark-text-on-light style
   const txt = theme === 'dark' ? 'text-[#f5f0eb]' : 'text-[#1e133a]';
   const txtMuted = theme === 'dark' ? 'text-[#9b8ab8]' : 'text-[#4d3c69]';
   const txtSubtle = theme === 'dark' ? 'text-slate-700 dark:text-slate-300' : 'text-[#3d3650]';
   const cardBg = theme === 'dark' ? 'bg-[#120d21]' : 'bg-white';
-  const cardBorder = theme === 'dark' ? 'border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'border-purple-200';
+  const cardBorder = theme === 'dark' ? 'border-[#c9a0dc]/8' : 'border-[#d7d0e5]/50';
   const inputBorder = theme === 'dark' ? 'border-purple-500/30' : 'border-purple-300';
   const surfaceBg = theme === 'dark' ? 'bg-[#07040f]/60' : 'bg-slate-50';
   const surfaceBorder = theme === 'dark' ? 'border-[#c9a0dc]/10' : 'border-purple-100';
@@ -552,20 +578,26 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
       <main className="flex-1 md:pl-64 min-h-screen flex flex-col z-10 relative">
         
         {/* Interactive Header */}
-        <header className={`sticky top-0 backdrop-blur-md py-4 px-6 md:px-10 flex items-center justify-between border-b z-20 ${theme === 'dark' ? 'bg-[#07040f]/80 border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'bg-[#FAF8FD]/80 border-[#7e6c9e]/20'}`}>
+        <header className="sticky top-0 bg-[#FAF8FD]/85 dark:bg-slate-900/80 backdrop-blur-md py-4 px-6 md:px-10 flex items-center justify-between border-b border-purple-200/50 dark:border-[#6366f1]/10 z-20">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="md:hidden p-2 bg-purple-100/10 hover:bg-purple-100/20 rounded-xl cursor-pointer"
+              className="md:hidden p-2 bg-purple-100/30 dark:bg-slate-850 rounded-xl cursor-pointer"
             >
-              <Compass className="w-5 h-5 text-[#d4798e]" />
+              <Compass className="w-5 h-5 text-purple-650 dark:text-purple-400" />
             </button>
-            <div>
-              {/* <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#d4798e] block">COMMAND OVERVIEW</span> */}
-              <h1 className={`text-base font-extrabold flex items-center gap-1.5 capitalize ${theme === 'dark' ? 'text-[#FAF8FD]' : 'text-[#2e214c]'}`}>
-                {activeSection === 'home' ? 'Operations Dashboard' : `${activeSection} Interface`}
-              </h1>
-            </div>
+
+            {/* <h1 className="text-lg font-black theme-heading">
+              {activeSection === 'home'
+                ? 'Operations Dashboard'
+                : `${activeSection} Interface`}
+            </h1> */}
+            {/* <h1 className="text-lg font-black theme-heading">
+              {navItems.find(item => item.id === activeSection)?.label}
+            </h1> */}
+            <h1 className="text-lg font-black theme-heading">
+              {navItems.find(item => item.id === activeSection)?.label}
+            </h1>
           </div>
 
           <div className="flex items-center gap-3">
@@ -604,10 +636,12 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
 
             <button
               onClick={onThemeToggle}
-              className="p-2 rounded-xl border border-transparent hover:border-[#c9a0dc]/20 hover:bg-purple-100/10 cursor-pointer"
+              className="p-2 bg-purple-100/40 dark:bg-slate-850 hover:bg-purple-100 hover:text-purple-750 dark:hover:bg-slate-800 text-purple-600 dark:text-purple-400 rounded-xl transition cursor-pointer"
               aria-label="Toggle Theme"
             >
-              {theme === 'dark' ? <Sun className="w-4 h-4 text-slate-700 dark:text-slate-300" /> : <Moon className="w-4 h-4 text-[#3d3650]" />}
+              {theme === 'light'
+                ? <Moon className="w-4.5 h-4.5" />
+                : <Sun className="w-4.5 h-4.5" />}
             </button>
           </div>
         </header>
@@ -618,7 +652,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
             <span className="absolute top-0 right-0 w-8 h-8 bg-[#c9a0dc]/5 rounded-full blur-sm" />
             <Sparkles className="w-4 h-4 text-[#d4798e] flex-shrink-0 mt-0.5 animate-bounce" />
             <div>
-              <span className="text-[9px] font-black uppercase tracking-widest text-[#d4798e] block">RECOVERY COMPASS</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-[#d4798e] block">RECOVERY TIPS</span>
               <p className={`text-xs italic mt-0.5 leading-relaxed font-semibold ${theme === 'dark' ? 'text-[#FAF8FD]/90' : 'text-[#3d3650]'}`}>{currentRecoveryRem}</p>
             </div>
           </div>
@@ -644,7 +678,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                     </span>
                     <h2 className={`text-xl md:text-2xl font-black tracking-tight ${txt}`}>Your patient's support is part of their healing journey.</h2>
                     <p className={`text-xs mt-1 max-w-lg leading-relaxed ${txtMuted}`}>
-                      Two stars orbiting the same night sky, closer together. You have saved <b className={theme === 'dark' ? 'text-[#f4d4a8]' : 'text-purple-700'}>4 treatment parameters</b> this week. Sarah's current fatigue index is moderate.
+                      You have saved <b className={theme === 'dark' ? 'text-[#f4d4a8]' : 'text-purple-700'}>4 treatment parameters</b> this week. Your patient's Fatigue Index: Moderate.
                     </p>
                   </div>
                   <div className="hidden md:block flex-shrink-0 bg-[#07040f]/50 p-4 rounded-full border border-[#c9a0dc]/10 animate-bounce cursor-pointer" style={{ animationDuration: '3s' }}>
@@ -921,7 +955,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                     { id: 'exhausted', emoji: '🌙', title: 'Physically Exhausted', color: 'from-[#e1dbec] to-[#decfe6] dark:to-[#2c1a4d] border-[#c9a0dc]' },
                     { id: 'worried', emoji: '🌪️', title: 'Anxious & Worried', color: 'from-[#faecee] to-[#ea96a6] dark:to-pink-900 border-[#ea96a6]' },
                     { id: 'peaceful', emoji: '🌱', title: 'Calm & Grounded', color: 'from-emerald-100 to-emerald-200 dark:to-emerald-950 border-emerald-500' },
-                    { id: 'overwhelmed', emoji: '🌫️', title: 'Numb / Overwhelmed', color: 'from-slate-100 to-[#decfe6] dark:to-slate-800 border-slate-500' },
+                    { id: 'overwhelmed', emoji: '🌫️', title: 'Numb / Overwhelmed', color: 'from-slate-100 to-[#decfe6] dark:to-slate-800' },
                     // {
                     //   id: 'overwhelmed',
                     //   emoji: '🌫️',

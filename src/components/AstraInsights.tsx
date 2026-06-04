@@ -92,7 +92,7 @@ export default function AstraInsights({ starsCount, recentSymptoms, lastAction, 
             </div>
           ) : insightData ? (
             <div className="mt-2.5">
-              <h4 className="text-base font-semibold text-[#1e133a] dark:text-slate-100 leading-snug">
+              <h4 className="text-base font-semibold text-[#1e133a] dark:text-slate-100 leading-snug font-black theme-heading">
                 {insightData.insight}
               </h4>
               <p className="mt-1.5 text-sm leading-relaxed text-[#4f426d] dark:text-slate-400 italic">

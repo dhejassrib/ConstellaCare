@@ -44,38 +44,6 @@ export default function SymptomTracker({ onLogSymptoms, initialLog = {} }: Sympt
             <Heart className="w-5 h-5 text-rose-500 animate-pulse" />
             Health Check-In Tracker
           </h3>
-          
-          {/* <h3
-            className={`text-lg font-bold flex items-center gap-2 ${
-              theme === 'dark'
-                ? 'text-white'
-                : 'text-[#5D4C78]'
-            }`}
-          >
-            <Heart className="w-5 h-5 text-rose-500 animate-pulse" />
-            Health Check-In Tracker
-          </h3> */}
-          {/* <h3
-            style={{ color: '#5D4C78' }}
-            className="text-lg font-bold flex items-center gap-2"
-          >
-            <Heart className="w-5 h-5 text-rose-500 animate-pulse" />
-            Health Check-In Tracker
-          </h3> */}
-          {/* <h3 style={{ color: '#5D4C78' }} className="text-lg font-bold flex items-center gap-2 dark:text-white">
-            <Heart className="w-5 h-5 text-rose-500 animate-pulse" />
-            Health Check-In Tracker
-          </h3> */}
-          {/* <h3
-            style={{
-              color: document.documentElement.classList.contains('dark')
-                ? '#ffffff'
-                : '#5D4C78',
-            }}
-            className="text-lg font-bold flex items-center gap-2"
-          >
-            Health Check-In Tracker
-          </h3> */}
           <p className="text-xs text-[#5a487c] dark:text-slate-400 mt-1">
             Tracking severity (0 = None, 5 = Severe) generates analytical medical reports.
           </p>
@@ -92,7 +60,7 @@ export default function SymptomTracker({ onLogSymptoms, initialLog = {} }: Sympt
             <div key={symptom} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-1.5">
               <div className="flex items-center gap-2.5 sm:w-44">
                 <div className={`w-2 h-2 rounded-full ${rating > 3 ? 'bg-rose-500 animate-ping' : rating > 1 ? 'bg-amber-400' : 'bg-emerald-400'}`} />
-                <span className="text-sm font-semibold text-[#2e214c] dark:text-slate-200">{symptom}</span>
+                <span className="text-sm font-black theme-heading">{symptom}</span>
               </div>
 
               <div className="flex items-center justify-between sm:justify-start gap-1.5 flex-1 max-w-sm">

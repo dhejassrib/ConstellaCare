@@ -44,6 +44,9 @@ export default function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [quickSupportOpen, setQuickSupportOpen] = useState(false);
 
+  // const [currentRecoveryRem, setCurrentRecoveryRem] = useState('🍵 Cozy Lavender Alert: Take 2 minutes to stretch your arms and have three long deep sips of warm water.');
+  const [currentRecoveryRem, setCurrentRecoveryRem] = useState('Take a moment to stretch your shoulders and neck. Have a few slow sips of water before continuing.');
+
   // Core Constellation Trackers
   const [totalStars, setTotalStars] = useState(8);
   const [stars, setStars] = useState<ConstellationStar[]>([
@@ -156,6 +159,35 @@ export default function App() {
   useEffect(() => {
     chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chatHistory, chatLoading]);
+
+  useEffect(() => {
+    const reminders = [
+      "Take a moment to stretch your shoulders and neck. Have a few slow sips of water before continuing.",
+      
+      "Look away from your screen for 20 seconds. Notice two things around you that you haven't paid attention to today.",
+      
+      "Try a quick breathing reset: inhale for 4 seconds, hold for 2, then exhale slowly for 6 seconds.",
+      
+      "If you're feeling overwhelmed, it's okay to step away briefly. A short break can help you return with more focus.",
+      
+      "Check in with yourself: what's one thing that went well today, even if it was small?",
+      
+      "Relax your jaw, unclench your shoulders, and take one slow breath before moving to the next task.",
+      
+      "You don't need to solve everything at once. Focus on the next small step in front of you.",
+      
+      "Take 30 seconds to sit comfortably and notice how your body feels right now.",
+      
+      "Consider reaching out to someone if you've been carrying a challenge on your own.",
+      
+      "Progress doesn't have to be dramatic. Small actions count too."
+    ];
+    const timer = setInterval(() => {
+      const randomRem = reminders[Math.floor(Math.random() * reminders.length)];
+      setCurrentRecoveryRem(randomRem);
+    }, 28000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Observer to trigger progressive auth on Care Circle open
   useEffect(() => {
@@ -411,6 +443,7 @@ export default function App() {
       )}
 
       {/* ── Main Dashboard Panel Area ── */}
+
       <main className="flex-1 md:pl-64 min-h-screen flex flex-col z-10 relative">
         
         {/* Interactive Topbar */}
@@ -422,7 +455,7 @@ export default function App() {
             >
               <Compass className="w-5 h-5 text-purple-650 dark:text-purple-400" />
             </button>
-            <h1 className="text-lg font-black bg-gradient-to-r from-[#1e133a] to-[#4d3c69] dark:from-slate-100 dark:to-slate-350 bg-clip-text text-transparent">
+            <h1 className="text-lg font-black theme-heading">
               {getSectionTitle()}
             </h1>
           </div>
@@ -478,6 +511,18 @@ export default function App() {
             </button>
           </div>
         </header>
+
+        {/* Recovery Reminder Banner */}
+        <div className="px-6 md:px-10 pt-4">
+          <div className={`bg-gradient-to-r from-[#decfe6]/20 via-[#e8e2f4]/15 to-[#ea96a6]/5 border border-[#c9a0dc]/30 rounded-2xl p-3.5 flex items-start gap-3 shadow-sm relative overflow-hidden`}>
+            <span className="absolute top-0 right-0 w-8 h-8 bg-[#c9a0dc]/5 rounded-full blur-sm" />
+            <Sparkles className="w-4 h-4 text-[#d4798e] flex-shrink-0 mt-0.5 animate-bounce" />
+            <div>
+              <span className="text-[9px] font-black uppercase tracking-widest text-[#d4798e] block">RECOVERY TIPS</span>
+              <p className={`text-xs italic mt-0.5 leading-relaxed font-semibold ${theme === 'dark' ? 'text-[#FAF8FD]/90' : 'text-[#3d3650]'}`}>{currentRecoveryRem}</p>
+            </div>
+          </div>
+        </div>
 
         
         {/* ── Main Content Compartment ── */}
@@ -876,19 +921,13 @@ export default function App() {
           {activeSection === 'timeline' && (
             <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl font-sans animate-fade-in">
               <div className="pb-4 border-b border-slate-100 dark:border-slate-800 mb-6">
-                <h3 className="text-md font-extrabold text-[#1e133a] dark:text-slate-100">Health Journey Timeline</h3>
+                <h3 className="text-md font-black theme-heading">Health Journey Timeline</h3>
                 <p className="text-xs text-[#7e6c9e] dark:text-slate-400 mt-1">View appointments, treatments, check-ins, and important milestones in one place.</p>
               </div>
 
               <div className="relative pl-6 border-l-2 border-purple-500/15 space-y-8 text-left py-2">
                 {timelineItems.map((mil, idx) => (
                   <div key={mil.id} className="relative">
-                    {/* Glowing orb anchor */}
-                    {/* <span className={`absolute -left-[30px] top-0 w-4 h-4 rounded-full border-2 ${
-                      mil.done 
-                        ? 'bg-gradient-to-tr from-pink-400 to-purple-500 border-white ring-4 ring-pink-400/20 shadow-md' 
-                        : 'bg-[#decfe6] border-purple-200 text-[#4d3c69] dark:bg-slate-700 dark:border-slate-600 dark:text-slate-400'
-                    }`} /> */}
                     {mil.type === 'milestone' ? (
                       <span className="absolute -left-[33px] top-0 text-yellow-500 text-lg">
                         ⭐
@@ -902,7 +941,7 @@ export default function App() {
                         }`}
                       />
                     )}
-                    
+
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-[10px] font-mono tracking-wider font-extrabold text-[#7e6c9e] dark:text-slate-400">{mil.date}</span>
@@ -923,7 +962,7 @@ export default function App() {
                         className={`text-xs font-bold mt-1 leading-snug ${
                           mil.type === 'milestone'
                             ? 'text-amber-600 dark:text-amber-400'
-                            : 'text-[#2e214c] dark:text-slate-200'
+                            : 'text-md font-black theme-heading'
                         }`}
                       >
                         {mil.label}
@@ -956,7 +995,7 @@ export default function App() {
               <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col items-center justify-center text-center">
                 <div className="absolute top-0 right-0 w-44 h-44 bg-purple-500/5 blur-3xl rounded-full" />
                 <span className="text-4xl block mb-3 animate-bounce">💌</span>
-                <h3 className="text-md font-extrabold text-[#1e133a] dark:text-slate-100">Hopeful Message Bottles</h3>
+                <h3 className="text-md font-black theme-heading">Hopeful Message Bottles</h3>
                 <p className="text-xs text-[#7e6c9e] dark:text-slate-400 mt-1.5 leading-relaxed">
                   Supportive messages gathered from shared health journeys. <br></br>Unscrew a bottle whenever dark clouds make the stars harder to see.
                 </p>
@@ -1041,8 +1080,8 @@ export default function App() {
                 <div className="flex items-center gap-3.5 bg-purple-50/50 dark:bg-purple-950/25 border border-purple-100/60 p-4.5 rounded-2xl mb-6">
                   <span className="text-3xl animate-pulse">🌙</span>
                   <div>
-                    <span className="text-[9px] font-bold font-mono tracking-wider text-purple-600 uppercase">ACTIVE COGNITIVE ALIGNMENT PROMPT</span>
-                    <p className="text-sm font-semibold text-[#1e133a] dark:text-slate-200 italic mt-0.5">
+                    <span className="text-[9px] font-bold font-mono tracking-wider text-purple-600 uppercase">Thought Starter</span>
+                    <p className="text-md font-black theme-heading">
                       "{REFLECTIONS[reflectionIndex]}"
                     </p>
                   </div>
