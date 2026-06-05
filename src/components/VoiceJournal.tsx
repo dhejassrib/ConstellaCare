@@ -209,7 +209,7 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2.5xl p-6 shadow-xl transition-all duration-300">
       <div className="text-center max-w-md mx-auto">
-        <h3 className="text-lg font-bold text-[#1e133a] dark:text-slate-100 mb-1">Empathetic Voice Journaling</h3>
+        <h3 className="text-lg font-black theme-heading mb-1">Empathetic Voice Journaling</h3>
         <p className="text-xs text-[#5a487c] dark:text-slate-400">
           Some days it's easier to talk than type. Share your thoughts aloud, and let Astra transcribe and reflect on your emotional weather.
         </p>
