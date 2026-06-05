@@ -28,11 +28,11 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
   const recognitionRef = useRef<any>(null);
 
   // Mock templates for quick bypass testing if needed
-  const mockTemplates = [
-    { label: "🥀 Vulnerable Fatigue", text: "I finished my second chemo round today. My body feels entirely heavy, like lead. Even holding a fork is tough... but Chloe made me some ginger water, and that felt like a quiet drop of safety in my throat." },
-    { label: "🌱 A Moment of Hope", text: "Woke up feeling stable today. The nauseous fog took the morning off. Gavin and I sat on the porch for ten minutes. I felt the dry sun on my face. Feeling grateful that today feels accessible." },
-    { label: "🌪️ Pre-Appointment Flurry", text: "The next check-up is tomorrow. My chest feels tight, my breathing is high in my rib cage. I am terrified of what the blood marker counts will say, but I am trying to focus on my bubble breathing orbits." }
-  ];
+  // const mockTemplates = [
+  //   { label: "🥀 Vulnerable Fatigue", text: "I finished my second chemo round today. My body feels entirely heavy, like lead. Even holding a fork is tough... but Chloe made me some ginger water, and that felt like a quiet drop of safety in my throat." },
+  //   { label: "🌱 A Moment of Hope", text: "Woke up feeling stable today. The nauseous fog took the morning off. Gavin and I sat on the porch for ten minutes. I felt the dry sun on my face. Feeling grateful that today feels accessible." },
+  //   { label: "🌪️ Pre-Appointment Flurry", text: "The next check-up is tomorrow. My chest feels tight, my breathing is high in my rib cage. I am terrified of what the blood marker counts will say, but I am trying to focus on my bubble breathing orbits." }
+  // ];
 
   // Waveform Visualization Effect
   useEffect(() => {
@@ -262,10 +262,10 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
           <>
             <div className="relative mb-6">
               <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-100 dark:border-slate-800" /></div>
-              <div className="relative flex justify-center text-xs"><span className="bg-white dark:bg-slate-900 px-3 text-slate-400 font-medium">Capture Simulators</span></div>
+              {/* <div className="relative flex justify-center text-xs"><span className="bg-white dark:bg-slate-900 px-3 text-slate-400 font-medium">Capture Simulators</span></div> */}
             </div>
 
-            <div className="flex justify-center gap-2.5 flex-wrap mb-6">
+            {/* <div className="flex justify-center gap-2.5 flex-wrap mb-6">
               {mockTemplates.map((tmp, ix) => (
                 <button
                   key={ix}
@@ -282,7 +282,7 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
                   {tmp.label}
                 </button>
               ))}
-            </div>
+            </div> */}
           </>
         )}
 
@@ -311,13 +311,17 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
               >
                 {isAnalyzing ? (
                   <>
-                    <span className="w-3 h-3 rounded-full border-2 border-t-transparent border-white animate-spin" />
+                    <span className="w-3 h-3 rounded-full border-2 border-t-transparent border-pink-400 animate-spin" />
+                    <span className="font-black theme-heading text-xs">
                     Analyzing Emotional Weather...
+                    </span>
                   </>
                 ) : (
                   <>
                     <Sparkles className="w-3.5 h-3.5 text-pink-400" />
+                    <span className="font-black theme-heading text-xs">
                     Analyze with Astra AI
+                    </span>
                   </>
                 )}
               </button>
@@ -326,7 +330,7 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
         )}
 
         {analysisResult && (
-          <div className="text-left bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200/40 dark:border-purple-900/30 rounded-2.5xl p-5 shadow-lg relative overflow-hidden">
+          <div className="text-left bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200/40 dark:border-purple-900/30 rounded-2xl p-5 shadow-lg relative overflow-hidden r">
             <div className="absolute top-0 right-0 w-36 h-36 bg-pink-500/5 blur-2xl rounded-full" />
             
             <div className="flex items-center gap-2 pb-3 border-b border-purple-200/30 dark:border-purple-900/20 mb-3.5">
@@ -335,12 +339,12 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
             </div>
 
             <div className="mb-4 on-dark-surface bg-[#1a1530] dark:bg-slate-950 border border-slate-800 rounded-xl p-3.5 flex items-center gap-3 shadow-inner">
-              <div className="w-9 h-9 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-amber-400">
+              <div className="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center text-amber-400">
                 <CloudLightning className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[9px] uppercase tracking-wider font-mono text-slate-400 block">Identified Weather Horizon</span>
-                <span className="text-xs font-bold text-slate-100">{analysisResult.weather}</span>
+                <span className="text-[9px] uppercase tracking-wider font-mono text-slate-350 block">Identified Weather Horizon</span>
+                <span className="text-xs font-bold text-slate-400">{analysisResult.weather}</span>
               </div>
             </div>
 
@@ -348,7 +352,18 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
               <span className="text-[10px] font-bold uppercase font-mono tracking-widest text-slate-400 block mb-1.5">Detected Resonance Layers</span>
               <div className="flex gap-1.5 flex-wrap">
                 {analysisResult.emotions.map(em => (
-                  <span key={em} className="text-[10px] font-bold bg-pink-100 dark:bg-pink-950/30 text-rose-700 dark:text-rose-300 border border-pink-200/50 dark:border-pink-900/30 px-3 py-1 rounded-full">
+                  <span key={em} className="
+                    text-[10px] font-black
+                    theme-heading
+                    bg-gradient-to-r from-pink-200 to-purple-200
+                    dark:from-pink-950/30 dark:to-purple-950/30
+                    text-[#2e1446]
+                    dark:text-pink-200
+                    border border-purple-300/60
+                    dark:border-pink-900/30
+                    px-3 py-1 rounded-full
+                    shadow-sm
+                    ">
                     ✦ {em}
                   </span>
                 ))}

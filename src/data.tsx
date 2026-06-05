@@ -1,45 +1,5 @@
 import { Section, CareCircleNode, Milestone, SymptomLog } from './types';
 
-// export const NAV_GROUPS = [
-//   {
-//     group: 'Emotional Support',
-//     items: [
-//       { id: 'home' as Section, label: 'Home', icon: '⭐' },
-//       { id: 'shared' as Section, label: 'Shared Constellation', icon: '💫' },
-//       { id: 'astra' as Section, label: 'Talk to Astra', icon: '✨' },
-//       { id: 'mood' as Section, label: 'Mood Check-In', icon: '🌸' },
-//       { id: 'calm' as Section, label: 'Calm Corner', icon: '🫧' },
-//       { id: 'voice' as Section, label: 'Voice Journal', icon: '🎙️' },
-//     ],
-//   },
-//   {
-//     group: 'Care Journey',
-//     items: [
-//       { id: 'appointment' as Section, label: 'Appointment Prep', icon: '🩺' },
-//       { id: 'symptoms' as Section, label: 'Health Tracker', icon: '📋' },
-//       { id: 'medications' as Section, label: 'Medications', icon: '💊' },
-//       { id: 'timeline' as Section, label: 'Timeline', icon: '📅' },
-//       { id: 'reports' as Section, label: 'Reports', icon: '📊' },
-//     ],
-//   },
-//   {
-//     group: 'Community',
-//     items: [
-//       { id: 'circle' as Section, label: 'Care Circle', icon: '🌌' },
-//       { id: 'bottles' as Section, label: 'Message Bottles', icon: '💌' },
-//       { id: 'resources' as Section, label: 'Resources', icon: '📚' },
-//     ],
-//   },
-//   {
-//     group: 'My Constellation',
-//     items: [
-//       { id: 'progress' as Section, label: 'Progress', icon: '✨' },
-//       { id: 'milestones' as Section, label: 'Health Milestones', icon: '🌟' },
-//       { id: 'reflection' as Section, label: 'Reflection Archive', icon: '🌙' },
-//     ],
-//   },
-// ];
-
 import {
   Compass,
   Sparkles,
@@ -67,7 +27,6 @@ export const NAV_GROUPS = [
       { id: 'astra', label: 'Talk to Astra', icon: <MessageSquare className="w-3.5 h-3.5" /> },
       { id: 'mood', label: 'Mood Check-In', icon: <Heart className="w-3.5 h-3.5" /> },
       { id: 'calm', label: 'Calm Corner', icon: <Wind className="w-3.5 h-3.5" /> },
-      // { id: 'voice', label: 'Voice Journal', icon: <Mic className="w-3.5 h-3.5" /> },
     ],
   },
   {
@@ -76,8 +35,6 @@ export const NAV_GROUPS = [
       { id: 'appointment', label: 'Appointment Copilot', icon: <Calendar className="w-3.5 h-3.5" /> },
       { id: 'symptoms', label: 'Health Tracker', icon: <Activity className="w-3.5 h-3.5" /> },
       { id: 'medications', label: 'Medications', icon: <Pill className="w-3.5 h-3.5" /> },
-      // { id: 'timeline', label: 'Timeline', icon: <Clock className="w-3.5 h-3.5" /> },
-      // { id: 'reports', label: 'Reports', icon: <BarChart3 className="w-3.5 h-3.5" /> },
       { id: 'timeline', label: 'Health Journey Timeline', icon: <Clock className="w-3.5 h-3.5" /> },
     ],
   },
@@ -92,8 +49,6 @@ export const NAV_GROUPS = [
   {
     group: 'Personal',
     items: [
-      // { id: 'progress', label: 'Progress', icon: <Trophy className="w-3.5 h-3.5" /> },
-      // { id: 'milestones', label: 'Health Milestones', icon: <Star className="w-3.5 h-3.5" /> },
       { id: 'reflection', label: 'Reflection Archive', icon: <Moon className="w-3.5 h-3.5" /> },
       { id: 'resources', label: 'Resources', icon: <BookOpen className="w-3.5 h-3.5" /> },
     ],

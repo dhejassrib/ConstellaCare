@@ -400,7 +400,7 @@ export default function App() {
                   <button
                     key={item.id}
                     onClick={() => {
-                      setActiveSection(item.id);
+                      setActiveSection(item.id as Section);
                       setSidebarOpen(false);
                     }}
                     className={`w-full flex items-center gap-3.5 px-3 py-2 rounded-xl text-xs font-bold leading-none capitalize transition-all duration-200 cursor-pointer ${
