@@ -31,7 +31,6 @@ import SharedConstellation from './components/SharedConstellation';
 import ProgressiveAuthModal from './components/ProgressiveAuthModal';
 import MedicationReminderConstellation from './components/MedicationReminderConstellation';
 import ConstellaLogo from './components/ConstellaLogo';
-import ConstellaLogo from './components/ConstellaLogo';
 
 // Lucide Icons
 import {

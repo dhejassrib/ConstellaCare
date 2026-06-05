@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import styles from './Landing.module.css';
-import ConstellationSphere from './components/ConstellationSphere';
-import ConstellaLogo from './components/ConstellaLogo';
 import { Sun, Moon, Sparkles, Heart } from 'lucide-react';
 import ConstellaLogo from './components/ConstellaLogo';
 
@@ -65,7 +63,9 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
           </span>
         </div>
 
-        <ConstellaLogo size={72} className={styles.logo} />
+        <div className="flex justify-center mb-4">
+          <ConstellaLogo size={72} className={styles.logo} />
+        </div>
         <h1 className={styles.brand}>ConstellaCare</h1>
         <p className={styles.tagline}>A gentle space for every health journey.</p>
         
