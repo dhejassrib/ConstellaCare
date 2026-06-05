@@ -403,9 +403,21 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
       {/* Main Panel Area */}
       <main className="flex-1 md:pl-64 min-h-screen flex flex-col z-10 relative">
         <header className="sticky top-0 bg-[#FAF8FD]/85 dark:bg-slate-900/80 backdrop-blur-md py-4 px-6 md:px-10 flex items-center justify-between border-b border-purple-200/50 dark:border-[#6366f1]/10 z-20">
-          <h1 className={`text-base font-extrabold flex items-center gap-1.5 capitalize ${theme === 'dark' ? 'text-[#FAF8FD]' : 'text-[#2e214c]'}`}>
-            {activeSection === 'home' ? 'Dashboard Home' : `${activeSection} Interface`}
-          </h1>
+          <div className="flex items-center gap-3.5">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="md:hidden p-2 bg-purple-100/30 dark:bg-slate-850 rounded-xl cursor-pointer"
+            >
+              <Compass className="w-5 h-5 text-purple-650 dark:text-purple-400" />
+            </button>
+            <div>
+              {/* <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#d4798e] block">COMMAND OVERVIEW</span> */}
+              <h1 className={`text-base font-extrabold flex items-center gap-1.5 capitalize ${theme === 'dark' ? 'text-[#FAF8FD]' : 'text-[#2e214c]'}`}>
+                {activeSection === 'home' ? 'Dashboard Home' : `${activeSection} Interface`}
+              </h1>
+            </div>
+          </div>
+
           <div className="flex items-center gap-3">
             <button onClick={onThemeToggle} className="p-2 bg-purple-100/40 dark:bg-slate-850 text-purple-600 dark:text-purple-400 rounded-xl cursor-pointer">
               {theme === 'light' ? <Moon className="w-4.5 h-4.5" /> : <Sun className="w-4.5 h-4.5" />}
