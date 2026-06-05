@@ -579,8 +579,8 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
             </button>
             <div>
               {/* <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#d4798e] block">COMMAND OVERVIEW</span> */}
-              <h1 className={`text-base font-extrabold flex items-center gap-1.5 capitalize ${theme === 'dark' ? 'text-[#FAF8FD]' : 'text-[#2e214c]'}`}>
-                {activeSection === 'home' ? 'Dashboard Home' : `${activeSection} Interface`}
+              <h1 className={`text-base font-extrabold flex items-center gap-1.5 ${theme === 'dark' ? 'text-[#FAF8FD]' : 'text-[#2e214c]'}`}>
+                {navItems.find((item) => item.id === activeSection)?.label ?? 'Dashboard Home'}
               </h1>
             </div>
           </div>
