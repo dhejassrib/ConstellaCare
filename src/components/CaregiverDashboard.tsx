@@ -536,18 +536,6 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
           </nav>
         </div>
 
-        {/* Global Stars Counter at bottom */}
-        {/* <div className={`p-5 border-t flex-shrink-0 ${theme === 'dark' ? 'border-slate-200 dark:border-slate-200 dark:border-slate-200 dark:border-[#c9a0dc]/15' : 'border-[#7e6c9e]/20'}`}>
-          <div className="bg-gradient-to-tr from-[#120d21] to-[#251a3d] text-[#f4d4a8] rounded-2xl p-4 border border-[#c9a0dc]/25 text-center relative overflow-hidden shadow-lg">
-            <div className="absolute top-0 right-0 w-16 h-16 bg-[#d4798e]/10 blur-xl rounded-full" />
-            <Award className="w-6.5 h-6.5 text-[#f4d4a8] mx-auto animate-pulse" />
-            <span className="text-[9px] text-[#c9a0dc]/80 block font-mono font-bold tracking-widest mt-1">CAREGIVER CARESCORE</span>
-            <span className="text-xl font-black mt-1 block">{totalStars} ✨</span>
-            <p className="text-[10px] text-[#FAF8FD]/70 mt-1 lines-2 leading-relaxed">
-              Every coordination aid lights a star under the same night sky.
-            </p>
-          </div>
-        </div> */}
 
         <div className={`p-6 border-t flex-shrink-0 ${theme === 'dark' ? 'border-[#6366f1]/10' : 'border-[#7e6c9e]/20'}`}>
           <div className={`rounded-2xl p-4 border text-center relative overflow-hidden shadow-md ${
@@ -557,7 +545,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
           }`}>
             <div className="absolute top-0 right-0 w-16 h-16 bg-purple-500/10 blur-xl rounded-full" />
             <Award className="w-7 h-7 text-amber-500 dark:text-amber-400 mx-auto animate-pulse" />
-            <span className={`text-[10px] block font-mono font-bold tracking-widest mt-1 ${theme === 'dark' ? 'text-purple-400' : 'text-[#7e6c9e]'}`}>CAREGIVER CARESCORE</span>
+            <span className={`text-[10px] block font-mono font-bold tracking-widest mt-1 ${theme === 'dark' ? 'text-purple-400' : 'text-[#7e6c9e]'}`}>STAR ENERGY INDEX</span>
             <span className={`text-2xl font-black mt-1 block ${theme === 'dark' ? 'text-[#d4af37]' : 'text-[#5b4a7a]'}`}>{totalStars} ✨</span>
             <p className={`text-[10px] mt-1.5 leading-relaxed ${theme === 'dark' ? 'text-slate-350' : 'text-[#4f426d]'}`}>
               Every coordination aid lights a star under the same night sky.

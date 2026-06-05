@@ -1093,7 +1093,7 @@ export default function App() {
 
                 <label className="text-[10px] font-bold font-mono tracking-widest text-[#7e6c9e] dark:text-slate-400 block mb-2">WRITE YOUR SECURE THOUGHTS</label>
                 <textarea
-                  className="w-full text-xs p-4 bg-[#FAF8FD] dark:bg-slate-950 rounded-2xl border border-purple-200 dark:border-slate-805 focus:outline-none focus:border-purple-500 text-[#2e214c] dark:text-slate-250 leading-relaxed resize-none"
+                  className="w-full text-xs p-4 bg-[#FAF8FD] dark:bg-slate-950 rounded-2xl border border-purple-200 dark:border-slate-805 focus:outline-none focus:border-purple-500 text-[#2e214c] dark:text-slate-350 leading-relaxed resize-none"
                   rows={4}
                   placeholder="The page is empty. There is absolute permission to express frustration, beauty, stable relief, or fog. This is just for you..."
                   value={reflectionAnswer}

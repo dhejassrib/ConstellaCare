@@ -330,11 +330,11 @@ export default function ProgressiveAuthModal({
                     className="text-left space-y-3 w-full animate-fade-in"
                   >
                     <span className="text-[10px] font-black text-pink-500 block uppercase tracking-wider">
-                      {authMode === 'signup' ? 'Create Healing Account' : 'Email OTP Access'}
+                      {authMode === 'signup' ? 'Create Account' : 'Email OTP Access'}
                     </span>
                     <p className={`text-[11px] leading-relaxed ${theme === 'dark' ? 'text-purple-300' : 'text-slate-600'}`}>
                       {authMode === 'signup'
-                        ? 'Fill in your name and email to establish a HIPAA-compliant cloud sync coordinate:'
+                        ? 'Fill in your name and email to securely save your health journey:'
                         : 'Input email to trigger an instant OTP verification key:'}
                     </p>
                     
@@ -369,7 +369,7 @@ export default function ProgressiveAuthModal({
                       disabled={loading}
                       className="w-full py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-2xl text-xs font-bold shadow hover:scale-[1.01] transition-transform cursor-pointer"
                     >
-                      {loading ? "Transmitting safe channel..." : authMode === 'signup' ? "Create Account & Send Token ✉️" : "Send Verification Token ✉️"}
+                      {loading ? "Transmitting safe channel..." : authMode === 'signup' ? "Create Account & Send Token" : "Send Verification Token"}
                     </button>
                     
                     <button
@@ -402,7 +402,7 @@ export default function ProgressiveAuthModal({
                     className="text-left space-y-3 w-full"
                   >
                     <span className="text-[10px] font-black text-pink-500 block uppercase tracking-wider">Verify Identity Sequence</span>
-                    <p className={`text-[11px] leading-relaxed ${theme === 'dark' ? 'text-purple-300' : 'text-slate-600'}`}>Transmitted authentication digits to <b className="font-mono text-pink-500">{emailInput}</b>. Type any 4 digits:</p>
+                    <p className={`text-[11px] leading-relaxed ${theme === 'dark' ? 'text-purple-300' : 'text-slate-600'}`}>Transmitted authentication digits to <b className="font-mono text-pink-500">{emailInput}</b>. Type the 4 digits:</p>
 
                     <input
                       type="text"
