@@ -57,6 +57,20 @@ interface AppointmentEvent {
   notesPinned: string;
 }
 
+const SUPPORT_CENTER_NAV: { id: CaregiverSection; label: string }[] = [
+  { id: 'home', label: 'Dashboard Home' },
+  { id: 'shared', label: 'Shared Constellation' },
+  { id: 'emotion', label: 'Caregiver Wellbeing' },
+  { id: 'appointments', label: 'Treatment Timeline' },
+  { id: 'communication', label: 'Communication Assistant' },
+  { id: 'circle', label: 'Care Orbit Circle' },
+  { id: 'journal', label: 'Private Journal' },
+];
+
+function getSupportCenterTitle(section: CaregiverSection): string {
+  return SUPPORT_CENTER_NAV.find((item) => item.id === section)?.label ?? 'Dashboard Home';
+}
+
 function generateLocalCaregiverCommFallback(query: string): string {
   const text = query.toLowerCase();
   if (text.includes('chemo') || text.includes('chemotherapy')) {
@@ -369,24 +383,26 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
           <nav className="p-4 space-y-5 overflow-y-auto flex-1">
             <div className="space-y-1">
               <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#d4798e] block pl-2.5 mb-2.5">Support Center</span>
-              {[
-                { id: 'home', label: 'Dashboard Home', icon: <Compass className="w-3.5 h-3.5" /> },
-                { id: 'shared', label: 'Shared Constellation', icon: <Sparkles className="w-3.5 h-3.5 text-pink-400 animate-pulse" /> },
-                { id: 'emotion', label: 'Caregiver Wellbeing', icon: <Activity className="w-3.5 h-3.5" /> },
-                { id: 'appointments', label: 'Treatment Timeline', icon: <Calendar className="w-3.5 h-3.5" /> },
-                { id: 'communication', label: 'Communication Assistant', icon: <MessageSquare className="w-3.5 h-3.5" /> },
-                { id: 'circle', label: 'Care Orbit Circle', icon: <Users className="w-3.5 h-3.5" /> },
-                { id: 'journal', label: 'Private Journal', icon: <Mic className="w-3.5 h-3.5" /> },
-              ].map((item) => (
+              {SUPPORT_CENTER_NAV.map((item) => {
+                const icon =
+                  item.id === 'home' ? <Compass className="w-3.5 h-3.5" /> :
+                  item.id === 'shared' ? <Sparkles className="w-3.5 h-3.5 text-pink-400 animate-pulse" /> :
+                  item.id === 'emotion' ? <Activity className="w-3.5 h-3.5" /> :
+                  item.id === 'appointments' ? <Calendar className="w-3.5 h-3.5" /> :
+                  item.id === 'communication' ? <MessageSquare className="w-3.5 h-3.5" /> :
+                  item.id === 'circle' ? <Users className="w-3.5 h-3.5" /> :
+                  <Mic className="w-3.5 h-3.5" />;
+                return (
                 <button
                   key={item.id}
-                  onClick={() => setActiveSection(item.id as CaregiverSection)}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold leading-none capitalize transition-all duration-200 cursor-pointer ${activeSection === item.id ? (theme === 'dark' ? 'bg-gradient-to-r from-[#211738] to-[#120d21] text-[#f4d4a8] border border-[#c9a0dc]/20' : 'bg-gradient-to-r from-[#decfe6] to-[#e8e2f4] text-[#1a1530] border border-[#c9a0dc]/20') : (theme === 'dark' ? 'bg-transparent text-[#9b8ab8] hover:bg-[#1c1530]/50 font-semibold' : 'bg-transparent text-[#4d3c69] hover:bg-purple-100/60 font-semibold')}`}
+                  onClick={() => setActiveSection(item.id)}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold leading-none transition-all duration-200 cursor-pointer ${activeSection === item.id ? (theme === 'dark' ? 'bg-gradient-to-r from-[#211738] to-[#120d21] text-[#f4d4a8] border border-[#c9a0dc]/20' : 'bg-gradient-to-r from-[#decfe6] to-[#e8e2f4] text-[#1a1530] border border-[#c9a0dc]/20') : (theme === 'dark' ? 'bg-transparent text-[#9b8ab8] hover:bg-[#1c1530]/50 font-semibold' : 'bg-transparent text-[#4d3c69] hover:bg-purple-100/60 font-semibold')}`}
                 >
-                  <span className="text-sm">{item.icon}</span>
+                  <span className="text-sm">{icon}</span>
                   {item.label}
                 </button>
-              ))}
+                );
+              })}
             </div>
           </nav>
         </div>
@@ -412,8 +428,8 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
             </button>
             <div>
               {/* <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#d4798e] block">COMMAND OVERVIEW</span> */}
-              <h1 className={`text-base font-extrabold flex items-center gap-1.5 capitalize ${theme === 'dark' ? 'text-[#FAF8FD]' : 'text-[#2e214c]'}`}>
-                {activeSection === 'home' ? 'Dashboard Home' : `${activeSection} Interface`}
+              <h1 className={`text-base font-extrabold flex items-center gap-1.5 ${theme === 'dark' ? 'text-[#FAF8FD]' : 'text-[#2e214c]'}`}>
+                {getSupportCenterTitle(activeSection)}
               </h1>
             </div>
           </div>
