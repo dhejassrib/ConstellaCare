@@ -179,11 +179,11 @@ export default function EmotionalTrendTracking({ logs = INITIAL_SYMPTOMS_LOG }: 
           
           {/* Day overview */}
           <div className="bg-slate-50 dark:bg-slate-950 rounded-xl p-4 border border-slate-100 dark:border-slate-800 flex items-center gap-3.5 shadow-sm">
-            <div className="w-10 h-10 rounded-full bg-cyan-50 dark:bg-cyan-950/20 text-cyan-600 dark:text-cyan-400 flex items-center justify-center flex-shrink-0">
+            <div className="w-10 h-10 rounded-full bg-cyan-200 dark:bg-cyan-950/20 text-cyan-700 dark:text-cyan-400 flex items-center justify-center flex-shrink-0 shadow-sm">
               <CloudSun className="w-5 h-5 animate-pulse" />
             </div>
             <div>
-              <span className="text-[9px] uppercase font-mono text-slate-400 block tracking-wide">Sky Horizon ({activeLog.date})</span>
+              <span className="text-[9px] uppercase font-mono text-slate-400 block tracking-wide">Sky Horizon</span>
               <span className="text-xs font-bold text-slate-800 dark:text-slate-100">
                 {activeLog.Anxiety > 3 ? '☁️ Thick Cloud Cover' : '✨ High Visibility'}
               </span>
@@ -192,7 +192,7 @@ export default function EmotionalTrendTracking({ logs = INITIAL_SYMPTOMS_LOG }: 
 
           {/* Hope rating */}
           <div className="bg-slate-50 dark:bg-slate-950 rounded-xl p-4 border border-slate-100 dark:border-slate-800 flex items-center gap-3.5 shadow-sm">
-            <div className="w-10 h-10 rounded-full bg-purple-50 dark:bg-purple-950/20 text-purple-600 dark:text-purple-400 flex items-center justify-center flex-shrink-0">
+            <div className="w-10 h-10 rounded-full bg-purple-50 dark:bg-purple-850/20 text-purple-600 dark:text-purple-400 flex items-center justify-center flex-shrink-0">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
@@ -226,10 +226,10 @@ export default function EmotionalTrendTracking({ logs = INITIAL_SYMPTOMS_LOG }: 
           <span className="flex items-center gap-1">✨ Hope: <b className="text-slate-700 dark:text-slate-300">Increasing</b></span>
           <span className="flex items-center gap-1">🌙 Sleep: <b className="text-slate-700 dark:text-slate-300">Unstable</b></span>
         </div>
-        <div className="flex items-center gap-1 text-[10px] bg-emerald-50 dark:bg-emerald-600/20 text-emerald-700 dark:text-emerald-400 px-2.5 py-1 rounded-full">
+        {/* <div className="flex items-center gap-1 text-[10px] bg-emerald-50 dark:bg-emerald-600/20 text-emerald-700 dark:text-emerald-400 px-2.5 py-1 rounded-full">
           <ShieldCheck className="w-3.5 h-3.5" />
           <span>Biometric validation completed successfully.</span>
-        </div>
+        </div> */}
       </div>
 
     </div>
