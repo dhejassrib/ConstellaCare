@@ -15,6 +15,15 @@ const SCAN_RESULTS = [
   'Gentle Overwhelm',
 ];
 
+const EMOTION_TIPS: Record<string, string> = {
+  Calm: 'You seem steady right now. Consider using this moment to rest and recharge.',
+  Hopeful: 'Hold onto what is going well today. Small wins matter.',
+  Neutral: 'Take a moment to check in with yourself. How are you feeling physically and emotionally?',
+  Tired: 'Your energy may be running low. A short break, water, or a stretch could help.',
+  Anxious: 'Focus on one thing you can control right now. Slow breathing may help settle racing thoughts.',
+  Overwhelmed: 'Try breaking your next task into one small step. You do not need to solve everything at once.',
+};
+
 export default function FacialEmotionDetection({ onDetected }: FacialEmotionDetectionProps) {
   const [phase, setPhase] = useState<'idle' | 'active' | 'scanning' | 'done'>('idle');
   const [cameraAvailable, setCameraAvailable] = useState(true);
@@ -25,7 +34,9 @@ export default function FacialEmotionDetection({ onDetected }: FacialEmotionDete
   const streamRef = useRef<MediaStream | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+
   const [liveEmotion, setLiveEmotion] = useState('Analyzing...');
+  const [emotionTip, setEmotionTip] = useState('');
 
   // ── Start camera ──────────────────────────────────────────────────────────
   const startCamera = async () => {
@@ -79,7 +90,7 @@ export default function FacialEmotionDetection({ onDetected }: FacialEmotionDete
 
     intervalRef.current = setInterval(() => {
       setScanProgress(prev => {
-        const next = prev + 4;
+        const next = prev + 1.5;
 
         if (next >= 100) {
           clearInterval(intervalRef.current!);
@@ -90,6 +101,7 @@ export default function FacialEmotionDetection({ onDetected }: FacialEmotionDete
 
           setLiveEmotion(result);
           setDetectedEmotion(result);
+          setEmotionTip(EMOTION_TIPS[result]);
           setPhase('done');
           onDetected(result);
 
@@ -115,38 +127,6 @@ export default function FacialEmotionDetection({ onDetected }: FacialEmotionDete
     setDetectedEmotion(null);
     setScanProgress(0);
   };
-
-  // ── Run scan ──────────────────────────────────────────────────────────────
-  // const startScan = () => {
-
-  //   const LIVE_EMOTIONS = [
-  //     'Calm',
-  //     'Hopeful',
-  //     'Neutral',
-  //     'Tired',
-  //     'Anxious',
-  //     'Overwhelmed',
-  //   ];
-
-  //   if (phase !== 'active') return;
-  //   setPhase('scanning');
-  //   setScanProgress(0);
-
-  //   intervalRef.current = setInterval(() => {
-  //     setScanProgress(prev => {
-  //       const next = prev + 4;
-  //       if (next >= 100) {
-  //         clearInterval(intervalRef.current!);
-  //         const result = SCAN_RESULTS[Math.floor(Math.random() * SCAN_RESULTS.length)];
-  //         setDetectedEmotion(result);
-  //         setPhase('done');
-  //         onDetected(result);
-  //         return 100;
-  //       }
-  //       return next;
-  //     });
-  //   }, 80);
-  // };
 
   // ── Cleanup on unmount ────────────────────────────────────────────────────
   useEffect(() => {
@@ -266,7 +246,13 @@ export default function FacialEmotionDetection({ onDetected }: FacialEmotionDete
         {/* Scan progress badge */}
         {phase === 'scanning' && (
           <div className="absolute top-3 left-3 bg-slate-900/85 border border-purple-500/40 px-2 py-0.5 rounded font-mono text-[9px] text-purple-300 z-20">
-            SCANNING: {scanProgress}%
+            {scanProgress < 33
+              ? 'DETECTING FACE'
+              : scanProgress < 66
+              ? 'ANALYZING EXPRESSION'
+              : 'MAPPING EMOTION'}
+            {' · '}
+            {Math.round(scanProgress)}%
           </div>
         )}
 
@@ -302,9 +288,19 @@ export default function FacialEmotionDetection({ onDetected }: FacialEmotionDete
           )}
 
           {phase === 'done' && (
+            // <button
+            //   onClick={() => { setPhase('active'); setScanProgress(0); setDetectedEmotion(null); }}
+            //   className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl cursor-pointer transition-colors"
+            // >
+            //   Scan Again
+            // </button>
             <button
-              onClick={() => { setPhase('active'); setScanProgress(0); setDetectedEmotion(null); }}
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl cursor-pointer transition-colors"
+              onClick={() => {
+                setPhase('active');
+                setScanProgress(0);
+                setDetectedEmotion(null);
+              }}
+              className="px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-bold rounded-xl cursor-pointer transition-colors"
             >
               Scan Again
             </button>
@@ -320,7 +316,7 @@ export default function FacialEmotionDetection({ onDetected }: FacialEmotionDete
       )}
 
       {/* ── Result card ── */}
-      {detectedEmotion && (
+      {/* {detectedEmotion && (
         <div className="w-full bg-emerald-50 dark:bg-emerald-950/25 border border-emerald-200 dark:border-emerald-900/40 rounded-xl p-4 text-center relative overflow-hidden">
           <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/8 blur-xl rounded-full" />
           <div className="flex items-center justify-center gap-1.5 text-emerald-700 dark:text-emerald-300 font-bold text-sm mb-1">
@@ -332,6 +328,28 @@ export default function FacialEmotionDetection({ onDetected }: FacialEmotionDete
             <span className="font-extrabold text-purple-600 dark:text-purple-400">{detectedEmotion}</span>
             {' '}· Constellation index expanded ✨
           </p>
+        </div>
+      )} */}
+      {detectedEmotion && (
+        <div className="w-full bg-emerald-50 dark:bg-emerald-200/25 border border-emerald-200 dark:border-emerald-400/40 rounded-xl p-4 text-center relative overflow-hidden">
+
+          <div className="flex items-center justify-center gap-1.5 text-emerald-700 dark:text-emerald-500 font-bold text-sm mb-2">
+            <Check className="w-4 h-4 text-emerald-500" />
+            Scan Complete
+          </div>
+
+          <p className="text-sm font-bold text-purple-600 dark:text-purple-400 mb-2">
+            Detected Emotion: {detectedEmotion}
+          </p>
+
+          <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            {emotionTip}
+          </p>
+
+          <p className="text-xs font-black theme-heading leading-relaxed">
+            Constellation index expanded ✨
+          </p>
+
         </div>
       )}
     </div>
