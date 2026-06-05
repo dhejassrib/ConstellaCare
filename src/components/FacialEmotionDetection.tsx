@@ -25,6 +25,8 @@ export default function FacialEmotionDetection({ onDetected }: FacialEmotionDete
   const streamRef = useRef<MediaStream | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  const [liveEmotion, setLiveEmotion] = useState('Analyzing...');
+
   // ── Start camera ──────────────────────────────────────────────────────────
   const startCamera = async () => {
     setDetectedEmotion(null);
@@ -54,6 +56,51 @@ export default function FacialEmotionDetection({ onDetected }: FacialEmotionDete
     }
   };
 
+  const startScan = () => {
+  const LIVE_EMOTIONS = [
+    'Calm',
+    'Hopeful',
+    'Neutral',
+    'Tired',
+    'Anxious',
+    'Overwhelmed',
+  ];
+
+  if (phase !== 'active') return;
+
+  setPhase('scanning');
+  setScanProgress(0);
+
+  const emotionInterval = setInterval(() => {
+    setLiveEmotion(
+      LIVE_EMOTIONS[Math.floor(Math.random() * LIVE_EMOTIONS.length)]
+    );
+    }, 500);
+
+    intervalRef.current = setInterval(() => {
+      setScanProgress(prev => {
+        const next = prev + 4;
+
+        if (next >= 100) {
+          clearInterval(intervalRef.current!);
+          clearInterval(emotionInterval);
+
+          const result =
+            LIVE_EMOTIONS[Math.floor(Math.random() * LIVE_EMOTIONS.length)];
+
+          setLiveEmotion(result);
+          setDetectedEmotion(result);
+          setPhase('done');
+          onDetected(result);
+
+          return 100;
+        }
+
+        return next;
+      });
+    }, 80);
+  };
+
   // ── Stop camera ───────────────────────────────────────────────────────────
   const stopCamera = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -70,26 +117,36 @@ export default function FacialEmotionDetection({ onDetected }: FacialEmotionDete
   };
 
   // ── Run scan ──────────────────────────────────────────────────────────────
-  const startScan = () => {
-    if (phase !== 'active') return;
-    setPhase('scanning');
-    setScanProgress(0);
+  // const startScan = () => {
 
-    intervalRef.current = setInterval(() => {
-      setScanProgress(prev => {
-        const next = prev + 4;
-        if (next >= 100) {
-          clearInterval(intervalRef.current!);
-          const result = SCAN_RESULTS[Math.floor(Math.random() * SCAN_RESULTS.length)];
-          setDetectedEmotion(result);
-          setPhase('done');
-          onDetected(result);
-          return 100;
-        }
-        return next;
-      });
-    }, 80);
-  };
+  //   const LIVE_EMOTIONS = [
+  //     'Calm',
+  //     'Hopeful',
+  //     'Neutral',
+  //     'Tired',
+  //     'Anxious',
+  //     'Overwhelmed',
+  //   ];
+
+  //   if (phase !== 'active') return;
+  //   setPhase('scanning');
+  //   setScanProgress(0);
+
+  //   intervalRef.current = setInterval(() => {
+  //     setScanProgress(prev => {
+  //       const next = prev + 4;
+  //       if (next >= 100) {
+  //         clearInterval(intervalRef.current!);
+  //         const result = SCAN_RESULTS[Math.floor(Math.random() * SCAN_RESULTS.length)];
+  //         setDetectedEmotion(result);
+  //         setPhase('done');
+  //         onDetected(result);
+  //         return 100;
+  //       }
+  //       return next;
+  //     });
+  //   }, 80);
+  // };
 
   // ── Cleanup on unmount ────────────────────────────────────────────────────
   useEffect(() => {
@@ -164,6 +221,33 @@ export default function FacialEmotionDetection({ onDetected }: FacialEmotionDete
             <div className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-purple-400/80" />
             <div className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-purple-400/80" />
             <div className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-purple-400/80" />
+          </div>
+        )}
+
+        {/* Face tracking box */}
+        {isLive && (
+          <div
+            className="absolute border-2 border-purple-400 rounded-xl pointer-events-none"
+            style={{
+              width: '140px',
+              height: '180px',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
+              boxShadow: '0 0 20px rgba(192,132,252,0.35)',
+            }}
+          />
+        )}
+
+        {/* Live emotion label */}
+        {isLive && (
+          <div
+            className="absolute left-1/2 -translate-x-1/2 bg-slate-900/90 border border-purple-500/40 px-3 py-1 rounded-full z-20"
+            style={{ top: 'calc(50% - 120px)' }}
+          >
+            <span className="text-[10px] font-mono text-purple-300 font-bold uppercase tracking-wider">
+              {liveEmotion}
+            </span>
           </div>
         )}
 
