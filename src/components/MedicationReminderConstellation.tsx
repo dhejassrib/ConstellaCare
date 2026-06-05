@@ -160,7 +160,7 @@ export default function MedicationReminderConstellation({
         
         {/* Left Column: Form & Add Medications */}
         <div className="space-y-6">
-          <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2.5xl border border-slate-100 dark:border-slate-850">
+          <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-100 dark:border-slate-850">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#4f426d] dark:text-slate-350 flex items-center gap-1.5 mb-3">
               <Plus className="w-4 h-4 text-purple-500" /> Add New Medication
             </h4>
@@ -223,13 +223,13 @@ export default function MedicationReminderConstellation({
             <h4 className="text-xs font-black uppercase tracking-wider text-[#a855f7] flex items-center gap-1.5">
               <Calendar className="w-4 h-4" /> Weekly Tracking Calendar
             </h4>
-            {/* <button
+            <button
               onClick={checkWeekCompletion}
               disabled={meds.length === 0}
-              className="text-[10px] font-extrabold uppercase tracking-widest px-3 py-1.5 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-700 dark:bg-purple-950/50 dark:text-purple-300 border border-purple-500/20 disabled:opacity-40 select-none cursor-pointer"
+              className="text-[10px] font-extrabold uppercase tracking-widest px-3 py-1.5 rounded-xl bg-purple-100 hover:bg-purple-500 text-purple-700 dark:bg-purple-950/50 dark:text-purple-300 border border-purple-500/20 disabled:opacity-40 select-none cursor-pointer"
             >
-              🌌 Light Up Constellation Week
-            </button> */}
+              Light Up Constellation Week
+            </button>
           </div>
 
           <div className="space-y-4">
@@ -241,15 +241,15 @@ export default function MedicationReminderConstellation({
               meds.map((med) => (
                 <div
                   key={med.id}
-                  className="p-4 bg-slate-50/30 dark:bg-[#110d24]/45 border border-slate-100 dark:border-purple-550/15 rounded-2.5xl shadow-sm hover:border-purple-500/20 transition-all"
+                  className="p-4 bg-slate-50/30 dark:bg-[#110d24]/45 border border-slate-100 dark:border-purple-550/15 rounded-2xl shadow-sm hover:border-purple-500/20 transition-all"
                 >
                   <div className="flex items-start justify-between gap-4 mb-3 border-b border-dashed border-slate-150 dark:border-purple-500/5 pb-2">
                     <div>
                       <h5 className="text-xs font-bold text-[#1e133a] dark:text-slate-150 flex items-center gap-1.5 leading-none">
                         <Pill className="w-3.5 h-3.5 text-pink-500 animate-pulse" />
-                        {med.name}
+                        <span className="text-smfont-black theme-heading">{med.name}</span>
                       </h5>
-                      <span className="text-[10px] text-slate-400 block mt-1 font-mono">{med.dosage} // {med.schedule}</span>
+                      <span className="text-[10px] text-slate-400 block mt-1 font-mono">{med.dosage} , {med.schedule}</span>
                     </div>
 
                     <button
@@ -293,7 +293,7 @@ export default function MedicationReminderConstellation({
           
           {/* Constellation visualizer mockup inside component */}
           {meds.length > 0 && (
-            <div className="on-dark-surface p-4 rounded-2.5xl bg-[#1a1530] text-[#decfe6] border border-purple-500/20 text-center relative overflow-hidden">
+            <div className="on-dark-surface p-4 rounded-2xl bg-[#1a1530] text-[#decfe6] border border-purple-500/20 text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-20 h-20 bg-pink-500/10 blur-xl rounded-full" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-[0.5px] border-b border-dashed border-purple-500/15" />
               <h5 className="text-[10px] font-black uppercase tracking-widest text-pink-400 block font-mono">ADHERENCE CONSTELLATION MAP</h5>
