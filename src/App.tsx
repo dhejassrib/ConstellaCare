@@ -10,6 +10,8 @@ import {
   INITIAL_MILESTONES 
 } from './data';
 import { Section, ConstellationStar, ChatMessage, JournalEntry } from './types';
+import styles from './Landing.module.css';
+
 
 // Import modular subcomponents
 import LivingConstellation from './components/LivingConstellation';
@@ -28,6 +30,7 @@ import CaregiverDashboard from './components/CaregiverDashboard';
 import SharedConstellation from './components/SharedConstellation';
 import ProgressiveAuthModal from './components/ProgressiveAuthModal';
 import MedicationReminderConstellation from './components/MedicationReminderConstellation';
+import ConstellaLogo from './components/ConstellaLogo';
 
 // Lucide Icons
 import {
@@ -199,7 +202,7 @@ export default function App() {
   }, [activeSection]);
 
   // Star Accretion engine (illuminates a node on mapping coordinates)
-  const addStar = (label: string, category: 'mood' | 'calm' | 'journal' | 'appointment' | 'symptom') => {
+  const addStar = (label: string, category: 'mood' | 'calm' | 'journal' | 'appointment' | 'symptom' | 'medications') => {
     const newStar: ConstellationStar = {
       id: Math.random().toString(),
       x: 10 + Math.random() * 80,
@@ -370,7 +373,10 @@ export default function App() {
               className="flex items-center gap-2.5 cursor-pointer group"
               title="Return to Landing Page"
             >
-              <span className="w-8 h-8 rounded-xl bg-gradient-to-r from-pink-400 to-purple-400 flex items-center justify-center text-white text-lg font-black shadow-lg animate-pulse">C</span>
+
+              <span className="w-8 h-8 flex justify-center mb-4">
+                <ConstellaLogo size={50} className={styles.logo} />
+              </span>
               <span className="font-bold text-xl bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent italic tracking-tight group-hover:opacity-85">
                 ConstellaCare
               </span>
@@ -860,8 +866,8 @@ export default function App() {
 
                     <div className="bg-purple-50/60 dark:bg-purple-950/20 border border-purple-200/60 dark:border-purple-100/60 p-4.5 rounded-2xl flex items-center justify-between text-left">
                       <div>
-                        <b className="text-xs text-[#1e133a] dark:text-slate-100 block font-bold">Deep Cosmic Rest Playlist</b>
-                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400 block mt-0.5">Opens in Spotify when you need background calm.</span>
+                        <b className="text-xs font-black font-bold theme-heading">Deep Cosmic Rest Playlist</b>
+                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400 block mt-0.5">Opens in Spotify when you ne  ed background calm.</span>
                       </div>
                       <a 
                         href="https://open.spotify.com/playlist/37i9dQZF1DWXe9gFZP0gtP" 
