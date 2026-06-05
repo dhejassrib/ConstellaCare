@@ -153,6 +153,22 @@
   }
 }
 
+.logo {
+  display: block;
+  margin: 0 auto 1rem;
+  filter: drop-shadow(0 0 12px rgba(212, 121, 142, 0.35));
+  animation: logoGlow 4s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(212, 121, 142, 0.3)); }
+  50% { filter: drop-shadow(0 0 18px rgba(201, 160, 220, 0.55)); }
+}
+
+:global(.dark) .logo {
+  filter: drop-shadow(0 0 14px rgba(244, 212, 168, 0.4));
+}
+
 .brand {
   font-size: clamp(2.6rem, 7vw, 3.8rem);
   font-weight: 900;
