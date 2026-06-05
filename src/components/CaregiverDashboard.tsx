@@ -257,7 +257,6 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
     }
   };
 
-  // 🔥 UPGRADED: AI Caregiver Decompress Engine using Official Gen AI SDK
   const saveJournalEntry = async () => {
     if (!journalText.trim()) return;
     setIsJournalAnalyzing(true);
@@ -292,7 +291,6 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
       setJournalText('');
     } catch (error) {
       console.error("Caregiver Journal AI Processing Error:", error);
-      // Fallback response if API key fails or truncates
       const fallbackEntry = {
         id: Math.random().toString(),
         text: journalText,
@@ -307,7 +305,6 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
     }
   };
 
-  // 🔥 UPGRADED: Real Web Speech Recognition loop for Caregiver Voice Logging
   const triggerVoiceNote = () => {
     if (voiceActive) {
       setVoiceActive(false);
@@ -514,10 +511,11 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
             </div>
           )}
 
-          {/* 🎙️ LIVE GERMINI VOICE DECOMPRESS SPACE VIEW */}
+          {/* 🎙️ LIVE GEMINI VOICE DECOMPRESS SPACE VIEW */}
           {activeSection === 'journal' && (
             <div className="space-y-8 animate-fade-in text-left">
               <div className={`border rounded-3xl p-6 shadow-xl leading-relaxed relative overflow-hidden ${cardBg} ${cardBorder}`}>
+                <span className="absolute top-0 right-0 w-28 h-28 bg-[#d4798e]/5 blur-2xl rounded-full" />
                 <h3 className={`text-md font-extrabold flex items-center gap-2 ${txt}`}>
                   <Lock className="w-4 h-4 text-emerald-500" /> Secure Caregiver Decompress Space
                 </h3>
@@ -533,6 +531,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                       ))}
                     </div>
                     <button
+                      type="button"
                       onClick={triggerVoiceNote}
                       className={`w-14 h-14 rounded-full flex items-center justify-center cursor-pointer shadow-lg transition-all ${voiceActive ? 'bg-red-500 animate-pulse' : 'bg-purple-600'}`}
                     >
@@ -545,13 +544,14 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                     <textarea
                       className={`w-full text-xs p-4 rounded-2xl border focus:outline-none focus:border-[#d4798e] bg-transparent ${theme === 'dark' ? 'text-slate-200 border-slate-800' : 'text-[#2e214c] border-purple-300'}`}
                       rows={6}
-                      placeholder="Pour whatever fits inside your heart tonight..."
+                      placeholder="Pour whatever fits inside your heart tonight. Sarah cannot read this; your boundaries are locked."
                       value={journalText}
                       onChange={(e) => setJournalText(e.target.value)}
                     />
                     <div className="flex justify-between items-center mt-3">
                       <span className="text-[10px] text-slate-500">🔒 Dynamic Aligned Encryption</span>
                       <button
+                        type="button"
                         onClick={saveJournalEntry}
                         disabled={!journalText.trim() || isJournalAnalyzing}
                         className="px-5 py-2.5 rounded-xl bg-[#d4798e] hover:bg-[#ea96a6] text-white text-xs font-bold cursor-pointer disabled:opacity-40"
@@ -578,7 +578,9 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                             <Sparkles className="w-4 h-4 text-[#d4798e] mt-0.5 flex-shrink-0 animate-pulse" />
                             <div>
                               <b className="uppercase font-bold tracking-wider text-[8px] text-[#ea96a6] block mb-0.5">Astra Compass Interpretation:</b>
-                              <p className="italic text-slate-600 dark:text-slate-400 leading-normal">{log.reply}</p>
+                              <p className="italic text-slate-600 dark:text-slate-400 leading-normal">
+                                {log.reply || "Astra has synchronized your decompress alignment vector safely."}
+                              </p>
                             </div>
                           </div>
                         </div>
