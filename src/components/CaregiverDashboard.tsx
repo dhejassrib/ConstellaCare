@@ -480,7 +480,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                 { id: 'shared', label: 'Shared Constellation', icon: <Sparkles className="w-3.5 h-3.5 text-pink-400 animate-pulse" /> },
                 { id: 'emotion', label: 'Caregiver Wellbeing', icon: <Activity className="w-3.5 h-3.5" /> },
                 { id: 'appointments', label: 'Treatment Timeline', icon: <Calendar className="w-3.5 h-3.5" /> },
-                { id: 'communication', label: 'Comm. Assistant', icon: <MessageSquare className="w-3.5 h-3.5" /> },
+                { id: 'communication', label: 'Communication Assistant', icon: <MessageSquare className="w-3.5 h-3.5" /> },
                 { id: 'circle', label: 'Care Orbit Circle', icon: <Users className="w-3.5 h-3.5" /> },
                 { id: 'journal', label: 'Private Journal', icon: <Mic className="w-3.5 h-3.5" /> },
               ].map((item) => (
@@ -563,7 +563,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
             <div>
               {/* <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#d4798e] block">COMMAND OVERVIEW</span> */}
               <h1 className={`text-base font-extrabold flex items-center gap-1.5 capitalize ${theme === 'dark' ? 'text-[#FAF8FD]' : 'text-[#2e214c]'}`}>
-                {activeSection === 'home' ? 'Operations Dashboard' : `${activeSection} Interface`}
+                {activeSection === 'home' ? 'Dashboard Home' : `${activeSection} Interface`}
               </h1>
             </div>
           </div>
