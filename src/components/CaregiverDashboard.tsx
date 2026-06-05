@@ -674,7 +674,7 @@ export default function CaregiverDashboard({ theme, onThemeToggle, onNavigate, u
                     <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-[#d4798e]/10 border border-[#d4798e]/20 text-[#ea96a6] mb-3`}>
                       <ShieldCheck className="w-2.5 h-2.5" /> Care coordination stable
                     </span>
-                    <h2 className={`text-xl md:text-2xl font-black tracking-tight ${txt}`}>Your patient's support is part of their healing journey.</h2>
+                    <h2 className={`text-xl md:text-2xl font-black tracking-tight theme-heading ${txt}`}>Your patient's support is part of their healing journey.</h2>
                     <p className={`text-xs mt-1 max-w-lg leading-relaxed ${txtMuted}`}>
                       You have saved <b className={theme === 'dark' ? 'text-[#f4d4a8]' : 'text-purple-700'}>4 treatment parameters</b> this week. Your patient's Fatigue Index: Moderate.
                     </p>
