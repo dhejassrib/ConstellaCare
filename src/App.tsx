@@ -792,8 +792,7 @@ export default function App() {
             <div className="space-y-8 animate-fade-in">
               <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl leading-relaxed">
                 <p className="text-sm text-[#4d3c69] dark:text-slate-400 leading-relaxed center">
-                  Checking in with how you are feeling helps track your emotional wellbeing over time. <br>
-                  </br>Use a biometric mood scan, emotion card, or voice journal - whatever feels easiest for you today.
+                  Checking in with how you are feeling helps track your emotional wellbeing over time. Use a biometric mood scan, emotion card, or voice journal — then explore your Emotional Weather Sky chart to visualize how your feelings evolve over time.
                 </p>
               </div>
 
@@ -833,10 +832,10 @@ export default function App() {
               )}
               
               {/* MAP EMOTIONAL SKY CHART */}
-              {/* <div className="space-y-4">
+              <div className="space-y-4">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#a855f7] block pl-1.5">Emotional Weather Sky Chart</span>
                 <EmotionalTrendTracking />
-              </div> */}
+              </div>
             </div>
           )}
 

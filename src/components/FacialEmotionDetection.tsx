@@ -179,8 +179,8 @@ export default function FacialEmotionDetection({ onDetected }: FacialEmotionDete
             <div className="w-12 h-12 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center mb-3">
               <Camera className="w-5 h-5 text-slate-400" />
             </div>
-            <h4 className="text-xs font-bold text-slate-300 font-mono tracking-widest uppercase mb-1">
-              Biometric Mood Scanner
+            <h4 className="text-xs font-bold font-mono tracking-widest text-[#a855f7] uppercase block mb-2 text-center">
+              Face Scanner
             </h4>
             <p className="text-[11px] text-slate-500 max-w-[220px] mb-5 leading-relaxed">
               Map your current emotional state using your facial expression patterns.

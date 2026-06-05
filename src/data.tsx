@@ -110,15 +110,6 @@ export const INITIAL_CARE_CIRCLE: CareCircleNode[] = [
   { id: '4', name: 'Gavin', relationship: 'Best Friend', lastActive: '5h ago', message: 'Shared a funny music video: \"Keep shine in your sky!\"', angle: 310, distance: 140, color: '#3dd5f3' },
 ];
 
-// export const INITIAL_MILESTONES: Milestone[] = [
-//   { id: 'm1', date: '2026-05-15', label: 'Oncology Consultation', done: true, type: 'medical', notes: 'Agreed on chemotherapy parameters and schedule.' },
-//   { id: 'm2', date: '2026-05-20', label: 'Chemo Infusion #1', done: true, type: 'medical', notes: 'Completed. Experienced moderate nausea, but stable.' },
-//   { id: 'm3', date: '2026-05-26', label: 'Care Circle Grounding', done: true, type: 'emotional', notes: 'Mom joined the Constellation. Star lit.' },
-//   { id: 'm4', date: 'Yesterday', label: '3-Min Deep Breathing Star', done: true, type: 'selfcare', notes: 'Practiced bubble expansion twice.' },
-//   { id: 'm5', date: 'Tomorrow, 2:30 PM', label: 'Appointment with Dr. Evelyn Moss', done: false, type: 'medical', notes: 'Chemotherapy review and next schedule.' },
-//   { id: 'm6', date: 'Next Week', label: 'Chemo Infusion #2', done: false, type: 'medical', notes: 'Prepare hydration levels 48h before.' },
-// ];
-
 export const INITIAL_MILESTONES: Milestone[] = [
   { id: 'm1', date: '2026-05-15', label: 'Oncology Consultation', done: true, type: 'medical', notes: 'Agreed on chemotherapy parameters and schedule.' },
 
@@ -149,7 +140,7 @@ export const INITIAL_SYMPTOMS_LOG: SymptomLog[] = [
   { date: 'Thu', Fatigue: 4, Nausea: 2, Pain: 2, Anxiety: 3, 'Appetite loss': 2, 'Sleep issues': 3 },
   { date: 'Fri', Fatigue: 3, Nausea: 1, Pain: 1, Anxiety: 2, 'Appetite loss': 1, 'Sleep issues': 2 },
   { date: 'Sat', Fatigue: 2, Nausea: 1, Pain: 1, Anxiety: 2, 'Appetite loss': 1, 'Sleep issues': 2 },
-  { date: 'Sun (Today)', Fatigue: 3, Nausea: 2, Pain: 2, Anxiety: 3, 'Appetite loss': 2, 'Sleep issues': 3 },
+  { date: 'Sun', Fatigue: 3, Nausea: 2, Pain: 2, Anxiety: 3, 'Appetite loss': 2, 'Sleep issues': 3 },
 ];
 
 export const HELPFUL_RESOURCES = [

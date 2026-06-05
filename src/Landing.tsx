@@ -58,7 +58,7 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
       <div className={styles.content}>
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/15 mb-4 animate-bounce" style={{ animationDuration: '3s' }}>
           <Sparkles className="w-3.5 h-3.5 text-pink-400" />
-          <span className="text-[10px] font-bold uppercase tracking-widest text-[#a855f7] dark:text-pink-300">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#a855f7] dark:text-pink-500">
             Celestial Companion
           </span>
         </div>
