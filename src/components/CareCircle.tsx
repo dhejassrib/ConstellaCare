@@ -205,12 +205,12 @@ export default function CareCircle({ nodes: propNodes, onAddMessage }: CareCircl
                       <Clock className="w-3.5 h-3.5" />
                       <span>Awaiting alignment match approval...</span>
                     </div>
-                    <button
+                    {/* <button
                       onClick={() => approveNodeHandler(selectedNode.id)}
                       className="bg-amber-500 hover:bg-amber-600 text-white font-bold text-[10px] px-2.5 py-1 rounded-lg transition flex items-center gap-1 cursor-pointer"
                     >
                       <Check className="w-3 h-3" /> Approve (Demo)
-                    </button>
+                    </button> */}
                   </div>
                 )}
 
@@ -228,7 +228,7 @@ export default function CareCircle({ nodes: propNodes, onAddMessage }: CareCircl
 
           {/* Invitation setup form */}
           <form onSubmit={handleInvite} className="mt-6 border-t border-slate-100 dark:border-slate-800 pt-5">
-            <span className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-2">Connect New Constellation Ally</span>
+            <span className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-2">Connect New Constellation</span>
             <div className="flex gap-2">
               <input
                 type="email"
