@@ -77,7 +77,7 @@ export default function EmotionalTrendTracking({ logs = INITIAL_SYMPTOMS_LOG }: 
         </div>
       </div>
 
-      {/* 🌌 Cosmic SVG Star Chart Canvas — Completely solid backgrounds to overpower external wrapper masks */}
+      {/* Cosmic SVG Star Chart Canvas */}
       <div className="relative w-full overflow-x-auto select-none py-2 bg-[#FAF8FD] dark:bg-slate-950 border border-purple-200/60 dark:border-slate-850 rounded-2xl shadow-inner max-w-full transition-all duration-500">
         
         {/* Subtle grid lines */}
@@ -139,12 +139,14 @@ export default function EmotionalTrendTracking({ logs = INITIAL_SYMPTOMS_LOG }: 
         </div>
       </div>
 
-      {/* Weather Highlights Panels */}
+      {/* Weather Highlights Panels — FIXED: Overridden with native inline style properties to kill the gray mask backgrounds */}
       {activeLog && (
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-slate-800 dark:text-slate-100">
+          
+          {/* Left Card: Sky Horizon (Forced Pastel Cyan) */}
           <div className="bg-slate-50 dark:bg-slate-950 rounded-xl p-4 border border-slate-100 dark:border-slate-800 flex items-center gap-3.5 shadow-sm">
-            <div className="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-950/20 text-cyan-700 dark:text-cyan-400 flex items-center justify-center flex-shrink-0">
-              <CloudSun className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm" style={{ backgroundColor: '#e0f7fa' }}>
+              <CloudSun className="w-5 h-5 stroke-[2.5]" style={{ color: '#00838f' }} />
             </div>
             <div>
               <span className="text-[9px] uppercase font-mono text-slate-400 block tracking-wide">Sky Horizon</span>
@@ -152,9 +154,10 @@ export default function EmotionalTrendTracking({ logs = INITIAL_SYMPTOMS_LOG }: 
             </div>
           </div>
 
+          {/* Center Card: Hope Alignment (Baseline Purple) */}
           <div className="bg-slate-50 dark:bg-slate-950 rounded-xl p-4 border border-slate-100 dark:border-slate-800 flex items-center gap-3.5 shadow-sm">
-            <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-850/20 text-purple-600 dark:text-purple-400 flex items-center justify-center flex-shrink-0">
-              <Sparkles className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm" style={{ backgroundColor: '#f3e5f5' }}>
+              <Sparkles className="w-5 h-5 stroke-[2.5]" style={{ color: '#6a1b9a' }} />
             </div>
             <div>
               <span className="text-[9px] uppercase font-mono text-slate-400 block tracking-wide">Hope Alignment</span>
@@ -162,15 +165,17 @@ export default function EmotionalTrendTracking({ logs = INITIAL_SYMPTOMS_LOG }: 
             </div>
           </div>
 
+          {/* Right Card: Physical Stress Index (Forced Pastel Pink) */}
           <div className="bg-slate-50 dark:bg-slate-950 rounded-xl p-4 border border-slate-100 dark:border-slate-800 flex items-center gap-3.5 shadow-sm">
-            <div className="w-10 h-10 rounded-full bg-pink-100 dark:bg-pink-950/20 text-pink-600 dark:text-pink-400 flex items-center justify-center flex-shrink-0">
-              <Moon className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm" style={{ backgroundColor: '#fce4ec' }}>
+              <Moon className="w-5 h-5 stroke-[2.5]" style={{ color: '#c2185b' }} />
             </div>
             <div>
               <span className="text-[9px] uppercase font-mono text-slate-400 block tracking-wide">Physical Stress Index</span>
               <span className="text-xs font-bold text-slate-800 dark:text-slate-100">Level {Math.round((activeLog.Fatigue + activeLog.Nausea) / 2)} / 5 (Moderate)</span>
             </div>
           </div>
+          
         </div>
       )}
 
