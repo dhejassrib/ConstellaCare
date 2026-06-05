@@ -1,45 +1,5 @@
 import { Section, CareCircleNode, Milestone, SymptomLog } from './types';
 
-// export const NAV_GROUPS = [
-//   {
-//     group: 'Emotional Support',
-//     items: [
-//       { id: 'home' as Section, label: 'Home', icon: '⭐' },
-//       { id: 'shared' as Section, label: 'Shared Constellation', icon: '💫' },
-//       { id: 'astra' as Section, label: 'Talk to Astra', icon: '✨' },
-//       { id: 'mood' as Section, label: 'Mood Check-In', icon: '🌸' },
-//       { id: 'calm' as Section, label: 'Calm Corner', icon: '🫧' },
-//       { id: 'voice' as Section, label: 'Voice Journal', icon: '🎙️' },
-//     ],
-//   },
-//   {
-//     group: 'Care Journey',
-//     items: [
-//       { id: 'appointment' as Section, label: 'Appointment Prep', icon: '🩺' },
-//       { id: 'symptoms' as Section, label: 'Health Tracker', icon: '📋' },
-//       { id: 'medications' as Section, label: 'Medications', icon: '💊' },
-//       { id: 'timeline' as Section, label: 'Timeline', icon: '📅' },
-//       { id: 'reports' as Section, label: 'Reports', icon: '📊' },
-//     ],
-//   },
-//   {
-//     group: 'Community',
-//     items: [
-//       { id: 'circle' as Section, label: 'Care Circle', icon: '🌌' },
-//       { id: 'bottles' as Section, label: 'Message Bottles', icon: '💌' },
-//       { id: 'resources' as Section, label: 'Resources', icon: '📚' },
-//     ],
-//   },
-//   {
-//     group: 'My Constellation',
-//     items: [
-//       { id: 'progress' as Section, label: 'Progress', icon: '✨' },
-//       { id: 'milestones' as Section, label: 'Health Milestones', icon: '🌟' },
-//       { id: 'reflection' as Section, label: 'Reflection Archive', icon: '🌙' },
-//     ],
-//   },
-// ];
-
 import {
   Compass,
   Sparkles,
@@ -67,7 +27,6 @@ export const NAV_GROUPS = [
       { id: 'astra', label: 'Talk to Astra', icon: <MessageSquare className="w-3.5 h-3.5" /> },
       { id: 'mood', label: 'Mood Check-In', icon: <Heart className="w-3.5 h-3.5" /> },
       { id: 'calm', label: 'Calm Corner', icon: <Wind className="w-3.5 h-3.5" /> },
-      // { id: 'voice', label: 'Voice Journal', icon: <Mic className="w-3.5 h-3.5" /> },
     ],
   },
   {
@@ -76,8 +35,6 @@ export const NAV_GROUPS = [
       { id: 'appointment', label: 'Appointment Copilot', icon: <Calendar className="w-3.5 h-3.5" /> },
       { id: 'symptoms', label: 'Health Tracker', icon: <Activity className="w-3.5 h-3.5" /> },
       { id: 'medications', label: 'Medications', icon: <Pill className="w-3.5 h-3.5" /> },
-      // { id: 'timeline', label: 'Timeline', icon: <Clock className="w-3.5 h-3.5" /> },
-      // { id: 'reports', label: 'Reports', icon: <BarChart3 className="w-3.5 h-3.5" /> },
       { id: 'timeline', label: 'Health Journey Timeline', icon: <Clock className="w-3.5 h-3.5" /> },
     ],
   },
@@ -92,8 +49,6 @@ export const NAV_GROUPS = [
   {
     group: 'Personal',
     items: [
-      // { id: 'progress', label: 'Progress', icon: <Trophy className="w-3.5 h-3.5" /> },
-      // { id: 'milestones', label: 'Health Milestones', icon: <Star className="w-3.5 h-3.5" /> },
       { id: 'reflection', label: 'Reflection Archive', icon: <Moon className="w-3.5 h-3.5" /> },
       { id: 'resources', label: 'Resources', icon: <BookOpen className="w-3.5 h-3.5" /> },
     ],
@@ -155,15 +110,6 @@ export const INITIAL_CARE_CIRCLE: CareCircleNode[] = [
   { id: '4', name: 'Gavin', relationship: 'Best Friend', lastActive: '5h ago', message: 'Shared a funny music video: \"Keep shine in your sky!\"', angle: 310, distance: 140, color: '#3dd5f3' },
 ];
 
-// export const INITIAL_MILESTONES: Milestone[] = [
-//   { id: 'm1', date: '2026-05-15', label: 'Oncology Consultation', done: true, type: 'medical', notes: 'Agreed on chemotherapy parameters and schedule.' },
-//   { id: 'm2', date: '2026-05-20', label: 'Chemo Infusion #1', done: true, type: 'medical', notes: 'Completed. Experienced moderate nausea, but stable.' },
-//   { id: 'm3', date: '2026-05-26', label: 'Care Circle Grounding', done: true, type: 'emotional', notes: 'Mom joined the Constellation. Star lit.' },
-//   { id: 'm4', date: 'Yesterday', label: '3-Min Deep Breathing Star', done: true, type: 'selfcare', notes: 'Practiced bubble expansion twice.' },
-//   { id: 'm5', date: 'Tomorrow, 2:30 PM', label: 'Appointment with Dr. Evelyn Moss', done: false, type: 'medical', notes: 'Chemotherapy review and next schedule.' },
-//   { id: 'm6', date: 'Next Week', label: 'Chemo Infusion #2', done: false, type: 'medical', notes: 'Prepare hydration levels 48h before.' },
-// ];
-
 export const INITIAL_MILESTONES: Milestone[] = [
   { id: 'm1', date: '2026-05-15', label: 'Oncology Consultation', done: true, type: 'medical', notes: 'Agreed on chemotherapy parameters and schedule.' },
 
@@ -194,7 +140,7 @@ export const INITIAL_SYMPTOMS_LOG: SymptomLog[] = [
   { date: 'Thu', Fatigue: 4, Nausea: 2, Pain: 2, Anxiety: 3, 'Appetite loss': 2, 'Sleep issues': 3 },
   { date: 'Fri', Fatigue: 3, Nausea: 1, Pain: 1, Anxiety: 2, 'Appetite loss': 1, 'Sleep issues': 2 },
   { date: 'Sat', Fatigue: 2, Nausea: 1, Pain: 1, Anxiety: 2, 'Appetite loss': 1, 'Sleep issues': 2 },
-  { date: 'Sun (Today)', Fatigue: 3, Nausea: 2, Pain: 2, Anxiety: 3, 'Appetite loss': 2, 'Sleep issues': 3 },
+  { date: 'Sun', Fatigue: 3, Nausea: 2, Pain: 2, Anxiety: 3, 'Appetite loss': 2, 'Sleep issues': 3 },
 ];
 
 export const HELPFUL_RESOURCES = [

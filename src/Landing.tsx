@@ -3,6 +3,7 @@ import styles from './Landing.module.css';
 import ConstellationSphere from './components/ConstellationSphere';
 import ConstellaLogo from './components/ConstellaLogo';
 import { Sun, Moon, Sparkles, Heart } from 'lucide-react';
+import ConstellaLogo from './components/ConstellaLogo';
 
 interface LandingProps {
   theme: 'light' | 'dark';
@@ -18,10 +19,6 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
 
   return (
     <div className={styles.page}>
-      {/* Absolute 3D Interactive Celestial Constellation Overlay */}
-      {/* <div className="absolute inset-0 z-0 overflow-hidden pointer-events-auto">
-        <ConstellationSphere theme={theme} />
-      </div> */}
 
       {/* Subtle backing starry particles spacer */}
       <div className={styles.stars} aria-hidden />
@@ -63,7 +60,7 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
       <div className={styles.content}>
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/15 mb-4 animate-bounce" style={{ animationDuration: '3s' }}>
           <Sparkles className="w-3.5 h-3.5 text-pink-400" />
-          <span className="text-[10px] font-bold uppercase tracking-widest text-[#a855f7] dark:text-pink-300">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#a855f7] dark:text-pink-500">
             Celestial Companion
           </span>
         </div>
@@ -94,7 +91,6 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
           </button>
         </div>
 
-        {/* <p className={styles.sub}>Turning health journeys into constellations of support.</p> */}
       </div>
 
       {/* ── About Modal ── */}
@@ -215,4 +211,3 @@ export default function Landing({ theme, onThemeToggle, onNavigate }: LandingPro
     </div>
   );
 }
-// 💜 You are not alone — help is always within reach

@@ -170,10 +170,10 @@ export default function ProgressiveAuthModal({
                 <Star className="w-5 h-5 text-pink-500 flex-shrink-0 mt-0.5 animate-pulse" />
                 <div>
                   <span className="text-[9px] uppercase font-mono font-black text-pink-500 block tracking-widest leading-none">
-                    ⭐ JOURNEY COMPLETED
+                      JOURNEY COMPLETED
                   </span>
                   <p className={`text-[11.5px] mt-1 leading-relaxed ${theme === 'dark' ? 'text-purple-300' : 'text-slate-600'}`}>
-                    You earned a shiny coordinate for completing this mindful support task. Create a secure credentials link to preserve your checklists, notes, trends, and message logs.
+                    Your progress can be securely preserved across devices. Sign in or create an account to save your checklists, notes, trends, and communication history.
                   </p>
                 </div>
               </div>
@@ -222,7 +222,7 @@ export default function ProgressiveAuthModal({
 
                     <button
                       onClick={() => setSimState('email')}
-                      className="w-full py-3 rounded-2xl bg-[#a855f7]/15 dark:bg-[#a855f7]/25 hover:bg-[#a855f7]/35 text-[#a855f7] dark:text-[#fba5c9] border border-purple-400/20 dark:border-purple-500/30 font-sans font-extrabold text-xs shadow-sm cursor-pointer transition-transform"
+                      className="w-full py-3 rounded-2xl bg-[#a855f7]/15 dark:bg-[#a855f7]/25 hover:bg-[#a855f7]/35 text-[#a855f7] dark:text-[#fba5c9] border border-purple-500/20 dark:border-purple-400/30 font-sans font-extrabold text-xs shadow-sm cursor-pointer transition-transform"
                     >
                       {authMode === 'signup' ? 'Create Account with Email' : 'Continue with Email'}
                     </button>

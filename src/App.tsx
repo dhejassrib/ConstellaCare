@@ -10,6 +10,8 @@ import {
   INITIAL_MILESTONES 
 } from './data';
 import { Section, ConstellationStar, ChatMessage, JournalEntry } from './types';
+import styles from './Landing.module.css';
+
 
 // Import modular subcomponents
 import LivingConstellation from './components/LivingConstellation';
@@ -28,6 +30,7 @@ import CaregiverDashboard from './components/CaregiverDashboard';
 import SharedConstellation from './components/SharedConstellation';
 import ProgressiveAuthModal from './components/ProgressiveAuthModal';
 import MedicationReminderConstellation from './components/MedicationReminderConstellation';
+import ConstellaLogo from './components/ConstellaLogo';
 import ConstellaLogo from './components/ConstellaLogo';
 
 // Lucide Icons
@@ -200,7 +203,7 @@ export default function App() {
   }, [activeSection]);
 
   // Star Accretion engine (illuminates a node on mapping coordinates)
-  const addStar = (label: string, category: 'mood' | 'calm' | 'journal' | 'appointment' | 'symptom') => {
+  const addStar = (label: string, category: 'mood' | 'calm' | 'journal' | 'appointment' | 'symptom' | 'medications') => {
     const newStar: ConstellationStar = {
       id: Math.random().toString(),
       x: 10 + Math.random() * 80,
@@ -397,7 +400,7 @@ export default function App() {
                   <button
                     key={item.id}
                     onClick={() => {
-                      setActiveSection(item.id);
+                      setActiveSection(item.id as Section);
                       setSidebarOpen(false);
                     }}
                     className={`w-full flex items-center gap-3.5 px-3 py-2 rounded-xl text-xs font-bold leading-none capitalize transition-all duration-200 cursor-pointer ${
@@ -789,8 +792,7 @@ export default function App() {
             <div className="space-y-8 animate-fade-in">
               <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl leading-relaxed">
                 <p className="text-sm text-[#4d3c69] dark:text-slate-400 leading-relaxed center">
-                  Checking in with how you are feeling helps track your emotional wellbeing over time. <br>
-                  </br>Use a biometric mood scan, emotion card, or voice journal - whatever feels easiest for you today.
+                  Checking in with how you are feeling helps track your emotional wellbeing over time. Use a biometric mood scan, emotion card, or voice journal — then explore your Emotional Weather Sky chart to visualize how your feelings evolve over time.
                 </p>
               </div>
 
@@ -830,10 +832,10 @@ export default function App() {
               )}
               
               {/* MAP EMOTIONAL SKY CHART */}
-              {/* <div className="space-y-4">
+              <div className="space-y-4">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#a855f7] block pl-1.5">Emotional Weather Sky Chart</span>
                 <EmotionalTrendTracking />
-              </div> */}
+              </div>
             </div>
           )}
 
@@ -863,8 +865,8 @@ export default function App() {
 
                     <div className="bg-purple-50/60 dark:bg-purple-950/20 border border-purple-200/60 dark:border-purple-100/60 p-4.5 rounded-2xl flex items-center justify-between text-left">
                       <div>
-                        <b className="text-xs text-[#1e133a] dark:text-slate-100 block font-bold">Deep Cosmic Rest Playlist</b>
-                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400 block mt-0.5">Opens in Spotify when you need background calm.</span>
+                        <b className="text-xs font-black font-bold theme-heading">Deep Cosmic Rest Playlist</b>
+                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400 block mt-0.5">Opens in Spotify when you ne  ed background calm.</span>
                       </div>
                       <a 
                         href="https://open.spotify.com/playlist/37i9dQZF1DWXe9gFZP0gtP" 

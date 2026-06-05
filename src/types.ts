@@ -67,7 +67,7 @@ export interface ConstellationStar {
   x: number; // percentage coordinate 0-100
   y: number; // percentage coordinate 0-100
   label: string;
-  category: 'mood' | 'calm' | 'journal' | 'appointment' | 'symptom';
+  category: 'mood' | 'calm' | 'journal' | 'appointment' | 'symptom' | 'medications';
   timestamp: string;
   brightness: number; // pulsing strength
 }

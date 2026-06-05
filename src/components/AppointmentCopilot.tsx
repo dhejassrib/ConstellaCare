@@ -287,7 +287,7 @@ export default function AppointmentCopilot({ onQuestionsBuilt }: AppointmentCopi
                 value={newChecklistItem}
                 onChange={(e) => setNewChecklistItem(e.target.value)}
                 placeholder="Add checklist item..."
-                className="flex-1 px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent"
+                className="flex-1 px-3 py-2 text-xs rounded-xl border border-slate-100 dark:border-slate-800 bg-transparent"
               />
 
               <button

@@ -8,7 +8,17 @@ interface EmotionalTrendTrackingProps {
 }
 
 export default function EmotionalTrendTracking({ logs = INITIAL_SYMPTOMS_LOG }: EmotionalTrendTrackingProps) {
-  const [selectedDayIndex, setSelectedDayIndex] = useState<number | null>(6); // Default Sunday
+  // const [selectedDayIndex, setSelectedDayIndex] = useState<number | null>(6); // Default Sunday
+  const [selectedDayIndex, setSelectedDayIndex] = useState<number | null>(
+    new Date().getDay()
+  );
+
+  const jsDay = new Date().getDay();
+
+  const todayIndex = jsDay === 0 ? 6 : jsDay - 1;
+
+  // const todayIndex = new Date().getDay(); 
+  // 0 = Sunday, 1 = Monday, ... 6 = Saturday
 
   const activeLog = selectedDayIndex !== null ? logs[selectedDayIndex] : null;
 
@@ -153,6 +163,11 @@ export default function EmotionalTrendTracking({ logs = INITIAL_SYMPTOMS_LOG }: 
               className={`font-semibold cursor-pointer py-1 px-1.5 rounded transition ${selectedDayIndex === idx ? 'bg-purple-900/40 text-slate-200 font-bold border border-purple-500/30' : 'text-slate-550'}`}
             >
               {l.date}
+              {idx === todayIndex && (
+                <span className="ml-1 text-cyan-400">
+                  (Today)
+                </span>
+              )}
             </button>
           ))}
         </div>
@@ -211,7 +226,7 @@ export default function EmotionalTrendTracking({ logs = INITIAL_SYMPTOMS_LOG }: 
           <span className="flex items-center gap-1">✨ Hope: <b className="text-slate-700 dark:text-slate-300">Increasing</b></span>
           <span className="flex items-center gap-1">🌙 Sleep: <b className="text-slate-700 dark:text-slate-300">Unstable</b></span>
         </div>
-        <div className="flex items-center gap-1 text-[10px] bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400 border border-emerald-100 px-2.5 py-1 rounded-full">
+        <div className="flex items-center gap-1 text-[10px] bg-emerald-50 dark:bg-emerald-600/20 text-emerald-700 dark:text-emerald-400 px-2.5 py-1 rounded-full">
           <ShieldCheck className="w-3.5 h-3.5" />
           <span>Biometric validation completed successfully.</span>
         </div>
