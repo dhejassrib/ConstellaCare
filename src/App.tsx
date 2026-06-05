@@ -1,4 +1,4 @@
-// app.tsx: patient dashbaord:
+// app.tsx: patient dashboard:
 import { useState, useEffect, useRef } from 'react';
 import Landing from './Landing';
 import { 
@@ -11,7 +11,6 @@ import {
 } from './data';
 import { Section, ConstellationStar, ChatMessage, JournalEntry } from './types';
 import styles from './Landing.module.css';
-
 
 // Import modular subcomponents
 import LivingConstellation from './components/LivingConstellation';
@@ -47,7 +46,6 @@ export default function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [quickSupportOpen, setQuickSupportOpen] = useState(false);
 
-  // const [currentRecoveryRem, setCurrentRecoveryRem] = useState('🍵 Cozy Lavender Alert: Take 2 minutes to stretch your arms and have three long deep sips of warm water.');
   const [currentRecoveryRem, setCurrentRecoveryRem] = useState('Take a moment to stretch your shoulders and neck. Have a few slow sips of water before continuing.');
 
   // Core Constellation Trackers
@@ -166,23 +164,14 @@ export default function App() {
   useEffect(() => {
     const reminders = [
       "Take a moment to stretch your shoulders and neck. Have a few slow sips of water before continuing.",
-      
       "Look away from your screen for 20 seconds. Notice two things around you that you haven't paid attention to today.",
-      
       "Try a quick breathing reset: inhale for 4 seconds, hold for 2, then exhale slowly for 6 seconds.",
-      
       "If you're feeling overwhelmed, it's okay to step away briefly. A short break can help you return with more focus.",
-      
       "Check in with yourself: what's one thing that went well today, even if it was small?",
-      
       "Relax your jaw, unclench your shoulders, and take one slow breath before moving to the next task.",
-      
       "You don't need to solve everything at once. Focus on the next small step in front of you.",
-      
       "Take 30 seconds to sit comfortably and notice how your body feels right now.",
-      
       "Consider reaching out to someone if you've been carrying a challenge on your own.",
-      
       "Progress doesn't have to be dramatic. Small actions count too."
     ];
     const timer = setInterval(() => {
@@ -364,7 +353,6 @@ export default function App() {
           sidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
         } ${theme === 'dark' ? 'bg-slate-900 border-[#6366f1]/10' : 'bg-[#FAF8FD]/95 border-[#7e6c9e]/20'}`}
       >
-        {/* ── CHANGED: wrapped in flex-col with min-h-0 so nav can scroll ── */}
         <div className="flex flex-col min-h-0 flex-1">
           {/* Brand header */}
           <div className={`flex items-center justify-between px-6 py-5 border-b flex-shrink-0 ${theme === 'dark' ? 'border-[#6366f1]/10' : 'border-[#7e6c9e]/20'}`}>
@@ -388,7 +376,6 @@ export default function App() {
             </button>
           </div>
 
-          {/* ── CHANGED: added overflow-y-auto flex-1 so this scrolls ── */}
           <nav className="p-4 space-y-6 overflow-y-auto flex-1">
             {NAV_GROUPS.map((group) => (
               <div key={group.group} className="space-y-1">
@@ -421,7 +408,6 @@ export default function App() {
           </nav>
         </div>
 
-        {/* ── CHANGED: added flex-shrink-0 so stars counter stays pinned at bottom ── */}
         <div className={`p-6 border-t flex-shrink-0 ${theme === 'dark' ? 'border-[#6366f1]/10' : 'border-[#7e6c9e]/20'}`}>
           <div className={`rounded-2xl p-4 border text-center relative overflow-hidden shadow-md ${
             theme === 'dark'
@@ -448,15 +434,14 @@ export default function App() {
       )}
 
       {/* ── Main Dashboard Panel Area ── */}
-
-      <main className="flex-1 md:pl-64 min-h-screen flex flex-col z-10 relative">
+      <main className="flex-1 md:pl-64 min-h-screen flex flex-col z-10 relative text-left">
         
         {/* Interactive Topbar */}
         <header className="sticky top-0 bg-[#FAF8FD]/85 dark:bg-slate-900/80 backdrop-blur-md py-4 px-6 md:px-10 flex items-center justify-between border-b border-purple-200/50 dark:border-[#6366f1]/10 z-20">
           <div className="flex items-center gap-3">
             <button 
               onClick={() => setSidebarOpen(true)}
-              className="md:hidden p-2 bg-purple-100/30 dark:bg-slate-850 rounded-xl cursor-pointer"
+              className="p-2 bg-purple-100/30 dark:bg-slate-850 rounded-xl cursor-pointer md:hidden"
             >
               <Compass className="w-5 h-5 text-purple-650 dark:text-purple-400" />
             </button>
@@ -473,16 +458,17 @@ export default function App() {
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Sync Active
                 </span>
                 
-                {/* Profile avatar button with click-to-logout functionality */}
+                {/* Profile avatar button with clean styling */}
                 <div className="relative group">
                   <button
                     onClick={handleLogout}
-                    title="Click to sign out"
                     className="w-8 h-8 rounded-full bg-gradient-to-tr from-pink-400 via-purple-500 to-indigo-500 text-white text-xs font-black flex items-center justify-center cursor-pointer shadow ring-2 ring-purple-300 dark:ring-purple-900 transition-transform active:scale-90"
                   >
                     {user.displayName ? user.displayName.charAt(0).toUpperCase() : user.email.charAt(0).toUpperCase()}
                   </button>
-                  <div className="absolute top-10 right-0 scale-0 group-hover:scale-100 bg-slate-900 dark:bg-white text-white dark:text-slate-900 border border-purple-500/20 text-[9px] font-bold p-1 px-2 rounded-lg pointer-events-none duration-150 min-w-[110px] text-center shadow-lg uppercase tracking-wide">
+                  
+                  {/* Tooltip text flips seamlessly from dark backdrop (light layout mode) to clean white container card (dark layout mode) */}
+                  <div className="absolute top-10 right-0 scale-0 group-hover:scale-100 bg-slate-900 text-slate-100 dark:bg-white dark:text-slate-900 border border-purple-500/20 text-[9px] font-mono font-bold p-1.5 px-2.5 rounded-lg pointer-events-none duration-150 min-w-[110px] text-center shadow-lg uppercase tracking-wide z-50">
                     Click to sign out
                   </div>
                 </div>
@@ -497,10 +483,6 @@ export default function App() {
             )}
 
             {/* Stars counter on header right */}
-            {/* <div className="flex items-center gap-1.5 bg-purple-100/50 dark:bg-[#1a0e30]/40 border border-purple-500/20 px-3 py-1 rounded-full text-xs font-bold text-purple-650 dark:text-purple-400">
-              <Star className="w-3.5 h-3.5 fill-purple-600 dark:fill-purple-500 animate-pulse" />
-              <span>{totalStars} Stars</span>
-            </div> */}
             <div className={`flex items-center gap-1.5 bg-gradient-to-r from-[#d4798e]/10 to-[#9c82ba]/10 border border-[#d4798e]/35 px-3 py-1 rounded-full text-xs font-bold ${theme === 'dark' ? 'text-[#f4d4a8]' : 'text-[#d4798e]'}`}>
               <Star className="w-3.5 h-3.5 fill-[#d4798e] text-[#d4798e] animate-pulse" />
               <span>{totalStars} stars aligned</span>
@@ -519,7 +501,7 @@ export default function App() {
 
         {/* Recovery Reminder Banner */}
         <div className="px-6 md:px-10 pt-4">
-          <div className={`bg-gradient-to-r from-[#decfe6]/20 via-[#e8e2f4]/15 to-[#ea96a6]/5 border border-[#c9a0dc]/30 rounded-2xl p-3.5 flex items-start gap-3 shadow-sm relative overflow-hidden`}>
+          <div className="bg-gradient-to-r from-[#decfe6]/20 via-[#e8e2f4]/15 to-[#ea96a6]/5 border border-[#c9a0dc]/30 rounded-2xl p-3.5 flex items-start gap-3 shadow-sm relative overflow-hidden">
             <span className="absolute top-0 right-0 w-8 h-8 bg-[#c9a0dc]/5 rounded-full blur-sm" />
             <Sparkles className="w-4 h-4 text-[#d4798e] flex-shrink-0 mt-0.5 animate-bounce" />
             <div>
@@ -529,7 +511,6 @@ export default function App() {
           </div>
         </div>
 
-        
         {/* ── Main Content Compartment ── */}
         <div className="flex-1 p-6 md:p-10 max-w-5xl w-full mx-auto space-y-8 pb-32">
           
@@ -548,10 +529,7 @@ export default function App() {
                 <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6 z-10">
                   <div>
                     <h2 className="text-xl md:text-2xl font-extrabold flex items-center gap-2">
-                      {user
-                        ? `Good Evening ✨`
-                        // : 'Good evening, Sarah ✨'}
-                        : 'Good Evening ✨'}
+                      Good Evening ✨
                     </h2>
 
                     <p className={`text-xs mt-1 leading-relaxed ${theme === 'dark' ? 'text-slate-350' : 'text-[#4f426d]'}`}>
@@ -562,16 +540,11 @@ export default function App() {
                       <div className={`border border-purple-500/10 rounded-xl py-1 px-3 ${theme === 'dark' ? 'bg-slate-850/60' : 'bg-white/70'}`}>
                         <span className={`text-[9px] uppercase font-mono tracking-wider block font-bold ${theme === 'dark' ? 'text-slate-350' : 'text-[#7e6c9e]'}`}>Resilience</span>
                         <span className="text-xs font-bold text-pink-600 dark:text-pink-400">Calmer than last week</span>
-                        {/* <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">Calmer than last week</span> */}
                       </div>
                       <div className={`border border-purple-500/10 rounded-xl py-1 px-3 ${theme === 'dark' ? 'bg-slate-850/60' : 'bg-white/70'}`}>
                         <span className={`text-[9px] uppercase font-mono tracking-wider block font-bold ${theme === 'dark' ? 'text-slate-350' : 'text-[#7e6c9e]'}`}>Next Oncology Check</span>
                         <span className="text-xs font-bold text-purple-600 dark:text-purple-400">Tomorrow, 2:30 PM</span>
                       </div>
-                      {/* <div className={`border border-purple-500/10 rounded-xl py-1 px-3 ${theme === 'dark' ? 'bg-slate-850/60' : 'bg-white/70'}`}>
-                        <span className={`text-[9px] uppercase font-mono tracking-wider block font-bold ${theme === 'dark' ? 'text-slate-350' : 'text-[#7e6c9e]'}`}>Constellation circle</span>
-                        <span className="text-xs font-bold text-pink-600 dark:text-pink-400">2 active check-ins</span>
-                      </div> */}
                     </div>
                   </div>
 
@@ -614,7 +587,7 @@ export default function App() {
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
                       <button 
                         onClick={() => setActiveSection('mood')} 
-                        className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
+                        className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all cursor-pointer"
                       >
                         <span className="text-2xl animate-pulse">🌸</span>
                         <span className="text-xs font-bold text-[#0284c7]">Mood Check-In</span>
@@ -623,16 +596,12 @@ export default function App() {
 
                       <button 
                         onClick={() => setActiveSection('calm')} 
-                        className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
+                        className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all cursor-pointer"
                       >
                         <span className="text-2xl animate-pulse">🫧</span>
-                        {/* <span className= "text-xs font-bold text-[#1e133a] dark:text-slate-400">Calm exercises</span>
-                        <span className="text-[10px] text-[#22d3ee]">Bubble expansion and calming sounds</span> */}
-                        {/* colors swapped */}
                         <span className="text-xs font-bold text-[#0284c7]">
                           Calm exercises
                         </span>
-
                         <span className="text-[10px] text-[#1e133a] dark:text-slate-400">
                           Bubble expansion and calming sounds
                         </span>
@@ -640,7 +609,7 @@ export default function App() {
 
                       <button 
                         onClick={() => setActiveSection('appointment')} 
-                        className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
+                        className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all cursor-pointer"
                       >
                         <span className="text-2xl animate-pulse">🩺</span>
                         <span className="text-xs font-bold text-[#0284c7]">Copilot 2.0</span>
@@ -649,7 +618,7 @@ export default function App() {
 
                       <button 
                         onClick={() => setActiveSection('bottles')} 
-                        className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all"
+                        className="bg-white dark:bg-slate-900 hover:border-purple-400 dark:hover:border-purple-900 border border-purple-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center gap-2 shadow-sm transition-all cursor-pointer"
                       >
                         <span className="text-2xl animate-pulse">💌</span>
                         <span className="text-xs font-bold text-[#0284c7]">Message Bottle</span>
@@ -677,20 +646,13 @@ export default function App() {
                       <div className="w-11 h-11 rounded-full bg-gradient-to-r from-pink-400 to-indigo-500 text-white font-bold text-xs flex items-center justify-center ring-4 ring-purple-500/20">Me</div>
                     </div>
                     
-                    <h5 className="text-xs font-bold text-[#1e133a] dark:text-slate-205 mt-4">Family Connections Active</h5>
+                    <h5 className="text-xs font-bold text-[#1e133a] dark:text-slate-200 mt-4">Family Connections Active</h5>
                     <p className="text-[10px] text-[#7e6c9e] dark:text-slate-400 max-w-[150px] mt-1.5 mx-auto leading-relaxed">
                       Mom checked in today. Your sister added encouraging tea lines.
                     </p>
                   </div>
                 </div>
               </div>
-
-              {/* MAP EMOTIONAL SKY CHART */}
-              {/* <div className="space-y-4">
-                <span className="text-xs font-bold uppercase tracking-widest text-[#a855f7] block pl-1.5">Emotional Weather Sky Chart</span>
-                <EmotionalTrendTracking />
-              </div> */}
-
             </div>
           )}
 
@@ -733,7 +695,7 @@ export default function App() {
                 ))}
                 {chatLoading && (
                   <div className="flex justify-start">
-                    <div className={`rounded-2xl rounded-tl-none p-4 flex items-center gap-2 border font-semibold text-xs ${theme === 'dark' ? 'bg-slate-900 text-slate-400 border-slate-850' : 'bg-white text-[#7e6c9e] border-purple-100'}`}>
+                    <div className={`rounded-2xl rounded-tl-none p-4 flex items-center gap-2 border border-purple-100 dark:border-slate-850 font-semibold text-xs ${theme === 'dark' ? 'bg-slate-900 text-slate-400' : 'bg-white text-[#7e6c9e]'}`}>
                       <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-bounce" />
                       <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
                       <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
@@ -748,26 +710,26 @@ export default function App() {
               <div className="p-3 bg-white dark:bg-slate-900 border-t border-purple-100 dark:border-slate-850 flex gap-2 overflow-x-auto">
                 <button
                   onClick={() => handleSendChat("I am feeling physically exhausted after today's sessions... Guidelines?")}
-                  className="px-3 py-1.5 border border-purple-200 dark:border-slate-800 text-[10px] font-bold text-[#4d3c69] dark:text-slate-400 rounded-full whitespace-nowrap hover:border-purple-400 cursor-pointer text-xs"
+                  className="px-3 py-1.5 border border-purple-200 dark:border-slate-800 text-[10px] font-bold text-[#4d3c69] dark:text-slate-400 rounded-full whitespace-nowrap hover:border-purple-400 cursor-pointer"
                 >
                   "Exhausted after session"
                 </button>
                 <button
                   onClick={() => handleSendChat("I have minor nausea spikes during the deep night, what has worked?")}
-                  className="px-3 py-1.5 border border-purple-200 dark:border-slate-800 text-[10px] font-bold text-[#4d3c69] dark:text-slate-400 rounded-full whitespace-nowrap hover:border-purple-400 cursor-pointer text-xs"
+                  className="px-3 py-1.5 border border-purple-200 dark:border-slate-800 text-[10px] font-bold text-[#4d3c69] dark:text-slate-400 rounded-full whitespace-nowrap hover:border-purple-400 cursor-pointer"
                 >
                   "Night nausea adjustments"
                 </button>
                 <button
                   onClick={() => handleSendChat("Guide me through a quick grounding breath to help clear my racing heart.")}
-                  className="px-3 py-1.5 border border-purple-200 dark:border-slate-800 text-[10px] font-bold text-[#4d3c69] dark:text-slate-400 rounded-full whitespace-nowrap hover:border-purple-400 cursor-pointer text-xs"
+                  className="px-3 py-1.5 border border-purple-200 dark:border-slate-800 text-[10px] font-bold text-[#4d3c69] dark:text-slate-400 rounded-full whitespace-nowrap hover:border-purple-400 cursor-pointer"
                 >
-                  " racing thoughts "
+                  "racing thoughts"
                 </button>
               </div>
 
               {/* Chat Input panel bar */}
-              <div className="p-4 bg-slate-50/80 dark:bg-slate-950/40 border-t border-purple-100 dark:border-slate-850 flex gap-2">
+              <div className="p-4 bg-slate-55/80 dark:bg-slate-950/40 border-t border-purple-100 dark:border-slate-850 flex gap-2">
                 <input
                   type="text"
                   placeholder="Share whatever feels right — no expectations here..."
@@ -790,7 +752,7 @@ export default function App() {
           {activeSection === 'mood' && (
             <div className="space-y-8 animate-fade-in">
               <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl leading-relaxed">
-                <p className="text-sm text-[#4d3c69] dark:text-slate-400 leading-relaxed center">
+                <p className="text-sm text-[#4d3c69] dark:text-slate-400 leading-relaxed">
                   Checking in with how you are feeling helps track your emotional wellbeing over time. Use a biometric mood scan, emotion card, or voice journal — then explore your Emotional Weather Sky chart to visualize how your feelings evolve over time.
                 </p>
               </div>
@@ -805,32 +767,23 @@ export default function App() {
                 </div>
 
                 <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-5 shadow-xl flex flex-col justify-between">
-                  <div>
-                    <span className="text-xs font-bold font-mono tracking-widest text-[#a855f7] uppercase block mb-4 text-center">Daily Emotion Selector Card Set</span>
-                    <EmotionCards 
-                      emotions={PATIENT_EMOTION_CARDS}
-                      responses={PATIENT_AI_RESPONSES}
-                      onSelect={(cardId) => {
-                        addStar("Selected Daily Emotion Chip", "mood");
-                        setLastAction(`Logged mood: ${cardId}`);
-                      }}
-                    />
-                  </div>
+                  <span className="text-xs font-bold font-mono tracking-widest text-[#a855f7] uppercase block mb-4 text-center">Daily Emotion Selector Card Set</span>
+                  <EmotionCards 
+                    emotions={PATIENT_EMOTION_CARDS}
+                    responses={PATIENT_AI_RESPONSES}
+                    onSelect={(cardId) => {
+                      addStar("Selected Daily Emotion Chip", "mood");
+                      setLastAction(`Logged mood: ${cardId}`);
+                    }}
+                  />
                 </div>
               </div>
 
-              {/*  VOICE JOURNAL ── */}
-              {/* changed activesection===voice to activesection===mood */}
-              {activeSection === 'mood' && (
-                <div className="space-y-8 animate-fade-in">
-                  <VoiceJournal onJournalSaved={(entry) => {
-                    setReflectionHistory(prev => [entry, ...prev]);
-                    setLastAction("Transcribed Voice Journal");
-                  }} />
-                </div>
-              )}
+              <VoiceJournal onJournalSaved={(entry) => {
+                setReflectionHistory(prev => [entry, ...prev]);
+                setLastAction("Transcribed Voice Journal");
+              }} />
               
-              {/* MAP EMOTIONAL SKY CHART */}
               <div className="space-y-4">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#a855f7] block pl-1.5">Emotional Weather Sky Chart</span>
                 <EmotionalTrendTracking />
@@ -856,22 +809,20 @@ export default function App() {
                 {/* Soundtrack Corner */}
                 <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
                   <span className="text-xs font-bold font-mono tracking-widest text-[#a855f7] uppercase block mb-4">Clinical Calming Soundtrack Orbits</span>
-                  
                   <div className="space-y-4">
                     <p className="text-xs text-[#4d3c69] dark:text-slate-400 leading-relaxed">
                       Settle your thoughts under gentle acoustic white noises and space soundtracks curated by care leads.
                     </p>
-
                     <div className="bg-purple-50/60 dark:bg-purple-950/20 border border-purple-200/60 dark:border-purple-100/60 p-4.5 rounded-2xl flex items-center justify-between text-left">
                       <div>
-                        <b className="text-xs font-black font-bold theme-heading">Deep Cosmic Rest Playlist</b>
-                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400 block mt-0.5">Opens in Spotify when you ne  ed background calm.</span>
+                        <b className="text-xs font-bold theme-heading">Deep Cosmic Rest Playlist</b>
+                        <span className="text-[10px] text-[#7e6c9e] dark:text-slate-400 block mt-0.5">Opens in Spotify when you need background calm.</span>
                       </div>
                       <a 
                         href="https://open.spotify.com/playlist/37i9dQZF1DWXe9gFZP0gtP" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="p-2 bg-purple-600 text-white rounded-full text-xs shadow hover:scale-105 transition"
+                        className="p-2 bg-purple-600 text-white rounded-full text-xs shadow hover:scale-105 transition cursor-pointer"
                       >
                         <Compass className="w-4.5 h-4.5 fill-white" />
                       </a>
@@ -881,16 +832,6 @@ export default function App() {
               </div>
             </div>
           )}
-
-          {/*  VOICE JOURNAL ── */}
-          {/* {activeSection === 'voice' && (
-            <div className="space-y-8 animate-fade-in">
-              <VoiceJournal onJournalSaved={(entry) => {
-                setReflectionHistory(prev => [entry, ...prev]);
-                setLastAction("Transcribed Voice Journal");
-              }} />
-            </div>
-          )} */}
 
           {/*  APPOINTMENT COPILOT ── */}
           {activeSection === 'appointment' && (
@@ -930,47 +871,19 @@ export default function App() {
               </div>
 
               <div className="relative pl-6 border-l-2 border-purple-500/15 space-y-8 text-left py-2">
-                {timelineItems.map((mil, idx) => (
+                {timelineItems.map((mil) => (
                   <div key={mil.id} className="relative">
                     {mil.type === 'milestone' ? (
-                      <span className="absolute -left-[33px] top-0 text-yellow-500 text-lg">
-                        ⭐
-                      </span>
+                      <span className="absolute -left-[33px] top-0 text-lg">⭐</span>
                     ) : (
-                      <span
-                        className={`absolute -left-[30px] top-0 w-4 h-4 rounded-full border-2 ${
-                          mil.done
-                            ? 'bg-gradient-to-tr from-pink-400 to-purple-500 border-white ring-4 ring-pink-400/20 shadow-md'
-                            : 'bg-[#decfe6] border-purple-200 text-[#4d3c69] dark:bg-slate-700 dark:border-slate-600 dark:text-slate-400'
-                        }`}
-                      />
+                      <span className={`absolute -left-[30px] top-0 w-4 h-4 rounded-full border-2 ${mil.done ? 'bg-gradient-to-tr from-pink-400 to-purple-500 border-white ring-4 ring-pink-400/20 shadow-md' : 'bg-[#decfe6] border-purple-200 text-[#4d3c69] dark:bg-slate-700 dark:border-slate-600 dark:text-slate-400'}`} />
                     )}
-
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-[10px] font-mono tracking-wider font-extrabold text-[#7e6c9e] dark:text-slate-400">{mil.date}</span>
-                        <span className={`text-[8px] px-2 py-0.5 rounded-full font-extrabold uppercase ${
-                          mil.type === 'medical'
-                            ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/20 dark:text-blue-400'
-                            : mil.type === 'emotional'
-                            ? 'bg-pink-50 text-pink-600 dark:bg-pink-950/20 dark:text-pink-400'
-                            : mil.type === 'selfcare'
-                            ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-400'
-                            : 'bg-amber-50 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400'
-                        }`}>
-                          {mil.type}
-                        </span>
+                        <span className={`text-[8px] px-2 py-0.5 rounded-full font-extrabold uppercase ${mil.type === 'medical' ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/20 dark:text-blue-400' : mil.type === 'emotional' ? 'bg-pink-50 text-pink-600 dark:bg-pink-950/20 dark:text-pink-400' : mil.type === 'selfcare' ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-400' : 'bg-amber-50 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400'}`}>{mil.type}</span>
                       </div>
-
-                      <h4
-                        className={`text-xs font-bold mt-1 leading-snug ${
-                          mil.type === 'milestone'
-                            ? 'text-amber-600 dark:text-amber-400'
-                            : 'text-md font-black theme-heading'
-                        }`}
-                      >
-                        {mil.label}
-                      </h4>
+                      <h4 className={`text-xs font-bold mt-1 leading-snug ${mil.type === 'milestone' ? 'text-amber-600 dark:text-amber-400' : 'text-md font-black theme-heading'}`}>{mil.label}</h4>
                       {mil.notes && <p className="text-[11px] leading-relaxed mt-1 text-[#4d3c69] dark:text-slate-400">{mil.notes}</p>}
                     </div>
                   </div>
@@ -981,16 +894,12 @@ export default function App() {
 
           {/*  REPORTS ── */}
           {activeSection === 'reports' && (
-            <div className="space-y-8 animate-fade-in">
-              <Reports />
-            </div>
+            <div className="space-y-8 animate-fade-in"><Reports /></div>
           )}
 
           {/*  CARE CIRCLE ── */}
           {activeSection === 'circle' && (
-            <div className="space-y-8 animate-fade-in">
-              <CareCircle />
-            </div>
+            <div className="space-y-8 animate-fade-in"><CareCircle /></div>
           )}
 
           {/*  MESSAGE BOTTLES ── */}
@@ -1001,27 +910,12 @@ export default function App() {
                 <span className="text-4xl block mb-3 animate-bounce">💌</span>
                 <h3 className="text-md font-black theme-heading">Hopeful Message Bottles</h3>
                 <p className="text-xs text-[#7e6c9e] dark:text-slate-400 mt-1.5 leading-relaxed">
-                  Supportive messages gathered from shared health journeys. <br></br>Unscrew a bottle whenever dark clouds make the stars harder to see.
+                  Supportive messages gathered from shared health journeys. <br />Unscrew a bottle whenever dark clouds make the stars harder to see.
                 </p>
-
-                <div className="my-6 max-w-md w-full bg-purple-50/50 dark:bg-slate-950/30 border border-dashed border-purple-300/40 rounded-2xl p-5 leading-relaxed shadow-inner min-h-[90px] flex items-center justify-center italic text-xs text-[#3d3650] dark:text-slate-300">
-                  {bottleIndex !== null 
-                    ? MESSAGE_BOTTLES[bottleIndex] 
-                    : "No active alignment message opened yet. Pull a secure cork below."}
-                </div>
-
+                <div className="my-6 max-w-md w-full bg-purple-50/50 dark:bg-slate-950/30 border border-dashed border-purple-300/40 rounded-2xl p-5 leading-relaxed shadow-inner min-h-[90px] flex items-center justify-center italic text-xs text-[#3d3650] dark:text-slate-300">{bottleIndex !== null ? MESSAGE_BOTTLES[bottleIndex] : "No active alignment message opened yet. Pull a secure cork below."}</div>
                 <div className="flex flex-col items-center gap-2">
-                  <button
-                    onClick={unlockBottle}
-                    disabled={unlockedBottles >= MESSAGE_BOTTLES.length}
-                    className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-sans text-xs font-bold px-6 py-2.5 rounded-full shadow-lg hover:shadow-purple-500/20 cursor-pointer disabled:opacity-40"
-                  >
-                    {unlockedBottles >= MESSAGE_BOTTLES.length ? 'All Bottles Dispatched 🌸' : 'Acquire Orbits Bottle 🌟'}
-                  </button>
-
-                  <span className="text-[10px] font-mono text-[#7e6c9e] dark:text-slate-400 font-bold uppercase mt-1">
-                    {unlockedBottles} / {MESSAGE_BOTTLES.length} BOTTLES UNLOCKED
-                  </span>
+                  <button onClick={unlockBottle} disabled={unlockedBottles >= MESSAGE_BOTTLES.length} className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-sans text-xs font-bold px-6 py-2.5 rounded-full shadow-lg hover:shadow-purple-500/20 cursor-pointer disabled:opacity-40">{unlockedBottles >= MESSAGE_BOTTLES.length ? 'All Bottles Dispatched 🌸' : 'Acquire Orbits Bottle 🌟'}</button>
+                  <span className="text-[10px] font-mono text-[#7e6c9e] dark:text-slate-400 font-bold uppercase mt-1">{unlockedBottles} / {MESSAGE_BOTTLES.length} BOTTLES UNLOCKED</span>
                 </div>
               </div>
             </div>
@@ -1029,9 +923,7 @@ export default function App() {
 
           {/*  RESOURCES ── */}
           {activeSection === 'resources' && (
-            <div className="space-y-8 animate-fade-in">
-              <Resources />
-            </div>
+            <div className="space-y-8 animate-fade-in"><Resources /></div>
           )}
 
           {/*  PROGRESS ── */}
@@ -1042,24 +934,13 @@ export default function App() {
                   <h3 className="text-md font-extrabold text-[#1e133a] dark:text-white">Active Constellation Index</h3>
                   <p className="text-xs text-[#7e6c9e] dark:text-slate-400 mt-1">A historical view of all illuminated alignment points mapping safety guidelines.</p>
                 </div>
-
                 <div className="grid grid-cols-3 gap-4 text-center">
-                  <div className="p-4 bg-slate-55/40 dark:bg-slate-950/30 rounded-2xl border border-purple-100 dark:border-slate-800">
-                    <span className="text-2xl font-black text-purple-600 block">{stars.length}</span>
-                    <span className="text-[10px] font-semibold text-[#7e6c9e] dark:text-slate-400 block mt-1">Illuminated Stars</span>
-                  </div>
-                  <div className="p-4 bg-slate-55/40 dark:bg-slate-950/30 rounded-2xl border border-purple-100 dark:border-slate-800">
-                    <span className="text-2xl font-black text-pink-600 block">{Math.max(1, Math.floor(stars.length / 5))}</span>
-                    <span className="text-[10px] font-semibold text-[#7e6c9e] dark:text-slate-400 block mt-1">Formed Constellations</span>
-                  </div>
-                  <div className="p-4 bg-slate-55/40 dark:bg-slate-950/30 rounded-2xl border border-purple-100 dark:border-slate-800">
-                    <span className="text-2xl font-black text-cyan-600 block">{unlockedBottles}</span>
-                    <span className="text-[10px] font-semibold text-[#7e6c9e] dark:text-slate-400 block mt-1">Hope Messages Discovered</span>
-                  </div>
+                  <div className="p-4 bg-slate-55/40 dark:bg-slate-950/30 rounded-2xl border border-purple-100 dark:border-slate-800"><span className="text-2xl font-black text-purple-600 block">{stars.length}</span><span className="text-[10px] font-semibold text-[#7e6c9e] dark:text-slate-400 block mt-1">Illuminated Stars</span></div>
+                  <div className="p-4 bg-slate-55/40 dark:bg-slate-950/30 rounded-2xl border border-purple-100 dark:border-slate-800"><span className="text-2xl font-black text-pink-600 block">{Math.max(1, Math.floor(stars.length / 5))}</span><span className="text-[10px] font-semibold text-[#7e6c9e] dark:text-slate-400 block mt-1">Formed Constellations</span></div>
+                  <div className="p-4 bg-slate-55/40 dark:bg-slate-950/30 rounded-2xl border border-purple-100 dark:border-slate-800"><span className="text-2xl font-black text-cyan-600 block">{unlockedBottles}</span><span className="text-[10px] font-semibold text-[#7e6c9e] dark:text-slate-400 block mt-1">Hope Messages Discovered</span></div>
                 </div>
               </div>
 
-              {/* Connected Star summary items */}
               <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-800 rounded-3xl p-5 shadow-xl">
                 <span className="text-xs font-bold font-mono tracking-widest text-[#a855f7] block mb-4 uppercase">Stellar Log Pathway Archive</span>
                 <div className="space-y-3">
@@ -1085,39 +966,22 @@ export default function App() {
                   <span className="text-3xl animate-pulse">🌙</span>
                   <div>
                     <span className="text-[9px] font-bold font-mono tracking-wider text-purple-600 uppercase">Thought Starter</span>
-                    <p className="text-md font-black theme-heading">
-                      "{REFLECTIONS[reflectionIndex]}"
-                    </p>
+                    <p className="text-md font-black theme-heading">"{REFLECTIONS[reflectionIndex]}"</p>
                   </div>
                 </div>
-
                 <label className="text-[10px] font-bold font-mono tracking-widest text-[#7e6c9e] dark:text-slate-400 block mb-2">WRITE YOUR SECURE THOUGHTS</label>
-                <textarea
-                  className="w-full text-xs p-4 bg-[#FAF8FD] dark:bg-slate-950 rounded-2xl border border-purple-200 dark:border-slate-805 focus:outline-none focus:border-purple-500 text-[#2e214c] dark:text-slate-350 leading-relaxed resize-none"
-                  rows={4}
-                  placeholder="The page is empty. There is absolute permission to express frustration, beauty, stable relief, or fog. This is just for you..."
-                  value={reflectionAnswer}
-                  onChange={e => setReflectionAnswer(e.target.value)}
-                />
-
+                <textarea className="w-full text-xs p-4 bg-[#FAF8FD] dark:bg-slate-950 rounded-2xl border border-purple-200 dark:border-slate-805 focus:outline-none focus:border-purple-500 text-[#2e214c] dark:text-slate-350 leading-relaxed resize-none" rows={4} placeholder="The page is empty. There is absolute permission to express frustration, beauty, stable relief, or fog. This is just for you..." value={reflectionAnswer} onChange={e => setReflectionAnswer(e.target.value)} />
                 <div className="mt-4 flex justify-end">
-                  <button
-                    onClick={handleSaveReflection}
-                    disabled={!reflectionAnswer.trim()}
-                    className="bg-purple-600 hover:bg-purple-700 text-white select-none text-xs font-bold px-5 py-2.5 rounded-full shadow-lg cursor-pointer disabled:opacity-40"
-                  >
-                    Commit to Constellation Star ✦
-                  </button>
+                  <button onClick={handleSaveReflection} disabled={!reflectionAnswer.trim()} className="bg-purple-600 hover:bg-purple-700 text-white select-none text-xs font-bold px-5 py-2.5 rounded-full shadow-lg cursor-pointer disabled:opacity-40">Commit to Constellation Star ✦</button>
                 </div>
               </div>
 
-              {/* Reflection historical log summary */}
               {reflectionHistory.length > 0 && (
                 <div className="space-y-4">
                   <span className="text-xs font-bold uppercase tracking-widest text-[#a855f7] block pl-1">Historical Reflections Archive</span>
                   <div className="space-y-4">
                     {reflectionHistory.map(item => (
-                      <div key={item.id} className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-805 p-5 rounded-2xl shadow-sm text-left">
+                      <div key={item.id} className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-slate-805 p-5 rounded-2xl shadow-sm">
                         <div className="flex items-center justify-between pb-2 border-b border-purple-100 dark:border-slate-805 mb-2.5">
                           <span className="text-[10px] font-bold text-[#7e6c9e] dark:text-slate-400">Prompt: "{item.prompt}"</span>
                           <span className="text-[9px] font-mono text-[#7e6c9e] dark:text-slate-400">{item.date}</span>
@@ -1133,12 +997,7 @@ export default function App() {
 
           {activeSection === 'shared' && (
             <div className="animate-fade-in">
-              <SharedConstellation
-                theme={theme}
-                role="patient"
-                isLoggedIn={!!user}
-                onNavigateHome={() => setActiveSection('home')}
-              />
+              <SharedConstellation theme={theme} role="patient" isLoggedIn={!!user} onNavigateHome={() => setActiveSection('home')} />
             </div>
           )}
 
@@ -1147,112 +1006,28 @@ export default function App() {
         {/* ── BOTTOM RIGHT FLOATING QUICK ACTIONS MENU ── */}
         <div className="fixed bottom-6 right-6 z-50">
           <div className="relative">
-            {/* Quick action menu selector overlay panel */}
             {quickSupportOpen && (
-              <div className="absolute bottom-16 right-0 w-52 bg-white dark:bg-slate-900 border border-purple-200/50 dark:border-slate-800 rounded-2xl p-3 shadow-2xl backdrop-blur-md animate-fade-in flex flex-col gap-1.5 text-left">
-                <span className="text-[9px] font-extrabold uppercase font-mono tracking-widest text-slate-700 dark:text-pink-500 border-b border-slate-200 dark:border-slate-850 pb-1.5 mb-1 pl-1">
-                  QUICK COMPASS
-                </span>
-
-                <button
-                  onClick={() => {
-                    setActiveSection('astra');
-                    setQuickSupportOpen(false);
-                  }}
-                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
-                >
-                  <Sparkles className="w-4 h-4 text-purple-700 dark:text-purple-600" />
-                  <span>Talk with Astra</span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    setActiveSection('calm');
-                    setQuickSupportOpen(false);
-                  }}
-                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
-                >
-                  <Heart className="w-4 h-4 text-cyan-600 dark:text-cyan-500 animate-pulse" />
-                  <span>Breathing exercises</span>
-                </button>
-
-                {/* <button
-                  onClick={() => {
-                    setActiveSection('voice');
-                    setQuickSupportOpen(false);
-                  }}
-                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer text-left"
-                >
-                  <Compass className="w-4 h-4 text-purple-700 dark:text-purple-500" />
-                  <span>Voice Journal</span>
-                </button> */}
-
+              <div className="absolute bottom-16 right-0 w-52 bg-white dark:bg-slate-900 border border-purple-200/50 dark:border-slate-800 rounded-2xl p-3 shadow-2xl backdrop-blur-md animate-fade-in flex flex-col gap-1.5">
+                <span className="text-[9px] font-extrabold uppercase font-mono tracking-widest text-slate-700 dark:text-pink-500 border-b border-slate-200 dark:border-slate-850 pb-1.5 mb-1 pl-1 block">QUICK COMPASS</span>
+                <button onClick={() => { setActiveSection('astra'); setQuickSupportOpen(false); }} className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer"><Sparkles className="w-4 h-4 text-purple-700 dark:text-purple-600" /><span>Talk with Astra</span></button>
+                <button onClick={() => { setActiveSection('calm'); setQuickSupportOpen(false); }} className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-purple-100/50 dark:hover:bg-purple-900/10 cursor-pointer"><Heart className="w-4 h-4 text-cyan-600 dark:text-cyan-500 animate-pulse" /><span>Breathing exercises</span></button>
+                
                 <div className="border-t border-slate-200 dark:border-[#c9a0dc]/15 pt-1.5 mt-1">
                   <div className="px-2 py-1">
-                    <div className="flex items-center gap-2 text-[11px] font-black text-red-600 dark:text-red-400 mb-2">
-                      <ShieldAlert className="w-3.5 h-3.5 text-red-600 dark:text-red-500 animate-bounce" />
-                      <span>Get Help Now 🚨</span>
-                    </div>
-
-                    <a
-                      href="tel:995"
-                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-red-500/10 transition"
-                    >
-                      <span>Singapore Emergency</span>
-                      <span className="text-red-600 dark:text-red-500 font-bold">995</span>
-                    </a>
-
-                    <a
-                      href="tel:1767"
-                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-purple-500/10 transition"
-                    >
-                      <span>SOS Crisis Hotline</span>
-                      <span className="text-purple-700 dark:text-purple-600 font-bold">1767</span>
-                    </a>
-
-                    <a
-                      href="tel:63892222"
-                      className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-indigo-500/10 transition"
-                    >
-                      <span>IMH Mental Health</span>
-                      <span className="text-[10px] leading-none text-indigo-700 dark:text-indigo-400 font-bold">6389 2222</span>
-                    </a>
-
-                    <button
-                      onClick={() => {
-                        setActiveSection('calm');
-                        setQuickSupportOpen(false);
-                      }}
-                      className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-cyan-700 dark:text-cyan-400 hover:bg-cyan-500/10 transition"
-                    >
-                      <Heart className="w-3.5 h-3.5" />
-                      <span>Ground Me First</span>
-                    </button>
+                    <div className="flex items-center gap-2 text-[11px] font-black text-red-600 dark:text-red-400 mb-2"><ShieldAlert className="w-3.5 h-3.5 text-red-600 dark:text-red-500 animate-bounce" /><span>Get Help Now 🚨</span></div>
+                    <a href="tel:995" className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-red-500/10 transition"><span>Singapore Emergency</span><span className="text-red-600 dark:text-red-500 font-bold">995</span></a>
+                    <a href="tel:1767" className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-purple-500/10 transition"><span>SOS Crisis Hotline</span><span className="text-purple-700 dark:text-purple-600 font-bold">1767</span></a>
+                    <a href="tel:63892222" className="w-full flex items-center justify-between px-2 py-2 rounded-xl text-[11px] font-semibold text-[#4f426d] dark:text-slate-350 hover:bg-indigo-500/10 transition"><span>IMH Mental Health</span><span className="text-[10px] leading-none text-indigo-700 dark:text-indigo-400 font-bold">6389 2222</span></a>
+                    <button onClick={() => { setActiveSection('calm'); setQuickSupportOpen(false); }} className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-[11px] font-semibold text-cyan-700 dark:text-cyan-400 hover:bg-cyan-500/10 transition"><Heart className="w-3.5 h-3.5" /><span>Ground Me First</span></button>
                   </div>
                 </div>
               </div>
             )}
-
-            {/* Glowing Trigger Orb Button */}
-            <button
-              onClick={() => setQuickSupportOpen(!quickSupportOpen)}
-              className="px-5 py-3 rounded-full bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] text-white text-xs font-black flex items-center gap-2 cursor-pointer shadow-2xl hover:scale-103 transition-all ring-4 ring-purple-400/20 select-none"
-            >
-              <Heart className="w-4 h-4 fill-white animate-pulse" />
-              <span>Need support?</span>
-            </button>
+            <button onClick={() => setQuickSupportOpen(!quickSupportOpen)} className="px-5 py-3 rounded-full bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] text-white text-xs font-black flex items-center gap-2 cursor-pointer shadow-2xl hover:scale-103 transition-all ring-4 ring-purple-400/20 select-none"><Heart className="w-4 h-4 fill-white animate-pulse" /><span>Need support?</span></button>
           </div>
         </div>
 
-        {/* PROGRESSIVE ACCOUNT REWARD WALL */}
-        <ProgressiveAuthModal
-          isOpen={progressiveAuthOpen}
-          onClose={() => setProgressiveAuthOpen(false)}
-          reason={progressiveAuthReason}
-          theme={theme}
-          onAuthSuccess={handleAuthSuccess}
-        />
-
+        <ProgressiveAuthModal isOpen={progressiveAuthOpen} onClose={() => setProgressiveAuthOpen(false)} reason={progressiveAuthReason} theme={theme} onAuthSuccess={handleAuthSuccess} />
       </main>
     </div>
   );
