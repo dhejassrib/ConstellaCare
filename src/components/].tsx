@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Mic, Square, Sparkles, AlertCircle, Headphones, CloudLightning } from 'lucide-react';
 import { JournalEntry } from '../types';
-import { GoogleGenAI } from '@google/genai';
 
 interface VoiceJournalProps {
   onJournalSaved: (entry: JournalEntry) => void;
@@ -75,7 +74,6 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
     setErrorMessage(null);
     try {
       const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-      
       if (!SpeechRecognition) {
         setErrorMessage("Your browser doesn't support live transcription. Try using Chrome or Edge!");
         return;
@@ -151,9 +149,6 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
         return;
       }
 
-      // Initialize official SDK instance
-      const ai = new GoogleGenAI({ apiKey });
-
       const prompt = `
         You are Astra, an empathetic AI for a healthcare app. Analyze this patient journal entry: "${transcript}"
         
@@ -163,16 +158,22 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
         - "weather": A creative, 1-sentence metaphor for their emotional state (e.g., "Stormy seas looking for a lighthouse").
       `;
 
-      // Swapping to modern active model identifier via official SDK configuration pipelines
-      const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: prompt
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }]
+        })
       });
 
-      const aiText = response.text;
-      if (!aiText) {
-        throw new Error("Empty content stream packet received from API gateway");
+      if (!response.ok) {
+        const errorBody = await response.text();
+        console.error("Google Server API Raw Error:", errorBody);
+        throw new Error(`Gemini API responded with status ${response.status}`);
       }
+
+      const rawData = await response.json();
+      const aiText = rawData.candidates[0].content.parts[0].text;
       
       const cleanJson = aiText.replace(/```json/g, '').replace(/```/g, '').trim();
       const data = JSON.parse(cleanJson);
@@ -191,7 +192,7 @@ export default function VoiceJournal({ onJournalSaved }: VoiceJournalProps) {
         emotionsDetected: data.emotions || ["Processing"]
       });
 
-    } catch (e: any) {
+    } catch (e) {
       console.error("Gemini API Execution Error:", e);
       setErrorMessage("Astra couldn't finalize the content generation stream. Swapping to baseline mode.");
       
