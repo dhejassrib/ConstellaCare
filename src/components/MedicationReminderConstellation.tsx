@@ -139,7 +139,7 @@ export default function MedicationReminderConstellation({
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-6 gap-4">
         <div>
           <span className="text-[10px] font-black uppercase tracking-widest text-[#a855f7] block font-mono">CARE JOURNEY MODULE</span>
-          <h3 className="text-lg font-bold text-[#1e133a] dark:text-slate-100 flex items-center gap-2 mt-0.5">
+          <h3 className="text-lg font-bold text-[#1e133a] dark:text-slate-100 flex items-center gap-2 mt-0.5 font-black theme-heading">
             <Pill className="w-5 h-5 text-purple-600 dark:text-purple-400" />
             Medication Reminder
           </h3>

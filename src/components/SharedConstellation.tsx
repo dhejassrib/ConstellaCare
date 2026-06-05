@@ -435,7 +435,7 @@ export default function SharedConstellation({ theme, role, isLoggedIn = false, o
         {/* ============================================== */}
         <div className="lg:col-span-5 space-y-6">
           
-          <div className="bg-[#110c24] border border-purple-500/20 rounded-3.5xl p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between h-[510px]">
+          <div className="bg-[#110c24] border border-purple-500/20 rounded-3xl p-6 shadow-lg relative overflow-hidden flex flex-col justify-between h-[510px]">
             {/* Ambient map stars */}
             <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
               <div className="absolute inset-10 border border-dashed border-purple-500/10 rounded-full animate-spin duration-[55s]" />
