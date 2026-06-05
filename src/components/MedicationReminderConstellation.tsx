@@ -55,7 +55,6 @@ export default function MedicationReminderConstellation({
   useEffect(() => {
     localStorage.setItem('constella-medications', JSON.stringify(meds));
     
-    // Calculate and trigger adherence rate
     if (onAdherenceUpdate) {
       let totalCells = meds.length * 7;
       if (totalCells === 0) {
@@ -116,24 +115,16 @@ export default function MedicationReminderConstellation({
     }));
   };
 
-  // Check if a full week is complete across all configured meds
   const checkWeekCompletion = () => {
     if (meds.length === 0) return;
     
-    let allTaken = true;
-    meds.forEach(med => {
-      DAYS_OF_WEEK.forEach(day => {
-        if (!med.takenDays[day]) allTaken = true; // Let them manually trigger week completion to celebrate
-      });
-    });
-
     setCompletedWeeks(w => w + 1);
     onStarEarned("Lighted Medication Adherence Constellation! 🌌");
     alert("✨ Congratulations! Your clinical adherence lights up a beautiful new constellation mapping in your sky.");
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2.5xl p-6 shadow-xl transition-all duration-300">
+    <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2.5xl p-6 shadow-xl transition-all duration-300 text-left">
       
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-6 gap-4">
@@ -147,13 +138,6 @@ export default function MedicationReminderConstellation({
             Record medication schedules, track adherence, and build a consistent care routine.
           </p>
         </div>
-
-        {/* <div className="flex items-center gap-3">
-          <div className="bg-purple-50 dark:bg-purple-950/40 p-3 rounded-2xl border border-purple-500/10 text-center">
-            <span className="text-[9px] uppercase tracking-wider text-purple-600 dark:text-purple-400 block font-bold font-mono">CONSTELLATIONS LIT</span>
-            <span className="text-lg font-black text-[#2e214c] dark:text-purple-300 block mt-0.5">{completedWeeks} 🌌</span>
-          </div>
-        </div> */}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -167,7 +151,7 @@ export default function MedicationReminderConstellation({
 
             <form onSubmit={handleAddMed} className="space-y-3">
               <div>
-                <label className="text-[9px] font-bold font-mono text-slate-450 uppercase block mb-1">Medication Name</label>
+                <label className="text-[9px] font-bold font-mono text-slate-400 uppercase block mb-1">Medication Name</label>
                 <input
                   type="text"
                   required
@@ -179,7 +163,7 @@ export default function MedicationReminderConstellation({
               </div>
 
               <div>
-                <label className="text-[9px] font-bold font-mono text-slate-450 uppercase block mb-1">Dosage or Strength</label>
+                <label className="text-[9px] font-bold font-mono text-slate-400 uppercase block mb-1">Dosage or Strength</label>
                 <input
                   type="text"
                   placeholder="e.g. 4mg / 1 capsule"
@@ -190,13 +174,13 @@ export default function MedicationReminderConstellation({
               </div>
 
               <div>
-                <label className="text-[9px] font-bold font-mono text-slate-450 uppercase block mb-1">Schedule & frequency</label>
+                <label className="text-[9px] font-bold font-mono text-slate-400 uppercase block mb-1">Schedule & frequency</label>
                 <input
                   type="text"
                   placeholder="e.g. Once every 8 hours"
                   value={newSchedule}
                   onChange={e => setNewSchedule(e.target.value)}
-                  className="w-full text-xs px-3 py-2.5 rounded-xl border bg-transparent text-slate-755 dark:text-slate-200 border-slate-200 dark:border-slate-800 focus:outline-none focus:border-purple-500"
+                  className="w-full text-xs px-3 py-2.5 rounded-xl border bg-transparent text-slate-750 dark:text-slate-200 border-slate-200 dark:border-slate-800 focus:outline-none focus:border-purple-500"
                 />
               </div>
 
@@ -208,17 +192,10 @@ export default function MedicationReminderConstellation({
               </button>
             </form>
           </div>
-
-          {/* <div className="bg-purple-50/40 dark:bg-purple-950/10 border border-purple-100 dark:border-purple-900/30 p-4 rounded-2.5xl text-left">
-            <span className="text-[9px] font-mono tracking-wider text-purple-600 dark:text-purple-450 block uppercase font-bold">Stellar Compliance Benefit</span>
-            <p className="text-[11px] leading-relaxed text-slate-600 dark:text-slate-400 mt-1.5">
-              Taking your medication daily stabilizes physiological recovery metrics. When all cells are protected, matching lines of light connect your care team, forming a protective barrier of wellness.
-            </p>
-          </div> */}
         </div>
 
         {/* Right 2 Columns: Adherence Grid View */}
-        <div className="lg:col-span-2 space-y-6 text-left">
+        <div className="lg:col-span-2 space-y-6">
           <div className="flex items-center justify-between">
             <h4 className="text-xs font-black uppercase tracking-wider text-[#a855f7] flex items-center gap-1.5">
               <Calendar className="w-4 h-4" /> Weekly Tracking Calendar
@@ -241,20 +218,21 @@ export default function MedicationReminderConstellation({
               meds.map((med) => (
                 <div
                   key={med.id}
-                  className="p-4 bg-slate-50/30 dark:bg-[#110d24]/45 border border-slate-100 dark:border-purple-550/15 rounded-2xl shadow-sm hover:border-purple-500/20 transition-all"
+                  // FIXED: Reset border styles and added clear hover transitions for glowing white/purple outer borders
+                  className="p-4 bg-slate-50/30 dark:bg-[#110d24]/45 border border-slate-100 dark:border-purple-950/40 rounded-2xl shadow-sm hover:border-purple-400 dark:hover:border-white hover:shadow-[0_0_15px_rgba(168,85,247,0.25)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.15)] transition-all duration-300"
                 >
                   <div className="flex items-start justify-between gap-4 mb-3 border-b border-dashed border-slate-150 dark:border-purple-500/5 pb-2">
                     <div>
                       <h5 className="text-xs font-bold text-[#1e133a] dark:text-slate-150 flex items-center gap-1.5 leading-none">
                         <Pill className="w-3.5 h-3.5 text-pink-500 animate-pulse" />
-                        <span className="text-smfont-black theme-heading">{med.name}</span>
+                        <span className="text-sm font-black theme-heading">{med.name}</span>
                       </h5>
                       <span className="text-[10px] text-slate-400 block mt-1 font-mono">{med.dosage} , {med.schedule}</span>
                     </div>
 
                     <button
                       onClick={() => handleRemoveMed(med.id)}
-                      className="text-slate-400 hover:text-rose-500 p-1 rounded-lg transition"
+                      className="text-slate-400 hover:text-rose-500 p-1 rounded-lg transition cursor-pointer"
                       title="Remove record"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -268,17 +246,17 @@ export default function MedicationReminderConstellation({
                         <div
                           key={day}
                           onClick={() => toggleDayTaken(med.id, day)}
-                          className={`flex flex-col items-center p-1.5 rounded-xl border cursor-pointer select-none transition-all ${
+                          className={`flex flex-col items-center p-1.5 rounded-xl border cursor-pointer select-none transition-all duration-200 ${
                             isTaken
-                              ? 'bg-emerald-500/15 border-emerald-520 text-emerald-600 dark:text-emerald-400 ring-2 ring-emerald-500/15'
-                              : 'bg-transparent border-slate-200 dark:border-slate-800 text-slate-400 hover:border-purple-400'
+                              ? 'bg-emerald-500/15 border-emerald-500 text-emerald-600 dark:text-emerald-400 ring-2 ring-emerald-500/15'
+                              : 'bg-transparent border-slate-200 dark:border-slate-800 text-slate-400 hover:border-purple-400 dark:hover:border-slate-600'
                           }`}
                         >
                           <span className="text-[9px] font-black uppercase block tracking-wider font-mono">{day}</span>
-                          <div className={`w-6 h-6 rounded-full flex items-center justify-center mt-1 text-xs font-bold border transition ${
+                          <div className={`w-6 h-6 rounded-full flex items-center justify-center mt-1 text-xs font-bold border transition-all ${
                             isTaken
                               ? 'bg-emerald-500 text-white border-transparent'
-                              : 'bg-transparent border-slate-200 dark:border-slate-805'
+                              : 'bg-transparent border-slate-200 dark:border-slate-700'
                           }`}>
                             {isTaken ? '✓' : ''}
                           </div>
@@ -293,7 +271,7 @@ export default function MedicationReminderConstellation({
           
           {/* Constellation visualizer mockup inside component */}
           {meds.length > 0 && (
-            <div className="on-dark-surface p-4 rounded-2xl bg-[#1a1530] text-[#decfe6] border border-purple-500/20 text-center relative overflow-hidden">
+            <div className="on-dark-surface p-4 rounded-2xl bg-[#1a1530] text-[#decfe6] border border-purple-500/20 text-center relative overflow-hidden shadow-inner">
               <div className="absolute top-0 right-0 w-20 h-20 bg-pink-500/10 blur-xl rounded-full" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-[0.5px] border-b border-dashed border-purple-500/15" />
               <h5 className="text-[10px] font-black uppercase tracking-widest text-pink-400 block font-mono">ADHERENCE CONSTELLATION MAP</h5>
